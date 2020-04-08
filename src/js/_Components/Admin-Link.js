@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const Link = React.memo(({ title, desc, link }) => {
 	return (
-		<a className='ad-single' href={'/admin/' + link}>
+		<a className='ad-single' href={'/' + link}>
 			<h2>{title}</h2>
 			<p>{desc}</p>
 		</a>
