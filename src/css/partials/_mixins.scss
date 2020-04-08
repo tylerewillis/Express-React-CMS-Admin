@@ -1,0 +1,93 @@
+// Flex containers
+@mixin flex-container(
+	$justify: space-between,
+	$align: null,
+	$wrap: wrap) {
+	display: flex;
+	justify-content: $justify;
+	flex-wrap: $wrap;
+	align-items: $align;
+}
+
+// Transitions
+@mixin transition($length: 0.1s, $all: all) {
+	-webkit-transition: $all $length;
+	-moz-transition: $all $length;
+	-ms-transition: $all $length;
+	-o-transition: $all $length;
+	transition: $all $length;
+}
+
+// Animations
+@mixin animation($name, $length: 0.3s, $timing: ease-in, $repeat: forwards) {
+	-webkit-animation: $name $length $timing $repeat;
+	-moz-animation: $name $length $timing $repeat;
+	-ms-animation: $name $length $timing $repeat;
+	-o-animation: $name $length $timing $repeat;
+}
+
+// Media queries
+@mixin mq($break) {
+	$value: map-get($breakpoints, $break);
+	@if $value == null {
+		@error "`#{$break}` is not a valid breakpoint.";
+	}
+	@else {
+		@media (max-width: $value) {
+			@content;
+		}
+	}
+}
+
+// Global width
+@mixin global-width($max-width: 1260px, $margin: auto) {
+	width: 95%;
+	max-width: $max-width;
+	margin: $margin;
+}
+
+// =========================================/
+// Admin
+// =========================================/
+
+// White background with gray shadow in admin area
+@mixin admin-white-background($padding: 30px, $margin: 0px auto 20px auto) {
+	background-color: $admin-color-white;
+	box-shadow: 1px 1px 1px $admin-color-bg-medium;
+	border-radius: 5px;
+	padding: $padding;
+	margin: $margin;
+}
+
+// Media queries
+@mixin admin-mq($break) {
+	$value: map-get($admin-breakpoints, $break);
+	@if $value == null {
+		@error "`#{$break}` is not a valid breakpoint.";
+	}
+	@else {
+		@media (max-width: $value) {
+			@content;
+		}
+	}
+}
+
+// Buttons
+@mixin admin-button($width: 100px, $margin: 20px 0px 0px 0px, $font-size: 14px) {
+	width: $width;
+	border: 2px solid #d3d3d3;
+	padding: 5px;
+	display: block;
+	text-align: center;
+	color: #333;
+	margin: $margin;
+	border-radius: 3px;
+	font-size: $font-size;
+	line-height: $font-size;
+	cursor: pointer;
+	&:hover {
+		background-color: $admin-color-bg;
+		border: 2px solid $admin-color-bg;
+		color: $admin-color-white;
+	}
+}

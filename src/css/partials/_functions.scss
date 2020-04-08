@@ -1,0 +1,11 @@
+// =========================================
+// Functions
+// =========================================
+
+@function px-to-pc($target, $context: 1000) {
+	@return($target / $context) * 100%;
+}
+
+.test {
+	width: px-to-pc(400px, 1200px);
+}

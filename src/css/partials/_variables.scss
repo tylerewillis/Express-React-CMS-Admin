@@ -1,0 +1,53 @@
+// VARIABLES ------------------------------------ /
+
+// Colors
+$color-primary: #278da4; // Green
+$color-secondary: #b13c69; // Red
+$color-black: #333;
+$color-white: #fff;
+$color-shade-dark: #a9a9a9;
+$color-text: #343434;
+$color-bg: #3acec2;
+$color-bg-light: #009fe1;
+
+// Fonts
+$font-stack-header: 'Raleway', sans-serif;
+$font-stack-body: 'Bree Serif', serif;
+
+// Breakpoints
+$breakpoints: (
+	's': 575px,
+	'm': 768px,
+	'l': 1000px,
+);
+
+// ==========================================/
+// Admin Styles
+// ==========================================/
+
+// Colors
+$admin-color-primary: #f1645f; // Peach
+$admin-color-primary-light: lighten($admin-color-primary, 18%); // Peach light
+$admin-color-primary-dark: darken($admin-color-primary, 18%); // Peach dark
+$admin-color-primary-opac: rgba($admin-color-primary, 0.7); // Peach 70% opacity
+$admin-color-secondary: #2089c7; // Blue
+$admin-color-secondary-dark: #1d2d5a; // Dark Blue
+$complement: complement($admin-color-primary);
+
+// Shades
+$admin-color-bg: #444; // Dark gray
+$admin-color-bg-medium: #d3d3d3; // Medium Gray
+$admin-color-bg-light: #f9f9f9; // Light gray
+$admin-color-white: #fff; // White
+$admin-color-black: #333; // Dark Gray
+
+// Fonts
+$admin-header-font: 'Playfair Display', serif;
+$admin-body-font: 'Libre Baskerville', serif;
+
+// Breakpoints
+$admin-breakpoints: (
+	's': 575px,
+	'm': 850px,
+	'l': 1100px,
+);
