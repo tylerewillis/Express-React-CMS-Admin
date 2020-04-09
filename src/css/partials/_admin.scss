@@ -959,6 +959,28 @@
 			}
 		}
 	}
+	.image-copied-confirmation {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		@include flex-container(center,center);
+		background-color: rgba(0,0,0,.6);
+		@include transition(0.5s);
+		visibility: hidden;
+		opacity: 0;
+		z-index: 5;
+		p {
+			color: #fff;
+			font-size: 2em;
+			margin: 0px;
+		}
+	}
+	.image-copied-confirmation-active {
+		visibility: visible;
+		opacity: 1;
+	}
 }
 
 // =========================================/

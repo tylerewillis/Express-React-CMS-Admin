@@ -16,6 +16,12 @@ const Media = ({ images, url }) => {
 		input.select()
 		document.execCommand('copy')
 		document.body.removeChild(input)
+
+		// Confirmation
+		document.querySelector('.image-copied-confirmation').classList.add('image-copied-confirmation-active')
+		setTimeout(() => {
+			document.querySelector('.image-copied-confirmation').classList.remove('image-copied-confirmation-active')
+		},2000)
 	}
 
 	const reloadContainer = () => {
@@ -32,6 +38,9 @@ const Media = ({ images, url }) => {
 				{availableImages.map((img, i) => {
 					return <div key={i} name={img} className='acbic-single' style={{backgroundImage: 'url(' + API_IMAGE_PATH + img + ')'}} onClick={() => copyImage(img)} />
 				})}
+			</div>
+			<div className='image-copied-confirmation'>
+				<p>Image source copied to clipboard</p>
 			</div>
 		</div>
 	)
