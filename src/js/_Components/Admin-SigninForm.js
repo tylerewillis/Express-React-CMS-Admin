@@ -15,13 +15,13 @@ const SignIn = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		(async function() {
-			const submit = await Submit('/admin/signin', {
+			const submit = await Submit('/signin', {
 				email, password, ip
 			})
 			if (submit.success) {
 				setCookie('signedIn', true, { path: '/'})
 				setCookie('role', submit.role, { path: '/'})
-				window.location.replace('/admin')
+				window.location.replace('/')
 			} else {
 				setSignInError(true)
 			}
@@ -32,7 +32,7 @@ const SignIn = () => {
 		<form onSubmit={(e) => handleSubmit(e)}>
 			{signInError
 			? <p className='wrong-password'>There was an error with your credentials. Do you want to
-					<a href='/admin/reset-password'> reset your password</a>?
+					<a href='/reset-password'> reset your password</a>?
 				</p>
 			: null}
 			<div style={{display: 'none'}}>

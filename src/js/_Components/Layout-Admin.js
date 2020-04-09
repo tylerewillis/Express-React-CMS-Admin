@@ -22,8 +22,8 @@ const Admin = React.memo((props) => {
 
 	if (page) {
 		if (!cookies.signedIn) {
-			if (window.location.pathname !== '/admin/signin') {
-				window.location.replace('/admin/signin')
+			if (window.location.pathname !== '/signin') {
+				window.location.replace('/signin')
 			} else {
 				return (
 					<div className='page page-admin'>

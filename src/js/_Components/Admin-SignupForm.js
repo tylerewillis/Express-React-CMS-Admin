@@ -18,7 +18,7 @@ const SignUp = (props) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		(async function() {
-			const submit = await Submit('/admin/signup', {
+			const submit = await Submit('/signup', {
 				first, last, email, password, ip, url
 			})
 			setSubmitted(true)

@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
+import Shortcodes from './_Text/Shortcodes'
 
 const Text = React.memo(({ con, handleChange, role, removeSection }) => {
 
@@ -43,6 +44,7 @@ const Text = React.memo(({ con, handleChange, role, removeSection }) => {
 			<div className='atbs-editor'>
 				<ReactQuill defaultValue={con.content} onChange={sendChange} modules={modules} formats={formats} />
 			</div>
+			<Shortcodes />
 			{role === 'super' &&
 				<i className="fas fa-times" onClick={() => removeSection(con.id)}/>
 			}
