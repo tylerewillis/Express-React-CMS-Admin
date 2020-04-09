@@ -1337,11 +1337,14 @@
 		cursor: pointer;
 		svg {
 			width: 20px;
-			float: right;
+			margin: 0px 0px -5px 30px;
 		}
 	}
 	.acb-sc-list {
 		.sc {
+			border-top: 2px solid;
+			padding-top: 15px;
+			margin-top: 15px;
 			.sc-label {
 				font-weight: 600;
 				font-size: 1.1em;
@@ -1350,6 +1353,8 @@
 				font-size: .9em;
 				padding: 5px;
 				margin-bottom: 1em;
+				max-width: 415px;
+				border: 1px solid #d3d3d3;
 			}
 			.sc-desc {
 				font-size: .9em;
