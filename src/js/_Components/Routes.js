@@ -27,22 +27,22 @@ export default [
     component: AdminSignout
   },
   {
-    path: ["/pages", "/events", "/blog", "/meta", "/alerts"],
+    path: ["/pages", "/events", "/blog", "/meta", "/alerts", "/news"],
     exact: true,
     component: AdminList
   },
   {
-    path: ["/events/new", "/blog/new", "/alerts/new"],
+    path: ["/events/new", "/blog/new", "/alerts/new", "/news/new"],
     exact: true,
     component: AdminNew
   },
   {
-    path: ["/events/delete/:id", "/blog/delete/:id", "/alerts/delete/:id"],
+    path: ["/events/delete/:id", "/blog/delete/:id", "/alerts/delete/:id", "/news/delete/:id"],
     exact: true,
     component: AdminDelete
   },
   {
-    path: ["/pages/:id", "/events/:id", "/blog/:id", "/meta/:id", "/alerts/:id"],
+    path: ["/pages/:id", "/events/:id", "/blog/:id", "/meta/:id", "/alerts/:id", "/news/:id"],
     component: AdminContent
   },
   {

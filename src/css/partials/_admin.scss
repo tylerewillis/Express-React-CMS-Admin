@@ -607,6 +607,38 @@
 }
 
 // =========================================/
+// Queries
+// =========================================/
+
+.admin-vert-list {
+	.avl-post {
+		.query {
+			.query-header {
+				margin-bottom: 10px;
+			}
+			.query-fields {
+				@include flex-container(flex-start);
+				p {
+					font-weight: 600;
+					margin: 0px;
+					padding: 15px 30px;
+					border: 1px solid #d3d3d3;
+					span {
+						font-weight: 400;
+						margin-left: 10px;
+					}
+					margin-top: -1px;
+				}
+				p ~ p {
+					margin-left: -1px;
+				}
+
+			}
+		}
+	}
+}
+
+// =========================================/
 // Pages
 // =========================================/
 
@@ -1048,46 +1080,6 @@
 
 .hide-textarea {
 	display: none;
-}
-
-// =========================================/
-// Queries
-// =========================================/
-
-.admin-queries-container {
-	@include flex-container(space-between, center);
-	h2 {
-		width: 100%;
-	  font-weight: 900;
-	  font-size: 18px;
-	  @include flex-container;
-	  a {
-			font-size: 15px;
-		}
-	}
-	.query {
-		@include admin-white-background;
-		width: 100%;
-	  padding: 30px;
-	  margin-top: 20px;
-	  h3 {
-			font-weight: 900;
-			@include flex-container;
-			margin-bottom: 15px;
-			span {
-				font-weight: 400;
-				font-size: 16px;
-			}
-		}
-		p {
-			margin-bottom: 0px;
-			font-weight: 900;
-			span {
-				font-weight: 400;
-				padding-left: 5px;
-			}
-		}
-	}
 }
 
 // =========================================/

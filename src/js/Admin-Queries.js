@@ -17,15 +17,15 @@ const Queries = React.memo(({ types, queries }) => {
 				{types.map((t,i) => {
 					return <p key={i} className={(active === t) ? 'avct-active' : ''} onClick={() => toggle(t)}>{t.charAt(0).toUpperCase() + t.substr(1)}</p>
 				})}
-				<a href={API_PATH + '/admin/queries/export'} target='_blank' rel="noopener noreferrer">Export All</a>
+				<a href={API_PATH + '/queries/export'} target='_blank' rel="noopener noreferrer">Export All</a>
 			</div>
 			{queries.map((q,i) => {
 				return <div className={(active === q.type) ? 'avl-post avlp-active' : 'avl-post'} key={i} id={i} >
-					<div className='quote'>
-						<div className='quote-fields-header'>
+					<div className='query'>
+						<div className='query-header'>
 							<p>{q.data[0]} {q.data[1]} on {q.contact_date}</p>
 						</div>
-						<div className='quote-fields'>
+						<div className='query-fields'>
 							{q.data.map((value,j) => {
 								if (value && q.keys[j] !== 'Ip') {
 									return <p key={j}>{q.keys[j]}:
