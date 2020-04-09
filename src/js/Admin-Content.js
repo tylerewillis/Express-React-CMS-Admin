@@ -45,9 +45,9 @@ const Content = React.memo(({ post, content, images }) => {
 	const removeSection = (id) => {
 		if (window.confirm('Are you sure you want to delete this content?')) {
 			setData(prevState => {
-				delete content[id]
-				for (let i = id + 1; i < content.length; i++) {
-					if (content[i]) content[i].id = i - 1
+				prevState.content.splice(id, 1)
+				for (let i = id; i < content.length; i++) {
+					if (content[i]) content[i].id = i
 				}
 				return { ...prevState }
 			})
@@ -57,7 +57,7 @@ const Content = React.memo(({ post, content, images }) => {
 	const addSection = (section) => {
 		section.id = content.length
 		setData(prevState => {
-			content[content.length] = section
+			content[prevState.content.length] = section
 			return { ...prevState }
 		})
 	}

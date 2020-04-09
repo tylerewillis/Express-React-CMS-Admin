@@ -1364,6 +1364,9 @@
 			width: 20px;
 			margin: 0px 0px -5px 30px;
 		}
+		&:hover {
+			text-decoration: underline;
+		}
 	}
 	.acb-sc-list {
 		.sc {

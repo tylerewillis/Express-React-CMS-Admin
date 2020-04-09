@@ -23,7 +23,7 @@ const Text = React.memo(({ con, handleChange, role, removeSection }) => {
       [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
       [{ 'script': 'sub' }, { 'script': 'super' }],
       [{ 'align': [] }],
-      ['link', 'image'],
+      ['link'],
       ['clean']
     ]
   }
@@ -34,7 +34,7 @@ const Text = React.memo(({ con, handleChange, role, removeSection }) => {
     'list', 'bullet', 'indent',
     'script',
     'align',
-    'link', 'image'
+    'link'
   ]
 
 	return (
