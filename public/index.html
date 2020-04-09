@@ -21,19 +21,11 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>Mullin/Ashley App</title>
+    <title>Administrator</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root">
-      <script>
-        // IE Not Supported message
-        var html = "<p style='font-size:1em;text-align: center;margin:20vh 20vw;'>Internet Explorer is no longer supported by Microsoft. Please use an updated version of <a href='https://www.google.com/chrome'>Google Chrome</a>, <a href='https://www.mozilla.org/en-US/firefox/'>Mozilla Firefox</a>, or <a href='https://www.microsoft.com/en-us/edge'>Microsoft Edge</a> to view this site. Thanks!</p>"
-        if (navigator.appName == 'Microsoft Internet Explorer' ||  !!(navigator.userAgent.match(/Trident/) || navigator.userAgent.match(/rv:11/)) || (typeof $.browser !== "undefined" && $.browser.msie == 1)) {
-          document.write(html)
-        }
-      </script>
-    </div>
+    <div id="root"></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
