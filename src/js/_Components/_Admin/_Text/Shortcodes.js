@@ -56,6 +56,16 @@ export default () => {
 				</div>
 				{/********************/}
 				<div className='sc'>
+					<p className='sc-label'>Image Slideshow</p>
+					<input type='text' readOnly value='[image-slideshow source="" source=""]' />
+					<p className='sc-desc'>Add an image slideshow with the following options:</p>
+					<hr />
+					<div className='options'>
+						<p><strong>Source</strong>: <em>(required)</em> The paths of each image. Go to <a href='/media' target='_blank'>Media</a> and click on an image to copy its path. Add additional sources for additional images.</p>
+					</div>
+				</div>
+				{/********************/}
+				<div className='sc'>
 					<p className='sc-label'>Quote</p>
 					<input type='text' readOnly value='[quote text="" author="" link=""]' />
 					<p className='sc-desc'>Add a quote with the following options:</p>
