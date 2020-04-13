@@ -1433,3 +1433,135 @@
 		margin-top: 1.5em;
 	}
 }
+
+// =========================================/
+// Comments
+// =========================================/
+
+.comments-list {
+	.comment {
+		margin: 0px;
+		@include flex-container(space-between,stretch);
+		p {
+			display: inline-block;
+			margin: 0px;
+			border: 1px solid #d3d3d3;
+			padding: 5px;
+			min-height: 40px;
+			svg {
+				height: 20px;
+				fill: #d3d3d3;
+				cursor: pointer;
+				&:hover {
+					fill: #333;
+				}
+			}
+		}
+		p:nth-child(1) {
+			width: 150px;
+		}
+		p:nth-child(2) {
+			width: 250px;
+		}
+		p:nth-child(3) {
+			width: calc(100% - 480px);
+		}
+		p:nth-child(4), p:nth-child(5) {
+			width: 40px;
+			@include flex-container(center,center);
+		}
+	}
+	.admin-comment {
+		p {
+			border: 1px solid $color-primary;
+			outline: 1px solid $color-primary;
+		}
+	}
+	.comment-fade-out {
+		display: none;
+	}
+}
+.comments-reply, .comments-new {
+	.comment {
+		margin: 0px;
+		@include flex-container(space-between,stretch);
+		p {
+			display: inline-block;
+			margin: 0px;
+			border: 1px solid #d3d3d3;
+			padding: 5px;
+			min-height: 40px;
+			svg {
+				height: 20px;
+				fill: #d3d3d3;
+				cursor: pointer;
+				&:hover {
+					fill: #333;
+				}
+			}
+		}
+		p:nth-child(1) {
+			width: 150px;
+		}
+		p:nth-child(2) {
+			width: 250px;
+		}
+		p:nth-child(3) {
+			width: calc(100% - 400px);
+		}
+	}
+	.admin-comment {
+		p {
+			border: 1px solid $color-primary;
+			outline: 1px solid $color-primary;
+		}
+	}
+	.reply-text {
+		margin-top: 20px;
+	}
+	textarea {
+		width: 100%;
+		border: 1px solid #d3d3d3;
+		padding: 8px;
+		font-size: .87em;
+		margin-bottom: 8px;
+	}
+	input {
+		width: 100%;
+		border: 1px solid #d3d3d3;
+		padding: 8px;
+		font-size: .87em;
+	}
+	input[type=submit] {
+		background-color: $color-primary;
+		color: $color-white;
+		width: 125px;
+		border: 0px;
+		border-radius: 3px;
+		display: block;
+		margin: 20px auto 0px;
+		&:hover {
+			background-color: darken($color-primary, 5%);
+		}
+	}
+}
+.comments-reply-empty {
+	span {
+		cursor: pointer;
+		color: $color-primary;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+.comments-new {
+	select {
+		width: 100%;
+		height: 35px;
+		font-size: .87em;
+		margin-bottom: 8px;
+	}
+	input[type=submit] {
+		width: 160px;
+	}
+}

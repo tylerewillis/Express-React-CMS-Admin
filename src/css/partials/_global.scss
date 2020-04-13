@@ -147,3 +147,44 @@ li {
 		margin-top: 30vh;
 	}
 }
+
+//===================================
+//= Loading
+//===================================
+
+.loading {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	@include flex-container(center,center);
+	background-color: rgba(255,255,255,.7);
+	z-index: 100;
+	.outer {
+		width: 95%;
+		max-width: 500px;
+		fill: lighten($color-primary, 50%);
+		@include animation(spin, 2s, linear, infinite);
+	}
+	.inner-container {
+		@include overlay;
+		@include flex-container(center,center);
+		z-index: 1;
+		.inner {
+			width: 95%;
+			max-width: 300px;
+			fill: $color-primary;
+			@include animation(spinInner, 1.5s, linear, infinite);
+		}
+	}
+}
+@keyframes spin {
+	0% {transform: rotate(0deg);}
+	100% {transform: rotate(360deg);}
+}
+
+@keyframes spinInner {
+	0% {transform: rotate(0deg);}
+	100% {transform: rotate(-360deg);}
+}

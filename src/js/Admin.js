@@ -16,6 +16,7 @@ const Admin = React.memo(({ role }) => {
 			<Link title='Events' desc='Review upcoming and past events, and create new events.' link='events' />
 			<Link title='Blog' desc='Create new blog posts or review/edit existing posts.' link='blog' />
 			<Link title='News' desc='Create new news posts or review/edit existing posts.' link='news' />
+			<Link title='Comments' desc='Create new comments or review existing comments.' link='comments' />
 			<Link title='Media' desc='Review and upload new files.' link='media' />
 			<Link title='Alerts' desc='Review and create alerts to be displayed to visitors on the website.' link='alerts' />
 			<Link title='Metadata' desc='The behind-the-scenes context effecting SEO of each web page.' link='meta' />

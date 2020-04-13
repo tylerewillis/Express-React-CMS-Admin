@@ -9,6 +9,7 @@ import AdminMedia from '../Admin-Media'
 import AdminQueries from '../Admin-Queries'
 import AdminResources from '../Admin-Resources'
 import AdminAdmins from '../Admin-Admins'
+import Comments from '../Comments'
 
 import RedirectToMainSite from '../Redirect-to-Site'
 
@@ -52,6 +53,10 @@ export default [
   {
     path: "/queries",
     component: AdminQueries
+  },
+  {
+    path: "/comments",
+    component: Comments
   },
   {
     path: "/admins",

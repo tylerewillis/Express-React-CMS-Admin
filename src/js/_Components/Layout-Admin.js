@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet"
 import { useCookies } from 'react-cookie'
 import Head from './Head'
 import { API_PATH } from './_Config'
+import Loading from './Loading'
 
 const Admin = React.memo((props) => {
 
@@ -67,7 +68,7 @@ const Admin = React.memo((props) => {
 			)
 		}
 	} else {
-		return null
+		return <Loading />
 	}
 })
 
