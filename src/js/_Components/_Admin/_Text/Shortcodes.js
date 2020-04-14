@@ -97,6 +97,12 @@ export default () => {
 						<p><strong>Answer</strong>: <em>(required)</em> The answer text.</p>
 					</div>
 				</div>
+				{/********************/}
+				<div className='sc'>
+					<p className='sc-label'>HTML</p>
+					<input type='text' readOnly value='[html ...]' />
+					<p className='sc-desc'>Add custom HTML to your post by using the label "HTML" with a space and then adding or pasting the HTML code.</p>
+				</div>
 			</div>
 			<p className='acbs-rules' style={{'display': display}}>Rules: Only the required options need to be present in the shortcode - the others can be removed entirely. 1 space should be present between the shortcode name and each option. Double-quotes need to be used to contain the values inside of the options.</p>
 		</div>

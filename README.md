@@ -7,3 +7,7 @@ The administrator CMS in React for the Express-React-CMS package.
 #### :one: Update Credentials
 
 1. Update API link in .env file
+
+2. Update name for commenting
+	1. Comments-New
+	2. Comments-Reply
