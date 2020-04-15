@@ -1200,9 +1200,20 @@
 		margin-bottom: 20px;
 	}
 	p {
-		font-size: 13px;
-		line-height: 21px;
-		margin-bottom: 12px;
+		font-size: .8em;
+		line-height: 1.5em;
+		margin-bottom: 1em;
+	}
+	ul {
+		list-style: disc;
+		margin: 0px 0px 1em 20px;
+		li {
+			font-size: .8em;
+			line-height: 1.5em;
+		}
+	}
+	strong {
+		font-weight: 600;
 	}
 }
 
