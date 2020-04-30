@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import Shortcodes from './_Text/Shortcodes'
 
 const Text = React.memo(({ con, handleChange, role, removeSection }) => {
+
+	const section = React.createRef()
+	const editor = React.createRef()
 
 	const sendChange = (e) => {
 		handleChange({
@@ -14,6 +17,24 @@ const Text = React.memo(({ con, handleChange, role, removeSection }) => {
 			description: con.description,
 			content: e
 		})
+	}
+
+	useEffect(() => {
+		window.addEventListener('scroll', handleScroll())
+		return () => {
+			window.removeEventListener('scroll', handleScroll())
+		}
+	})
+
+	const handleScroll = (e) => {
+		window.onscroll = function(){
+			var st = window.pageYOffset
+			if (st > (editor.current.offsetTop + section.current.offsetTop)) {
+				section.current.classList.add('ac-block-active')
+			} else {
+				section.current.classList.remove('ac-block-active')
+			}
+		}
 	}
 
 	const modules = {
@@ -38,10 +59,10 @@ const Text = React.memo(({ con, handleChange, role, removeSection }) => {
   ]
 
 	return (
-		<div className='ac-block'>
+		<div className='ac-block' ref={section}>
 			<h2>{con.name}</h2>
 			<p className='acb-description'>{con.description}</p>
-			<div className='atbs-editor'>
+			<div className='atbs-editor' ref={editor}>
 				<ReactQuill defaultValue={con.content} onChange={sendChange} modules={modules} formats={formats} />
 			</div>
 			<Shortcodes />

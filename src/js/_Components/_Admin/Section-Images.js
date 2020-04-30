@@ -85,7 +85,7 @@ const Images = React.memo(({ con, images, handleChange, role, removeSection }) =
 
 	const reloadContainer = () => {
 		(async function() {
-			const updatedImages = await Call('/admin/get-images-from-directory')
+			const updatedImages = await Call('/get-images-from-directory')
 			setAvailableImages(updatedImages)
 		})()
 	}

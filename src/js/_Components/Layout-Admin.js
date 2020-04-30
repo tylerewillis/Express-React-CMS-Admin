@@ -14,10 +14,15 @@ const Admin = React.memo((props) => {
 	useEffect(() => {
 		(async function() {
 			const path = window.location.pathname === '/' ? '/' : window.location.pathname
-			const res = await fetch(API_PATH + path)
-		  const json = await res.json()
-
-		  setPage(json)
+			try {
+				const res = await fetch(API_PATH + path)
+				const json = await res.json()
+		  	setPage(json)
+			} catch(e) {
+				setTimeout(() => {
+					window.location.reload()
+				},2000)
+			}
 		})()
 	},[])
 
@@ -30,7 +35,7 @@ const Admin = React.memo((props) => {
 					<div className='page page-admin'>
 						<Helmet>
 			        <meta charSet="utf-8" />
-			        <title>{page.title}</title>
+			        <title>{decodeURIComponent(page.title)}</title>
 			        <meta name='description' content=''/>
 			        <meta property='og:locale' content='en_US' />
 			        <meta property='og:type' content='website' />
@@ -51,7 +56,7 @@ const Admin = React.memo((props) => {
 				<div className='page page-admin'>
 					<Helmet>
 		        <meta charSet="utf-8" />
-		        <title>{page.title}</title>
+		        <title>{decodeURIComponent(page.title)}</title>
 		        <meta name='description' content=''/>
 		        <meta property='og:locale' content='en_US' />
 		        <meta property='og:type' content='website' />

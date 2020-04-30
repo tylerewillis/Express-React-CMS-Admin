@@ -17,10 +17,10 @@ const List = React.memo(({ posts }) => {
 			}
 			{posts.map((post, index) => {
 				return <a key={index} className='atb-single' href={window.location.pathname + '/' + post.ID}>
-					<h2>{post.name}</h2>
-					{isDynamic &&
+					<h2>{decodeURIComponent(post.name)}</h2>
+					{/*isDynamic &&
 						<a href={window.location.pathname + '/delete/' + post.ID}>Delete</a>
-					}
+					*/}
 					{post.pub_date && 
 						<p>(Last updated {post.pub_date})</p>
 					}

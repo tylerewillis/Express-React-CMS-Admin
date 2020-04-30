@@ -4,10 +4,13 @@ import Layout from './_Components/Layout-Admin'
 import Dropzone from './_Components/_Admin/Dropzone'
 import { API_IMAGE_PATH } from './_Components/_Config'
 import Call from './_Components/_API/Call'
+import Submit from './_Components/_API/Submit'
+import Loading from './_Components/Loading'
 
 const Media = ({ images, url }) => {
 
 	const [ availableImages, setAvailableImages ] = useState(images)
+	const [ loading, setLoading ] = useState(false)
 
 	const copyImage = (img) => {
 		const input = document.createElement('textarea')
@@ -31,17 +34,36 @@ const Media = ({ images, url }) => {
 		})()
 	}
 
+	const deleteImg = (img) => {
+		if (window.confirm('Are you sure you want to delete this image? Any links to this image will be broken.')) {
+			setLoading(true);
+			(async function() {
+	      await Submit('/upload/delete', {
+	      	path: img
+	      })
+	      setTimeout(() => {
+	      	reloadContainer()
+	      	setLoading(false)
+	      },1000)
+			})() // eslint-disable-next-line
+		}
+	}
+
 	return (
 		<div className='admin-media-container'>
 			<Dropzone reloadContainer={reloadContainer} />
 			<div className='image-container'>
 				{availableImages.map((img, i) => {
-					return <div key={i} name={img} className='acbic-single' style={{backgroundImage: 'url(' + API_IMAGE_PATH + img + ')'}} onClick={() => copyImage(img)} />
+					return <div key={i} name={img} className='acbic-single' style={{backgroundImage: 'url(' + API_IMAGE_PATH + img + ')'}}>
+						<div className='copy-area' onClick={() => copyImage(img)}/>
+						<i class="fas fa-times-circle delete" onClick={() => deleteImg(img)}></i>
+					</div>
 				})}
 			</div>
 			<div className='image-copied-confirmation'>
 				<p>Image source copied to clipboard</p>
 			</div>
+			{loading && <Loading />}
 		</div>
 	)
 }

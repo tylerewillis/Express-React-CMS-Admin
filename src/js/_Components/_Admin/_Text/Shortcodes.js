@@ -32,10 +32,24 @@ export default () => {
 				<div className='sc'>
 					<p className='sc-label'>Image Grid</p>
 					<input type='text' readOnly value='[image-grid source="" width="" margin=""]' />
-					<p className='sc-desc'>Create a grid of images to a post with the following options:</p>
+					<p className='sc-desc'>Add a grid of images to a post with the following options:</p>
 					<hr />
 					<div className='options'>
 						<p><strong>Source</strong>: <em>(required)</em> The path of the image. Each additional source="" will input an additional image. Go to <a href='/media' target='_blank'>Media</a> and click on an image to copy its path.</p>
+						<p><strong>Width</strong>: <em>(optional)</em> The width of the grid in terms of images. Input 1, 2, 3, or 4. If not set, the grid will be 2 images wide.</p>
+						<p><strong>Margin</strong>: <em>(optional)</em> The margin or space between each image in terms of pixels. Input 0 through 100. 0 would mean no margin. If not set, the margin will default to 5.</p>
+					</div>
+				</div>
+				{/********************/}
+				<div className='sc'>
+					<p className='sc-label'>Image Grid with Links</p>
+					<input type='text' readOnly value='[image-grid-links sources="" links="" text="" width="" margin=""]' />
+					<p className='sc-desc'>Add a grid of images with links to a post with the following options:</p>
+					<hr />
+					<div className='options'>
+						<p><strong>Sources</strong>: <em>(required)</em> The paths of the images separated by commas. Go to <a href='/media' target='_blank'>Media</a> and click on an image to copy its path.</p>
+						<p><strong>Links</strong>: <em>(required)</em> The URLs to use for the links separated by commas.</p>
+						<p><strong>Text</strong>: <em>(optional)</em> The link text to use for each link separated by commas. If left blank, the images will be used for the links.</p>
 						<p><strong>Width</strong>: <em>(optional)</em> The width of the grid in terms of images. Input 1, 2, 3, or 4. If not set, the grid will be 2 images wide.</p>
 						<p><strong>Margin</strong>: <em>(optional)</em> The margin or space between each image in terms of pixels. Input 0 through 100. 0 would mean no margin. If not set, the margin will default to 5.</p>
 					</div>
@@ -95,6 +109,17 @@ export default () => {
 					<div className='options'>
 						<p><strong>Question</strong>: <em>(required)</em> The question text.</p>
 						<p><strong>Answer</strong>: <em>(required)</em> The answer text.</p>
+					</div>
+				</div>
+				{/********************/}
+				<div className='sc'>
+					<p className='sc-label'>Link Button</p>
+					<input type='text' readOnly value='[link text="" url=""]' />
+					<p className='sc-desc'>Add a larger link button with the following options:</p>
+					<hr />
+					<div className='options'>
+						<p><strong>Text</strong>: <em>(required)</em> The visible link text.</p>
+						<p><strong>URL</strong>: <em>(required)</em> The URL of the link.</p>
 					</div>
 				</div>
 				{/********************/}

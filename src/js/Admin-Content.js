@@ -11,28 +11,28 @@ import Images from './_Components/_Admin/Section-Images'
 import Table from './_Components/_Admin/Section-Table'
 import New from './_Components/_Admin/Section-New'
 import WindowType from './_Components/_Admin/Section-Window-Type'
-
+import Loading from './_Components/Loading'
 import Submit from './_Components/_API/Submit'
 
 const Content = React.memo(({ post, content, images }) => {
 	
+	const [ submit, setSubmit ] = useState(false)
 	const [ data, setData ] = useState({content})
 	const [ cookies, setCookie ] = useCookies(['role']) // eslint-disable-line
+	const pathArray = window.location.pathname.split('/')
+	const path = pathArray[pathArray.length - 2]
+	const isDynamic = (path === 'events' || path === 'blog' || path === 'news' || path === 'alerts' || path === 'products') ? true : false
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		try {
-			Submit(window.location.pathname, data.content)
+		setSubmit(true);
+		(async () => {
+			await Submit(window.location.pathname, data.content)
 			const prevUrl = window.location.pathname.split('/')
 			prevUrl.pop()
 			const url = prevUrl.join('/')
 			window.location.replace(url)
-		} catch(e) {
-			const prevUrl = window.location.pathname.split('/')
-			prevUrl.pop()
-			const url = prevUrl.join('/')
-			window.location.replace(url)
-		}
+		})()
 	}
 	
 	const handleChange = (e) => {
@@ -62,6 +62,12 @@ const Content = React.memo(({ post, content, images }) => {
 		})
 	}
 
+	const deletePost = (id) => {
+		if (window.confirm('Are you sure that you want to delete this post?')) {
+			window.location.replace('/' + path + '/delete/' + id)
+		}
+	}
+
 	const section = content.map((con, index) => {
 		switch(con.type) {
 			case 'text':
@@ -85,15 +91,23 @@ const Content = React.memo(({ post, content, images }) => {
 
 	return (
 		<div className='admin-content'>
+			{submit &&
+				<Loading />
+			}
 			<div className='atbs-header'>
-				<h2>{post.name}</h2>
+				<h2>{decodeURIComponent(post.name)}</h2>
 			</div>
 			<form onSubmit={handleSubmit}>
 				{section}
 				{cookies['role'] === 'super' &&
 					<New content={content} addSection={addSection} />
 				}
-				<input type='submit' value='Save/Update Page' />
+				<div className='buttons'>
+					<input type='submit' value='Save/Update Page' />
+					{isDynamic &&
+						<p className='delete' onClick={() => deletePost(post.ID)}>Delete Post</p>
+					}
+				</div>
 			</form>
 		</div>
 	)
