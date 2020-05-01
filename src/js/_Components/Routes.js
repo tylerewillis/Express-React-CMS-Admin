@@ -10,6 +10,7 @@ import AdminQueries from '../Admin-Queries'
 import AdminResources from '../Admin-Resources'
 import AdminAdmins from '../Admin-Admins'
 import Comments from '../Comments'
+import Navigation from '../Navigation'
 
 import RedirectToMainSite from '../Redirect-to-Site'
 
@@ -65,6 +66,10 @@ export default [
   {
     path: "/resources",
     component: AdminResources
+  },
+  {
+    path: "/nav",
+    component: Navigation
   },
   {
     path: "*",

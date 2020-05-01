@@ -56,6 +56,66 @@
 }
 
 // =========================================/
+// Block
+// =========================================/
+
+.block {
+	background-color: #fff;
+	box-shadow: 0px 2px 2px #d3d3d3;
+	padding: 40px;
+	border-radius: 5px;
+	margin-bottom: 50px;
+	h1 {
+		font-size: 1.5em;
+		margin-bottom: 1em;
+	}
+}
+
+// =========================================/
+// Nav
+// =========================================/
+
+.nav {
+	@include flex-container(flex-end);
+	.item {
+		background-color: #fff;
+		border-bottom: 1px solid #d3d3d3;
+		padding: 10px;
+		cursor: pointer;
+		position: relative;
+		width: 100%;
+		.arrow {
+			font-size: 2em;
+			top: 5px;
+			color: #d3d3d3;
+			position: absolute;
+			&:hover {
+				color: gray;
+			}
+		}
+		.arrow-left {
+			left: 10px;
+		}
+		.arrow-right {
+			right: 10px;
+		}
+		.details {
+			padding: 0px 30px;
+			p {
+				display: inline-block;
+				margin: 0px;
+			}
+			.number {
+				margin-right: 5px;
+			}
+			.name {
+
+			}
+		}
+	}
+}
+
+// =========================================/
 // Content
 // =========================================/
 
