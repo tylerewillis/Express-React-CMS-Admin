@@ -81,7 +81,7 @@
 		background-color: #fff;
 		border-bottom: 1px solid #d3d3d3;
 		padding: 10px;
-		cursor: pointer;
+		cursor: move;
 		position: relative;
 		width: 100%;
 		.arrow {
@@ -95,9 +95,11 @@
 		}
 		.arrow-left {
 			left: 10px;
+			cursor: w-resize;
 		}
 		.arrow-right {
 			right: 10px;
+			cursor: e-resize;
 		}
 		.details {
 			padding: 0px 30px;
