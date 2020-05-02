@@ -1,19 +1,22 @@
 import React, { useState } from 'react'
 import Layout from './_Components/Layout-Admin'
 
-const Nav = React.memo(({ nav, posts }) => {
+const Nav = ({ nav, posts }) => {
 
 	const [ order, setOrder ] = useState(nav)
 
-	const updateState = () => {
+	const updateState = (ignore = false, add = false) => {
 		var newState = []
 		document.querySelectorAll('.nav .item').forEach(item => {
-			newState.push({
-				name: item.getAttribute('data-name'),
-				url: item.getAttribute('data-url'),
-				parent: item.getAttribute('data-parent')
-			})
+			if (!item.classList.contains('add-item') && ((ignore && !item.classList.contains(ignore)) || !ignore)) {
+				newState.push({
+					name: item.getAttribute('data-name'),
+					url: item.getAttribute('data-url'),
+					parent: item.getAttribute('data-parent')
+				})
+			}
 		})
+		if (add) newState.push({name: '',url: '',parent: false})
 		setOrder(newState)
 	}
 
@@ -86,10 +89,37 @@ const Nav = React.memo(({ nav, posts }) => {
 	}
 
 	const handleChange = (e) => {
-		const element = e.target
 		const el = e.target.closest('.item')
-		el.setAttribute('data-name', el.querySelector('.input-name').value)
+		const oldName = el.getAttribute('data-name')
+		const newName = el.querySelector('.input-name').value
+		el.setAttribute('data-name', newName)
 		el.setAttribute('data-url', el.querySelector('.input-url').value)
+		// Update children
+		if (oldName !== newName) {
+			let items = document.querySelectorAll('.nav .item')
+			for (let i = 0; i < items.length; i++) {
+				if (items[i].getAttribute('data-parent') === oldName) items[i].setAttribute('data-parent', newName)
+			}
+		}
+	}
+
+	const deleteNav = index => {
+		if (window.confirm('Are you sure that you want to delete this navigation item?')) {
+			// Update children
+			const name = document.querySelector('.item-' + index).getAttribute('data-name')
+			let items = document.querySelectorAll('.nav .item')
+			for (let i = 0; i < items.length; i++) {
+				if (items[i].getAttribute('data-parent') === name) {
+					items[i].setAttribute('data-parent', false)
+					items[i].style.marginLeft = '0px'
+				}
+			}
+			updateState('item-' + index)
+		}
+	}
+
+	const newItem = () => {
+		updateState(false,true)
 	}
 
 	return (
@@ -102,18 +132,24 @@ const Nav = React.memo(({ nav, posts }) => {
 				{order.map((item, i) => {
 					return <div className={'item item-' + i} onDragStart={(e) => drag(e,i)} onDragOver={(e) => dragover(e)} onDrop={(e) => drop(e,i)} key={item.name} draggable="true" data-name={item.name} data-url={item.url} data-parent={null}>
 						<i class="fas fa-caret-left arrow arrow-left" onClick={() => unTab(i)}></i>
+						<i className="fas fa-caret-right arrow arrow-right" onClick={() => tab(i)}></i>
 						<div className='details'>
 							<p className='number'>{(i + 1) + '.'}</p>
+							<label>Name:</label>
 							<input type='text' className='input-name' defaultValue={item.name} onChange={handleChange} />
+							<label>URL:</label>
 							<input type='text' className='input-url' defaultValue={item.url} onChange={handleChange} />
 						</div>
-						<i className="fas fa-caret-right arrow arrow-right" onClick={() => tab(i)}></i>
+						<i class="fas fa-times delete" onClick={() => deleteNav(i)}></i>
 					</div>
 				})}
+				<div className='item add-item' onClick={newItem}>
+					<p>Add new navigation link</p>
+				</div>
 			</div>
 		</React.Fragment>
 	)
-})
+}
 
 export default () => (
 	<Layout>
