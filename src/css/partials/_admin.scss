@@ -131,20 +131,53 @@
 			}
 		}
 	}
+}
+
+.buttons-bottom {
 	.add-item {
+		padding: 10px;
 		cursor: pointer;
 		border: 2px dashed #d3d3d3;
-		margin-top: 20px;
 		width: 30%;
 		min-width: 200px;
-		margin-right: auto;
 		border-radius: 5px;
 		text-align: center;
+		background-color: $color-white;
+		margin-right: 15px;
 		&:hover {
 			border: 2px solid #d3d3d3;
 		}
 		p {
 			margin: 0px;
+		}
+	}
+}
+
+// =========================================/
+// Bottom Buttons
+// =========================================/
+
+.buttons-bottom {
+	@include flex-container(flex-start,center);
+	margin-top: 20px;
+	.save {
+		margin: 0px 15px 0px 0px;
+		padding: 8px;
+		cursor: pointer;
+		background-color: $admin-color-secondary;
+		@include transition;
+		border-radius: 5px;
+		min-width: 80px;
+		text-align: center;
+		color: $color-white;
+		&:hover {
+			background-color: darken($admin-color-secondary,10%);
+		}
+	}
+	.save-close {
+		background-color: complement($admin-color-secondary);
+		&:hover {
+			background-color: darken(complement($admin-color-secondary),10%);
 		}
 	}
 }

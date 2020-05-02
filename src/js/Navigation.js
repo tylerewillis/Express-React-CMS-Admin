@@ -1,14 +1,49 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Layout from './_Components/Layout-Admin'
+import Loading from './_Components/Loading'
+import Submit from './_Components/_API/Submit'
 
 const Nav = ({ nav, posts }) => {
 
 	const [ order, setOrder ] = useState(nav)
+	const [ loading, setLoading ] = useState(false)
+
+	useEffect(() => {
+		// Set initial formatting
+		let items = document.querySelectorAll('.nav .item')
+		var level1 = '', level2 = ''
+		for (let i = 0; i < items.length; i++) {
+			let parent = items[i].getAttribute('data-parent')
+			let name = items[i].getAttribute('data-name')
+			if (parent) {
+				if (parent === level1) items[i].style.marginLeft = '50px'
+				if (parent === level2) items[i].style.marginLeft = '100px'
+			}
+			// Assign level
+			if (!items[i].style.marginLeft || items[i].style.marginLeft === '0px') level1 = name
+			else if (items[i].style.marginLeft === '50px') level2 = name
+		}
+	},[])
 
 	const updateState = (ignore = false, add = false) => {
+		// Reset variables
+		let items = document.querySelectorAll('.nav .item')
+		var level1 = '', level2 = '', level3 = '' //eslint-disable-line
+		for (let i = 0; i < items.length; i++) {
+			let name = items[i].getAttribute('data-name')
+			// Assign level
+			if (!items[i].style.marginLeft || items[i].style.marginLeft === '0px') level1 = name
+			else if (items[i].style.marginLeft === '50px') level2 = name
+			else level3 = name
+			// Assign parent
+			if (name === level1) items[i].setAttribute('data-parent', false)
+			else if (name === level2) items[i].setAttribute('data-parent', level1)
+			else items[i].setAttribute('data-parent', level2)
+		}
+		// Update State
 		var newState = []
 		document.querySelectorAll('.nav .item').forEach(item => {
-			if (!item.classList.contains('add-item') && ((ignore && !item.classList.contains(ignore)) || !ignore)) {
+			if ((ignore && !item.classList.contains(ignore)) || !ignore) {
 				newState.push({
 					name: item.getAttribute('data-name'),
 					url: item.getAttribute('data-url'),
@@ -29,13 +64,22 @@ const Nav = ({ nav, posts }) => {
   	document.querySelector(`.item-${movingKey}`).style.marginLeft = '0px'
   	document.querySelector(`.item-${movingKey}`).setAttribute('data-parent', false)
   	document.querySelector('.nav').insertBefore(document.querySelector(`.item-${movingKey}`), document.querySelector(`.item-${key}`))
+		// Update parent of child elements
+		const parentName = (document.querySelector(`.item-${key - 1}`)) ? document.querySelector(`.item-${key - 1}`).getAttribute('data-name') : false
+		const newParentName = document.querySelector(`.item-${movingKey}`).getAttribute('data-name')
+		if (parentName) {
+			let items = document.querySelectorAll('.nav .item')
+			for (let i = key; i < items.length; i++) {
+				if (items[i].getAttribute('data-parent') === parentName) items[i].setAttribute('data-parent', newParentName)
+			}
+		}
 		updateState()
 	}
 
 	const tab = key => {
 		// If not first element
 		if (key !== 0) {
-			// If subsequent element is not element's parent
+			// If previous element is not element's parent (to prevent double indentation)
 			const prev = document.querySelector('.item-' + (key - 1)).getAttribute('data-name')
 			const el = document.querySelector('.item-' + key)
 			if (el.getAttribute('data-parent') !== prev) {
@@ -43,17 +87,6 @@ const Nav = ({ nav, posts }) => {
 				if (!el.style.marginLeft || el.style.marginLeft === '0px') el.style.marginLeft = '50px'
 				else if (el.style.marginLeft === '50px') el.style.marginLeft = '100px'
 				else el.style.marginLeft = '0px'
-				// Set parent
-				let items = document.querySelectorAll('.nav .item')
-				if (el.style.marginLeft === '0px') el.setAttribute('data-parent',false)
-				else {
-					for (let i = key; i >= 0; i--) {
-						if (isNaN(parseInt(items[i].style.marginLeft)) || parseInt(items[i].style.marginLeft) < parseInt(el.style.marginLeft)) {
-							el.setAttribute('data-parent',items[i].getAttribute('data-name'))
-							break
-						}
-					}
-				}
 				updateState()
 			}
 		}
@@ -65,18 +98,8 @@ const Nav = ({ nav, posts }) => {
 		if (!el.style.marginLeft || el.style.marginLeft === '50px') el.style.marginLeft = '0px'
 		else if (el.style.marginLeft === '100px') el.style.marginLeft = '50px'
 		else el.style.marginLeft = '100px'
-		// Set parent
-		let items = document.querySelectorAll('.nav .item')
-		if (el.style.marginLeft === '0px') el.setAttribute('data-parent',false)
-		else {
-			for (let i = key; i >= 0; i--) {
-				if (isNaN(parseInt(items[i].style.marginLeft)) || parseInt(items[i].style.marginLeft) < parseInt(el.style.marginLeft)) {
-					el.setAttribute('data-parent',items[i].getAttribute('data-name'))
-					break
-				}
-			}
-		}
 		// If children, untab also
+		let items = document.querySelectorAll('.nav .item')
 		const name = el.getAttribute('data-name')
 		for (let i = key; i < items.length; i++) {
 			if (items[i].getAttribute('data-parent') === name) {
@@ -122,6 +145,25 @@ const Nav = ({ nav, posts }) => {
 		updateState(false,true)
 	}
 
+	const handleSave = () => {
+		setLoading(true);
+		(async () => {
+			await Submit(window.location.pathname, order)
+			setLoading(false)
+		})()
+	}
+
+	const handleSaveClose = () => {
+		setLoading(true);
+		(async () => {
+			await Submit(window.location.pathname, order)
+			const prevUrl = window.location.pathname.split('/')
+			prevUrl.pop()
+			const url = prevUrl.join('/')
+			window.location.replace(url)
+		})()
+	}
+
 	return (
 		<React.Fragment>
 			<div className='block'>
@@ -130,7 +172,7 @@ const Nav = ({ nav, posts }) => {
 			</div>
 			<div className='nav'>
 				{order.map((item, i) => {
-					return <div className={'item item-' + i} onDragStart={(e) => drag(e,i)} onDragOver={(e) => dragover(e)} onDrop={(e) => drop(e,i)} key={item.name} draggable="true" data-name={item.name} data-url={item.url} data-parent={null}>
+					return <div className={'item item-' + i} onDragStart={(e) => drag(e,i)} onDragOver={(e) => dragover(e)} onDrop={(e) => drop(e,i)} key={item.name} draggable="true" data-name={item.name} data-url={item.url} data-parent={(item.parent) ? item.parent : false}>
 						<i class="fas fa-caret-left arrow arrow-left" onClick={() => unTab(i)}></i>
 						<i className="fas fa-caret-right arrow arrow-right" onClick={() => tab(i)}></i>
 						<div className='details'>
@@ -143,10 +185,15 @@ const Nav = ({ nav, posts }) => {
 						<i class="fas fa-times delete" onClick={() => deleteNav(i)}></i>
 					</div>
 				})}
-				<div className='item add-item' onClick={newItem}>
+			</div>
+			<div className='buttons-bottom'>
+				<div className='add-item' onClick={newItem}>
 					<p>Add new navigation link</p>
 				</div>
+				<p className='save' onClick={handleSave}>Save</p>
+				<p className='save save-close' onClick={handleSaveClose}>Save & Close</p>
 			</div>
+			{loading && <Loading />}
 		</React.Fragment>
 	)
 }
