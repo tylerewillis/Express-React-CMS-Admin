@@ -6,7 +6,7 @@ const List = React.memo(({ posts }) => {
 
 	const pathArray = window.location.pathname.split('/')
 	const path = pathArray[pathArray.length - 1]
-	const isDynamic = (path === 'events' || path === 'blog' || path === 'news' || path === 'alerts') ? true : false
+	const isDynamic = (path === 'events' || path === 'blog' || path === 'news' || path === 'alerts' || path === 'forms') ? true : false
 
 	return (
 		<div className='admin-content-listing'>
@@ -27,7 +27,7 @@ const List = React.memo(({ posts }) => {
 				</a>
 			})}
 			{posts.length === 0 &&
-				<p className='no-posts'>You haven't created any posts yet. Click "Create New" above to get started.</p>
+				<p className='no-posts'>You haven't created any {(path === 'blog' || path === 'news') ? 'posts' : path} yet. Click "Create New" above to get started.</p>
 			}
 		</div>
 	)

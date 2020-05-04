@@ -19,6 +19,7 @@ const Admin = React.memo(({ role }) => {
 			<Link title='Comments' desc='Create new comments or review existing comments.' link='comments' />
 			<Link title='Media' desc='Review and upload new files.' link='media' />
 			<Link title='Navigation' desc="Update the site's main navigation" link='nav' />
+			<Link title='Forms' desc="Add, update and delete forms" link='forms' />
 			<Link title='Alerts' desc='Review and create alerts to be displayed to visitors on the website.' link='alerts' />
 			<Link title='Metadata' desc='The behind-the-scenes context effecting SEO of each web page.' link='meta' />
 			<Link title='Queries' desc='Review user queries that have been submitted to the website.' link='queries' />

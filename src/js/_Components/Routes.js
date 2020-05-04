@@ -11,6 +11,7 @@ import AdminResources from '../Admin-Resources'
 import AdminAdmins from '../Admin-Admins'
 import Comments from '../Comments'
 import Navigation from '../Navigation'
+import Form from '../Form'
 
 import RedirectToMainSite from '../Redirect-to-Site'
 
@@ -29,23 +30,27 @@ export default [
     component: AdminSignout
   },
   {
-    path: ["/pages", "/events", "/blog", "/meta", "/alerts", "/news"],
+    path: ["/pages", "/events", "/blog", "/meta", "/alerts", "/news", "/forms"],
     exact: true,
     component: AdminList
   },
   {
-    path: ["/events/new", "/blog/new", "/alerts/new", "/news/new"],
+    path: ["/events/new", "/blog/new", "/alerts/new", "/news/new", "/forms/new"],
     exact: true,
     component: AdminNew
   },
   {
-    path: ["/events/delete/:id", "/blog/delete/:id", "/alerts/delete/:id", "/news/delete/:id"],
+    path: ["/events/delete/:id", "/blog/delete/:id", "/alerts/delete/:id", "/news/delete/:id", "/forms/delete/:id"],
     exact: true,
     component: AdminDelete
   },
   {
     path: ["/pages/:id", "/events/:id", "/blog/:id", "/meta/:id", "/alerts/:id", "/news/:id"],
     component: AdminContent
+  },
+  {
+    path: ["/forms/:id"],
+    component: Form
   },
   {
     path: "/media",
