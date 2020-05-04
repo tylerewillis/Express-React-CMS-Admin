@@ -159,7 +159,7 @@
 
 .buttons-bottom {
 	@include flex-container(flex-start,center);
-	margin-top: 20px;
+	margin-top: 50px;
 	.save {
 		margin: 0px 15px 0px 0px;
 		padding: 8px;
@@ -174,10 +174,16 @@
 			background-color: darken($admin-color-secondary,10%);
 		}
 	}
-	.save-close {
+	.save.save-close {
 		background-color: complement($admin-color-secondary);
 		&:hover {
 			background-color: darken(complement($admin-color-secondary),10%);
+		}
+	}
+	.save.delete {
+		background-color: #a9a9a9;
+		&:hover {
+			background-color: darken(#a9a9a9,10%);
 		}
 	}
 }
@@ -210,7 +216,7 @@
 .form-groups {
 	.group {
 		@include flex-container(space-between,center);
-		padding-left: 30px;
+		padding: 0px 30px;
 		position: relative;
 		margin-bottom: 20px;
 		.lines {
@@ -224,6 +230,18 @@
 				color: gray;
 			}
 		}
+		.delete {
+			font-size: 1.5em;
+			top: 23px;
+			color: #d3d3d3;
+			position: absolute;
+			padding: 0px 5px;
+			cursor: pointer;
+			right: 0;
+			&:hover {
+				color: gray;
+			}
+		}
 		.input {
 			background-color: $color-white;
 			padding: 20px;
@@ -233,9 +251,13 @@
 			position: relative;
 			cursor: move;
 			p {
-				font-weight: 600;
-				margin: 0px 25px 0px 0px;
-				width: 60px;
+				margin: 0px 10px 0px 0px;
+		    width: 75px;
+		    background-color: #333;
+		    color: #fff;
+		    border-radius: 3px;
+		    font-size: .8em;
+		    text-align: center;
 			}
 			label {
 				font-weight: 400;
@@ -248,20 +270,6 @@
 				max-width: 20%;
 				margin-right: 10px;
 			}
-			i {
-				font-size: 1.5em;
-				top: 23px;
-				color: #d3d3d3;
-				position: absolute;
-				padding: 0px 5px;
-				cursor: pointer;
-				&:hover {
-					color: gray;
-				}
-			}
-			.delete {
-				right: 5px;
-			}
 		}
 	}
 	.group-submit {
@@ -272,6 +280,7 @@
 }
 .form-buttons {
 	@include flex-container(flex-start,center);
+	margin-top: 50px;
 	p {
 		margin: 0px 20px 0px 0px;
 		font-weight: 600;
