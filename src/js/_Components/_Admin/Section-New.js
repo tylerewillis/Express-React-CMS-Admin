@@ -58,6 +58,7 @@ const PlainText = React.memo(({ content, addSection }) => {
 					<option value='images'>Multiple Images</option>
 					<option value='dates'>Dates</option>
 					<option value='table'>Table</option>
+					<option value='form'>Form</option>
 				</select>
 				{select === 'table' &&
 					<div>

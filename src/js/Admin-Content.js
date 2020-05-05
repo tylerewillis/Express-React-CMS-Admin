@@ -10,11 +10,12 @@ import Image from './_Components/_Admin/Section-Image'
 import Images from './_Components/_Admin/Section-Images'
 import Table from './_Components/_Admin/Section-Table'
 import New from './_Components/_Admin/Section-New'
+import Forms from './_Components/_Admin/Section-Forms'
 import WindowType from './_Components/_Admin/Section-Window-Type'
 import Loading from './_Components/Loading'
 import Submit from './_Components/_API/Submit'
 
-const Content = React.memo(({ post, content, images }) => {
+const Content = React.memo(({ post, content, images, forms }) => {
 	
 	const [ submit, setSubmit ] = useState(false)
 	const [ data, setData ] = useState({content})
@@ -84,6 +85,8 @@ const Content = React.memo(({ post, content, images }) => {
 				return <Images key={index} con={con} handleChange={handleChange} images={images} role={cookies['role']} removeSection={removeSection} />
 			case 'window-type':
 				return <WindowType key={index} con={con} handleChange={handleChange} role={cookies['role']} removeSection={removeSection} />
+			case 'form':
+				return <Forms key={index} con={con} forms={forms} handleChange={handleChange} role={cookies['role']} removeSection={removeSection} />
 			default:
 				return null
 		}

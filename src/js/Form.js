@@ -97,6 +97,7 @@ const Form = ({ post, content }) => {
 		el.setAttribute('data-label', el.querySelector('.label-input').value)
 		if (el.getAttribute('data-required')) el.setAttribute('data-required', (el.getAttribute('data-required') === 'true') ? 'false' : 'true')
 		if (el.getAttribute('data-placeholder')) el.setAttribute('data-placeholder', el.querySelector('.placeholder-input').value)
+		if (el.getAttribute('data-options')) el.setAttribute('data-options', el.querySelector('.options-input').value)
 		updateState()
 	}
 
