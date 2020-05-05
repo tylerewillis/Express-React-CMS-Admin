@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Form = React.memo(({ con, forms, handleChange, role, removeSection }) => {
+const Form = React.memo(({ con, forms, handleChange, removeSection }) => {
 
 	const [ options, setOptions ] = useState(forms) //eslint-disable-line
 	const [ value, setValue ] = useState(con.content)
@@ -28,6 +28,7 @@ const Form = React.memo(({ con, forms, handleChange, role, removeSection }) => {
 					})}
 				</select>
 			</div>
+			<i className="fas fa-times" onClick={() => removeSection(con.id)}/>
 		</div>
 	)
 })

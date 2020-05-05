@@ -313,7 +313,17 @@
 			h2 {
 				font-size: 2em;
 				font-weight: 600;
-				margin: 0px 0px 30px 30px;
+				margin: 0px 0px 10px 30px;
+			}
+			.url-header {
+				margin: 0px 0px 20px 30px;
+				padding: 5px;
+				font-size: .85em;
+				border-radius: 3px;
+				border: 1px solid #d3d3d3;
+				background-color: #fdfdfd;
+				width: 100%;
+				max-width: 400px;
 			}
 		}
 		.ac-block {
@@ -342,6 +352,10 @@
 			input {
 				width: 100%;
 				padding: 8px;
+				border: 1px solid #d3d3d3;
+			}
+			input.uneditable {
+				background-color: #f9f9f9;
 			}
 			.dates-editor {
 				@include flex-container;
@@ -435,6 +449,24 @@
 				&:hover {
 					background-color: #333;
 				}
+			}
+		}
+		.need-to-save {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			@include flex-container(center,center);
+			background-color: rgba(0,0,0,.5);
+			z-index: 1;
+			p {
+				color: #fff;
+				font-size: 2em;
+				width: 95%;
+				text-align: center;
+				max-width: 800px;
+				line-height: 1.5em;
 			}
 		}
 	}

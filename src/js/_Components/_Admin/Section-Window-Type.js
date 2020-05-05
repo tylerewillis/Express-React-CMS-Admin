@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-const Text = React.memo(({ con, handleChange, role, removeSection }) => {
+const Text = React.memo(({ con, handleChange, removeSection }) => {
 
 	const [ selectValue, setSelectValue ] = useState(con.content)
 
@@ -27,9 +27,7 @@ const Text = React.memo(({ con, handleChange, role, removeSection }) => {
 					<option value='Bottom'>Bottom</option>
 				</select>
 			</div>
-			{role === 'super' &&
-				<i className="fas fa-times" onClick={() => removeSection(con.id)}/>
-			}
+			<i className="fas fa-times" onClick={() => removeSection(con.id)}/>
 		</div>
 	)
 })

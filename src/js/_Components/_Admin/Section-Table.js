@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
-const Table = React.memo(({ con, handleChange, role, removeSection }) => {
+const Table = React.memo(({ con, handleChange, removeSection }) => {
 
 	const [ newWidth, setNewWidth ] = useState('0')
 	const [ newHeight, setNewHeight ] = useState('0')
@@ -89,9 +89,7 @@ const Table = React.memo(({ con, handleChange, role, removeSection }) => {
 			<h2>{con.name}</h2>
 			<p className='acb-description'>{con.description}</p>
 			<table dangerouslySetInnerHTML={{__html: con.content}} contentEditable='true' ref={tableRef} onKeyUp={updateValue} />
-			{role === 'super' &&
-				<i className="fas fa-times" onClick={() => removeSection(con.id)}/>
-			}
+			<i className="fas fa-times" onClick={() => removeSection(con.id)}/>
 			<div className='table-resize'>
 				<input type='text' value={newWidth} placeholder='Width' onChange={(e) => setNewWidth(e.target.value)} />
 				<span>X</span>

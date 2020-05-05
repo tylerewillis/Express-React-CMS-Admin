@@ -35,12 +35,12 @@ export default [
     component: AdminList
   },
   {
-    path: ["/events/new", "/blog/new", "/alerts/new", "/news/new", "/forms/new"],
+    path: ["/pages/new", "/events/new", "/blog/new", "/alerts/new", "/news/new", "/forms/new"],
     exact: true,
     component: AdminNew
   },
   {
-    path: ["/events/delete/:id", "/blog/delete/:id", "/alerts/delete/:id", "/news/delete/:id", "/forms/delete/:id"],
+    path: ["/pages/delete/:id", "/events/delete/:id", "/blog/delete/:id", "/alerts/delete/:id", "/news/delete/:id", "/forms/delete/:id"],
     exact: true,
     component: AdminDelete
   },

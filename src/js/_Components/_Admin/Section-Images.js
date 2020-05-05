@@ -97,7 +97,7 @@ const Images = React.memo(({ con, images, handleChange, role, removeSection }) =
 			<div className='acb-images'>
 				<div className='acb-images-current'>
 					{imagesView.map((img, i) => {
-						return <div key={i} name={img} className="acbi-active" style={{backgroundImage: 'url(' + ((img.charAt(0) === '/') ? img : '/' + img) + ')'}} onClick={containerToggle}>
+						return <div key={i} name={img} className="acbi-active" style={{backgroundImage: 'url(' + img + ')'}} onClick={containerToggle}>
 							<i className="far fa-times-circle" imgid={i} onClick={e => removeImage(e)}></i>
 						</div>
 					})}

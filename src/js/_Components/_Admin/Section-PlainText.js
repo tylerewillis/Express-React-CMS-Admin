@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const PlainText = React.memo(({ con, handleChange, role, removeSection }) => {
+const PlainText = React.memo(({ con, handleChange, removeSection }) => {
 
 	const sendChange = (e) => {
 		handleChange({
@@ -17,10 +17,8 @@ const PlainText = React.memo(({ con, handleChange, role, removeSection }) => {
 		<div className='ac-block'>
 			<h2>{con.name}</h2>
 			<p className='acb-description'>{con.description}</p>
-			<input defaultValue={con.content} onChange={sendChange} />
-			{role === 'super' &&
-				<i className="fas fa-times" onClick={() => removeSection(con.id)}/>
-			}
+			<input defaultValue={con.content} onChange={sendChange} readOnly={(con.content === 'Home') ? true : false} className={(con.content === 'Home') ? 'uneditable' : ''} />
+			{(con.id !== 0) && <i className="fas fa-times" onClick={() => removeSection(con.id)}/>}
 		</div>
 	)
 })

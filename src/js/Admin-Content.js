@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Layout from './_Components/Layout-Admin'
 import { useCookies } from 'react-cookie'
+import Loading from './_Components/Loading'
 
 import Text from './_Components/_Admin/Section-Text'
 import PlainText from './_Components/_Admin/Section-PlainText'
@@ -12,39 +13,50 @@ import Table from './_Components/_Admin/Section-Table'
 import New from './_Components/_Admin/Section-New'
 import Forms from './_Components/_Admin/Section-Forms'
 import WindowType from './_Components/_Admin/Section-Window-Type'
-import Loading from './_Components/Loading'
 import Submit from './_Components/_API/Submit'
 
 const Content = React.memo(({ post, content, images, forms }) => {
 	
-	const [ submit, setSubmit ] = useState(false)
 	const [ data, setData ] = useState({content})
+	const [ loading, setLoading ] = useState(false)
+	const [ name, setName ] = useState(content[0].content)
+	const [ url, setUrl ] = useState(false)
+	const [ needToSave, setNeedToSave ] = useState(false)
 	const [ cookies, setCookie ] = useCookies(['role']) // eslint-disable-line
 	const pathArray = window.location.pathname.split('/')
 	const path = pathArray[pathArray.length - 2]
-	const isDynamic = (path === 'events' || path === 'blog' || path === 'news' || path === 'alerts' || path === 'products') ? true : false
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		setSubmit(true);
-		(async () => {
-			await Submit(window.location.pathname, data.content)
-			const prevUrl = window.location.pathname.split('/')
-			prevUrl.pop()
-			const url = prevUrl.join('/')
-			window.location.replace(url)
-		})()
+	useEffect(() => {
+		if (path === 'pages') setUrl('/' + post.url)
+		else if (path === 'products') setUrl('/shop/' + post.url)
+		else setUrl('/' + path + '/' + post.url)
+	},[]) //eslint-disable-line
+
+	const toUrl = string => {
+	  var clean = string.replace(/[^a-zA-Z0-9 ]/g, '')
+	  var url = clean.replace(/ /gm, "-").toLowerCase()
+
+	  if (path === 'pages') return '/' + url
+		else if (path === 'products') return '/shop/' + url
+		else return '/' + path + '/' + url
 	}
-	
+
 	const handleChange = (e) => {
 		setData(prevState => {
 			content[e.id].content = e.content
 			return { ...prevState }
 		})
+		if (e.id === 0) {
+			setName(e.content)
+			setUrl(toUrl(e.content))
+		}
+		document.querySelector('body').addEventListener('mouseleave', (e) => {
+			setNeedToSave(true)
+		})
 	}
 
 	const removeSection = (id) => {
-		if (window.confirm('Are you sure you want to delete this content?')) {
+		if (window.confirm('Are you sure you want to delete this content? Formatting on the page may be broken.')) {
 			setData(prevState => {
 				prevState.content.splice(id, 1)
 				for (let i = id; i < content.length; i++) {
@@ -63,10 +75,8 @@ const Content = React.memo(({ post, content, images, forms }) => {
 		})
 	}
 
-	const deletePost = (id) => {
-		if (window.confirm('Are you sure that you want to delete this post?')) {
-			window.location.replace('/' + path + '/delete/' + id)
-		}
+	const hideSaveMessage = () => {
+		document.querySelector('.need-to-save').remove()
 	}
 
 	const section = content.map((con, index) => {
@@ -92,26 +102,52 @@ const Content = React.memo(({ post, content, images, forms }) => {
 		}
 	})
 
+	const handleSave = () => {
+		setLoading(true);
+		(async () => {
+			await Submit(window.location.pathname, data.content)
+			setLoading(false)
+		})()
+	}
+
+	const handleSaveClose = () => {
+		setLoading(true);
+		(async () => {
+			await Submit(window.location.pathname, data.content)
+			const prevUrl = window.location.pathname.split('/')
+			prevUrl.pop()
+			const url = prevUrl.join('/')
+			window.location.replace(url)
+		})()
+	}
+
+	const handleDelete = (id) => {
+		if (window.confirm('Are you sure that you want to delete this post? This will break any existing links pointed this page and it cannot be undone.')) {
+			window.location.replace('/' + path + '/delete/' + id)
+		}
+	}
+
 	return (
 		<div className='admin-content'>
-			{submit &&
-				<Loading />
-			}
 			<div className='atbs-header'>
-				<h2>{decodeURIComponent(post.name)}</h2>
+				<h2>{name}</h2>
+				{(path !== 'alerts') && <input className='url-header' value={url} readonly />}
 			</div>
-			<form onSubmit={handleSubmit}>
+			<form>
 				{section}
-				{cookies['role'] === 'super' &&
-					<New content={content} addSection={addSection} />
-				}
-				<div className='buttons'>
-					<input type='submit' value='Save/Update Page' />
-					{isDynamic &&
-						<p className='delete' onClick={() => deletePost(post.ID)}>Delete Post</p>
-					}
+				<New content={content} addSection={addSection} />
+				<div className='buttons-bottom'>
+					<p className='save' onClick={handleSave}>Save</p>
+					<p className='save save-close' onClick={handleSaveClose}>Save & Close</p>
+					<p className='save delete' onClick={() => handleDelete(post.ID)}>Delete Form</p>
 				</div>
 			</form>
+			{needToSave &&
+				<div className='need-to-save' onClick={hideSaveMessage}>
+					<p>Changes have been made to this page. Make sure to save before exiting!</p>
+				</div>
+			}
+			{loading && <Loading />}
 		</div>
 	)
 })

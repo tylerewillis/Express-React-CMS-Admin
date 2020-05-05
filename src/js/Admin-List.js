@@ -6,7 +6,7 @@ const List = React.memo(({ posts }) => {
 
 	const pathArray = window.location.pathname.split('/')
 	const path = pathArray[pathArray.length - 1]
-	const isDynamic = (path === 'events' || path === 'blog' || path === 'news' || path === 'alerts' || path === 'forms') ? true : false
+	const isDynamic = (path === 'pages' || path === 'events' || path === 'blog' || path === 'news' || path === 'alerts' || path === 'forms') ? true : false
 
 	return (
 		<div className='admin-content-listing'>

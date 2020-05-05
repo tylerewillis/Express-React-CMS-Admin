@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-const Dates = React.memo(({ con, handleChange, role, removeSection }) => {
+const Dates = React.memo(({ con, handleChange, removeSection }) => {
 
 	const [ start, setStart ] = useState(con.content.split(',')[0])
 	const [ end, setEnd ] = useState(con.content.split(',')[1])
@@ -36,9 +36,7 @@ const Dates = React.memo(({ con, handleChange, role, removeSection }) => {
 				<input type='datetime-local' name='start' value={start} onChange={updateDate} placeholder='Start' />
 				<input type='datetime-local' name='end' value={end} onChange={updateDate} placeholder='End (if applicable)' />
 			</div>
-			{role === 'super' &&
-				<i className="fas fa-times" onClick={() => removeSection(con.id)}/>
-			}
+			<i className="fas fa-times" onClick={() => removeSection(con.id)}/>
 		</div>
 	)
 })

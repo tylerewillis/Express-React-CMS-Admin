@@ -4,7 +4,7 @@ import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import Shortcodes from './_Text/Shortcodes'
 
-const Text = React.memo(({ con, handleChange, role, removeSection }) => {
+const Text = React.memo(({ con, handleChange, removeSection }) => {
 
 	const section = React.createRef()
 	const editor = React.createRef()
@@ -29,10 +29,12 @@ const Text = React.memo(({ con, handleChange, role, removeSection }) => {
 	const handleScroll = (e) => {
 		window.onscroll = function(){
 			var st = window.pageYOffset
-			if (st > (editor.current.offsetTop + section.current.offsetTop)) {
-				section.current.classList.add('ac-block-active')
-			} else {
-				section.current.classList.remove('ac-block-active')
+			if (editor.current && section.current) {
+				if (st > (editor.current.offsetTop + section.current.offsetTop)) {
+					section.current.classList.add('ac-block-active')
+				} else {
+					section.current.classList.remove('ac-block-active')
+				}
 			}
 		}
 	}
@@ -66,9 +68,7 @@ const Text = React.memo(({ con, handleChange, role, removeSection }) => {
 				<ReactQuill defaultValue={con.content} onChange={sendChange} modules={modules} formats={formats} />
 			</div>
 			<Shortcodes />
-			{role === 'super' &&
-				<i className="fas fa-times" onClick={() => removeSection(con.id)}/>
-			}
+			<i className="fas fa-times" onClick={() => removeSection(con.id)}/>
 		</div>
 	)
 })
