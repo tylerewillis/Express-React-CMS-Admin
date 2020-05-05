@@ -3,7 +3,7 @@ import Layout from './_Components/Layout-Admin'
 import Loading from './_Components/Loading'
 import Submit from './_Components/_API/Submit'
 
-const Form = ({ content }) => {
+const Form = ({ post, content }) => {
 
 	const [ data, setData ] = useState(content)
 	const [ loading, setLoading ] = useState(false)
@@ -105,7 +105,7 @@ const Form = ({ content }) => {
 	}
 
 	const deleteGroup = i => {
-		updateState(false, false, false, i)
+		updateState(false, false, false, String(i))
 	}
 
 	const handleSave = () => {
@@ -199,7 +199,7 @@ const Form = ({ content }) => {
 			<div className='buttons-bottom'>
 				<p className='save' onClick={handleSave}>Save</p>
 				<p className='save save-close' onClick={handleSaveClose}>Save & Close</p>
-				<p className='save delete' onClick={handleDelete}>Delete Form</p>
+				<p className='save delete' onClick={() => handleDelete(post.ID)}>Delete Form</p>
 			</div>
 			{loading && <Loading />}
 		</React.Fragment>
