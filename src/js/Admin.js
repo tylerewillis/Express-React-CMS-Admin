@@ -11,7 +11,7 @@ const Admin = React.memo(({ role }) => {
 	return (
 		<div className='admin-dashboard'>
 			<Link title='Pages' desc='Review and edit page content displayed on the website.' link='pages' />
-			<Link title='Support' desc='Contact Mullin/Ashley for support at support@mullinashley.com' link='#' />
+			<Link title='Support' desc='Contact Mullin/Ashley for support at support@mullinashley.com' />
 			<Link title='Sign Out' desc='Click to sign out of the administrator dashboard.' link='signout' />
 			<Link title='Events' desc='Review upcoming and past events, and create new events.' link='events' />
 			<Link title='Blog' desc='Create new blog posts or review/edit existing posts.' link='blog' />
@@ -24,12 +24,7 @@ const Admin = React.memo(({ role }) => {
 			<Link title='Metadata' desc='The behind-the-scenes context effecting SEO of each web page.' link='meta' />
 			<Link title='Queries' desc='Review user queries that have been submitted to the website.' link='queries' />
 			<Link title='Resources' desc='Tips and tricks to help you with your website.' link='resources' />
-			{role !== 'approved' &&
-				<Link title='Admins' desc='View and approve/revoke administrator access.' link='admins' />
-			}
-			{cookies['role'] === 'super' && 
-				<Link title='New Page' desc='For super users, add a new page.' link='new-page' />
-			}
+			<Link title='Admins' desc='View and approve/revoke administrator access.' link='admins' />
 		</div>
 	)
 })

@@ -5,21 +5,23 @@ export default React.memo(({ replyTo, setReplyTo, setActive }) => {
 
 	const [ submit, setSubmit ] = useState(false)
 	const [ message, setMessage ] = useState('')
-	const [ name, setName ] = useState('Admin')
+	const [ name, setName ] = useState('Elaine')
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		setSubmit(true)
-		Submit(window.location.pathname + '/reply', {
-			parentId: replyTo.id,
-			name,
-			message
-		})
-		setTimeout(() => {
-			setMessage('')
-			setReplyTo('')
-			setSubmit(false)
-		},3000)
+		setSubmit(true);
+		(async () => {
+			await Submit(window.location.pathname + '/reply', {
+				parentId: replyTo.id,
+				name,
+				message
+			})
+			setTimeout(() => {
+				setMessage('')
+				setReplyTo('')
+				setSubmit(false)
+			},3000)
+		})()
 	}
 
 	if (replyTo) {

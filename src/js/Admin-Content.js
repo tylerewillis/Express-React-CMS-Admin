@@ -139,7 +139,7 @@ const Content = React.memo(({ post, content, images, forms }) => {
 				<div className='buttons-bottom'>
 					<p className='save' onClick={handleSave}>Save</p>
 					<p className='save save-close' onClick={handleSaveClose}>Save & Close</p>
-					<p className='save delete' onClick={() => handleDelete(post.ID)}>Delete Form</p>
+					<p className='save delete' onClick={() => handleDelete(post.ID)}>Delete</p>
 				</div>
 			</form>
 			{needToSave &&

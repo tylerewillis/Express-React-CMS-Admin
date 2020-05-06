@@ -5,22 +5,24 @@ export default React.memo(({ posts }) => {
 
 	const [ submit, setSubmit ] = useState(false)
 	const [ message, setMessage ] = useState('')
-	const [ name, setName ] = useState('Admin')
+	const [ name, setName ] = useState('Elaine')
 	const [ post, setPost ] = useState(posts[posts.length - 1])
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		setSubmit(true)
-		Submit(window.location.pathname + '/new', {
-			parentId: posts.indexOf(post),
-			name,
-			message
-		})
-		setTimeout(() => {
-			setMessage('')
-			setPost(posts[posts.length - 1])
-			setSubmit(false)
-		},3000)
+		setSubmit(true);
+		(async () => {
+			await Submit(window.location.pathname + '/new', {
+				parentId: 'post-' + posts.indexOf(post),
+				name,
+				message
+			})
+			setTimeout(() => {
+				setMessage('')
+				setPost(posts[posts.length - 1])
+				setSubmit(false)
+			},3000)
+		})()
 	}
 
 	if (submit) {

@@ -2,12 +2,21 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const Link = React.memo(({ title, desc, link }) => {
-	return (
-		<a className='ad-single' href={'/' + link}>
-			<h2>{title}</h2>
-			<p>{desc}</p>
-		</a>
-	)
+	if (link) {
+		return (
+			<a className='ad-single' href={'/' + link}>
+				<h2>{title}</h2>
+				<p>{desc}</p>
+			</a>
+		)
+	} else {
+		return (
+			<p className='ad-single'>
+				<h2>{title}</h2>
+				<p>{desc}</p>
+			</p>
+		)
+	}
 })
 
 Link.propTypes = {

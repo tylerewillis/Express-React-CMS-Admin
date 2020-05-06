@@ -321,7 +321,7 @@
 				font-size: .85em;
 				border-radius: 3px;
 				border: 1px solid #d3d3d3;
-				background-color: #fdfdfd;
+				background-color: #f9f9f9;
 				width: 100%;
 				max-width: 400px;
 			}
@@ -616,9 +616,6 @@
 		color: $color-black !important;
 		text-decoration: none !important;
 		@include transition(.2s);
-		&:hover {
-			box-shadow: 2px 2px 5px #a9a9a9;
-		}
 		@include admin-mq(l) {
 			width: 48%;
 		}
@@ -659,6 +656,11 @@
 			right: 0;
 			width: 100px;
 			margin: 20px;
+		}
+	}
+	a.ad-single {
+		&:hover {
+			box-shadow: 2px 2px 5px #a9a9a9;
 		}
 	}
 }
@@ -784,7 +786,9 @@
 			padding: 8px 25px;
 			color: #333;
 			border-radius: 3px;
+			text-decoration: none;
 			&:hover {
+				border: 2px solid #333;
 				background-color: #333;
 				color: #fff;
 			}
