@@ -12,6 +12,7 @@ import AdminAdmins from '../Admin-Admins'
 import Comments from '../Comments'
 import Navigation from '../Navigation'
 import Form from '../Form'
+import Shop from '../Shop'
 
 import RedirectToMainSite from '../Redirect-to-Site'
 
@@ -30,22 +31,22 @@ export default [
     component: AdminSignout
   },
   {
-    path: ["/pages", "/events", "/blog", "/meta", "/alerts", "/news", "/forms"],
+    path: ["/pages", "/events", "/blog", "/meta", "/alerts", "/news", "/forms", "/products"],
     exact: true,
     component: AdminList
   },
   {
-    path: ["/pages/new", "/events/new", "/blog/new", "/alerts/new", "/news/new", "/forms/new"],
+    path: ["/pages/new", "/events/new", "/blog/new", "/alerts/new", "/news/new", "/forms/new", "/products/new"],
     exact: true,
     component: AdminNew
   },
   {
-    path: ["/pages/delete/:id", "/events/delete/:id", "/blog/delete/:id", "/alerts/delete/:id", "/news/delete/:id", "/forms/delete/:id"],
+    path: ["/pages/delete/:id", "/events/delete/:id", "/blog/delete/:id", "/alerts/delete/:id", "/news/delete/:id", "/forms/delete/:id", "/products/delete/:id"],
     exact: true,
     component: AdminDelete
   },
   {
-    path: ["/pages/:id", "/events/:id", "/blog/:id", "/meta/:id", "/alerts/:id", "/news/:id"],
+    path: ["/pages/:id", "/events/:id", "/blog/:id", "/meta/:id", "/alerts/:id", "/news/:id", "/products/:id"],
     component: AdminContent
   },
   {
@@ -75,6 +76,10 @@ export default [
   {
     path: "/nav",
     component: Navigation
+  },
+  {
+    path: "/shop",
+    component: Shop
   },
   {
     path: "*",

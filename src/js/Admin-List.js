@@ -6,15 +6,12 @@ const List = React.memo(({ posts }) => {
 
 	const pathArray = window.location.pathname.split('/')
 	const path = pathArray[pathArray.length - 1]
-	const isDynamic = (path === 'pages' || path === 'events' || path === 'blog' || path === 'news' || path === 'alerts' || path === 'forms') ? true : false
 
 	return (
 		<div className='admin-content-listing'>
-			{isDynamic &&
-				<div className='acl-header'>
-					<a href={window.location.pathname + '/new'} className='new-post'>Create New</a>
-				</div>
-			}
+			<div className='acl-header'>
+				<a href={window.location.pathname + '/new'} className='new-post'>Create New</a>
+			</div>
 			{posts.map((post, index) => {
 				return <a key={index} className='atb-single' href={window.location.pathname + '/' + post.ID}>
 					<h2>{decodeURIComponent(post.name)}</h2>
