@@ -1,21 +1,18 @@
 import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
-import Shortcodes from './_Text/Shortcodes'
+import Shortcodes from '../_Text/Shortcodes'
 
-const Text = React.memo(({ con, handleChange, removeSection }) => {
+const Text = React.memo(({ con, p, i, updateValue, removeSection }) => {
 
 	const section = React.createRef()
 	const editor = React.createRef()
 
-	const sendChange = (e) => {
-		handleChange({
-			id: con.id,
+	const updateItem = (e) => {
+		updateValue(p,i, {
 			type: con.type,
 			name: con.name,
-			description: con.description,
-			content: e
+			value: e
 		})
 	}
 
@@ -65,21 +62,14 @@ const Text = React.memo(({ con, handleChange, removeSection }) => {
   ]
 
 	return (
-		<div className='ac-block' ref={section}>
+		<div className='item' ref={section}>
 			<h2>{con.name}</h2>
-			<p className='acb-description'>{con.description}</p>
 			<div className='atbs-editor' ref={editor}>
-				<ReactQuill defaultValue={con.content} onChange={sendChange} modules={modules} formats={formats} />
+				<ReactQuill defaultValue={con.value} onChange={updateItem} modules={modules} formats={formats} />
 			</div>
 			<Shortcodes />
-			<i className="fas fa-times" onClick={() => removeSection(con.id)}/>
 		</div>
 	)
 })
-
-Text.propTypes = {
-	con: PropTypes.array,
-	handleChange: PropTypes.func
-}
 
 export default Text

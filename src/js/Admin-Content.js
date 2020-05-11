@@ -13,6 +13,7 @@ import Table from './_Components/_Admin/Section-Table'
 import New from './_Components/_Admin/Section-New'
 import Forms from './_Components/_Admin/Section-Forms'
 import WindowType from './_Components/_Admin/Section-Window-Type'
+import Blocks from './_Components/_Admin/Section-Blocks'
 import Submit from './_Components/_API/Submit'
 
 const Content = React.memo(({ post, content, images, forms }) => {
@@ -82,21 +83,23 @@ const Content = React.memo(({ post, content, images, forms }) => {
 	const section = content.map((con, index) => {
 		switch(con.type) {
 			case 'text':
-				return <Text key={index} con={con} handleChange={handleChange} role={cookies['role']} removeSection={removeSection} />
+				return <Text key={index} con={con} handleChange={handleChange} removeSection={removeSection} />
 			case 'plain-text':
-				return <PlainText key={index} con={con} handleChange={handleChange} role={cookies['role']} removeSection={removeSection} />
+				return <PlainText key={index} con={con} handleChange={handleChange} removeSection={removeSection} />
 			case 'dates':
-				return <Dates key={index} con={con} handleChange={handleChange} role={cookies['role']} removeSection={removeSection} />
+				return <Dates key={index} con={con} handleChange={handleChange} removeSection={removeSection} />
 			case 'image':
-				return	<Image key={index} con={con} handleChange={handleChange} images={images} role={cookies['role']} removeSection={removeSection} />
+				return	<Image key={index} con={con} handleChange={handleChange} images={images} removeSection={removeSection} />
 			case 'table':
-				return <Table key={index} con={con} handleChange={handleChange} role={cookies['role']} removeSection={removeSection} />
+				return <Table key={index} con={con} handleChange={handleChange} removeSection={removeSection} />
 			case 'images':
-				return <Images key={index} con={con} handleChange={handleChange} images={images} role={cookies['role']} removeSection={removeSection} />
+				return <Images key={index} con={con} handleChange={handleChange} images={images} removeSection={removeSection} />
 			case 'window-type':
-				return <WindowType key={index} con={con} handleChange={handleChange} role={cookies['role']} removeSection={removeSection} />
+				return <WindowType key={index} con={con} handleChange={handleChange} removeSection={removeSection} />
 			case 'form':
-				return <Forms key={index} con={con} forms={forms} handleChange={handleChange} role={cookies['role']} removeSection={removeSection} />
+				return <Forms key={index} con={con} forms={forms} handleChange={handleChange} removeSection={removeSection} />
+			case 'blocks':
+				return <Blocks key={index} con={con} images={images} forms={forms} handleChange={handleChange} removeSection={removeSection} />
 			default:
 				return null
 		}

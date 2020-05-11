@@ -8,11 +8,13 @@ const PlainText = React.memo(({ content, addSection }) => {
 	const [ rows, setRows ] = useState('')
 	const [ columns, setColumns ] = useState('')
 	const [ select, setSelect ] = useState('')
+	const [ list, setList ] = useState({ array:[] })
 
 	const revealSubmit = () => {
 		if (title.length && desc.length) {
 			if (select.length && select !== 'table') return <p className='add-section-submit' onClick={add}>Add Section</p>
 			else if (select.length && rows.length && columns.length) return <p className='add-section-submit' onClick={add}>Add Section</p>
+			else if (select.length && list.array.length > 0) return <p className='add-section-submit' onClick={add}>Add Section</p>
 			else return null
 		} else {
 			return null
@@ -33,6 +35,15 @@ const PlainText = React.memo(({ content, addSection }) => {
 					content += '</tr>'
 				}
 			}
+		} else if (select === 'blocks') {
+			content = [[]]
+			list.array.forEach(item => {
+				content[0].push({
+					type: item.type,
+					name: item.name,
+					value: ''
+				})
+			})
 		}
 		addSection({
 			id: 0,
@@ -41,6 +52,43 @@ const PlainText = React.memo(({ content, addSection }) => {
 			description: desc,
 			content
 		})
+		setList({ array:[] })
+		setTitle('')
+		setDesc('')
+		setSelect('')
+	}
+
+	const addToList = type => {
+		setList({ array: [ ...list.array, {type, name: ''} ]})
+	}
+
+	const removeFromList = i => {
+		let temp = {
+			array: []
+		}
+		list.array.forEach((item, j) => {
+			if (j !== i) {
+				temp.array.push(item)
+			}
+		})
+		setList(temp)
+	}
+
+	const updateListName = (e,i) => {
+		let temp = {
+			array: []
+		}
+		list.array.forEach((item, j) => {
+			if (j === i) {
+				temp.array.push({
+					type: item.type,
+					name: e.target.value
+				})
+			} else {
+				temp.array.push(item)
+			}
+		})
+		setList(temp)
 	}
 
 	return (
@@ -59,11 +107,36 @@ const PlainText = React.memo(({ content, addSection }) => {
 					<option value='dates'>Dates</option>
 					<option value='table'>Table</option>
 					<option value='form'>Form</option>
+					<option value='blocks'>Blocks</option>
 				</select>
 				{select === 'table' &&
 					<div>
-						<input type='number' value={rows} placeholder='# Rows (if table)' onChange={e => setRows(e.target.value)} />
-						<input type='number' value={columns} placeholder='# Columns (if table)' onChange={e => setColumns(e.target.value)} />
+						<input type='number' value={rows} placeholder='# Rows' onChange={e => setRows(e.target.value)} />
+						<input type='number' value={columns} placeholder='# Columns' onChange={e => setColumns(e.target.value)} />
+					</div>
+				}
+				{select === 'blocks' &&
+					<div>
+						<div className='list-selected'>
+							{list.array.map((item, i) => {
+								return (
+									<div className='list-sel' key={i}>
+										<p>{item.type}</p>
+										<input type='text' defaultValue={item.name} onChange={(e) => updateListName(e,i)} placeholder='Name' />
+										<i className="fas fa-times" onClick={() => removeFromList(i)}/>
+									</div>
+								)
+							})}
+						</div>
+						<div className='list-options'>
+							<p onClick={() => addToList('plain-text')}>Plain Text</p>
+							<p onClick={() => addToList('text')}>Text</p>
+							<p onClick={() => addToList('image')}>Image</p>
+							<p onClick={() => addToList('images')}>Multiple Images</p>
+							{/*<p onClick={() => addToList('dates')}>Dates</p>
+							<p onClick={() => addToList('Table')}>Table</p>*/}
+							<p onClick={() => addToList('form')}>Form</p>
+						</div>
 					</div>
 				}
 				<div>
