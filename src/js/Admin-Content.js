@@ -34,7 +34,7 @@ const Content = React.memo(({ post, content, images, forms }) => {
 	},[]) //eslint-disable-line
 
 	const toUrl = string => {
-	  var clean = string.replace(/[^a-zA-Z0-9 ]/g, '')
+	  var clean = string.replace(/[^a-zA-Z0-9- ]/g, '')
 	  var url = clean.replace(/ /gm, "-").toLowerCase()
 
 	  if (path === 'pages') return '/' + url
@@ -47,10 +47,8 @@ const Content = React.memo(({ post, content, images, forms }) => {
 			content[e.id].content = e.content
 			return { ...prevState }
 		})
-		if (e.id === 0) {
-			setName(e.content)
-			setUrl(toUrl(e.content))
-		}
+		if (e.id === 0) setName(e.content)
+		if (e.id === 1 && e.name === 'URL') setUrl(toUrl(e.content))
 		document.querySelector('body').addEventListener('mouseleave', (e) => {
 			setNeedToSave(true)
 		})
@@ -134,7 +132,7 @@ const Content = React.memo(({ post, content, images, forms }) => {
 		<div className='admin-content'>
 			<div className='atbs-header'>
 				<h2>{name}</h2>
-				{(path !== 'alerts') && <input className='url-header' value={url} readonly />}
+				{(path !== 'alerts' && path !== 'meta') && <input className='url-header' value={url} readonly />}
 			</div>
 			<form>
 				{section}
