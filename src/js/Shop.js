@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Layout from './_Components/Layout-Admin'
+import Layout from './_Components/Layout'
 import Loading from './_Components/Loading'
 import Submit from './_Components/_API/Submit'
 

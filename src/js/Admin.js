@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Layout from './_Components/Layout-Admin'
-import Link from './_Components/Admin-Link'
+import Layout from './_Components/Layout'
+import Link from './_Components/Link'
 import { useCookies } from 'react-cookie'
 
 const Admin = React.memo(({ role }) => {

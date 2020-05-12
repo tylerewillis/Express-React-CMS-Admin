@@ -1,14 +1,14 @@
 import Admin from '../Admin'
-import AdminSignin from '../Admin-Signin'
-import AdminSignout from '../Admin-Signout'
-import AdminList from '../Admin-List'
-import AdminContent from '../Admin-Content'
-import AdminNew from '../Admin-New'
-import AdminDelete from '../Admin-Delete'
-import AdminMedia from '../Admin-Media'
-import AdminQueries from '../Admin-Queries'
-import AdminResources from '../Admin-Resources'
-import AdminAdmins from '../Admin-Admins'
+import Signin from '../Signin'
+import Signout from '../Signout'
+import List from '../List'
+import Content from '../Content'
+import New from '../New'
+import Delete from '../Delete'
+import Media from '../Media'
+import Queries from '../Queries'
+import Resources from '../Resources'
+import Admins from '../Admins'
 import Comments from '../Comments'
 import Navigation from '../Navigation'
 import Form from '../Form'
@@ -24,30 +24,30 @@ export default [
   },
   {
     path: "/signin",
-    component: AdminSignin
+    component: Signin
   },
   {
     path: "/signout",
-    component: AdminSignout
+    component: Signout
   },
   {
     path: ["/pages", "/events", "/blog", "/meta", "/alerts", "/news", "/forms", "/products"],
     exact: true,
-    component: AdminList
+    component: List
   },
   {
     path: ["/pages/new", "/events/new", "/blog/new", "/alerts/new", "/news/new", "/forms/new", "/products/new"],
     exact: true,
-    component: AdminNew
+    component: New
   },
   {
     path: ["/pages/delete/:id", "/events/delete/:id", "/blog/delete/:id", "/alerts/delete/:id", "/news/delete/:id", "/forms/delete/:id", "/products/delete/:id"],
     exact: true,
-    component: AdminDelete
+    component: Delete
   },
   {
     path: ["/pages/:id", "/events/:id", "/blog/:id", "/meta/:id", "/alerts/:id", "/news/:id", "/products/:id"],
-    component: AdminContent
+    component: Content
   },
   {
     path: ["/forms/:id"],
@@ -55,11 +55,11 @@ export default [
   },
   {
     path: "/media",
-    component: AdminMedia
+    component: Media
   },
   {
     path: "/queries",
-    component: AdminQueries
+    component: Queries
   },
   {
     path: "/comments",
@@ -67,11 +67,11 @@ export default [
   },
   {
     path: "/admins",
-    component: AdminAdmins
+    component: Admins
   },
   {
     path: "/resources",
-    component: AdminResources
+    component: Resources
   },
   {
     path: "/nav",

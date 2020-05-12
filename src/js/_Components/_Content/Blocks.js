@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import Text from './_Blocks/Section-Text'
-import PlainText from './_Blocks/Section-PlainText'
-import Dates from './_Blocks/Section-Dates'
-import Image from './_Blocks/Section-Image'
-import Images from './_Blocks/Section-Images'
-import Table from './_Blocks/Section-Table'
-import Forms from './_Blocks/Section-Forms'
+import Text from './_Blocks/Text'
+import PlainText from './_Blocks/PlainText'
+import Dates from './_Blocks/Dates'
+import Image from './_Blocks/Image'
+import Images from './_Blocks/Images'
+import Table from './_Blocks/Table'
+import Forms from './_Blocks/Forms'
 
 const Blocks = React.memo(({ con, images, forms, handleChange, removeSection }) => {
 
@@ -30,7 +30,7 @@ const Blocks = React.memo(({ con, images, forms, handleChange, removeSection }) 
 	}
 
 	const addSection = async () => {
-		var newItem = data[data.length - 1]
+		var newItem = JSON.parse(JSON.stringify(data[data.length - 1]))
 		newItem.forEach((item, i, a) => {
 			a[i].value = ''
 		})
@@ -74,7 +74,7 @@ const Blocks = React.memo(({ con, images, forms, handleChange, removeSection }) 
 			<div className='sections'>
 				{data.map((section, i) => {
 					return (
-						<div className='section' key={Math.floor(Math.random() * 1000)} draggable="true" onDragStart={(e) => drag(e,i)} onDragOver={(e) => dragover(e)} onDrop={(e) => drop(e,i)}>
+						<div className='section' key={i} draggable="true" onDragStart={(e) => drag(e,i)} onDragOver={(e) => dragover(e)} onDrop={(e) => drop(e,i)}>
 							<i className="fas fa-grip-lines lines"></i>
 							<i className="fas fa-times delete" onClick={() => removeSect(i)}/>
 							<div className='section-content'>

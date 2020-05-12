@@ -3,7 +3,7 @@ import Dropzone from '../Dropzone'
 import { API_IMAGE_PATH } from '../../_Config'
 import Call from '../../_API/Call'
 
-const Image = React.memo(({ con, p, i, images, updateValue, removeSection }) => {
+const Image = React.memo(({ con, p, i, images, updateValue }) => {
 
 	const [ image, setImage ] = useState(con.value)
 	const [ toggle, setToggle ] = useState('none')
@@ -46,7 +46,6 @@ const Image = React.memo(({ con, p, i, images, updateValue, removeSection }) => 
 					</div>
 				</div>
 			</div>
-			<i className="fas fa-times" onClick={() => removeSection(con.id)}/>
 		</div>
 	)
 })

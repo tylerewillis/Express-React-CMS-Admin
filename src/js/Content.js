@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import Layout from './_Components/Layout-Admin'
+import Layout from './_Components/Layout'
 import { useCookies } from 'react-cookie'
 import Loading from './_Components/Loading'
 
-import Text from './_Components/_Admin/Section-Text'
-import PlainText from './_Components/_Admin/Section-PlainText'
-import Dates from './_Components/_Admin/Section-Dates'
-import Image from './_Components/_Admin/Section-Image'
-import Images from './_Components/_Admin/Section-Images'
-import Table from './_Components/_Admin/Section-Table'
-import New from './_Components/_Admin/Section-New'
-import Forms from './_Components/_Admin/Section-Forms'
-import WindowType from './_Components/_Admin/Section-Window-Type'
-import Blocks from './_Components/_Admin/Section-Blocks'
+import Text from './_Components/_Content/Text'
+import PlainText from './_Components/_Content/PlainText'
+import Dates from './_Components/_Content/Dates'
+import Image from './_Components/_Content/Image'
+import Images from './_Components/_Content/Images'
+import Table from './_Components/_Content/Table'
+import New from './_Components/_Content/New'
+import Forms from './_Components/_Content/Forms'
+import WindowType from './_Components/_Content/Window-Type'
+import Blocks from './_Components/_Content/Blocks'
 import Submit from './_Components/_API/Submit'
 
 const Content = React.memo(({ post, content, images, forms }) => {
@@ -122,6 +122,13 @@ const Content = React.memo(({ post, content, images, forms }) => {
 		})()
 	}
 
+	const handleCancel = () => {
+		const prevUrl = window.location.pathname.split('/')
+		prevUrl.pop()
+		const url = prevUrl.join('/')
+		window.location.replace(url)
+	}
+
 	const handleDelete = (id) => {
 		if (window.confirm('Are you sure that you want to delete this post? This will break any existing links pointed this page and it cannot be undone.')) {
 			window.location.replace('/' + path + '/delete/' + id)
@@ -138,9 +145,14 @@ const Content = React.memo(({ post, content, images, forms }) => {
 				{section}
 				<New content={content} addSection={addSection} />
 				<div className='buttons-bottom'>
-					<p className='save' onClick={handleSave}>Save</p>
-					<p className='save save-close' onClick={handleSaveClose}>Save & Close</p>
-					<p className='save delete' onClick={() => handleDelete(post.ID)}>Delete</p>
+					<div>
+						<p className='save' onClick={handleSave}>Save</p>
+						<p className='save save-close' onClick={handleSaveClose}>Save & Close</p>
+					</div>
+					<div>
+						<p className='save cancel' onClick={handleCancel}>Cancel & Go Back</p>
+						<p className='save delete' onClick={() => handleDelete(post.ID)}>Delete</p>
+					</div>
 				</div>
 			</form>
 			{needToSave &&

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import Layout from './_Components/Layout-Admin'
+import Layout from './_Components/Layout'
 import { API_PATH } from './_Components/_Config'
 
 const Queries = React.memo(({ types, queries }) => {

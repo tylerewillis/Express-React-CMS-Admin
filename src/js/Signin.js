@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import Layout from './_Components/Layout-Admin'
-import SignInForm from './_Components/Admin-SigninForm'
-import SignUpForm from './_Components/Admin-SignupForm'
+import Layout from './_Components/Layout'
+import SignInForm from './_Components/SigninForm'
+import SignUpForm from './_Components/SignupForm'
 
 const SignIn = React.memo(() => {
 

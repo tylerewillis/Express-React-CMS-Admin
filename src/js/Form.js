@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Layout from './_Components/Layout-Admin'
+import Layout from './_Components/Layout'
 import Loading from './_Components/Loading'
 import Submit from './_Components/_API/Submit'
 
@@ -128,6 +128,13 @@ const Form = ({ post, content }) => {
 		})()
 	}
 
+	const handleCancel = () => {
+		const prevUrl = window.location.pathname.split('/')
+		prevUrl.pop()
+		const url = prevUrl.join('/')
+		window.location.replace(url)
+	}
+
 	const handleDelete = (id) => {
 		if (window.confirm('Are you sure that you want to delete this form?')) {
 			window.location.replace('/' + path + '/delete/' + id)
@@ -198,9 +205,14 @@ const Form = ({ post, content }) => {
 				<p className='button' onClick={() => addInput('double')}>Double</p>
 			</div>
 			<div className='buttons-bottom'>
-				<p className='save' onClick={handleSave}>Save</p>
-				<p className='save save-close' onClick={handleSaveClose}>Save & Close</p>
-				<p className='save delete' onClick={() => handleDelete(post.ID)}>Delete Form</p>
+				<div>
+					<p className='save' onClick={handleSave}>Save</p>
+					<p className='save save-close' onClick={handleSaveClose}>Save & Close</p>
+				</div>
+				<div>
+					<p className='save cancel' onClick={handleCancel}>Cancel & Go Back</p>
+					<p className='save delete' onClick={() => handleDelete(post.ID)}>Delete Form</p>
+				</div>
 			</div>
 			{loading && <Loading />}
 		</React.Fragment>

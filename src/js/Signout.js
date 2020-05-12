@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Layout from './_Components/Layout-Admin'
+import Layout from './_Components/Layout'
 import { useCookies } from 'react-cookie'
 
 const SignOut = React.memo(() => {

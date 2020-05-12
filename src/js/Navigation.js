@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Layout from './_Components/Layout-Admin'
+import Layout from './_Components/Layout'
 import Loading from './_Components/Loading'
 import Submit from './_Components/_API/Submit'
 
@@ -124,6 +124,7 @@ const Nav = ({ nav, posts }) => {
 				if (items[i].getAttribute('data-parent') === oldName) items[i].setAttribute('data-parent', newName)
 			}
 		}
+		updateState()
 	}
 
 	const deleteNav = index => {
@@ -164,6 +165,13 @@ const Nav = ({ nav, posts }) => {
 		})()
 	}
 
+	const handleCancel = () => {
+		const prevUrl = window.location.pathname.split('/')
+		prevUrl.pop()
+		const url = prevUrl.join('/')
+		window.location.replace(url)
+	}
+
 	return (
 		<React.Fragment>
 			<div className='block'>
@@ -190,8 +198,11 @@ const Nav = ({ nav, posts }) => {
 				<div className='add-item' onClick={newItem}>
 					<p>Add new navigation link</p>
 				</div>
-				<p className='save' onClick={handleSave}>Save</p>
-				<p className='save save-close' onClick={handleSaveClose}>Save & Close</p>
+				<div>
+					<p className='save' onClick={handleSave}>Save</p>
+					<p className='save save-close' onClick={handleSaveClose}>Save & Close</p>
+					<p className='save cancel' onClick={handleCancel}>Cancel & Go Back</p>
+				</div>
 			</div>
 			{loading && <Loading />}
 		</React.Fragment>

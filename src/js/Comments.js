@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Layout from './_Components/Layout-Admin'
+import Layout from './_Components/Layout'
 import List from './_Components/Comments-List'
 import Reply from './_Components/Comments-Reply'
 import New from './_Components/Comments-New'

@@ -114,9 +114,7 @@ const Images = React.memo(({ con, images, handleChange, role, removeSection }) =
 					</div>
 				</div>
 			</div>
-			{role === 'super' &&
-				<i className="fas fa-times" onClick={() => removeSection(con.id)}/>
-			}
+			<i className="fas fa-times" onClick={() => removeSection(con.id)}/>
 		</div>
 	)
 })

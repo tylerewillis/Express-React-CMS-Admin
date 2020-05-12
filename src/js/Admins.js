@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Layout from './_Components/Layout-Admin'
+import Layout from './_Components/Layout'
 import Call from './_Components/_API/Call'
 
 const Admins = ({ admins }) => {

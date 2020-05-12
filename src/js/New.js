@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Layout from './_Components/Layout-Admin'
+import Layout from './_Components/Layout'
 import PropTypes from 'prop-types'
 
 const New = React.memo(({ url }) => {
