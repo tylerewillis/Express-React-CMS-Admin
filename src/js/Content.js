@@ -12,8 +12,9 @@ import Images from './_Components/_Content/Images'
 import Table from './_Components/_Content/Table'
 import New from './_Components/_Content/New'
 import Forms from './_Components/_Content/Forms'
-import WindowType from './_Components/_Content/Window-Type'
+import Select from './_Components/_Content/Select'
 import Blocks from './_Components/_Content/Blocks'
+import Color from './_Components/_Content/Color'
 import Submit from './_Components/_API/Submit'
 
 const Content = React.memo(({ post, content, images, forms }) => {
@@ -92,8 +93,10 @@ const Content = React.memo(({ post, content, images, forms }) => {
 				return <Table key={index} con={con} handleChange={handleChange} removeSection={removeSection} />
 			case 'images':
 				return <Images key={index} con={con} handleChange={handleChange} images={images} removeSection={removeSection} />
-			case 'window-type':
-				return <WindowType key={index} con={con} handleChange={handleChange} removeSection={removeSection} />
+			case 'select':
+				return <Select key={index} con={con} handleChange={handleChange} removeSection={removeSection} />
+			case 'color':
+				return <Color key={index} con={con} handleChange={handleChange} removeSection={removeSection} />
 			case 'form':
 				return <Forms key={index} con={con} forms={forms} handleChange={handleChange} removeSection={removeSection} />
 			case 'blocks':

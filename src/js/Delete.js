@@ -13,7 +13,7 @@ const SignOut = React.memo(({ url }) => {
 	return (
 		<div className='admin-login-container'>
 			<div className='alc-form-container'>
-				<p className='alc-sign-out'>Deleting post ...</p>
+				<p className='alc-sign-out'>Deleting ...</p>
 			</div>
 		</div>
 	)

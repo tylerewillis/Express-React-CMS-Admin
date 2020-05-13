@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PlainText = React.memo(({ con, p, i, updateValue }) => {
+const Color = React.memo(({ con, p, i, updateValue }) => {
 
 	const updateItem = (e) => {
 		updateValue(p,i, {
@@ -13,9 +13,11 @@ const PlainText = React.memo(({ con, p, i, updateValue }) => {
 	return (
 		<div className='item'>
 			<h2>{con.name}</h2>
-			<input defaultValue={con.value} onChange={updateItem} />
+			<div className='acb-color'>
+				<input type='color' onChange={updateItem} defaultValue={con.content} />
+			</div>
 		</div>
 	)
 })
 
-export default PlainText
+export default Color

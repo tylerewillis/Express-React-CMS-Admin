@@ -13,7 +13,7 @@ const New = React.memo(({ url }) => {
 	return (
 		<div className='admin-login-container'>
 			<div className='alc-form-container'>
-				<p className='alc-sign-out'>Creating new post ...</p>
+				<p className='alc-sign-out'>Creating ...</p>
 			</div>
 		</div>
 	)

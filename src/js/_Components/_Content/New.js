@@ -9,6 +9,7 @@ const PlainText = React.memo(({ content, addSection }) => {
 	const [ columns, setColumns ] = useState('')
 	const [ select, setSelect ] = useState('')
 	const [ list, setList ] = useState({ array:[] })
+	const [ options, setOptions ] = useState('')
 
 	const revealSubmit = () => {
 		if (title.length && desc.length) {
@@ -38,28 +39,50 @@ const PlainText = React.memo(({ content, addSection }) => {
 		} else if (select === 'blocks') {
 			content = [[]]
 			list.array.forEach(item => {
-				content[0].push({
-					type: item.type,
-					name: item.name,
-					value: ''
-				})
+				if (item.type === 'select') {
+					content[0].push({
+						type: item.type,
+						name: item.name,
+						value: '',
+						options: item.options
+					})
+				} else {
+					content[0].push({
+						type: item.type,
+						name: item.name,
+						value: ''
+					})
+				}
 			})
 		}
-		addSection({
-			id: 0,
-			type: select,
-			name: title,
-			description: desc,
-			content
-		})
+		if (select === 'select') {
+			addSection({
+				id: 0,
+				type: select,
+				name: title,
+				description: desc,
+				content,
+				options
+			})
+		} else {
+			addSection({
+				id: 0,
+				type: select,
+				name: title,
+				description: desc,
+				content
+			})
+		}
 		setList({ array:[] })
 		setTitle('')
 		setDesc('')
 		setSelect('')
+		setOptions('')
 	}
 
 	const addToList = type => {
-		setList({ array: [ ...list.array, {type, name: ''} ]})
+		if (type === 'select') setList({ array: [ ...list.array, {type, name: '', options: ''} ]})
+		else setList({ array: [ ...list.array, {type, name: ''} ]})
 	}
 
 	const removeFromList = i => {
@@ -91,6 +114,32 @@ const PlainText = React.memo(({ content, addSection }) => {
 		setList(temp)
 	}
 
+	const updateListOptions = (e,i) => {
+		let temp = {
+			array: []
+		}
+		list.array.forEach((item, j) => {
+			if (j === i) {
+				let options = e.target.value.split(',')
+				options = options.map(opt => opt.trim())
+				temp.array.push({
+					type: item.type,
+					name: item.name,
+					options
+				})
+			} else {
+				temp.array.push(item)
+			}
+		})
+		setList(temp)
+	}
+
+	const setUpOptions = e => {
+		let opts = e.target.value.split(',')
+		opts = opts.map(o => o.trim())
+		setOptions(opts)
+	}
+
 	return (
 		<div className='ac-block'>
 			<h2>Add New Section</h2>
@@ -104,6 +153,8 @@ const PlainText = React.memo(({ content, addSection }) => {
 					<option value='plain-text'>Plain Text</option>
 					<option value='image'>Image</option>
 					<option value='images'>Multiple Images</option>
+					<option value='select'>Select</option>
+					<option value='color'>Color</option>
 					<option value='dates'>Dates</option>
 					<option value='table'>Table</option>
 					<option value='form'>Form</option>
@@ -115,6 +166,11 @@ const PlainText = React.memo(({ content, addSection }) => {
 						<input type='number' value={columns} placeholder='# Columns' onChange={e => setColumns(e.target.value)} />
 					</div>
 				}
+				{select === 'select' &&
+					<div>
+						<input type='text' placeholder='options separated by commas' onChange={setUpOptions} />
+					</div>
+				}
 				{select === 'blocks' &&
 					<div>
 						<div className='list-selected'>
@@ -123,6 +179,7 @@ const PlainText = React.memo(({ content, addSection }) => {
 									<div className='list-sel' key={i}>
 										<p>{item.type}</p>
 										<input type='text' defaultValue={item.name} onChange={(e) => updateListName(e,i)} placeholder='Name' />
+										{(item.type === 'select') && <input type='text' defaultValue={item.options} onChange={(e) => updateListOptions(e,i)} placeholder='Options' />}
 										<i className="fas fa-times" onClick={() => removeFromList(i)}/>
 									</div>
 								)
@@ -133,8 +190,8 @@ const PlainText = React.memo(({ content, addSection }) => {
 							<p onClick={() => addToList('text')}>Text</p>
 							<p onClick={() => addToList('image')}>Image</p>
 							<p onClick={() => addToList('images')}>Multiple Images</p>
-							{/*<p onClick={() => addToList('dates')}>Dates</p>
-							<p onClick={() => addToList('Table')}>Table</p>*/}
+							<p onClick={() => addToList('select')}>Select</p>
+							<p onClick={() => addToList('color')}>Color</p>
 							<p onClick={() => addToList('form')}>Form</p>
 						</div>
 					</div>
