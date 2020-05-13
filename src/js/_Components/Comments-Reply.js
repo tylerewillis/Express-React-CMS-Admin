@@ -5,7 +5,7 @@ export default React.memo(({ replyTo, setReplyTo, setActive }) => {
 
 	const [ submit, setSubmit ] = useState(false)
 	const [ message, setMessage ] = useState('')
-	const [ name, setName ] = useState('Elaine')
+	const [ name, setName ] = useState('Admin')
 
 	const handleSubmit = (e) => {
 		e.preventDefault()

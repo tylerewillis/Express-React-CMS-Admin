@@ -1978,7 +1978,7 @@
 
 .comments-list {
 	.comment {
-		margin: 0px;
+		margin: -1px 0px 0px;
 		@include flex-container(space-between,stretch);
 		p {
 			display: inline-block;
@@ -2010,9 +2010,15 @@
 		}
 	}
 	.admin-comment {
-		p {
-			border: 1px solid $color-primary;
-			outline: 1px solid $color-primary;
+		p:nth-child(1) {
+			border-left: 4px solid $color-primary;
+		}
+	}
+	.sub-comment {
+		padding-left: 50px;
+		width: 100%;
+		p:nth-child(3) {
+			width: calc(100% - 440px);
 		}
 	}
 	.comment-fade-out {

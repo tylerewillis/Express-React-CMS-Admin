@@ -5,7 +5,7 @@ export default React.memo(({ posts }) => {
 
 	const [ submit, setSubmit ] = useState(false)
 	const [ message, setMessage ] = useState('')
-	const [ name, setName ] = useState('Elaine')
+	const [ name, setName ] = useState('Admin')
 	const [ post, setPost ] = useState(posts[posts.length - 1])
 
 	const handleSubmit = (e) => {
