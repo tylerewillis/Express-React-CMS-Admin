@@ -2017,8 +2017,11 @@
 	.sub-comment {
 		padding-left: 50px;
 		width: 100%;
+		p:nth-child(1) {
+			width: 100px;
+		}
 		p:nth-child(3) {
-			width: calc(100% - 440px);
+			width: calc(100% - 390px);
 		}
 	}
 	.comment-fade-out {

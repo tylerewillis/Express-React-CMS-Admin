@@ -36,12 +36,12 @@ export default [
     component: List
   },
   {
-    path: ["/pages/new", "/events/new", "/blog/new", "/alerts/new", "/news/new", "/forms/new", "/products/new"],
+    path: ["/pages/new", "/events/new", "/blog/new", "/alerts/new", "/news/new", "/forms/new", "/products/new", "/meta/new"],
     exact: true,
     component: New
   },
   {
-    path: ["/pages/delete/:id", "/events/delete/:id", "/blog/delete/:id", "/alerts/delete/:id", "/news/delete/:id", "/forms/delete/:id", "/products/delete/:id"],
+    path: ["/pages/delete/:id", "/events/delete/:id", "/blog/delete/:id", "/alerts/delete/:id", "/news/delete/:id", "/forms/delete/:id", "/products/delete/:id", "/meta/delete/:id"],
     exact: true,
     component: Delete
   },
