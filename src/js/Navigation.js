@@ -87,8 +87,8 @@ const Nav = ({ nav, posts }) => {
 		// If not first element
 		if (key !== 0) {
 			// If previous element is not element's parent (to prevent double indentation)
-			const prev = document.querySelector('.item-' + (key - 1)).getAttribute('data-name')
-			const el = document.querySelector('.item-' + key)
+			const prev = document.querySelector('.item-key-' + (key - 1)).getAttribute('data-name')
+			const el = document.querySelector('.item-key-' + key)
 			if (el.getAttribute('data-parent') !== prev) {
 				// Tab
 				if (!el.style.marginLeft || el.style.marginLeft === '0px') el.style.marginLeft = '50px'
@@ -100,7 +100,7 @@ const Nav = ({ nav, posts }) => {
 	}
 
 	const unTab = key => {
-		const el = document.querySelector('.item-' + key)
+		const el = document.querySelector('.item-key-' + key)
 		// Tab
 		if (!el.style.marginLeft || el.style.marginLeft === '50px') el.style.marginLeft = '0px'
 		else if (el.style.marginLeft === '100px') el.style.marginLeft = '50px'
@@ -165,18 +165,12 @@ const Nav = ({ nav, posts }) => {
 		setLoading(true);
 		(async () => {
 			await Submit(window.location.pathname, order)
-			const prevUrl = window.location.pathname.split('/')
-			prevUrl.pop()
-			const url = prevUrl.join('/')
-			window.location.replace(url)
+			window.location.replace('/')
 		})()
 	}
 
 	const handleCancel = () => {
-		const prevUrl = window.location.pathname.split('/')
-		prevUrl.pop()
-		const url = prevUrl.join('/')
-		window.location.replace(url)
+		window.location.replace('/')
 	}
 
 	return (
@@ -187,9 +181,9 @@ const Nav = ({ nav, posts }) => {
 			</div>
 			<div className='nav'>
 				{order.map((item, i) => {
-					return <div className={'item item-' + item.id} onDragStart={(e) => drag(e,item.id)} onDragOver={(e) => dragover(e)} onDrop={(e) => drop(e,item.id)} key={item.id} draggable="true" data-id={item.id} data-name={item.name} data-url={item.url} data-parent={(item.parent) ? item.parent : false}>
-						<i class="fas fa-caret-left arrow arrow-left" onClick={() => unTab(item.id)}></i>
-						<i className="fas fa-caret-right arrow arrow-right" onClick={() => tab(item.id)}></i>
+					return <div className={'item item-' + item.id + ' item-key-' + i} onDragStart={(e) => drag(e,item.id)} onDragOver={(e) => dragover(e)} onDrop={(e) => drop(e,item.id)} key={item.id} draggable="true" data-id={item.id} data-name={item.name} data-url={item.url} data-parent={(item.parent) ? item.parent : false}>
+						<i class="fas fa-caret-left arrow arrow-left" onClick={() => unTab(i)}></i>
+						<i className="fas fa-caret-right arrow arrow-right" onClick={() => tab(i)}></i>
 						<div className='details'>
 							<p className='number'>{(i + 1) + '.'}</p>
 							<label>Name:</label>
