@@ -45,13 +45,21 @@ const Nav = ({ nav, posts }) => {
 		document.querySelectorAll('.nav .item').forEach(item => {
 			if ((ignore && !item.classList.contains(ignore)) || !ignore) {
 				newState.push({
+					id: parseInt(item.getAttribute('data-id')),
 					name: item.getAttribute('data-name'),
 					url: item.getAttribute('data-url'),
 					parent: item.getAttribute('data-parent')
 				})
 			}
 		})
-		if (add) newState.push({name: '',url: '',parent: false})
+		if (add) {
+			// Generate ID
+			var highest = 0
+			newState.forEach(item => {
+				if (item.id > highest) highest = item.id
+			})
+			newState.push({id: highest + 1, name: '',url: '',parent: false})
+		}
 		setOrder(newState)
 	}
 
@@ -63,7 +71,6 @@ const Nav = ({ nav, posts }) => {
   	const movingKey = e.dataTransfer.getData("key")
   	document.querySelector(`.item-${movingKey}`).style.marginLeft = '0px'
   	document.querySelector(`.item-${movingKey}`).setAttribute('data-parent', false)
-  	document.querySelector('.nav').insertBefore(document.querySelector(`.item-${movingKey}`), document.querySelector(`.item-${key}`))
 		// Update parent of child elements
 		const parentName = (document.querySelector(`.item-${key - 1}`)) ? document.querySelector(`.item-${key - 1}`).getAttribute('data-name') : false
 		const newParentName = document.querySelector(`.item-${movingKey}`).getAttribute('data-name')
@@ -180,9 +187,9 @@ const Nav = ({ nav, posts }) => {
 			</div>
 			<div className='nav'>
 				{order.map((item, i) => {
-					return <div className={'item item-' + i} onDragStart={(e) => drag(e,i)} onDragOver={(e) => dragover(e)} onDrop={(e) => drop(e,i)} key={item.name} draggable="true" data-name={item.name} data-url={item.url} data-parent={(item.parent) ? item.parent : false}>
-						<i class="fas fa-caret-left arrow arrow-left" onClick={() => unTab(i)}></i>
-						<i className="fas fa-caret-right arrow arrow-right" onClick={() => tab(i)}></i>
+					return <div className={'item item-' + item.id} onDragStart={(e) => drag(e,item.id)} onDragOver={(e) => dragover(e)} onDrop={(e) => drop(e,item.id)} key={item.id} draggable="true" data-id={item.id} data-name={item.name} data-url={item.url} data-parent={(item.parent) ? item.parent : false}>
+						<i class="fas fa-caret-left arrow arrow-left" onClick={() => unTab(item.id)}></i>
+						<i className="fas fa-caret-right arrow arrow-right" onClick={() => tab(item.id)}></i>
 						<div className='details'>
 							<p className='number'>{(i + 1) + '.'}</p>
 							<label>Name:</label>
@@ -190,7 +197,7 @@ const Nav = ({ nav, posts }) => {
 							<label>URL:</label>
 							<input type='text' className='input-url' defaultValue={item.url} onChange={handleChange} />
 						</div>
-						<i class="fas fa-times delete" onClick={() => deleteNav(i)}></i>
+						<i class="fas fa-times delete" onClick={() => deleteNav(item.id)}></i>
 					</div>
 				})}
 			</div>
