@@ -2183,3 +2183,107 @@
 		}
 	}
 }
+
+// =========================================/
+// Config - Dashboard Blocks
+// =========================================/
+
+.dashboard-blocks {
+	.item {
+		background-color: #fff;
+		border-bottom: 2px solid #333;
+		padding: 20px;
+		cursor: move;
+		position: relative;
+		width: 100%;
+		i {
+			font-size: 2em;
+			top: 8px;
+			right: 0;
+			color: #d3d3d3;
+			position: absolute;
+			padding: 0px 5px;
+			cursor: pointer;
+			&:hover {
+				color: gray;
+			}
+		}
+		.details {
+			padding: 0px 30px 0px 0px;
+			p {
+				display: inline-block;
+				margin: 0px;
+			}
+			label {
+				font-weight: 600;
+				font-size: 1em;
+			}
+			input {
+				font-size: .9em;
+				padding: 3px;
+				margin: 0px 15px 0px 5px;
+			}
+			.desc {
+				width: 100%;
+				margin-top: 10px;
+				input {
+					width: calc(100% - 200px);
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
+// Config - Post Types
+// =========================================/
+
+.post-types {
+	.item {
+		background-color: #fff;
+		border-bottom: 2px solid #333;
+		padding: 20px;
+		position: relative;
+		width: 100%;
+		i {
+			font-size: 2em;
+			top: 8px;
+			right: 0;
+			color: #d3d3d3;
+			position: absolute;
+			padding: 0px 5px;
+			cursor: pointer;
+			&:hover {
+				color: gray;
+			}
+		}
+		.details {
+			padding: 0px 30px 0px 0px;
+			p {
+				display: inline-block;
+				margin: 0px;
+			}
+			label {
+				font-weight: 600;
+				font-size: 1em;
+			}
+			input {
+				font-size: .9em;
+				padding: 3px;
+				margin: 0px 15px 0px 5px;
+			}
+			.desc {
+				width: 100%;
+				margin-top: 10px;
+				textarea {
+					margin-left: 5px;
+					width: calc(100% - 200px);
+					border: 1px solid #d3d3d3;
+					font-size: .9em;
+					padding: 3px;
+					height: 100px;
+				}
+			}
+		}
+	}
+}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Layout from './_Components/Layout'
 import { useCookies } from 'react-cookie'
@@ -17,22 +17,16 @@ import Blocks from './_Components/_Content/Blocks'
 import Color from './_Components/_Content/Color'
 import Submit from './_Components/_API/Submit'
 
-const Content = React.memo(({ post, content, images, forms }) => {
+const Content = React.memo(({ postUrl, post, content, images, forms }) => {
 	
 	const [ data, setData ] = useState({content})
 	const [ loading, setLoading ] = useState(false)
 	const [ name, setName ] = useState(content[0].content)
-	const [ url, setUrl ] = useState(false)
+	const [ url, setUrl ] = useState(postUrl)
 	const [ needToSave, setNeedToSave ] = useState(false)
 	const [ cookies, setCookie ] = useCookies(['role']) // eslint-disable-line
 	const pathArray = window.location.pathname.split('/')
 	const path = pathArray[pathArray.length - 2]
-
-	useEffect(() => {
-		if (path === 'pages') setUrl('/' + post.url)
-		else if (path === 'products') setUrl('/shop/' + post.url)
-		else setUrl('/' + path + '/' + post.url)
-	},[]) //eslint-disable-line
 
 	const toUrl = string => {
 	  var clean = string.replace(/[^a-zA-Z0-9- ]/g, '')

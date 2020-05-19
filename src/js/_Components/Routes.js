@@ -13,7 +13,7 @@ import Comments from '../Comments'
 import Navigation from '../Navigation'
 import Form from '../Form'
 import Shop from '../Shop'
-
+import Config from '../Config'
 import RedirectToMainSite from '../Redirect-to-Site'
 
 export default [
@@ -29,25 +29,6 @@ export default [
   {
     path: "/signout",
     component: Signout
-  },
-  {
-    path: ["/pages", "/events", "/blog", "/meta", "/alerts", "/news", "/forms", "/products"],
-    exact: true,
-    component: List
-  },
-  {
-    path: ["/pages/new", "/events/new", "/blog/new", "/alerts/new", "/news/new", "/forms/new", "/products/new", "/meta/new"],
-    exact: true,
-    component: New
-  },
-  {
-    path: ["/pages/delete/:id", "/events/delete/:id", "/blog/delete/:id", "/alerts/delete/:id", "/news/delete/:id", "/forms/delete/:id", "/products/delete/:id", "/meta/delete/:id"],
-    exact: true,
-    component: Delete
-  },
-  {
-    path: ["/pages/:id", "/events/:id", "/blog/:id", "/meta/:id", "/alerts/:id", "/news/:id", "/products/:id"],
-    component: Content
   },
   {
     path: ["/forms/:id"],
@@ -80,6 +61,29 @@ export default [
   {
     path: "/shop",
     component: Shop
+  },
+  {
+    path: "/config",
+    component: Config
+  },
+  {
+    path: "/:id",
+    exact: true,
+    component: List
+  },
+  {
+    path: "/:id/new",
+    exact: true,
+    component: New
+  },
+  {
+    path: "/:id/delete/:id",
+    exact: true,
+    component: Delete
+  },
+  {
+    path: "/:id/:id",
+    component: Content
   },
   {
     path: "*",

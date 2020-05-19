@@ -1,5 +1,11 @@
-const MAIN_SITE = (process.env.NODE_ENV === 'production') ? process.env.REACT_APP_API : process.env.REACT_APP_API_DEV
+// Get API paths
+var MAIN_SITE = ''
+if (process.env.NODE_ENV === 'production') {
+	var matches = window.location.href.match(/^http?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i) //eslint-disable-line
+	MAIN_SITE = matches && 'http://admin.' + matches[1]
+} else MAIN_SITE = 'http://localhost:4000'
+
 const API_PATH = MAIN_SITE + '/admin'
-const API_IMAGE_PATH = (process.env.NODE_ENV === 'production') ? process.env.REACT_APP_API + '/static/images/' : process.env.REACT_APP_API_DEV + '/static/images/'
+const API_IMAGE_PATH = MAIN_SITE + '/static/images/'
 
 export { MAIN_SITE, API_PATH, API_IMAGE_PATH }

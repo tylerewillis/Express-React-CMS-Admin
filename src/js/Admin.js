@@ -4,29 +4,16 @@ import Layout from './_Components/Layout'
 import Link from './_Components/Link'
 import { useCookies } from 'react-cookie'
 
-const Admin = React.memo(({ role }) => {
+const Admin = React.memo(({ blocks }) => {
 
 	const [ cookies, setCookie ] = useCookies(['signedIn', 'role']) // eslint-disable-line
 	
 	return (
 		<div className='admin-dashboard'>
-			<Link title='Pages' desc='Review and edit page content displayed on the website.' link='pages' />
-			<Link title='Support' desc='Contact Mullin/Ashley for support at support@mullinashley.com' />
-			<Link title='Sign Out' desc='Click to sign out of the administrator dashboard.' link='signout' />
-			<Link title='Events' desc='Review upcoming and past events, and create new events.' link='events' />
-			<Link title='Blog' desc='Create new blog posts or review/edit existing posts.' link='blog' />
-			<Link title='News' desc='Create new news posts or review/edit existing posts.' link='news' />
-			<Link title='Comments' desc='Create new comments or review existing comments.' link='comments' />
-			<Link title='Media' desc='Review and upload new files.' link='media' />
-			<Link title='Navigation' desc="Update the site's main navigation" link='nav' />
-			<Link title='Forms' desc="Add, update and delete forms" link='forms' />
-			<Link title='Products' desc='Create and edit products.' link='products' />
-			<Link title='Shop' desc='Manage settings for the shop.' link='shop' />
-			<Link title='Alerts' desc='Review and create alerts to be displayed to visitors on the website.' link='alerts' />
-			<Link title='Metadata' desc='The behind-the-scenes context effecting SEO of each web page.' link='meta' />
-			<Link title='Queries' desc='Review user queries that have been submitted to the website.' link='queries' />
-			<Link title='Resources' desc='Tips and tricks to help you with your website.' link='resources' />
-			<Link title='Admins' desc='View and approve/revoke administrator access.' link='admins' />
+			{blocks.map(block => {
+				return <Link key={block.id} title={block.name} desc={block.description} link={block.url} />
+			})}
+			{cookies.role === 'super' && <Link title='Configuration' desc="Edit the site's admin dashboard and customo post types." link='config' />}
 		</div>
 	)
 })
