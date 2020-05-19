@@ -69,8 +69,10 @@ const Nav = ({ nav, posts }) => {
 	const drop = (e, key) => {
 		e.preventDefault()
   	const movingKey = e.dataTransfer.getData("key")
+  	console.log(movingKey)
   	document.querySelector(`.item-${movingKey}`).style.marginLeft = '0px'
   	document.querySelector(`.item-${movingKey}`).setAttribute('data-parent', false)
+  	document.querySelector('.nav').insertBefore(document.querySelector(`.item-${movingKey}`), document.querySelector(`.item-${key}`))
 		// Update parent of child elements
 		const parentName = (document.querySelector(`.item-${key - 1}`)) ? document.querySelector(`.item-${key - 1}`).getAttribute('data-name') : false
 		const newParentName = document.querySelector(`.item-${movingKey}`).getAttribute('data-name')
