@@ -113,10 +113,7 @@ const Nav = ({ blocks, types }) => {
 	}
 
 	const handleCancel = () => {
-		const prevUrl = window.location.pathname.split('/')
-		prevUrl.pop()
-		const url = prevUrl.join('/')
-		window.location.replace(url)
+		window.location.replace('/')
 	}
 
 	return (
