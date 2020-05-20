@@ -74,12 +74,7 @@ const Admin = React.memo((props) => {
 			)
 		}
 	} else {
-		return (
-			<>
-				<Loading />
-				<p>{API_PATH}</p>
-			</>
-		)
+		return <Loading />
 	}
 })
 
