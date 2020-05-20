@@ -1,8 +1,8 @@
 // Get API paths
 var MAIN_SITE = ''
 if (process.env.NODE_ENV === 'production') {
-	var matches = window.location.href.match(/^http?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i) //eslint-disable-line
-	MAIN_SITE = matches && 'http://' + matches[1]
+	var matches = window.location.href.match(/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i) //eslint-disable-line
+	MAIN_SITE = matches && 'https://' + matches[1]
 } else MAIN_SITE = 'http://localhost:4000'
 
 const API_PATH = MAIN_SITE + '/admin'
