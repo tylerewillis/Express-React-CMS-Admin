@@ -48,6 +48,16 @@
 		p:nth-child(1) {
 			border-left: 4px solid $color-primary;
 		}
+		.sub-comment {
+			p:nth-child(1) {
+				border-left: 1px solid #d3d3d3;
+			}
+		}
+		.admin-comment.sub-comment {
+			p:nth-child(1) {
+				border-left: 4px solid $color-primary;
+			}
+		}
 	}
 	.sub-comment {
 		padding-left: 50px;
