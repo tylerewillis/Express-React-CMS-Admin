@@ -3,15 +3,26 @@ import Layout from './_Components/Layout'
 import Loading from './_Components/Loading'
 import Submit from './_Components/_API/Submit'
 
-const Nav = ({ blocks, types }) => {
+const Nav = ({ details, blocks, types }) => {
 
+	const [ dets, setDets ] = useState(details)
 	const [ order, setOrder ] = useState(blocks)
 	const [ typesState, setTypesState ] = useState(types)
 	const [ loading, setLoading ] = useState(false)
 
 	const updateState = (ignore = false, add = false, ignoreType = false, addType = false) => {
+		// Details
+		var newState = []
+		document.querySelectorAll('.client-details .item').forEach(item => {
+			newState.push({
+				id: item.getAttribute('data-id'),
+				name: item.getAttribute('data-name'),
+				value: item.getAttribute('data-value')
+			})
+		})
+		setDets(newState)
 		// Blocks
-		var id = 0, newState = []
+		var id = 0, newState = [] //eslint-disable-line
 		document.querySelectorAll('.dashboard-blocks .item').forEach(item => {
 			if (parseInt(item.getAttribute('data-id')) > id) id = parseInt(item.getAttribute('data-id'))
 			if ((ignore && !item.classList.contains(ignore)) || !ignore) {
@@ -70,6 +81,12 @@ const Nav = ({ blocks, types }) => {
 		updateState()
 	}
 
+	const handleChangeDet = (e) => {
+		const el = e.target.closest('.item')
+		el.setAttribute('data-value', el.querySelector('.input-value').value)
+		updateState()
+	}
+
 	const deleteBlock = index => {
 		if (window.confirm('Are you sure that you want to delete this dashboard block?')) {
 			updateState('item-' + index)
@@ -94,6 +111,7 @@ const Nav = ({ blocks, types }) => {
 		setLoading(true);
 		(async () => {
 			await Submit(window.location.pathname, {
+				details: dets,
 				dashboard: order,
 				post_types: typesState
 			})
@@ -105,6 +123,7 @@ const Nav = ({ blocks, types }) => {
 		setLoading(true);
 		(async () => {
 			await Submit(window.location.pathname, {
+				details: dets,
 				dashboard: order,
 				post_types: typesState
 			})
@@ -118,6 +137,20 @@ const Nav = ({ blocks, types }) => {
 
 	return (
 		<React.Fragment>
+			{/***************/}
+			<div className='block'>
+				<h1>Client Details</h1>
+				<p>Update the client details below.</p>
+			</div>
+			<div className='client-details'>
+				{dets.map(item => {
+					return <div className={'item item-' + item.id} key={item.id} data-id={item.id} data-name={item.name} data-value={item.value}>
+						<label>{item.name}:</label>
+						<input type='text' className='input-value' defaultValue={item.value} onChange={handleChangeDet} />
+					</div>
+				})}
+			</div>
+			{/***************/}
 			<div className='block'>
 				<h1>Dashboard Blocks</h1>
 				<p>Drag and drop the blocks below to reorder how they appear in the dashboard.</p>
@@ -144,6 +177,7 @@ const Nav = ({ blocks, types }) => {
 					<p>Add new block</p>
 				</div>
 			</div>
+			{/***************/}
 			<div className='block' style={{marginTop: '50px'}}>
 				<h1>Post Types</h1>
 				<p>Create and edit the blocks below to add new post types.</p>

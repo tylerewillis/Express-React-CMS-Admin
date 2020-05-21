@@ -1,0 +1,64 @@
+// =========================================/
+// Dashboard
+// =========================================/
+
+.admin-dashboard {
+	@include flex-container;
+	@include admin-mq(m) {
+		justify-content: center;
+	}
+	.ad-single {
+		@include admin-white-background(30px, 15px 0px);
+		width: 32%;
+		position: relative;
+		color: $color-black !important;
+		text-decoration: none !important;
+		@include transition(.2s);
+		@include admin-mq(l) {
+			width: 48%;
+		}
+		@include admin-mq(m) {
+			width: 95%;
+		}
+		h2 {
+			margin: 0px 0px 20px;
+		  font-size: 22px;
+		  line-height: 28px;
+		}
+		form {
+			font-size: 14px;
+		}
+		.ads-link {
+			@include transition;
+			width: 100px;
+		  border: 2px solid $admin-color-bg-medium;
+		  padding: 5px;
+		  display: block;
+		  text-align: center;
+		  color: $admin-color-black;
+		  margin: 20px 0px 0px 0px;
+		  border-radius: 3px;
+			font-size: 1em;
+			&:hover {
+				background-color: $admin-color-bg;
+				border: 2px solid $admin-color-bg;
+				color: $admin-color-white;
+			}
+			i {
+				padding-left: 5px;
+			}
+		}
+		.ads-ma-logo {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			width: 100px;
+			margin: 20px;
+		}
+	}
+	a.ad-single {
+		&:hover {
+			box-shadow: 2px 2px 5px #a9a9a9;
+		}
+	}
+}

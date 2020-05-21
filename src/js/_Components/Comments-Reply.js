@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import Submit from './_API/Submit'
 
-export default React.memo(({ replyTo, setReplyTo, setActive }) => {
+export default React.memo(({ replyTo, setReplyTo, setActive, adminName }) => {
 
 	const [ submit, setSubmit ] = useState(false)
 	const [ message, setMessage ] = useState('')
-	const [ name, setName ] = useState('Admin')
+	const [ name, setName ] = useState(adminName)
 
 	const handleSubmit = (e) => {
 		e.preventDefault()

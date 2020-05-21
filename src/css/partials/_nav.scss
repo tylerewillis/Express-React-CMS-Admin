@@ -1,0 +1,82 @@
+// =========================================/
+// Nav
+// =========================================/
+
+.nav {
+	@include flex-container(flex-end);
+	.item {
+		background-color: #fff;
+		border-bottom: 1px solid #d3d3d3;
+		padding: 10px;
+		cursor: move;
+		position: relative;
+		width: 100%;
+		i {
+			font-size: 2em;
+			top: 8px;
+			color: #d3d3d3;
+			position: absolute;
+			padding: 0px 5px;
+			&:hover {
+				color: gray;
+			}
+		}
+		.arrow-left {
+			left: 10px;
+			cursor: w-resize;
+		}
+		.arrow-right {
+			left: 40px;
+			cursor: e-resize;
+		}
+		.delete {
+			right: 10px;
+	    font-size: 1.2em;
+	    top: 15px;
+	    cursor: pointer;
+		}
+		.details {
+			padding: 0px 30px 0px 80px;
+			p {
+				display: inline-block;
+				margin: 0px;
+			}
+			label {
+				font-weight: 500;
+				font-size: 1em;
+			}
+			input {
+				font-size: .9em;
+				padding: 3px;
+				margin: 0px 15px 0px 5px;
+			}
+			.number {
+				margin-right: 5px;
+			}
+			.name {
+
+			}
+		}
+	}
+}
+
+.buttons-bottom {
+	.add-item {
+		padding: 10px;
+		cursor: pointer;
+		border: 2px dashed #d3d3d3;
+		width: 30%;
+		min-width: 200px;
+		border-radius: 5px;
+		text-align: center;
+		background-color: $color-white;
+		margin-right: 15px;
+		display: block;
+		&:hover {
+			border: 2px solid #d3d3d3;
+		}
+		p {
+			margin: 0px;
+		}
+	}
+}

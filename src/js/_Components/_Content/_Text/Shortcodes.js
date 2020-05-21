@@ -65,7 +65,7 @@ export default () => {
 						<p><strong>Text</strong>: <em>(required)</em> The text to appear next to the image.</p>
 						<p><strong>Width</strong>: <em>(optional)</em> The width of the image in the container. Input percentage (25-75 recommended). If not set, the image width will be 50.</p>
 						<p><strong>Sub</strong>: <em>(optional)</em> The sub-text to appear next to the image below the larger main text.</p>
-						<p><strong>Link</strong>: <em>(optional)</em> Insert a URL to link the main next to another webpage.</p>
+						<p><strong>Link</strong>: <em>(optional)</em> Insert a URL to link the main text to another webpage.</p>
 					</div>
 				</div>
 				{/********************/}

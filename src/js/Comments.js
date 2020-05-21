@@ -4,7 +4,7 @@ import List from './_Components/Comments-List'
 import Reply from './_Components/Comments-Reply'
 import New from './_Components/Comments-New'
 
-const Comments = React.memo(({ posts, comments }) => {
+const Comments = React.memo(({ posts, comments, adminName }) => {
 
 	const [ active, setActive ] = useState('comments')
 	const [ replyTo, setReplyTo ] = useState('')
@@ -22,15 +22,15 @@ const Comments = React.memo(({ posts, comments }) => {
 			</div>
 			<div className={(active === 'comments') ? 'avl-post avlp-active' : 'avl-post'}>
 				<h3>Comments</h3>
-				<List comments={comments} setReplyTo={setReplyTo} setActive={setActive} />
+				<List comments={comments} setReplyTo={setReplyTo} setActive={setActive} posts={posts} />
 			</div>
 			<div className={(active === 'replyComment') ? 'avl-post avlp-active' : 'avl-post'}>
 				<h3>Reply</h3>
-				<Reply replyTo={replyTo} setReplyTo={setReplyTo} setActive={setActive} />
+				<Reply replyTo={replyTo} setReplyTo={setReplyTo} setActive={setActive} adminName={adminName} />
 			</div>
 			<div className={(active === 'newComment') ? 'avl-post avlp-active' : 'avl-post'}>
 				<h3>New Comment</h3>
-				<New posts={posts} />
+				<New posts={posts} adminName={adminName} />
 			</div>
 		</div>
 	)
