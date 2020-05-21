@@ -14,7 +14,7 @@ const Dropzone = ({ reloadContainer }) => {
       acceptedFiles.forEach(file => {
         data.append('files[]', file)
       })
-      await Submit('/admin/upload', data)
+      await Submit('/upload', data)
       setTimeout(() => {
         reloadContainer()
         setLoading(false)
