@@ -1,6 +1,7 @@
+import { API_PATH } from '../_Config'
+
 export default async (url, data, method='POST') => {
-	const api = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_API : process.env.REACT_APP_API_DEV
-  const response = await fetch(api + url, {
+  const response = await fetch(API_PATH + url, {
     method: method,
     body: data
   });

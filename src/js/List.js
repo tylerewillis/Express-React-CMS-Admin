@@ -14,10 +14,7 @@ const List = React.memo(({ posts }) => {
 			</div>
 			{posts.map((post, index) => {
 				return <a key={index} className='atb-single' href={window.location.pathname + '/' + post.ID}>
-					<h2>{decodeURIComponent(post.name)}</h2>
-					{/*isDynamic &&
-						<a href={window.location.pathname + '/delete/' + post.ID}>Delete</a>
-					*/}
+					<h2>{(window.location.pathname === '/meta') ? 'URL: /' + decodeURIComponent(post.url) : decodeURIComponent(post.name)}</h2>
 					{post.pub_date && 
 						<p>(Last updated {post.pub_date})</p>
 					}
