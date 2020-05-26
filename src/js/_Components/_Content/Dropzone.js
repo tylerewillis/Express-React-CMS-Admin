@@ -18,6 +18,7 @@ const Dropzone = ({ reloadContainer }) => {
       setTimeout(() => {
         reloadContainer()
         setLoading(false)
+        rmvHighlight()
       },1000)
 		})() // eslint-disable-next-line
   },[])
@@ -37,7 +38,7 @@ const Dropzone = ({ reloadContainer }) => {
   }
 
   return (
-    <div className='acbic-new' {...getRootProps()} onDragOver={highlight} onDragLeave={rmvHighlight} onMouseUp={rmvHighlight}>
+    <div className='acbic-new' {...getRootProps()} onDragOver={highlight} onDragLeave={rmvHighlight}>
       <input {...getInputProps()} />
       <p className='text'>Drag 'n' drop files here, or click to select files</p>
       {loading && <Loading />}
