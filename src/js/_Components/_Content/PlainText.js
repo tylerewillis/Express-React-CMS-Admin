@@ -17,7 +17,7 @@ const PlainText = React.memo(({ con, handleChange, removeSection }) => {
 		<div className='ac-block'>
 			<h2>{con.name}</h2>
 			<p className='acb-description'>{con.description}</p>
-			<input defaultValue={con.content} onChange={sendChange} readOnly={(con.content === 'Home') ? true : false} className={(con.content === 'Home') ? 'uneditable' : ''} />
+			<input defaultValue={con.content} onBlur={sendChange} readOnly={(con.content === 'Home') ? true : false} className={(con.content === 'Home') ? 'uneditable' : ''} />
 			{(con.id !== 0) && <i className="fas fa-times" onClick={() => removeSection(con.id)}/>}
 		</div>
 	)

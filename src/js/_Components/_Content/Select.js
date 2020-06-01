@@ -17,7 +17,7 @@ const Select = React.memo(({ con, handleChange, removeSection }) => {
 			<h2>{con.name}</h2>
 			<p className='acb-description'>{con.description}</p>
 			<div className='acb-select'>
-				<select onChange={sendChange} defaultValue={con.content}>
+				<select onBlur={sendChange} defaultValue={con.content}>
 					<option value=''>Choose</option>
 					{con.options.map((opt, i) => {
 						return <option value={opt}>{opt.charAt(0).toUpperCase() + opt.substr(1)}</option>

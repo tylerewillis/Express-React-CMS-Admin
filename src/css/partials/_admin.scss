@@ -465,6 +465,7 @@
 					width: 49%;
 					height: 40px;
 					margin: 12px 0px;
+					border: 1px solid #d3d3d3;
 				}
 				.add-section-submit {
 					display: inline-block;
@@ -854,6 +855,11 @@
 	}
 	.atbs-editor {
 		width: 100%;
+		.ql-snow {
+			.ql-tooltip.ql-editing input[type=text] {
+				width: unset;
+			}
+		}
 	}
 	.textarea-inline {
 		width: 100%;
@@ -913,9 +919,20 @@
 		background-color: #f2f2f2;
 		border-radius: 5px;
 		border: 2px solid #f2f2f2;
+		position: relative;
 		&:hover {
 			cursor: pointer;
 			border: 2px solid gray;
+		}
+		i {
+			position: absolute;
+			top: 0;
+			right: 0;
+			color: $admin-color-primary;
+			cursor: pointer;
+			&:hover {
+				color: $admin-color-secondary;
+			}
 		}
 	}
 	.acbi-container {

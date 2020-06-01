@@ -14,7 +14,7 @@ const Color = React.memo(({ con, p, i, updateValue }) => {
 		<div className='item'>
 			<h2>{con.name}</h2>
 			<div className='acb-color'>
-				<input type='color' onChange={updateItem} defaultValue={con.content} />
+				<input type='color' onBlur={updateItem} defaultValue={con.content} />
 			</div>
 		</div>
 	)

@@ -36,7 +36,7 @@ const Queries = React.memo(({ types, queries }) => {
 						</div>
 						<div className='query-fields'>
 							{q.data.map((value,j) => {
-								if (value && q.keys[j] !== 'Ip') {
+								if (value && value.name !== 'Ip') {
 									return <p key={j}>{q.keys[j]}:
 										<span>{value}</span>
 									</p>

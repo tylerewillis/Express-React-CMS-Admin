@@ -42,6 +42,13 @@ const Form = ({ post, content }) => {
 							placeholder: inputs[j].getAttribute('data-placeholder'),
 							options: inputs[j].getAttribute('data-options')
 						})
+					} else if (inputs[j].getAttribute('data-type') === 'payment') {
+						array.push({
+							id: inputs[j].getAttribute('data-id'),
+							type: inputs[j].getAttribute('data-type'),
+							paymentValue: inputs[j].getAttribute('data-payment-value'),
+							paymentValueLink: inputs[j].getAttribute('data-payment-value-link')
+						})
 					} else {
 						array.push({
 							id: inputs[j].getAttribute('data-id'),
@@ -60,6 +67,7 @@ const Form = ({ post, content }) => {
 					else if (add && add === 'select') tempGroups.push({id, inputs:[{id: String(id) + "0", type:"select",label:"",required:"false",placeholder:"",options:"option 1, option 2, ..."}]})
 					else if (add && add === 'checkbox') tempGroups.push({id, inputs:[{id: String(id) + "0", type:"checkbox",label:"",required:"false",placeholder:""}]})
 					else if (add && add === 'double') tempGroups.push({id, inputs:[{id: String(id) + "0", type:"input",label:"",required:"false",placeholder:""},{id: String(id) + "1", type:"input",label:"",required:"false",placeholder:""}]})
+					else if (add && add === 'payment') tempGroups.push({id, inputs:[{id: String(id) + "0", type:"payment",paymentValue:"0",paymentValueLink:""}]})
 				}
 				tempGroups.push({
 					id: groups[i].getAttribute('data-id'),
@@ -94,10 +102,13 @@ const Form = ({ post, content }) => {
 
 	const handleChange = (e) => {
 		const el = e.target.closest('.input')
-		el.setAttribute('data-label', el.querySelector('.label-input').value)
+		console.log(el.getAttribute('data-payment-value'))
+		if (el.querySelector('.label-input')) el.setAttribute('data-label', el.querySelector('.label-input').value)
 		if (el.getAttribute('data-required')) el.setAttribute('data-required', (el.getAttribute('data-required') === 'true') ? 'false' : 'true')
-		if (el.getAttribute('data-placeholder')) el.setAttribute('data-placeholder', el.querySelector('.placeholder-input').value)
-		if (el.getAttribute('data-options')) el.setAttribute('data-options', el.querySelector('.options-input').value)
+		if (el.querySelector('.placeholder-input')) el.setAttribute('data-placeholder', el.querySelector('.placeholder-input').value)
+		if (el.querySelector('.options-input')) el.setAttribute('data-options', el.querySelector('.options-input').value)
+		if (el.querySelector('.payment-value-input')) el.setAttribute('data-payment-value', el.querySelector('.payment-value-input').value)
+		if (el.querySelector('.payment-value-link-input')) el.setAttribute('data-payment-value-link', el.querySelector('.payment-value-link-input').value)
 		updateState()
 	}
 
@@ -164,10 +175,14 @@ const Form = ({ post, content }) => {
 							{(i !== data[0].groups.length - 1) && <i className="fas fa-grip-lines lines"></i>}
 							{group.inputs.map((input, j) => {
 								return (
-									<div className='input' key={input.id} data-id={input.id} data-type={input.type} data-label={input.label} data-required={input.required} data-placeholder={input.placeholder} data-options={input.options} style={{width: 'calc(' + (100 / group.inputs.length) + '% - ' + ((group.inputs.length > 1) ? '10px' : '0px)')}}>
+									<div className='input' key={input.id} data-id={input.id} data-type={input.type} data-label={input.label} data-required={input.required} data-placeholder={input.placeholder} data-options={input.options} data-payment-value={input.paymentValue} data-payment-value-link={input.paymentValueLink} style={{width: 'calc(' + (100 / group.inputs.length) + '% - ' + ((group.inputs.length > 1) ? '10px' : '0px)')}}>
 										<p>{input.type}</p>
-										<label>Label:</label>
-										<input className='label-input' type='text' defaultValue={input.label} onChange={handleChange} />
+										{input.hasOwnProperty('label') &&
+											<React.Fragment>
+												<label>Label:</label>
+												<input className='label-input' type='text' defaultValue={input.label} onChange={handleChange} />
+											</React.Fragment>
+										}
 										{input.hasOwnProperty('options') &&
 											<React.Fragment>
 												<label>Options:</label>
@@ -184,6 +199,18 @@ const Form = ({ post, content }) => {
 											<React.Fragment>
 												<label>Required:</label>
 												<input className='required-input' type='checkbox' defaultChecked={(input.required === 'true') ? true : false} onChange={handleChange} />
+											</React.Fragment>
+										}
+										{input.hasOwnProperty('paymentValue') &&
+											<React.Fragment>
+												<label>Value:</label>
+												<input className='payment-value-input' type='text' defaultValue={input.paymentValue} onChange={handleChange} placeholder="Leave at 0 if value to be linked to another input" />
+											</React.Fragment>
+										}
+										{input.hasOwnProperty('paymentValueLink') &&
+											<React.Fragment>
+												<label>Value Link:</label>
+												<input className='payment-value-link-input' type='text' defaultValue={input.paymentValueLink} onChange={handleChange} placeholder="Name of element to get value from" />
 											</React.Fragment>
 										}
 									</div>
@@ -203,6 +230,7 @@ const Form = ({ post, content }) => {
 				<p className='button' onClick={() => addInput('select')}>Select</p>
 				<p className='button' onClick={() => addInput('checkbox')}>Checkbox</p>
 				<p className='button' onClick={() => addInput('double')}>Double</p>
+				<p className='button' onClick={() => addInput('payment')}>Payment</p>
 			</div>
 			<div className='buttons-bottom'>
 				<div>

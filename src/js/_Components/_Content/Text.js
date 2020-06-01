@@ -10,13 +10,15 @@ const Text = React.memo(({ con, handleChange, removeSection }) => {
 	const editor = React.createRef()
 
 	const sendChange = (e) => {
-		handleChange({
-			id: con.id,
-			type: con.type,
-			name: con.name,
-			description: con.description,
-			content: e
-		})
+		if (e.target.closest('.ql-editor')) {
+			handleChange({
+				id: con.id,
+				type: con.type,
+				name: con.name,
+				description: con.description,
+				content: e.target.closest('.ql-editor').innerHTML
+			})
+		}
 	}
 
 	useEffect(() => {
@@ -68,8 +70,8 @@ const Text = React.memo(({ con, handleChange, removeSection }) => {
 		<div className='ac-block' ref={section}>
 			<h2>{con.name}</h2>
 			<p className='acb-description'>{con.description}</p>
-			<div className='atbs-editor' ref={editor}>
-				<ReactQuill defaultValue={con.content} onChange={sendChange} modules={modules} formats={formats} />
+			<div className='atbs-editor' ref={editor} onBlur={sendChange}>
+				<ReactQuill defaultValue={con.content} modules={modules} formats={formats} />
 			</div>
 			<Shortcodes />
 			<i className="fas fa-times" onClick={() => removeSection(con.id)}/>

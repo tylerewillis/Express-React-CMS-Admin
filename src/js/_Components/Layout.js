@@ -17,12 +17,11 @@ const Admin = React.memo((props) => {
 			try {
 				const res = await fetch(API_PATH + path)
 				const json = await res.json()
-				console.log(json)
 		  	setPage(json)
 			} catch(e) {
-				// setTimeout(() => {
-				// 	window.location.reload()
-				// },2000)
+				setTimeout(() => {
+					window.location.reload()
+				},2000)
 			}
 		})()
 	},[])

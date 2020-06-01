@@ -9,11 +9,13 @@ const Text = React.memo(({ con, p, i, updateValue, removeSection }) => {
 	const editor = React.createRef()
 
 	const updateItem = (e) => {
-		updateValue(p,i, {
-			type: con.type,
-			name: con.name,
-			value: e
-		})
+		if (e.target.closest('.ql-editor')) {
+			updateValue(p,i, {
+				type: con.type,
+				name: con.name,
+				value: e.target.closest('.ql-editor').innerHTML
+			})
+		}
 	}
 
 	useEffect(() => {
@@ -64,8 +66,8 @@ const Text = React.memo(({ con, p, i, updateValue, removeSection }) => {
 	return (
 		<div className='item' ref={section}>
 			<h2>{con.name}</h2>
-			<div className='atbs-editor' ref={editor}>
-				<ReactQuill defaultValue={con.value} onChange={updateItem} modules={modules} formats={formats} />
+			<div className='atbs-editor' ref={editor} onBlur={updateItem}>
+				<ReactQuill defaultValue={con.value} modules={modules} formats={formats} />
 			</div>
 			<Shortcodes />
 		</div>

@@ -31,10 +31,6 @@ export default [
     component: Signout
   },
   {
-    path: ["/forms/:id"],
-    component: Form
-  },
-  {
     path: "/media",
     component: Media
   },
@@ -75,6 +71,10 @@ export default [
     path: "/:id/new",
     exact: true,
     component: New
+  },
+  {
+    path: ["/forms/:id"],
+    component: Form
   },
   {
     path: "/:id/delete/:id",

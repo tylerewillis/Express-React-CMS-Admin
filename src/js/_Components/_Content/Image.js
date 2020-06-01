@@ -35,12 +35,19 @@ const Image = React.memo(({ con, images, handleChange, removeSection }) => {
 		})()
 	}
 	
+	const removeImage = (e) => {
+		setImage('')
+		sendChange(e)
+	}
+
 	return (
 		<div className='ac-block'>
 			<h2>{con.name}</h2>
 			<p className='acb-description'>{con.description}</p>
 			<div className='acb-image'>
-				<div className='acbi-active' style={{backgroundImage: 'url(' + API_IMAGE_PATH + image + ')'}} onClick={containerToggle} />
+				<div className='acbi-active' style={{backgroundImage: 'url(' + API_IMAGE_PATH + image + ')'}} onClick={containerToggle}>
+					<i className="far fa-times-circle" onClick={removeImage}></i>
+				</div>
 				<div className='acbi-container' style={{display: toggle}}>
 					<Dropzone reloadContainer={reloadContainer} />
 					<div className='image-container'>

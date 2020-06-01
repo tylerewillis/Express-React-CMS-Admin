@@ -13,7 +13,7 @@ const PlainText = React.memo(({ con, p, i, updateValue }) => {
 	return (
 		<div className='item'>
 			<h2>{con.name}</h2>
-			<input defaultValue={con.value} onChange={updateItem} />
+			<input defaultValue={con.value} onBlur={updateItem} />
 		</div>
 	)
 })
