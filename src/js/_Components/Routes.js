@@ -73,13 +73,13 @@ export default [
     component: New
   },
   {
-    path: ["/forms/:id"],
-    component: Form
-  },
-  {
     path: "/:id/delete/:id",
     exact: true,
     component: Delete
+  },
+  {
+    path: ["/forms/:id"],
+    component: Form
   },
   {
     path: "/:id/:id",

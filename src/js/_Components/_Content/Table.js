@@ -12,10 +12,12 @@ const Table = React.memo(({ con, handleChange, removeSection }) => {
 		clearTimeout(timeout)
 		if (tableRef && tableRef.current) {
 			timeout = setTimeout(() => {
-				const retrieved = tableRef.current.innerHTML
-				const temp = retrieved.replace('<tbody>', '')
-				const temp2 = temp.replace('</tbody>', '')
-				sendChange(temp2)
+				if (tableRef.current) {
+					const retrieved = tableRef.current.innerHTML
+					const temp = retrieved.replace('<tbody>', '')
+					const temp2 = temp.replace('</tbody>', '')
+					sendChange(temp2)
+				}
 			}, 3000)
 		}
 	}

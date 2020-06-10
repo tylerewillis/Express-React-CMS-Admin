@@ -114,14 +114,15 @@
 	.item {
 		width: 48%;
 		@include flex-container(space-between,center);
+		margin-bottom: 10px;
 		label {
 			font-size: 1em;
-			width: 75px;
+			width: 165px;
 		}
 		input {
 			font-size: .9em;
 			padding: 3px;
-			width: calc(100% - 80px);
+			width: calc(100% - 170px);
 		}
 	}
 }
