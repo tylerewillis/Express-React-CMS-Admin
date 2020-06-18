@@ -33,8 +33,8 @@ const Dates = React.memo(({ con, handleChange, removeSection }) => {
 			<h2>{con.name}</h2>
 			<p className='acb-description'>{con.description}</p>
 			<div className='dates-editor'>
-				<input type='datetime-local' name='start' value={start} onBlur={updateDate} placeholder='Start' />
-				<input type='datetime-local' name='end' value={end} onBlur={updateDate} placeholder='End (if applicable)' />
+				<input type='datetime-local' name='start' value={start} onChange={updateDate} placeholder='Start' />
+				<input type='datetime-local' name='end' value={end} onChange={updateDate} placeholder='End (if applicable)' />
 			</div>
 			<i className="fas fa-times" onClick={() => removeSection(con.id)}/>
 		</div>
