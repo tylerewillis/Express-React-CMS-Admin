@@ -57,6 +57,9 @@ const Media = ({ images, url }) => {
 					return <div key={i} name={img} className='acbic-single' style={{backgroundImage: 'url(' + API_IMAGE_PATH + img + ')'}}>
 						<div className='copy-area' onClick={() => copyImage(img)}/>
 						<i class="fas fa-times-circle delete" onClick={() => deleteImg(img)}></i>
+						{(img.substr(img.length - 4) === 'docx' || img.substr(img.length - 4) === '.doc' || img.substr(img.length - 4) === '.pdf') &&
+							<p className='media-file-name'>{img}</p>
+						}
 					</div>
 				})}
 			</div>

@@ -1173,6 +1173,12 @@
 					color: $admin-color-primary;
 				}
 			}
+			.media-file-name {
+				@include overlay;
+				@include flex-container(center,center);
+				margin: 0px;
+				font-weight: 600;
+			}
 		}
 	}
 	.image-copied-confirmation {
