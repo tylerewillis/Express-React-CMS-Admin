@@ -25,7 +25,7 @@ export default () => {
 						<p><strong>Alt</strong>: <em>(optional)</em> Add an alternative description tag of the image for the visually impaired. Only seen by screen reader software, not displayed visually on page.</p>
 						<p><strong>Caption</strong> <em>(optional)</em> Add a caption to the image. Typically seen in small text beneath the image.</p>
 						<p><strong>Width</strong> <em>(optional)</em> Set the width percentage of the image. If not set, the width will be the maximum width of the original image.</p>
-						<p><strong>Position</strong> <em>(optional)</em> Adjust the position of the image - left, center, or right. If not set, the image will be centered.</p>
+						<p><strong>Position</strong> <em>(optional)</em> Adjust the position of the image - left, left-inline, center, right or right-inline. If not set, the image will be centered.</p>
 					</div>
 				</div>
 				{/********************/}
