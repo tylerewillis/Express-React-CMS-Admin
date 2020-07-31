@@ -26,13 +26,13 @@ export default ({ posts, comments, setReplyTo, setActive }) => {
 					<select value={post} onChange={(e) => setPost(e.target.value)}>
 						<option value='all'>All Posts</option>
 						{posts.map((post, i) => {
-							if (post && post.id) return <option value={post.id} key={i}>{post.name}</option>
+							if (post && post.ID) return <option value={'post-' + post.ID} key={i}>{post.name}</option>
 							else return null
 						})}
 					</select>
 				</div>
 				{comments.map((com, i) => {
-					if (post === 'all' || post === com.parent_id) {
+					if (post === 'all' || post === com.post_id) {
 						return (
 							<div className={(com.admin) ? 'comment admin-comment' :'comment'} key={i} data-parent={com.parent_id}>
 								<p>{com.name}</p>
