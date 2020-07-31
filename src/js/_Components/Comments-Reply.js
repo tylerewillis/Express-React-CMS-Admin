@@ -12,6 +12,7 @@ export default React.memo(({ replyTo, setReplyTo, setActive, adminName }) => {
 		setSubmit(true);
 		(async () => {
 			await Submit(window.location.pathname + '/reply', {
+				postId: replyTo.post_id, 
 				parentId: replyTo.id,
 				name,
 				message

@@ -36,7 +36,7 @@ export default React.memo(({ posts, adminName }) => {
 
 	if (submit) {
 		return <p>Your comment has been posted.</p>
-	} else {
+	} else if (posts.length) {
 		return (
 			<form onSubmit={handleSubmit} className='comments-new'>
 				<select value={post.id} onChange={(e) => updatePost(e)}>
