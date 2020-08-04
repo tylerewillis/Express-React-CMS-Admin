@@ -27,6 +27,7 @@ const Content = React.memo(({ postUrl, post, content, images, forms }) => {
 	const [ cookies, setCookie ] = useCookies(['role']) // eslint-disable-line
 	const pathArray = window.location.pathname.split('/')
 	const path = pathArray[pathArray.length - 2]
+	const [ pubDate, setPubDate ] = useState(post.pub_date)
 
 	const toUrl = string => {
 	  var clean = string.replace(/[^a-zA-Z0-9- ]/g, '')
@@ -103,7 +104,7 @@ const Content = React.memo(({ postUrl, post, content, images, forms }) => {
 	const handleSave = () => {
 		setLoading(true);
 		(async () => {
-			await Submit(window.location.pathname, data.content)
+			await Submit(window.location.pathname, { content: data.content, pub_date: pubDate })
 			setLoading(false)
 		})()
 	}
@@ -132,6 +133,12 @@ const Content = React.memo(({ postUrl, post, content, images, forms }) => {
 		}
 	}
 
+	const scrollTop = () => {
+		document.documentElement.style.scrollBehavior = 'auto'
+		setTimeout(() => { window.scrollTo(0,0) })
+		setTimeout(() => { document.documentElement.style.scrollBehavior = 'smooth' }, 1000)
+	}
+
 	return (
 		<div className='admin-content'>
 			<div className='atbs-header'>
@@ -143,12 +150,16 @@ const Content = React.memo(({ postUrl, post, content, images, forms }) => {
 				<New content={content} addSection={addSection} />
 				<div className='buttons-bottom'>
 					<div>
+						<p>Publish:
+							<input type='datetime-local' value={pubDate} onChange={(e) => setPubDate(e.target.value)} />
+						</p>
 						<p className='save' onClick={handleSave}>Save</p>
-						<p className='save save-close' onClick={handleSaveClose}>Save & Close</p>
+						<p className='plain' onClick={handleSaveClose}>Save & Close</p>
+						<p className='plain' onClick={handleCancel}>Cancel & Go Back</p>
+						<p className='plain' onClick={() => handleDelete(post.ID)}>Delete</p>
 					</div>
 					<div>
-						<p className='save cancel' onClick={handleCancel}>Cancel & Go Back</p>
-						<p className='save delete' onClick={() => handleDelete(post.ID)}>Delete</p>
+						<p className='top' onClick={scrollTop}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M6.101 359.293L25.9 379.092c4.686 4.686 12.284 4.686 16.971 0L224 198.393l181.13 180.698c4.686 4.686 12.284 4.686 16.971 0l19.799-19.799c4.686-4.686 4.686-12.284 0-16.971L232.485 132.908c-4.686-4.686-12.284-4.686-16.971 0L6.101 342.322c-4.687 4.687-4.687 12.285 0 16.971z"/></svg></p>
 					</div>
 				</div>
 			</form>

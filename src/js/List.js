@@ -16,7 +16,7 @@ const List = React.memo(({ posts }) => {
 				return <a key={index} className='atb-single' href={window.location.pathname + '/' + post.ID}>
 					<h2>{(window.location.pathname === '/meta') ? 'URL: /' + decodeURIComponent(post.url) : decodeURIComponent(post.name)}</h2>
 					{post.pub_date && 
-						<p>(Last updated {post.pub_date})</p>
+						<p>(Published {post.pub_date})</p>
 					}
 				</a>
 			})}
