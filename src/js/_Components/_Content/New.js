@@ -193,6 +193,7 @@ const PlainText = React.memo(({ content, addSection }) => {
 							<p onClick={() => addToList('select')}>Select</p>
 							<p onClick={() => addToList('color')}>Color</p>
 							<p onClick={() => addToList('form')}>Form</p>
+							<p onClick={() => addToList('table')}>Table</p>
 						</div>
 					</div>
 				}

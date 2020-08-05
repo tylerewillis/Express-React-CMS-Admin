@@ -18,7 +18,7 @@ const Table = React.memo(({ con, handleChange, removeSection }) => {
 					const temp2 = temp.replace('</tbody>', '')
 					sendChange(temp2)
 				}
-			}, 3000)
+			}, 2000)
 		}
 	}
 
@@ -73,6 +73,8 @@ const Table = React.memo(({ con, handleChange, removeSection }) => {
 			sendChange(newRows.join(''))
 		}
 	}
+
+	// Set column height/width
 
 	useEffect(() => {
 		const retrieved = tableRef.current.innerHTML

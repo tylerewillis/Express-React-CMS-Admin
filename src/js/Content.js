@@ -112,7 +112,7 @@ const Content = React.memo(({ postUrl, post, content, images, forms }) => {
 	const handleSaveClose = () => {
 		setLoading(true);
 		(async () => {
-			await Submit(window.location.pathname, data.content)
+			await Submit(window.location.pathname, { content: data.content, pub_date: pubDate })
 			const prevUrl = window.location.pathname.split('/')
 			prevUrl.pop()
 			const url = prevUrl.join('/')
