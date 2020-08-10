@@ -12,6 +12,7 @@ import Forms from './_Blocks/Forms'
 const Blocks = React.memo(({ con, images, forms, handleChange, removeSection }) => {
 
 	const [ data, setData ] = useState(con.content)
+	const [ display, setDisplay ] = useState(false)
 
 	const updateValue = async (p, i, obj) => {
 		await setData(prevState => {
@@ -73,7 +74,10 @@ const Blocks = React.memo(({ con, images, forms, handleChange, removeSection }) 
 		<div className='ac-block ac-block-blocks'>
 			<h2>{con.name}</h2>
 			<p className='acb-description'>{con.description}</p>
-			<div className='sections'>
+			<p className='blocks-toggle' onClick={() => setDisplay(!display)}>{(display) ? 'Hide List' : 'Show List'}
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M441.9 167.3l-19.8-19.8c-4.7-4.7-12.3-4.7-17 0L224 328.2 42.9 147.5c-4.7-4.7-12.3-4.7-17 0L6.1 167.3c-4.7 4.7-4.7 12.3 0 17l209.4 209.4c4.7 4.7 12.3 4.7 17 0l209.4-209.4c4.7-4.7 4.7-12.3 0-17z"/></svg>
+			</p>
+			<div className='sections' style={{'display': (display) ? 'block' : 'none'}}>
 				{data.map((section, i) => {
 					return (
 						<div className='section' key={i} draggable="true" onDragStart={(e) => drag(e,i)} onDragOver={(e) => dragover(e)} onDrop={(e) => drop(e,i)}>
@@ -109,7 +113,7 @@ const Blocks = React.memo(({ con, images, forms, handleChange, removeSection }) 
 					)
 				})}
 			</div>
-			<p className='add' onClick={addSection}><i className="fas fa-plus"></i>Add New</p>
+			<p className='add' onClick={addSection} style={{'display': (display) ? 'block' : 'none'}}><i className="fas fa-plus"></i>Add New</p>
 			{(con.id !== 0) && <i className="fas fa-times" onClick={() => removeSection(con.id)}/>}
 		</div>
 	)

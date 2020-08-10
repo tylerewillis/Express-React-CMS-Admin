@@ -1478,4 +1478,17 @@
 			margin-right: 5px;
 		}
 	}
+	.blocks-toggle {
+		cursor: pointer;
+		margin: 20px 0px;
+		color: $admin-color-primary;
+		svg {
+			width: 13px;
+			margin: 0px 0px -2px 15px;
+			margin-left: 15px;
+		}
+		&:hover {
+			text-decoration: underline;
+		}
+	}
 }
