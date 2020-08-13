@@ -1442,14 +1442,28 @@
 .ac-block-blocks {
 	.sections {
 		.section {
-			@include flex-container(space-between,center);
+			@include flex-container(space-between,flex-start);
 			margin-bottom: 20px;
 			position: relative;
-			.lines {
-				font-size: 1.5em;
-				cursor: move;
+			.left {
 				width: 60px;
-				text-align: center;
+				.number {
+					font-size: 2em;
+					color: #d3d3d3;
+					text-align: center;
+				}
+				.arrows {
+					i {
+						display: block;
+						font-size: 2em;
+						text-align: center;
+						cursor: pointer;
+						color: #d3d3d3;
+						&:hover {
+							color: $color-black;
+						}
+					}
+				}
 			}
 			.section-content {
 				width: calc(100% - 60px);

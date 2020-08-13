@@ -37,17 +37,20 @@ const PlainText = React.memo(({ content, addSection }) => {
 				}
 			}
 		} else if (select === 'blocks') {
-			content = [[]]
+			content = [{
+				id: 0,
+				value: []
+			}]
 			list.array.forEach(item => {
 				if (item.type === 'select') {
-					content[0].push({
+					content[0].value.push({
 						type: item.type,
 						name: item.name,
 						value: '',
 						options: item.options
 					})
 				} else {
-					content[0].push({
+					content[0].value.push({
 						type: item.type,
 						name: item.name,
 						value: ''

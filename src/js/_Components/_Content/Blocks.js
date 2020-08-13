@@ -16,7 +16,7 @@ const Blocks = React.memo(({ con, images, forms, handleChange, removeSection }) 
 
 	const updateValue = async (p, i, obj) => {
 		await setData(prevState => {
-			data[p][i] = obj
+			data[p].value[i] = obj
 			return [...prevState]
 		})
 		sendChange()
@@ -34,7 +34,8 @@ const Blocks = React.memo(({ con, images, forms, handleChange, removeSection }) 
 
 	const addSection = async () => {
 		var newItem = JSON.parse(JSON.stringify(data[data.length - 1]))
-		newItem.forEach((item, i, a) => {
+		newItem.id = data.length
+		newItem.value.forEach((item, i, a) => {
 			a[i].value = ''
 		})
 		var temp = data
@@ -45,20 +46,30 @@ const Blocks = React.memo(({ con, images, forms, handleChange, removeSection }) 
 		sendChange()
 	}
 
-	const drag = (e, key) => { e.dataTransfer.setData("key", key)}
-	const dragover = e => { e.preventDefault() }
+	const moveUp = async id => {
+		if (id > 0) {
+			var array = data
+			var temp = array[id]
+			array.splice(id, 1)
+			array.splice(id - 1, 0, temp)
+			await setData(() => {
+	  		return [...array]
+	  	})
+	  	sendChange()
+	  }
+	}
 
-	const drop = async (e, key) => {
-		e.preventDefault()
-  	const movingKey = e.dataTransfer.getData("key")
-  	var array = data
-  	var temp = array[movingKey]
-  	array.splice(movingKey, 1)
-  	array.splice(key, 0, temp)
-  	await setData(() => {
-  		return [...array]
-  	})
-  	sendChange()
+	const moveDown = async id => {
+		if (id < data.length - 1) {
+			var array = data
+			var temp = array[id]
+			array.splice(id, 1)
+			array.splice(id + 1, 0, temp)
+			await setData(() => {
+	  		return [...array]
+	  	})
+	  	sendChange()
+	  }
 	}
 
 	const removeSect = async i => {
@@ -80,11 +91,17 @@ const Blocks = React.memo(({ con, images, forms, handleChange, removeSection }) 
 			<div className='sections' style={{'display': (display) ? 'block' : 'none'}}>
 				{data.map((section, i) => {
 					return (
-						<div className='section' key={i} draggable="true" onDragStart={(e) => drag(e,i)} onDragOver={(e) => dragover(e)} onDrop={(e) => drop(e,i)}>
-							<i className="fas fa-grip-lines lines"></i>
+						<div className='section' key={section.id}>
+							<div className='left'>
+								<p className='number'>{i + 1}</p>
+								<div className='arrows'>
+									<i class="fas fa-caret-up" onClick={() => moveUp(i)}></i>
+									<i class="fas fa-caret-down" onClick={() => moveDown(i)}></i>
+								</div>
+							</div>
 							<i className="fas fa-times delete" onClick={() => removeSect(i)}/>
 							<div className='section-content'>
-								{section.map((item, index) => {
+								{section.value.map((item, index) => {
 									switch(item.type) {
 										case 'text':
 											return <Text key={index} p={i} i={index} con={item} updateValue={updateValue} />
