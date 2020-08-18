@@ -143,7 +143,10 @@ const Content = React.memo(({ postUrl, post, content, images, forms }) => {
 		<div className='admin-content'>
 			<div className='atbs-header'>
 				<h2>{name}</h2>
-				{(path !== 'alerts' && path !== 'meta') && <input className='url-header' value={url} readonly />}
+				<div className='atbs-header-sub'>
+					{(path !== 'alerts' && path !== 'meta') && <input className='url-header' value={url} readonly />}
+					{(path !== 'alerts' && path !== 'meta') && <p>Pageviews: {post.pageviews.toLocaleString()}</p>}
+				</div>
 			</div>
 			<form>
 				{section}

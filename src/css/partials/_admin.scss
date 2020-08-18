@@ -309,15 +309,23 @@
 				font-weight: 600;
 				margin: 0px 0px 10px 30px;
 			}
-			.url-header {
-				margin: 0px 0px 20px 30px;
-				padding: 5px;
-				font-size: .85em;
-				border-radius: 3px;
-				border: 1px solid #d3d3d3;
-				background-color: #f9f9f9;
-				width: 100%;
-				max-width: 400px;
+			.atbs-header-sub {
+				@include flex-container(space-between,center);
+				padding: 0px 30px;
+				margin-bottom: 20px;
+				.url-header {
+					padding: 5px;
+					font-size: .85em;
+					border-radius: 3px;
+					border: 1px solid #d3d3d3;
+					background-color: #f9f9f9;
+					width: 100%;
+					max-width: 400px;
+				}
+				p {
+					margin: 0px;
+					font-size: .75em;
+				}
 			}
 		}
 		.ac-block {
