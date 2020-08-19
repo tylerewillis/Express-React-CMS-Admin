@@ -6,20 +6,18 @@ const Table = React.memo(({ con, handleChange, removeSection }) => {
 	const [ newWidth, setNewWidth ] = useState('0')
 	const [ newHeight, setNewHeight ] = useState('0')
 	const tableRef = React.createRef()
+	const [ value, setValue ] = useState(con.content)
+	const [ cursorPosition, setCursorPosition ] = useState(0)
 
-	var timeout
-	const updateValue = () => {
-		clearTimeout(timeout)
-		if (tableRef && tableRef.current) {
-			timeout = setTimeout(() => {
-				if (tableRef.current) {
-					const retrieved = tableRef.current.innerHTML
-					const temp = retrieved.replace('<tbody>', '')
-					const temp2 = temp.replace('</tbody>', '')
-					sendChange(temp2)
-				}
-			}, 2000)
-		}
+	const updateValue = (test) => {
+		const retrieved = document.querySelector(`.table-${con.id}`)
+		retrieved.querySelectorAll('td').forEach(cell => {
+			cell.innerHTML = cell.querySelector('textarea').value
+		})
+		const temp = retrieved.innerHTML.replace('<tbody>', '')
+		const temp2 = temp.replace('</tbody>', '')
+		sendChange(temp2)
+		setValue(temp2)
 	}
 
 	const sendChange = (value) => {
@@ -48,7 +46,6 @@ const Table = React.memo(({ con, handleChange, removeSection }) => {
 					let cells = row.split('</td><td>')
 					for (let j = 0; j < newWidth; j++) {
 						if (cells[j]) {
-							console.log(cells[j])
 							let clean = cells[j].replace('<tr>', '')
 							let clean2 = clean.replace('</tr>', '')
 							console.log(clean2)
@@ -74,7 +71,9 @@ const Table = React.memo(({ con, handleChange, removeSection }) => {
 		}
 	}
 
+	//----------------------------------------
 	// Set column height/width
+	//----------------------------------------
 
 	useEffect(() => {
 		const retrieved = tableRef.current.innerHTML
@@ -88,11 +87,39 @@ const Table = React.memo(({ con, handleChange, removeSection }) => {
 		setNewHeight(rows.length)
 	},[]) // eslint-disable-line
 
+	//----------------------------------------
+	// Make editable
+	//----------------------------------------
+
+	useEffect(() => {
+		tableRef.current.querySelectorAll('td').forEach((cell, i) => {
+			let text = document.createElement('textarea')
+			text.value = cell.innerHTML
+
+			text.addEventListener('change', e => {
+				updateValue()
+				setCursorPosition(i)
+			})
+			cell.innerHTML = ''
+			cell.appendChild(text)
+		})
+	},[value]) // eslint-disable-line
+
+	//----------------------------------------
+	// Move cursor into field
+	//----------------------------------------
+
+	useEffect(() => {
+		tableRef.current.querySelectorAll('td').forEach((cell, i) => {
+			if (i === cursorPosition) cell.querySelector('textarea').focus()
+		})
+	},[cursorPosition]) // eslint-disable-line
+
 	return (
 		<div className='ac-block'>
 			<h2>{con.name}</h2>
 			<p className='acb-description'>{con.description}</p>
-			<table dangerouslySetInnerHTML={{__html: con.content}} contentEditable='true' ref={tableRef} onKeyUp={updateValue} />
+			<table dangerouslySetInnerHTML={{__html: value}} ref={tableRef} className={`table-${con.id}`} />
 			<i className="fas fa-times" onClick={() => removeSection(con.id)}/>
 			<div className='table-resize'>
 				<input type='text' value={newWidth} placeholder='Width' onChange={(e) => setNewWidth(e.target.value)} />

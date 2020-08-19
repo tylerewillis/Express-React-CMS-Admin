@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import Layout from './_Components/Layout'
 import { useCookies } from 'react-cookie'
@@ -45,9 +45,7 @@ const Content = React.memo(({ postUrl, post, content, images, forms }) => {
 		})
 		if (e.id === 0) setName(e.content)
 		if (e.id === 1 && e.name === 'URL') setUrl(toUrl(e.content))
-		document.querySelector('body').addEventListener('mouseleave', (e) => {
-			setNeedToSave(true)
-		})
+		setNeedToSave(true)
 	}
 
 	const removeSection = (id) => {
@@ -70,8 +68,21 @@ const Content = React.memo(({ postUrl, post, content, images, forms }) => {
 		})
 	}
 
-	const hideSaveMessage = () => {
-		document.querySelector('.need-to-save').remove()
+	//---------------------------
+	//- Confirm changes before leaving
+	//---------------------------
+
+	useEffect(() => {
+		if (needToSave) {
+			window.addEventListener("beforeunload", browserConfirm)
+		}
+	},[needToSave])
+
+	const browserConfirm = (e) => {
+		e.preventDefault()
+		e.returnValue = ''
+    var confirmationMessage = 'You have unsaved changes. Would you like to leave and cancel your changes?'
+    return confirmationMessage
 	}
 
 	const section = content.map((con, index) => {
@@ -111,6 +122,7 @@ const Content = React.memo(({ postUrl, post, content, images, forms }) => {
 
 	const handleSaveClose = () => {
 		setLoading(true);
+		window.removeEventListener('beforeunload', browserConfirm);
 		(async () => {
 			await Submit(window.location.pathname, { content: data.content, pub_date: pubDate })
 			const prevUrl = window.location.pathname.split('/')
@@ -166,11 +178,6 @@ const Content = React.memo(({ postUrl, post, content, images, forms }) => {
 					</div>
 				</div>
 			</form>
-			{needToSave &&
-				<div className='need-to-save' onClick={hideSaveMessage}>
-					<p>Changes have been made to this page. Make sure to save before exiting!</p>
-				</div>
-			}
 			{loading && <Loading />}
 		</div>
 	)
