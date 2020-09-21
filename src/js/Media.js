@@ -12,13 +12,16 @@ const Media = ({ images, url }) => {
 	const [ availableImages, setAvailableImages ] = useState(images)
 	const [ loading, setLoading ] = useState(false)
 
-	const copyImage = (img) => {
+	const copyImage = (img, pdf = false) => {
 		const input = document.createElement('textarea')
 		input.value = url + img
 		document.body.appendChild(input)
 		input.select()
 		document.execCommand('copy')
 		document.body.removeChild(input)
+
+		if (pdf) document.querySelector('.image-copied-confirmation p').textContent = 'Document path copied to clipboard'
+		else document.querySelector('.image-copied-confirmation p').textContent = 'Image path copied to clipboard'
 
 		// Confirmation
 		document.querySelector('.image-copied-confirmation').classList.add('image-copied-confirmation-active')
@@ -58,7 +61,7 @@ const Media = ({ images, url }) => {
 						<div className='copy-area' onClick={() => copyImage(img)}/>
 						<i class="fas fa-times-circle delete" onClick={() => deleteImg(img)}></i>
 						{(img.substr(img.length - 4) === 'docx' || img.substr(img.length - 4) === '.doc' || img.substr(img.length - 4) === '.pdf') &&
-							<p className='media-file-name'>{img}</p>
+							<p className='media-file-name' onClick={() => copyImage(img,true)}>{img}</p>
 						}
 					</div>
 				})}

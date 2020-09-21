@@ -39,7 +39,9 @@ const Images = React.memo(({ con, images, handleChange, role, removeSection }) =
 	},[])
 
 	const addImage = (e) => {
-		const url = e.target.getAttribute('name')
+		var url
+		if (!e.target.classList.contains('acbic-single')) url = e.target.closest('.acbic-single').getAttribute('name')
+		else url = e.target.getAttribute('name')
 		var state = imagesState
 		state += (state.length > 0) ? ',' + url : url
 		setImagesState(state)
@@ -99,6 +101,9 @@ const Images = React.memo(({ con, images, handleChange, role, removeSection }) =
 					{imagesView.map((img, i) => {
 						return <div key={i} name={img} className="acbi-active" style={{backgroundImage: 'url(' + img + ')'}} onClick={containerToggle}>
 							<i className="far fa-times-circle" imgid={i} onClick={e => removeImage(e)}></i>
+							{(img.substr(img.length - 4) === 'docx' || img.substr(img.length - 4) === '.doc' || img.substr(img.length - 4) === '.pdf') &&
+								<p className='media-file-name'>{img.split('/')[img.split('/').length - 1]}</p>
+							}
 						</div>
 					})}
 					{imagesView.length === 0 &&
@@ -109,7 +114,11 @@ const Images = React.memo(({ con, images, handleChange, role, removeSection }) =
 					<Dropzone reloadContainer={reloadContainer} />
 					<div className='image-container'>
 						{availableImages.map((img, i) => {
-							return <div key={i} name={img} className='acbic-single' style={{backgroundImage: 'url(' + API_IMAGE_PATH + img + ')'}} onClick={e => addImage(e)}/>
+							return <div key={i} name={img} className='acbic-single' style={{backgroundImage: 'url(' + API_IMAGE_PATH + img + ')'}} onClick={e => addImage(e)}>
+								{(img.substr(img.length - 4) === 'docx' || img.substr(img.length - 4) === '.doc' || img.substr(img.length - 4) === '.pdf') &&
+									<p className='media-file-name'>{img}</p>
+								}
+							</div>
 						})}
 					</div>
 				</div>
