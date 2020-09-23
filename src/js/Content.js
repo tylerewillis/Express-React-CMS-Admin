@@ -17,7 +17,7 @@ import Blocks from './_Components/_Content/Blocks'
 import Color from './_Components/_Content/Color'
 import Submit from './_Components/_API/Submit'
 
-const Content = React.memo(({ postUrl, post, content, images, forms }) => {
+const Content = React.memo(({ postType, postUrl, post, content, images, forms }) => {
 	
 	const [ data, setData ] = useState({content})
 	const [ loading, setLoading ] = useState(false)
@@ -132,6 +132,18 @@ const Content = React.memo(({ postUrl, post, content, images, forms }) => {
 		})()
 	}
 
+	const handleSaveCopy = () => {
+		setLoading(true);
+		window.removeEventListener('beforeunload', browserConfirm);
+		(async () => {
+			await Submit(window.location.pathname + '/copy', { type: postType, content: data.content, pub_date: pubDate })
+			const prevUrl = window.location.pathname.split('/')
+			prevUrl.pop()
+			const url = prevUrl.join('/')
+			window.location.replace(url)
+		})()
+	}
+
 	const handleCancel = () => {
 		const prevUrl = window.location.pathname.split('/')
 		prevUrl.pop()
@@ -170,6 +182,7 @@ const Content = React.memo(({ postUrl, post, content, images, forms }) => {
 						</p>
 						<p className='save' onClick={handleSave}>Save</p>
 						<p className='plain' onClick={handleSaveClose}>Save & Close</p>
+						<p className='plain' onClick={handleSaveCopy}>Save As Copy</p>
 						<p className='plain' onClick={handleCancel}>Cancel & Go Back</p>
 						<p className='plain' onClick={() => handleDelete(post.ID)}>Delete</p>
 					</div>
