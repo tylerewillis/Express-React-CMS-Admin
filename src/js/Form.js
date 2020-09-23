@@ -193,6 +193,17 @@ const Form = ({ post, content }) => {
 		})()
 	}
 
+	const handleSaveCopy = () => {
+		setLoading(true);
+		(async () => {
+			await Submit(window.location.pathname + '/copy', data)
+			const prevUrl = window.location.pathname.split('/')
+			prevUrl.pop()
+			const url = prevUrl.join('/')
+			window.location.replace(url)
+		})()
+	}
+
 	const handleCancel = () => {
 		const prevUrl = window.location.pathname.split('/')
 		prevUrl.pop()
@@ -221,6 +232,7 @@ const Form = ({ post, content }) => {
 				<div>
 					<p className='save' onClick={handleSave}>Save</p>
 					<p className='plain' onClick={handleSaveClose}>Save & Close</p>
+					<p className='plain' onClick={handleSaveCopy}>Save as Copy</p>
 					<p className='plain' onClick={handleCancel}>Cancel & Go Back</p>
 					<p className='plain' onClick={() => handleDelete(post.ID)}>Delete Form</p>
 				</div>
