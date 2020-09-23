@@ -60,6 +60,12 @@ const Form = ({ post, content }) => {
 							paymentValue: inputs[j].getAttribute('data-payment-value'),
 							paymentValueLink: inputs[j].getAttribute('data-payment-value-link')
 						})
+					} else if (inputs[j].getAttribute('data-type') === 'text-block') {
+						array.push({
+							id: inputs[j].getAttribute('data-id'),
+							type: inputs[j].getAttribute('data-type'),
+							text: inputs[j].getAttribute('data-text')
+						})
 					} else {
 						array.push({
 							id: inputs[j].getAttribute('data-id'),
@@ -79,6 +85,7 @@ const Form = ({ post, content }) => {
 					else if (add && add === 'checkbox') tempGroups.push({id, inputs:[{id: String(id) + "0", type:"checkbox",label:"",required:"false",placeholder:""}]})
 					else if (add && add === 'double') tempGroups.push({id, inputs:[{id: String(id) + "0", type:"input",label:"",required:"false",placeholder:""},{id: String(id) + "1", type:"input",label:"",required:"false",placeholder:""}]})
 					else if (add && add === 'payment') tempGroups.push({id, inputs:[{id: String(id) + "0", type:"payment",paymentValue:"0",paymentValueLink:""}]})
+					else if (add && add === 'text-block') tempGroups.push({id, inputs:[{id: String(id) + "0", type:"text-block",text:""}]})
 				}
 				tempGroups.push({
 					id: groups[i].getAttribute('data-id'),
@@ -120,6 +127,7 @@ const Form = ({ post, content }) => {
 		if (el.querySelector('.options-input')) el.setAttribute('data-options', el.querySelector('.options-input').value)
 		if (el.querySelector('.payment-value-input')) el.setAttribute('data-payment-value', el.querySelector('.payment-value-input').value)
 		if (el.querySelector('.payment-value-link-input')) el.setAttribute('data-payment-value-link', el.querySelector('.payment-value-link-input').value)
+		if (el.querySelector('.text-input')) el.setAttribute('data-text', el.querySelector('.text-input').value)
 		updateState()
 	}
 
@@ -201,7 +209,7 @@ const Form = ({ post, content }) => {
 							{(i !== data[0].groups.length - 1) && <i className="fas fa-grip-lines lines"></i>}
 							{group.inputs.map((input, j) => {
 								return (
-									<div className='input' key={input.id} data-id={input.id} data-type={input.type} data-label={input.label} data-required={input.required} data-placeholder={input.placeholder} data-options={input.options} data-payment-value={input.paymentValue} data-payment-value-link={input.paymentValueLink} style={{width: 'calc(' + (100 / group.inputs.length) + '% - ' + ((group.inputs.length > 1) ? '10px' : '0px)')}}>
+									<div className='input' key={input.id} data-id={input.id} data-type={input.type} data-label={input.label} data-required={input.required} data-placeholder={input.placeholder} data-options={input.options} data-payment-value={input.paymentValue} data-payment-value-link={input.paymentValueLink} data-text={input.text} style={{width: 'calc(' + (100 / group.inputs.length) + '% - ' + ((group.inputs.length > 1) ? '10px' : '0px)')}}>
 										<p>{input.type}</p>
 										{input.hasOwnProperty('label') &&
 											<React.Fragment>
@@ -239,6 +247,12 @@ const Form = ({ post, content }) => {
 												<input className='payment-value-link-input' type='text' defaultValue={input.paymentValueLink} onChange={handleChange} placeholder="Name of element to get value from" />
 											</React.Fragment>
 										}
+										{input.hasOwnProperty('text') &&
+											<React.Fragment>
+												<label>Text:</label>
+												<input className='text-input' type='text' defaultValue={input.text} onChange={handleChange} placeholder="The text to display here." />
+											</React.Fragment>
+										}
 									</div>
 								)
 							})}
@@ -257,6 +271,7 @@ const Form = ({ post, content }) => {
 				<p className='button' onClick={() => addInput('checkbox')}>Checkbox</p>
 				<p className='button' onClick={() => addInput('double')}>Double</p>
 				<p className='button' onClick={() => addInput('payment')}>Payment</p>
+				<p className='button' onClick={() => addInput('text-block')}>Text Block</p>
 			</div>
 			<div className='buttons-bottom'>
 				<div>

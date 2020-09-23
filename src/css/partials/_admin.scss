@@ -265,6 +265,10 @@
 				margin-right: 0px;
 			}
 		}
+		.text-input {
+			width: 100%;
+			max-width: calc(100% - 133px);
+		}
 	}
 	.group-submit {
 		.input {
