@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import Layout from './_Components/Layout'
 import Loading from './_Components/Loading'
 import Submit from './_Components/_API/Submit'
+import Groups from './_Components/_Form/Groups'
+import Buttons from './_Components/_Form/Buttons'
+import Details from './_Components/_Form/Details'
 
 const Form = ({ post, content }) => {
 
@@ -10,12 +13,23 @@ const Form = ({ post, content }) => {
 	const pathArray = window.location.pathname.split('/')
 	const path = pathArray[pathArray.length - 2]
 
+	//--------------------------
+	//- Update State
+	//--------------------------
+
 	const updateState = (add = false, replace = false, replaceWith = false, deleteEl = false) => {
 		var tempDetails = []
 		var tempGroups = []
 		const details = document.querySelectorAll('.form-details .detail')
 		for (let i = 0; i < details.length; i++) {
-			if (details[i].querySelector('input')) {
+			if (details[i].classList.contains('detail-email-message')) {
+				tempDetails.push({
+					type: 'text',
+					name: details[i].querySelector('h2').textContent,
+					description: details[i].querySelector('p').textContent,
+					value: details[i].querySelector('.ql-editor').innerHTML,
+				})
+			} else if (details[i].querySelector('input')) {
 				tempDetails.push({
 					type: 'plain-text',
 					name: details[i].querySelector('h2').textContent,
@@ -104,6 +118,10 @@ const Form = ({ post, content }) => {
 		}])
 	}
 
+	//--------------------------
+	//- Drag
+	//--------------------------
+
 	const drag = (e, key) => { e.dataTransfer.setData("key", key)}
 	const dragover = e => { e.preventDefault() }
 
@@ -115,8 +133,13 @@ const Form = ({ post, content }) => {
 	}
 
 	const handleDetailsChange = (e) => {
+		console.log(e.target.innerHTML)
 		updateState()
 	}
+
+	//--------------------------
+	//- Input Change
+	//--------------------------
 
 	const handleChange = (e) => {
 		const el = e.target.closest('.input')
@@ -131,13 +154,25 @@ const Form = ({ post, content }) => {
 		updateState()
 	}
 
+	//--------------------------
+	//- Add
+	//--------------------------
+
 	const addInput = (type) => {
 		updateState(type)
 	}
 
+	//--------------------------
+	//- Delete
+	//--------------------------
+
 	const deleteGroup = i => {
 		updateState(false, false, false, String(i))
 	}
+
+	//--------------------------
+	//- Save/Delete Form
+	//--------------------------
 
 	const handleSave = () => {
 		setLoading(true);
@@ -179,100 +214,9 @@ const Form = ({ post, content }) => {
 
 	return (
 		<React.Fragment>
-			<div className='block'>
-				<h1>Form: {data[0].details[0].value}</h1>
-				<div className='form-details'>
-					{data[0].details.map((det,i) => {
-						return (
-							<div className='detail' key={i} data-options={(det.options) ? det.options : ''}>
-								<h2>{det.name}</h2>
-								<p>{det.description}</p>
-								{det.type === 'plain-text' &&
-									<input type='text' defaultValue={det.value} onChange={handleDetailsChange} />
-								}
-								{det.type === 'select' &&
-									<select defaultValue={det.value} onChange={handleDetailsChange}>
-										{det.options.split(',').map((opt,j) => {
-											return <option value={opt} key={j}>{opt[0].toUpperCase() + opt.substr(1)}</option>
-										})}
-									</select>
-								}
-							</div>
-						)
-					})}
-				</div>
-			</div>
-			<div className='form-groups'>
-				{data[0].groups.map((group,i) => {
-					return (
-						<div className={'group group-' + i + ((i === data[0].groups.length - 1) ? ' group-submit' : '')} key={group.id} data-id={group.id} onDragStart={(e) => drag(e,i)} onDragOver={(e) => dragover(e)} onDrop={(e) => dropGroup(e,i)} draggable={(i === data[0].groups.length - 1) ? "false" : "true"}>
-							{(i !== data[0].groups.length - 1) && <i className="fas fa-grip-lines lines"></i>}
-							{group.inputs.map((input, j) => {
-								return (
-									<div className='input' key={input.id} data-id={input.id} data-type={input.type} data-label={input.label} data-required={input.required} data-placeholder={input.placeholder} data-options={input.options} data-payment-value={input.paymentValue} data-payment-value-link={input.paymentValueLink} data-text={input.text} style={{width: 'calc(' + (100 / group.inputs.length) + '% - ' + ((group.inputs.length > 1) ? '10px' : '0px)')}}>
-										<p>{input.type}</p>
-										{input.hasOwnProperty('label') &&
-											<React.Fragment>
-												<label>Label:</label>
-												<input className='label-input' type='text' defaultValue={input.label} onChange={handleChange} />
-											</React.Fragment>
-										}
-										{input.hasOwnProperty('options') &&
-											<React.Fragment>
-												<label>Options:</label>
-												<input className='options-input' type='text' defaultValue={input.options} onChange={handleChange} />
-											</React.Fragment>
-										}
-										{input.hasOwnProperty('placeholder') &&
-											<React.Fragment>
-												<label>Placeholder:</label>
-												<input className='placeholder-input' type='text' defaultValue={input.placeholder} onChange={handleChange} />
-											</React.Fragment>
-										}
-										{input.hasOwnProperty('required') &&
-											<React.Fragment>
-												<label>Required:</label>
-												<input className='required-input' type='checkbox' defaultChecked={(input.required === 'true') ? true : false} onChange={handleChange} />
-											</React.Fragment>
-										}
-										{input.hasOwnProperty('paymentValue') &&
-											<React.Fragment>
-												<label>Value:</label>
-												<input className='payment-value-input' type='text' defaultValue={input.paymentValue} onChange={handleChange} placeholder="Leave at 0 if value to be linked to another input" />
-											</React.Fragment>
-										}
-										{input.hasOwnProperty('paymentValueLink') &&
-											<React.Fragment>
-												<label>Value Link:</label>
-												<input className='payment-value-link-input' type='text' defaultValue={input.paymentValueLink} onChange={handleChange} placeholder="Name of element to get value from" />
-											</React.Fragment>
-										}
-										{input.hasOwnProperty('text') &&
-											<React.Fragment>
-												<label>Text:</label>
-												<input className='text-input' type='text' defaultValue={input.text} onChange={handleChange} placeholder="The text to display here." />
-											</React.Fragment>
-										}
-									</div>
-								)
-							})}
-							{i !== data[0].groups.length - 1 &&
-								<i className="fas fa-times delete" onClick={() => deleteGroup(i)}></i>
-							}
-						</div>
-					)
-				})}
-			</div>
-			<div className='form-buttons'>
-				<p>Add:</p>
-				<p className='button' onClick={() => addInput('input')}>Input</p>
-				<p className='button' onClick={() => addInput('textarea')}>Textarea</p>
-				<p className='button' onClick={() => addInput('select')}>Select</p>
-				<p className='button' onClick={() => addInput('checkbox')}>Checkbox</p>
-				<p className='button' onClick={() => addInput('double')}>Double</p>
-				<p className='button' onClick={() => addInput('payment')}>Payment</p>
-				<p className='button' onClick={() => addInput('text-block')}>Text Block</p>
-			</div>
+			<Details data={data} handleDetailsChange={handleDetailsChange} />
+			<Groups data={data} drag={drag} dragover={dragover} dropGroup={dropGroup} deleteGroup={deleteGroup} handleChange={handleChange} />
+			<Buttons addInput={addInput} />
 			<div className='buttons-bottom'>
 				<div>
 					<p className='save' onClick={handleSave}>Save</p>
