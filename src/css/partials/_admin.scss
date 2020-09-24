@@ -539,6 +539,7 @@
 	.acl-header {
 		width: 100%;
 		margin-bottom: 30px;
+		@include flex-container(space-between,center);
 		a {
 			display: inline-block;
 			border: 2px solid #d3d3d3;
@@ -551,6 +552,12 @@
 				background-color: #333;
 				color: #fff;
 			}
+		}
+		input {
+			font-size: .9em;
+			padding: 5px;
+			width: 100%;
+			max-width: 200px;
 		}
 	}
 	.atb-single {
@@ -1028,75 +1035,6 @@
 	font-size: 12px;
 	text-align: right;
 	display: none;
-}
-
-// =========================================/
-// Media
-// =========================================/
-
-.admin-media-container {
-	.image-container {
-		@include flex-container;
-		.acbic-single {
-			width: 24%;
-			height: 200px;
-			margin: 10px 0px;
-			position: relative;
-			background-position: center;
-			background-size: 90%;
-			background-repeat: no-repeat;
-			border: 2px solid #f2f2f2;
-			cursor: pointer;
-			border-radius: 3px;
-			&:hover {
-				border: 2px solid $admin-color-secondary;
-			}
-			.copy-area {
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-			}
-			.delete {
-				position: absolute;
-				top: 5px;
-				right: 5px;
-				z-index: 1;
-				&:hover {
-					color: $admin-color-primary;
-				}
-			}
-		}
-	}
-	.image-copied-confirmation {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100vw;
-		height: 100vh;
-		@include flex-container(center,center);
-		background-color: rgba(0,0,0,.6);
-		@include transition(0.5s);
-		visibility: hidden;
-		opacity: 0;
-		z-index: 5;
-		p {
-			color: #fff;
-			font-size: 2em;
-			margin: 0px;
-		}
-	}
-	.image-copied-confirmation-active {
-		visibility: visible;
-		opacity: 1;
-	}
-}
-.media-file-name {
-	@include overlay;
-	@include flex-container(center,center);
-	margin: 0px;
-	font-weight: 600;
 }
 
 // =========================================/

@@ -11,6 +11,7 @@ const Media = ({ images, url }) => {
 
 	const [ availableImages, setAvailableImages ] = useState(images)
 	const [ loading, setLoading ] = useState(false)
+	const [ search, setSearch ] = useState(false)
 
 	const copyImage = (img, pdf = false) => {
 		const input = document.createElement('textarea')
@@ -55,15 +56,23 @@ const Media = ({ images, url }) => {
 	return (
 		<div className='admin-media-container'>
 			<Dropzone reloadContainer={reloadContainer} />
+			<div className='image-search'>
+				<input value={(search) ? search : ''} placeholder='Search' onChange={(e) => setSearch(e.target.value.toLowerCase())} />
+			</div>
 			<div className='image-container'>
 				{availableImages.map((img, i) => {
-					return <div key={i} name={img} className='acbic-single' style={{backgroundImage: 'url(' + API_IMAGE_PATH + img + ')'}}>
-						<div className='copy-area' onClick={() => copyImage(img)}/>
-						<i class="fas fa-times-circle delete" onClick={() => deleteImg(img)}></i>
-						{(img.substr(img.length - 4) === 'docx' || img.substr(img.length - 4) === '.doc' || img.substr(img.length - 4) === '.pdf') &&
+					if (!search || (search && (img.toLowerCase().includes(search) || img.replace(/-/g, ' ').toLowerCase().includes(search)))) {
+						return <div key={i} name={img} className='acbic-single' style={{backgroundImage: 'url(' + API_IMAGE_PATH + img + ')'}}>
+							<div className='copy-area' onClick={() => copyImage(img)}/>
+							<i class="fas fa-times-circle delete" onClick={() => deleteImg(img)}></i>
+							{(img.substr(img.length - 4) === 'docx' || img.substr(img.length - 4) === '.doc' || img.substr(img.length - 4) === '.pdf') &&
+								<div className='media-file-icon' onClick={() => copyImage(img,true)}>
+									<img src={API_IMAGE_PATH + 'fileicon.png'} alt={'file icon for documents'} />
+								</div>
+							}
 							<p className='media-file-name' onClick={() => copyImage(img,true)}>{img}</p>
-						}
-					</div>
+						</div>
+					} else return false
 				})}
 			</div>
 			<div className='image-copied-confirmation'>
