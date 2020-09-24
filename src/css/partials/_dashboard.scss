@@ -8,7 +8,7 @@
 		justify-content: center;
 	}
 	.ad-single {
-		@include admin-white-background(30px, 15px 0px);
+		@include admin-white-background(20px, 15px 0px);
 		width: 32%;
 		position: relative;
 		color: $color-black !important;
@@ -21,9 +21,15 @@
 			width: 95%;
 		}
 		h2 {
-			margin: 0px 0px 20px;
+			margin: 0px 0px 12px;
 		  font-size: 22px;
 		  line-height: 28px;
+		}
+		p {
+			color: #a9a9a9;
+		}
+		p:last-child {
+			margin-bottom: 0px;
 		}
 		form {
 			font-size: 14px;

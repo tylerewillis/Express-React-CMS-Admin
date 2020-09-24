@@ -21,6 +21,7 @@ const SignIn = () => {
 			if (submit.success) {
 				setCookie('signedIn', true, { path: '/'})
 				setCookie('role', submit.role, { path: '/'})
+				setCookie('name', submit.name, { path: '/'})
 				window.location.replace('/')
 			} else {
 				setSignInError(true)

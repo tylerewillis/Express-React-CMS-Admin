@@ -13,6 +13,7 @@ const Admin = React.memo(({ blocks }) => {
 			{blocks.map(block => {
 				return <Link key={block.id} title={block.name} desc={block.description} link={block.url} />
 			})}
+			{(cookies.role === 'admin' || cookies.role === 'super') && <Link title='Admins' desc="View and approve/revoke administrator access." link='admins' />}
 			{cookies.role === 'super' && <Link title='Configuration' desc="Edit the site's admin dashboard and customo post types." link='config' />}
 		</div>
 	)

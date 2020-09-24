@@ -4,7 +4,6 @@
 
 .page-admin {
 	background-color: $admin-color-bg-light;
-	padding: 30px 0px;
 	h1,h2,h3,h4,h5,h6 {
 		font-family: $admin-header-font;
 	}
@@ -22,14 +21,54 @@
 		font-size: 14px;
 		font-weight: 900;
 	}
-	.breadcrumbs {
-		.bc-active {
-			margin: 0px;
+	.admin-header {
+		background-color: $admin-color-secondary-dark;
+		padding: 4px 0px 2px;
+		box-shadow: 0px 0px 0px 2px #f9f9f9, 0px 0px 0px 4px $admin-color-secondary-dark;
+		.container {
+			@include flex-container(space-between,center);
+			@include global-width;
+		}
+		.section {
+			@include flex-container(flex-start,center);
+			a {
+				color: #f2f2f2;
+				font-size: .95em;
+				i {
+					color: $admin-color-secondary;;
+					margin-right: 5px;
+				}
+			}
+			p {
+				margin: 0px;
+				color: #f2f2f2;
+				font-size: .75em;
+				line-height: 1em;
+				a {
+					font-size: 1em;
+				}
+			}
+			span.divider {
+				margin: 0px 10px;
+				color: $color-white;
+			}
+			.breadcrumbs {
+				margin: 0px;
+				.bc-active {
+					margin: 0px;
+				}
+			}
+		}
+		.section ~ .section {
+			a {
+				margin-left: 20px;
+			}
 		}
 	}
-	.pa-container {
+	.page-admin-main {
+		padding: 30px 0px;
 		@include global-width;
-		padding-bottom: 60px;
+		min-height: calc(100vh - 130px);
 	}
 }
 
@@ -52,6 +91,22 @@
 		color: $color-primary;
 		&:hover {
 			text-decoration: underline;
+		}
+	}
+}
+
+// =========================================/
+// Footer
+// =========================================/
+
+.page-admin {
+	.admin-footer {
+		background-color: $color-white;
+		@include flex-container(flex-end);
+		padding: 20px;
+		box-shadow: 0px 0px 0px 5px #f9f9f9, 0px 0px 0px 10px $color-white;
+		img {
+			width: 120px;
 		}
 	}
 }

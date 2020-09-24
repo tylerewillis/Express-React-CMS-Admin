@@ -179,7 +179,7 @@ const Nav = ({ nav, posts }) => {
 		<React.Fragment>
 			<div className='block'>
 				<h1>Site Navigation</h1>
-				<p>Drag and drop the menu items below to reorder how they appear on the website. To insert the item as a sub-link, drag under the parent link and indent before dropping.</p>
+				<p>Drag and drop the menu items below to reorder how they appear on the website. To insert the item as a sub-link, drag and drop under the parent link and then indent.</p>
 			</div>
 			<div className='nav'>
 				{order.map((item, i) => {
@@ -203,8 +203,8 @@ const Nav = ({ nav, posts }) => {
 				</div>
 				<div>
 					<p className='save' onClick={handleSave}>Save</p>
-					<p className='save save-close' onClick={handleSaveClose}>Save & Close</p>
-					<p className='save cancel' onClick={handleCancel}>Cancel & Go Back</p>
+					<p className='plain' onClick={handleSaveClose}>Save & Close</p>
+					<p className='plain' onClick={handleCancel}>Cancel & Go Back</p>
 				</div>
 			</div>
 			{loading && <Loading />}
