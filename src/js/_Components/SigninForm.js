@@ -41,7 +41,10 @@ const SignIn = () => {
 			</div>
 			<Input type='email' name='Email Address' inputName='email_address' required={true} updateValue={(e) => setEmail(e.target.value)} />
 			<Input type='password' name='Password' inputName='password' required={true} updateValue={(e) => setPassword(e.target.value)} />
-			<input type='submit' value='Sign In' />
+			<div className='buttons'>
+				<input type='submit' value='Sign In' />
+				<a href='/forgot-password'>Forgot Password</a>
+			</div>
 		</form>
 	)
 }

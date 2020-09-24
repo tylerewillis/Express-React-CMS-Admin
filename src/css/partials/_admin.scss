@@ -295,6 +295,7 @@
 				width: 100%;
 				padding: 8px;
 				border: 1px solid #d3d3d3;
+				font-size: .9em;
 			}
 			input.uneditable {
 				background-color: #f9f9f9;
@@ -329,6 +330,7 @@
 		    	border-top: 1px solid #d3d3d3;
 		    	border-bottom: 1px solid #d3d3d3;
 		    	border-left: 1px solid #d3d3d3;
+		    	font-size: .9em;
 		    }
 		    td {
 		    	background: none;
@@ -422,6 +424,7 @@
 					height: 40px;
 					margin: 12px 0px;
 					border: 1px solid #d3d3d3;
+					font-size: .9em;
 				}
 				.add-section-submit {
 					display: inline-block;
@@ -500,7 +503,7 @@
 		}
 	}
 	* {
-		font-family: unset !important;
+		font-family: "Libre Baskerville", serif !important;
 	}
 	p {
 		font-size: .9em !important;
@@ -735,6 +738,33 @@
 				cursor: pointer;
 				&:hover {
 					text-decoration: underline;
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
+// Admins
+// =========================================/
+
+.page-admin-main {
+	.admin-vert-list {
+		@include flex-container(space-between);
+		.avl-post {
+			padding: 20px !important;
+			width: calc(50% - 10px);
+			margin: 0px 0px 20px;
+			p {
+				margin-bottom: 10px;
+			}
+			p:last-child {
+				margin-bottom: 0px;
+			}
+			div {
+				p {
+					color: $admin-color-primary;
+					font-weight: 600;
 				}
 			}
 		}
@@ -1295,6 +1325,7 @@
 		select {
 			width: 100%;
 			height: 40px;
+			font-size: .9em;
 		}
 	}
 }

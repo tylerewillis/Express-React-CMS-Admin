@@ -1,15 +1,32 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Layout from './_Components/Layout'
-import Call from './_Components/_API/Call'
+import Submit from './_Components/_API/Submit'
 
 const Admins = ({ admins }) => {
 
-	const setStatus = (type, id) => {
+	const setStatus = (element, type, id) => {
 		if (type === 'approve') {
-			Call('/api/admin/admins/approved/' + id)
+			if (window.confirm('Are you sure that you want to approve this admin request?')) {
+				(async () => {
+					await Submit(window.location.pathname + '/approved/' + id)
+				})()
+				element.querySelector('div').remove()
+			}
+		} else if (type === 'deny') {
+			if (window.confirm('Are you sure that you want to deny this admin request?')) {
+				(async () => {
+					await Submit(window.location.pathname + '/denied/' + id)
+				})()
+				element.remove()
+			}
 		} else {
-			Call('/api/admin/admins/removed/' + id)
+			if (window.confirm('Are you sure that you want to remove admin access for this user?')) {
+				(async () => {
+					await Submit(window.location.pathname + '/removed/' + id)
+				})()
+				element.remove()
+			}
 		}
 	}
 
@@ -22,10 +39,10 @@ const Admins = ({ admins }) => {
 					<div>
 						{a.role === 'pending'
 						? <React.Fragment>
-								<p onClick={() => setStatus('approve', a.ID)}>Approve</p>
-								<p onClick={() => setStatus('deny', a.ID)}>Deny</p>
+								<p onClick={(e) => setStatus(e.target.closest('.avl-post'), 'approve', a.ID)}>Approve</p>
+								<p onClick={(e) => setStatus(e.target.closest('.avl-post'), 'deny', a.ID)}>Deny</p>
 							</React.Fragment>
-						: <p onClick={() => setStatus('remove', a.ID)}>Remove Access</p>
+						: <p onClick={(e) => setStatus(e.target.closest('.avl-post'), 'remove', a.ID)}>Remove Access</p>
 						}
 					</div>
 				</div>
