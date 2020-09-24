@@ -133,7 +133,6 @@ const Form = ({ post, content }) => {
 	}
 
 	const handleDetailsChange = (e) => {
-		console.log(e.target.innerHTML)
 		updateState()
 	}
 

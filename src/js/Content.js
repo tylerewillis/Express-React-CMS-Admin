@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Layout from './_Components/Layout'
 import { useCookies } from 'react-cookie'
@@ -23,7 +23,6 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms })
 	const [ loading, setLoading ] = useState(false)
 	const [ name, setName ] = useState(content[0].content)
 	const [ url, setUrl ] = useState(postUrl)
-	const [ needToSave, setNeedToSave ] = useState(false)
 	const [ cookies, setCookie ] = useCookies(['role']) // eslint-disable-line
 	const pathArray = window.location.pathname.split('/')
 	const path = pathArray[pathArray.length - 2]
@@ -45,7 +44,6 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms })
 		})
 		if (e.id === 0) setName(e.content)
 		if (e.id === 1 && e.name === 'URL') setUrl(toUrl(e.content))
-		setNeedToSave(true)
 	}
 
 	const removeSection = (id) => {
@@ -66,23 +64,6 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms })
 			content[prevState.content.length] = section
 			return { ...prevState }
 		})
-	}
-
-	//---------------------------
-	//- Confirm changes before leaving
-	//---------------------------
-
-	useEffect(() => {
-		if (needToSave) {
-			window.addEventListener("beforeunload", browserConfirm)
-		}
-	},[needToSave])
-
-	const browserConfirm = (e) => {
-		e.preventDefault()
-		e.returnValue = ''
-    var confirmationMessage = 'You have unsaved changes. Would you like to leave and cancel your changes?'
-    return confirmationMessage
 	}
 
 	const section = content.map((con, index) => {
@@ -122,7 +103,6 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms })
 
 	const handleSaveClose = () => {
 		setLoading(true);
-		window.removeEventListener('beforeunload', browserConfirm);
 		(async () => {
 			await Submit(window.location.pathname, { content: data.content, pub_date: pubDate })
 			const prevUrl = window.location.pathname.split('/')
@@ -134,7 +114,6 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms })
 
 	const handleSaveCopy = () => {
 		setLoading(true);
-		window.removeEventListener('beforeunload', browserConfirm);
 		(async () => {
 			await Submit(window.location.pathname + '/copy', { type: postType, content: data.content, pub_date: pubDate })
 			const prevUrl = window.location.pathname.split('/')
