@@ -3,40 +3,70 @@
 // =========================================/
 
 .admin-vert-list {
-	.avl-post-header {
-		background-color: #fff;
-    box-shadow: 1px 1px 1px #d3d3d3;
-    border-radius: 5px;
-    padding: 30px;
-    margin: 0px auto 20px auto;
-    div {
-    	@include flex-container(space-between,center);
-    	p, a {
-				font-size: 1.2em;
-				margin: 0px;
-				line-height: 1.3em;
-    	}
-    }
+	.avl-select-header {
+		@include flex-container(space-between,center);
+		padding-bottom: 12px;
+		select {
+			font-size: .8em;
+			padding: 6px;
+		}
+		a {
+
+		}
+	}
+	.avl-search-filter {
+		padding-bottom: 20px;
+		input[type=text] {
+			font-size: .8em;
+			padding: 6px;
+			margin-right: 20px;
+		}
+		label {
+			font-weight: 400;
+			input {
+				margin-left: 5px;
+			}
+		}
 	}
 	.avl-post {
+		padding: 0px;
 		.query {
 			.query-header {
-				margin-bottom: 10px;
+				padding: 30px;
+				@include flex-container(space-between,center);
+				cursor: pointer;
+				p {
+					margin: 0px;
+				}
 			}
 			.query-fields {
-				@include flex-container(flex-start);
+				height: 0px;
+				overflow: hidden;
 				p {
 					font-weight: 600;
-					margin: 0px;
-					padding: 15px 30px;
-					border: 1px solid #d3d3d3;
-					margin-left: -1px;
+					border-bottom: 1px solid #f2f2f2;
+					padding-bottom: 5px;
+					margin-bottom: 8px;
 					span {
 						font-weight: 400;
 						margin-left: 10px;
 					}
 					margin-top: -1px;
 				}
+				.actions {
+					margin-top: 25px;
+					label {
+						font-weight: 400;
+						margin-right: 15px;
+						input {
+							margin-left: 5px;
+						}
+					}
+				}
+			}
+			.query-fields.active {
+				padding: 0px 30px 30px;
+				height: auto;
 			}
 		}
 	}
