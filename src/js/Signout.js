@@ -10,6 +10,7 @@ const SignOut = React.memo(() => {
 		setTimeout(() => {
 			removeCookie('signedIn', { path: '/' })
 			removeCookie('role', { path: '/' })
+			removeCookie('name', { path: '/' })
 			window.location.href = '/'
 		}, 2000) // eslint-disable-next-line
 	},[])

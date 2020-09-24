@@ -60,7 +60,7 @@
 // =========================================/
 
 // White background with gray shadow in admin area
-@mixin admin-white-background($padding: 30px, $margin: 0px auto 20px auto) {
+@mixin admin-white-background($padding: 20px, $margin: 0px auto 20px auto) {
 	background-color: $admin-color-white;
 	box-shadow: 1px 1px 1px $admin-color-bg-medium;
 	border-radius: 5px;

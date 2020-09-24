@@ -7,7 +7,7 @@
 	@include global-width;
 }
 .admin-login-container {
-	@include admin-white-background(0px, 0px auto 0px);
+	@include admin-white-background(0px, 10vh auto);
 	width: 95%;
 	max-width: 700px;
 	display: block;
