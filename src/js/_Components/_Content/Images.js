@@ -82,9 +82,11 @@ const Images = React.memo(({ con, images, handleChange, role, removeSection }) =
 		})
 	}
 
-	const containerToggle = () => {
-		const temp = (toggle === 'block') ? 'none' : 'block'
-		setToggle(temp)
+	const containerToggle = (e) => {
+		if (!e.target.closest('.arrows')) {
+			const temp = (toggle === 'block') ? 'none' : 'block'
+			setToggle(temp)
+		}
 	}
 
 	const reloadContainer = () => {
@@ -94,6 +96,42 @@ const Images = React.memo(({ con, images, handleChange, role, removeSection }) =
 		})()
 	}
 	
+	const moveLeft = async id => {
+		if (id > 0) {
+			// State
+			var array = imagesState.split(',')
+			var temp = array[id]
+			array.splice(id, 1)
+			array.splice(id - 1, 0, temp)
+			setImagesState(array.join(','))
+	  	sendChange(array)
+	  	// Update view
+			var view = imagesView
+			temp = view[id]
+			view.splice(id, 1)
+			view.splice(id - 1, 0, temp)
+			setImagesView(view)
+	  }
+	}
+
+	const moveRight = async id => {
+		if (id < imagesState.split(',').length - 1) {
+			// State
+			var array = imagesState.split(',')
+			var temp = array[id]
+			array.splice(id, 1)
+			array.splice(id + 1, 0, temp)
+			setImagesState(array.join(','))
+	  	sendChange(array)
+	  	// Update view
+			var view = imagesView
+			temp = view[id]
+			view.splice(id, 1)
+			view.splice(id + 1, 0, temp)
+			setImagesView(view)
+	  }
+	}
+
 	return (
 		<div className='ac-block'>
 			<h2>{con.name}</h2>
@@ -101,8 +139,12 @@ const Images = React.memo(({ con, images, handleChange, role, removeSection }) =
 			<div className='acb-images'>
 				<div className='acb-images-current'>
 					{imagesView.map((img, i) => {
-						return <div key={i} name={img} className="acbi-active" style={{backgroundImage: 'url(' + img + ')'}} onClick={containerToggle}>
+						return <div key={i} name={img} className="acbi-active" style={{backgroundImage: 'url(' + img + ')'}} onClick={(e) => containerToggle(e)}>
 							<i className="far fa-times-circle" imgid={i} onClick={e => removeImage(e)}></i>
+							<div className='arrows'>
+								<i class="fas fa-caret-left" onClick={() => moveLeft(i)}></i>
+								<i class="fas fa-caret-right" onClick={() => moveRight(i)}></i>
+							</div>
 							{(img.substr(img.length - 4) === 'docx' || img.substr(img.length - 4) === '.doc' || img.substr(img.length - 4) === '.pdf') &&
 								<p className='media-file-name'>{img.split('/')[img.split('/').length - 1]}</p>
 							}
@@ -124,7 +166,7 @@ const Images = React.memo(({ con, images, handleChange, role, removeSection }) =
 					<div className={'image-container image-container-grid-' + grid}>
 						{availableImages.map((img, i) => {
 							if (!search || (search && (img.toLowerCase().includes(search) || img.replace(/-/g, ' ').toLowerCase().includes(search)))) {
-								return <div key={i} name={img} className='acbic-single' style={{backgroundImage: 'url(' + API_IMAGE_PATH + img + ')'}} onClick={e => addImage(e)}>
+								return <div key={img} name={img} className='acbic-single' style={{backgroundImage: 'url(' + API_IMAGE_PATH + img + ')'}} onClick={e => addImage(e)}>
 									{(img.substr(img.length - 4) === 'docx' || img.substr(img.length - 4) === '.doc' || img.substr(img.length - 4) === '.pdf') &&
 										<div className='media-file-icon'>
 											<img src={API_IMAGE_PATH + 'fileicon.png'} alt={'file icon for documents'} />

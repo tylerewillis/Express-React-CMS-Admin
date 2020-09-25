@@ -46,21 +46,24 @@ const Text = React.memo(({ con, handleChange, removeSection }) => {
 	}
 
 	const modules = {
-    toolbar: [
-      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-      ['bold', 'italic', 'underline','strike', 'blockquote'],
-      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-      [{ 'script': 'sub' }, { 'script': 'super' }],
-      [{ 'align': [] }],
-      ['link'],
-      ['clean']
-    ]
+    toolbar: {
+    	container: [
+	      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+	      ['bold', 'italic', 'underline','strike', 'blockquote'],
+	      [{ 'color': []}, { 'background': []}],
+	      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+	      [{ 'script': 'sub' }, { 'script': 'super' }],
+	      [{ 'align': [] }],
+	      ['link'],
+	      ['clean']
+	    ]
+	  }
   }
  
   const formats = [
     'header',
     'bold', 'italic', 'underline', 'strike', 'blockquote',
-    'list', 'bullet', 'indent',
+    'list', 'bullet', 'indent', 'color', 'background',
     'script',
     'align',
     'link'

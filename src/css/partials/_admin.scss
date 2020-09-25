@@ -336,6 +336,7 @@
 		    	background: none;
 		    	color: #333;
 		    	border-right: 1px solid #d3d3d3;
+		    	padding: 10px;
 		    	textarea {
 		    		padding: 10px;
 		    		width: 100%;
@@ -570,6 +571,30 @@
 		vertical-align: sub;
 		font-size: .7em;
 		line-height: 1em;
+	}
+}
+
+.quill {
+	.ql-toolbar {
+		.ql-color {
+			.ql-picker-options {
+				[data-value=custom-color] {
+					background: none;
+					width: 100%;
+					font-size: .7em;
+					line-height: 1em;
+					margin: 2px 0px -3px 0px;
+					font-style: italic;
+					color: #a9a9a9;
+					&:before {
+						content: 'Custom'
+					}
+					&:hover {
+						border-color: transparent;
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -907,6 +932,9 @@
 .acb-image,
 .acb-images {
 	position: relative;
+	.acb-images-current {
+		@include flex-container;
+	}
 	.acbi-active {
 		height: 250px;
 		width: 250px;
@@ -917,9 +945,13 @@
 		border-radius: 5px;
 		border: 2px solid #f2f2f2;
 		position: relative;
+		@include flex-container(center,center);
 		&:hover {
 			cursor: pointer;
 			border: 2px solid gray;
+			.arrows {
+				opacity: 1;
+			}
 		}
 		i {
 			position: absolute;
@@ -927,8 +959,24 @@
 			right: 0;
 			color: $admin-color-primary;
 			cursor: pointer;
+			z-index: 1;
 			&:hover {
 				color: $admin-color-secondary;
+			}
+		}
+		.arrows {
+			opacity: 0;
+			@include transition(.5s);
+			i {
+				position: unset !important;
+				font-size: 3em;
+				margin: 0px 5px;
+				color: $color-white !important;
+				text-shadow: 0px 0px 10px $color-black;
+				@include transition;
+				&:hover {
+					color: $admin-color-primary !important;
+				}
 			}
 		}
 	}
@@ -1034,7 +1082,6 @@
 		.acbi-active {
 			height: 150px;
 			width: 24%;
-			display: inline-block;
 			margin: 5px .5%;
 			position: relative;
 			i {
@@ -1421,7 +1468,9 @@
 	.blocks-toggle {
 		cursor: pointer;
 		margin: 20px 0px;
-		color: $admin-color-primary;
+		color: $admin-color-primary !important;
+		font-style: unset !important;
+		font-weight: 600 !important;
 		svg {
 			width: 13px;
 			margin: 0px 0px -2px 15px;
