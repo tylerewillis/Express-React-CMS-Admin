@@ -30,7 +30,7 @@ const Admin = React.memo((props) => {
 
 	if (page) {
 		if (!cookies.signedIn) {
-			if (window.location.pathname !== '/signin') {
+			if (window.location.pathname !== '/signin' && window.location.pathname.substring(0,15) !== '/password-reset') {
 				window.location.replace('/signin')
 			} else {
 				return (

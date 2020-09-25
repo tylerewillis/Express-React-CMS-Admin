@@ -1,6 +1,7 @@
 import Admin from '../Admin'
 import Signin from '../Signin'
 import Signout from '../Signout'
+import ResetPassword from '../Reset-Password'
 import List from '../List'
 import Content from '../Content'
 import New from '../New'
@@ -61,6 +62,14 @@ export default [
   {
     path: "/config",
     component: Config
+  },
+  {
+    path: "/password-reset",
+    component: ResetPassword
+  },
+  {
+    path: "/password-reset/:code/:email",
+    component: ResetPassword
   },
   {
     path: "/:id",

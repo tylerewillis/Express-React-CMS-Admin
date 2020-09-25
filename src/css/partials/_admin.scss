@@ -950,9 +950,27 @@
 				margin: 5px 0px;
 				border: 2px solid #f2f2f2;
 				position: relative;
+				@include mq(l) {
+					width: 33%;
+				}
+				@include mq(m) {
+					width: 49%;
+				}
+				@include mq(s) {
+					width: 100%;
+				}
 				&:hover {
 					cursor: pointer;
 					border: 2px solid gray;
+				}
+			}
+		}
+		.image-container-grid-large {
+			.acbic-single {
+				width: calc(50% - 10px);
+				height: 300px;
+				@include mq(m) {
+					width: 100%;
 				}
 			}
 		}

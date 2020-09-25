@@ -12,6 +12,7 @@ const Media = ({ images, url }) => {
 	const [ availableImages, setAvailableImages ] = useState(images)
 	const [ loading, setLoading ] = useState(false)
 	const [ search, setSearch ] = useState(false)
+	const [ grid, setGrid ] = useState('small')
 
 	const copyImage = (img, pdf = false) => {
 		const input = document.createElement('textarea')
@@ -58,8 +59,12 @@ const Media = ({ images, url }) => {
 			<Dropzone reloadContainer={reloadContainer} />
 			<div className='image-search'>
 				<input value={(search) ? search : ''} placeholder='Search' onChange={(e) => setSearch(e.target.value.toLowerCase())} />
+				<div className='actions'>
+					<i className={(grid === 'small') ? 'fas fa-th active' : 'fas fa-th'} onClick={() => setGrid('small')}></i>
+					<i className={(grid === 'large') ? 'fas fa-th-large active' : 'fas fa-th-large'} onClick={() => setGrid('large')}></i>
+				</div>
 			</div>
-			<div className='image-container'>
+			<div className={'image-container image-container-grid-' + grid}>
 				{availableImages.map((img, i) => {
 					if (!search || (search && (img.toLowerCase().includes(search) || img.replace(/-/g, ' ').toLowerCase().includes(search)))) {
 						return <div key={i} name={img} className='acbic-single' style={{backgroundImage: 'url(' + API_IMAGE_PATH + img + ')'}}>

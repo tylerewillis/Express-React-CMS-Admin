@@ -153,7 +153,7 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms })
 			</div>
 			<form>
 				{section}
-				<New content={content} addSection={addSection} />
+				{cookies.role === 'super' && <New content={content} addSection={addSection} />}
 				<div className='buttons-bottom'>
 					<div>
 						<p>Publish:

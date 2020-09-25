@@ -43,7 +43,7 @@ const SignIn = () => {
 			<Input type='password' name='Password' inputName='password' required={true} updateValue={(e) => setPassword(e.target.value)} />
 			<div className='buttons'>
 				<input type='submit' value='Sign In' />
-				<a href='/forgot-password'>Forgot Password</a>
+				<a href='/password-reset'>Forgot Password</a>
 			</div>
 		</form>
 	)
