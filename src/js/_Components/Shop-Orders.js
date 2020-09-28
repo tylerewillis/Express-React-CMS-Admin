@@ -5,6 +5,7 @@ import Loading from './Loading'
 export default React.memo(({ orders }) => {
 
 	const [ loading, setLoading ] = useState(false)
+	const [ completed, setCompleted ] = useState(false)
 
 	const toggleShow = (e) => {
 		e.target.closest('.order').classList.toggle('active')
@@ -35,11 +36,33 @@ export default React.memo(({ orders }) => {
 		},1000)
 	}
 
+	const showCompleted = e => {
+		var temp = !completed
+		setCompleted(temp)
+	}
+
+	const deleteOrder = (element, id) => {
+		if (window.confirm('Are you sure that you want to delete this order? This cannot be undone.')) {
+			(async () => {
+				await Submit(window.location.pathname + '/delete/' + id)
+			})()
+			element.closest('.order').remove()
+		}
+	}
+
 	return (
 		<div className='orders'>
+			<div className='actions'>
+				<div>
+					<label>Show Completed
+						<input type='checkbox' onChange={(e) => showCompleted(e.target.value)} />
+					</label>
+					<p>Export</p>
+				</div>
+			</div>
 			{orders.map((order, i) => {
 				return (
-					<div className='order' key={i} onClick={(e) => toggleShow(e)}>
+					<div className='order' key={i} onClick={(e) => toggleShow(e)} style={{display: (order.data[13].status !== 'complete' || completed) ? 'block' : 'none'}}>
 						<div className='top'>
 							<div className='details'>
 								<p>#{order.id}</p>
@@ -60,6 +83,9 @@ export default React.memo(({ orders }) => {
 								<p>City: <span>{order.data[8].value}</span></p>
 								<p>State: <span>{order.data[9].value}</span></p>
 								<p>Country: <span>{order.data[10].value}</span></p>
+								<label>Delete order
+									<input type='checkbox' onChange={(e) => deleteOrder(e.target, order.id)} />
+								</label>
 							</div>
 							<div className='product'>
 								{order.data[12] && order.data[12].items && order.data[12].items.map((item, j) => {

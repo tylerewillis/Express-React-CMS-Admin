@@ -1,8 +1,86 @@
 // =========================================/
+// Shop - Settings
+// =========================================/
+
+.page-admin {
+	.page-admin-main {
+		.page-admin-shop {
+			.block {
+				@include flex-container;
+				padding: 20px;
+				margin-bottom: 25px;
+				.section {
+					width: 100%;
+					p {
+						font-size: .8em;
+						font-style: italic;
+						color: #a9a9a9;
+						line-height: 1.5em;
+						margin-bottom: 1em;
+					}
+					.atbs-editor {
+						.ql-editor {
+							p:last-child {
+								margin-bottom: 1em;
+							}
+						}
+					}
+				}
+				h1 {
+					width: 100%;
+				}
+				h3 {
+					width: 100%;
+					margin-bottom: 15px;
+				}
+				.section-multiple {
+					width: 49%;
+				}
+				p:last-child {
+					margin-bottom: 0px;
+				}
+				.tabs {
+					@include flex-container(flex-start);
+					p {
+						margin-right: 15px;
+					}
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
 // Shop - Orders
 // =========================================/
 
 .orders {
+	.actions {
+		@include flex-container(flex-end,center);
+		padding: 20px;
+		div {
+			@include flex-container;
+			label {
+				font-family: $admin-body-font;
+				font-size: .8em;
+				font-weight: 500;
+				line-height: 1em;
+				cursor: pointer;
+				input {
+					margin-left: 8px;
+				}
+			}
+			p {
+				line-height: 1.3em;
+				font-size: .82em;
+				margin: 0px 0px 0px 15px;
+				cursor: pointer;
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
 	.order {
 		background-color: #fff;
 		border-bottom: 1px solid #d3d3d3;
@@ -59,6 +137,13 @@
 			}
 			.person {
 				width: 49%;
+				label {
+					font-weight: 400;
+					cursor: pointer;
+					input {
+						margin-left: 8px;
+					}
+				}
 			}
 			.product {
 				width: 49%;
