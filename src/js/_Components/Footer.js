@@ -1,6 +1,6 @@
 import React from 'react';
-import { API_IMAGE_PATH } from './_Config'
 import { useCookies } from 'react-cookie'
+import Img from '../../img/ma_vertical_logo_blue_peach.png'
 
 const Footer = React.memo(({ page }) => {
 
@@ -8,7 +8,7 @@ const Footer = React.memo(({ page }) => {
 
   return (
     <div className='admin-footer'>
-			<img src={API_IMAGE_PATH + 'ma-vertical-logo-blue-peach.png'} alt='Mullin/Ashley logo' />
+			<img src={Img} alt='Mullin/Ashley logo' />
 		</div>
   )
 })
