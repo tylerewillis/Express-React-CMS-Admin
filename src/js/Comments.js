@@ -14,7 +14,7 @@ const Comments = React.memo(({ posts, comments, adminName }) => {
 	}
 
 	return (
-		<div className='admin-vert-list'>
+		<div className='admin-vert-list comments-list'>
 			<div className='avl-tabs'>
 				<p className={(active === 'comments') ? 'avct-active' : ''} onClick={() => toggle('comments')}>Comments</p>
 				<p className={(active === 'replyComment') ? 'avct-active' : ''} onClick={() => toggle('replyComment')}>Reply</p>
