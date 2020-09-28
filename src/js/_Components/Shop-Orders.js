@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Submit from './_API/Submit'
 import Loading from './Loading'
+import { API_PATH } from './_Config'
 
 export default React.memo(({ orders }) => {
 
@@ -57,7 +58,7 @@ export default React.memo(({ orders }) => {
 					<label>Show Completed
 						<input type='checkbox' onChange={(e) => showCompleted(e.target.value)} />
 					</label>
-					<p>Export</p>
+					<a href={API_PATH + '/shop/export/'} target='_blank' rel="noopener noreferrer">Export</a>
 				</div>
 			</div>
 			{orders.map((order, i) => {
