@@ -154,6 +154,7 @@ const PlainText = React.memo(({ content, addSection }) => {
 					<option value=''>Select Type</option>
 					<option value='text'>Text</option>
 					<option value='plain-text'>Plain Text</option>
+					<option value='list'>Text List</option>
 					<option value='image'>Image</option>
 					<option value='images'>Multiple Images</option>
 					<option value='select'>Select</option>
@@ -191,6 +192,7 @@ const PlainText = React.memo(({ content, addSection }) => {
 						<div className='list-options'>
 							<p onClick={() => addToList('plain-text')}>Plain Text</p>
 							<p onClick={() => addToList('text')}>Text</p>
+							<p onClick={() => addToList('list')}>Text List</p>
 							<p onClick={() => addToList('image')}>Image</p>
 							<p onClick={() => addToList('images')}>Multiple Images</p>
 							<p onClick={() => addToList('select')}>Select</p>

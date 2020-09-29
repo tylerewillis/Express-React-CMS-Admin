@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Text from './_Blocks/Text'
 import PlainText from './_Blocks/PlainText'
+import List from './_Blocks/List'
 import Dates from './_Blocks/Dates'
 import Image from './_Blocks/Image'
 import Images from './_Blocks/Images'
@@ -107,6 +108,8 @@ const Blocks = React.memo(({ con, images, forms, handleChange, removeSection }) 
 											return <Text key={index} p={i} i={index} con={item} updateValue={updateValue} />
 										case 'plain-text':
 											return <PlainText key={index} p={i} i={index} con={item} updateValue={updateValue} />
+										case 'list':
+											return <List key={index} p={i} i={index} con={item} updateValue={updateValue} />
 										case 'select':
 											return <Select key={index} p={i} i={index} con={item} updateValue={updateValue} />
 										case 'color':

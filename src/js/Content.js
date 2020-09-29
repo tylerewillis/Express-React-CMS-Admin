@@ -6,6 +6,7 @@ import Loading from './_Components/Loading'
 
 import Text from './_Components/_Content/Text'
 import PlainText from './_Components/_Content/PlainText'
+import List from './_Components/_Content/List'
 import Dates from './_Components/_Content/Dates'
 import Image from './_Components/_Content/Image'
 import Images from './_Components/_Content/Images'
@@ -72,6 +73,8 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms })
 				return <Text key={index} con={con} handleChange={handleChange} removeSection={removeSection} />
 			case 'plain-text':
 				return <PlainText key={index} con={con} handleChange={handleChange} removeSection={removeSection} />
+			case 'list':
+				return <List key={index} con={con} handleChange={handleChange} removeSection={removeSection} />
 			case 'dates':
 				return <Dates key={index} con={con} handleChange={handleChange} removeSection={removeSection} />
 			case 'image':
