@@ -1,0 +1,289 @@
+// =========================================/
+// File Sharing -> Settings
+// =========================================/
+
+.admin-file-sharing {
+	.settings-header {
+		@include flex-container(space-between,center);
+		padding-bottom: 15px;
+		background-color: $color-white;
+		padding: 20px;
+		box-shadow: 1px 1px 1px #d3d3d3;
+		cursor: pointer;
+		&:hover {
+			background-color: #f2f2f2;
+			p {
+				text-decoration: underline;
+			}
+		}
+		p {
+			margin: 0px;
+		}
+		svg {
+			width: 15px;
+		}
+	}
+	.settings {
+		display: none;
+		background-color: $color-white;
+		box-shadow: 1px 1px 1px #d3d3d3;
+		border-radius: 0px 0px 5px;
+		padding: 0px 20px 20px;
+		margin: 0px;
+		.section:first-child {
+			border-top: 1px solid #f2f2f2;
+		}
+		.section {
+			@include flex-container(flex-start,center);
+			border-bottom: 1px solid #f2f2f2;
+			padding-bottom: 15px;
+			padding-top: 15px;
+			h2 {
+				font-size: 1.2em;
+				font-weight: 500;
+				margin-right: 20px;
+			}
+			select {
+				font-size: .9em;
+				padding: 5px;
+				width: 200px;
+			}
+			.level {
+				width: 100%;
+				@include flex-container(space-between,center);
+				margin-top: 10px;
+				label {
+					width: calc(49% - 15px);
+					margin: 10px 0px 0px;
+					font-weight: 500;
+					font-size: 1em;
+					color: #a9a9a9;
+					input {
+						margin-top: 5px;
+						display: block;
+						width: 100%;
+						padding: 5px;
+						font-size: .9em;
+					}
+				}
+				svg {
+					width: 10px;
+					margin-left: 20px;
+					margin-top: 20px;
+					cursor: pointer;
+				}
+				svg.no-hover {
+					cursor: default;
+				}
+			}
+			p.add-level {
+				font-size: .8em;
+				color: $admin-color-secondary;
+				cursor: pointer;
+				margin: 5px 0px 0px;
+				margin-top: 20px;
+				svg {
+					width: 12px;
+					fill: #a9a9a9;
+					margin: 0px 3px -2px 0px;
+				}
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+		p.save-settings {
+			margin-top: 20px;
+			cursor: pointer;
+			margin-bottom: 0px;
+			font-size: .8em;
+			background-color: $admin-color-primary;
+			color: $color-white;
+			display: inline-block;
+			padding: 4px 10px;
+			border-radius: 3px;
+			@include transition;
+			&:hover {
+				background-color: darken($admin-color-primary,10%);
+			}
+		}
+	}
+}
+
+// =========================================/
+// File Sharing -> Search
+// =========================================/
+
+.admin-file-sharing {
+	.file-search {
+		padding: 25px 0px;
+		.container {
+			@include flex-container(space-between,flex-start);
+			input {
+				padding: 8px;
+				font-size: .85em;
+				width: 300px;
+				max-width: calc(100% - 150px);
+			}
+			p.add-new-button {
+				background-color: $color-primary;
+				margin: 0px;
+				color: $color-white;
+				padding: 8px 20px;
+				border-radius: 3px;
+				font-size: .8em;
+				@include flex-container(space-between,center);
+				cursor: pointer;
+				@include transition;
+				span {
+					text-transform: uppercase;
+				}
+				svg {
+					width: 12px;
+					fill: $color-white;
+					margin-right: 8px;
+				}
+				&:hover {
+					background-color: darken($color-primary, 10%);
+				}
+			}
+		}
+	}
+	.top.blur {
+		filter: blur(3px);
+	}
+}
+
+// =========================================/
+// File Sharing -> Files
+// =========================================/
+
+.admin-file-sharing {
+	background-color: #f9f9f9;
+	.files {
+		.container {
+			background-color: $color-white;
+			border-radius: 3px;
+			.file {
+				@include flex-container(flex-start,center);
+				padding: 20px 30px;
+				@include mq(m) {
+					padding: 10px;
+					border-bottom: 1px solid #f2f2f2;
+				}
+				p {
+					font-size: .85em;
+					width: 125px;
+					text-align: center;
+					margin: 0px;
+					a {
+						display: block;
+					}
+				}
+				p:nth-child(1) {
+					width: calc(100% - 750px);
+					text-align: left;
+					@include mq(l) {
+						width: calc(100% - 300px);
+					}
+					@include mq(m) {
+						width: calc(100% - 190px);
+					}
+				}
+				p:nth-child(2), p:nth-child(3) {
+					width: 150px;
+				}
+				p:nth-child(6), p:nth-child(7) {
+					width: 100px;
+				}
+				&:hover {
+					box-shadow: 0px 0px 1px inset;
+				}
+			}
+			.file.label {
+				border-bottom: 1px solid #f2f2f2;
+				box-shadow: none !important;
+				display: flex;
+				p {
+					font-weight: 600;
+				}
+			}
+			.file.active {
+				display: flex;
+			}
+			.file:last-child {
+				@include mq(m) {
+					border-bottom: 0px;
+				}
+			}
+			p.no-files {
+				text-align: center;
+			}
+		}
+	}
+	.files.blur {
+		filter: blur(3px);
+	}
+}
+
+// =========================================/
+// File Sharing -> Add New
+// =========================================/
+
+.admin-file-sharing {
+	.add-new {
+		visibility: hidden;
+		opacity: 0;
+		@include overlay;
+		background-color: rgba($color-primary,.9);
+		@include flex-container(center,center);
+		@include transition(0.5s);
+		form {
+			background-color: $color-white;
+			padding: 30px;
+			@include global-width(500px);
+			border-radius: 3px;
+		}
+		svg {
+			position: absolute;
+			top: 0;
+			right: 0;
+			margin: 20px;
+			width: 20px;
+			fill: $color-white;
+			cursor: pointer;
+		}
+		form {
+			label {
+				width: 100%;
+				input, select {
+					margin-top: 5px;
+					display: block;
+					width: 100%;
+					padding: 5px;
+					margin-bottom: 8px;
+				}
+			}
+			.acbic-new .text {
+				font-size: .8em;
+			}
+			input[type=submit] {
+				background-color: $admin-color-secondary;
+				color: $color-white;
+				font-size: .8em;
+				padding: 7px 20px;
+				border-radius: 3px;
+				margin-top: 5px;
+				margin-bottom: 0px;
+				border: 0px;
+				&:hover {
+					background-color: darken($admin-color-secondary,10%);
+				}
+			}
+		}
+	}
+	.add-new.active {
+		visibility: visible;
+		opacity: 1;
+	}
+}

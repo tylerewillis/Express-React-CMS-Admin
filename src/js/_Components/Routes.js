@@ -16,6 +16,7 @@ import Form from '../Form'
 import Shop from '../Shop'
 import Config from '../Config'
 import RedirectToMainSite from '../Redirect-to-Site'
+import FileSharing from '../File-Sharing'
 
 export default [
   {
@@ -58,6 +59,10 @@ export default [
   {
     path: "/shop",
     component: Shop
+  },
+  {
+    path: "/file-share",
+    component: FileSharing
   },
   {
     path: "/config",
