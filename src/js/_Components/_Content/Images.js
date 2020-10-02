@@ -3,9 +3,11 @@ import PropTypes from 'prop-types'
 import Dropzone from './Dropzone'
 import { API_IMAGE_PATH } from '../_Config'
 import Call from '../_API/Call'
+import { useCookies } from 'react-cookie'
 
-const Images = React.memo(({ con, images, handleChange, role, removeSection }) => {
+const Images = React.memo(({ con, images, handleChange, role, removeSection, blocksOpen, openBlocks }) => {
 
+	const [ cookies ] = useCookies(['role'])
 	const [ imagesState, setImagesState ] = useState(con.content)
 	const [ imagesView, setImagesView ] = useState([])
 	const [ toggle, setToggle ] = useState('none')
@@ -133,8 +135,8 @@ const Images = React.memo(({ con, images, handleChange, role, removeSection }) =
 	}
 
 	return (
-		<div className='ac-block'>
-			<h2>{con.name}</h2>
+		<div className={(blocksOpen) ? 'ac-block active' : 'ac-block'} onClick={(e) => openBlocks(e)}>
+			<h2><span>{con.id + 1}.</span> {con.name}</h2>
 			<p className='acb-description'>{con.description}</p>
 			<div className='acb-images'>
 				<div className='acb-images-current'>
@@ -179,7 +181,7 @@ const Images = React.memo(({ con, images, handleChange, role, removeSection }) =
 					</div>
 				</div>
 			</div>
-			<i className="fas fa-times" onClick={() => removeSection(con.id)}/>
+			{cookies.role === 'super' && con.id !== 0 && <i className="fas fa-times" onClick={() => removeSection(con.id)}/>}
 		</div>
 	)
 })

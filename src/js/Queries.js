@@ -61,20 +61,22 @@ const Queries = React.memo(({ types, queries }) => {
 
 	return (
 		<div className='admin-vert-list'>
-			<div className='avl-select-header'>
-				<select onChange={(e) => toggle(e)}>
-					<option value='all'>All Queries</option>
-					{types.map((t,i) => {
-						return <option key={i} value={t}>{t.charAt(0).toUpperCase() + t.substr(1)}</option>
-					})}
-				</select>
-				<a href={API_PATH + '/queries/export/' + active} target='_blank' rel="noopener noreferrer" style={{display: (active === 'all') ? 'none' : 'block'}}>Export</a>
-			</div>
-			<div className='avl-search-filter'>
-				<input type='text' placeholder='Search' onChange={(e) => searchQueries(e)}/>
-				<label>Show Archived
-					<input type='checkbox' onChange={(e) => showArchived(e)} />
-				</label>
+			<div className='avl-top'>
+				<div className='avl-select-header'>
+					<select onChange={(e) => toggle(e)}>
+						<option value='all'>All Queries</option>
+						{types.map((t,i) => {
+							return <option key={i} value={t}>{t.charAt(0).toUpperCase() + t.substr(1)}</option>
+						})}
+					</select>
+					<a href={API_PATH + '/queries/export/' + active} target='_blank' rel="noopener noreferrer" style={{display: (active === 'all') ? 'none' : 'block'}}>Export</a>
+				</div>
+				<div className='avl-search-filter'>
+					<input type='text' placeholder='Search' onChange={(e) => searchQueries(e)}/>
+					<label>Show Archived
+						<input type='checkbox' onChange={(e) => showArchived(e)} />
+					</label>
+				</div>
 			</div>
 			{queries.map((q,i) => {
 				return <div className={(q.status !== 'archived' || archived) && (active === 'all' || active === q.type) && (!search || JSON.stringify(q.data).toLowerCase().includes(search)) ? 'avl-post avlp-active' : 'avl-post'} key={i} id={i} >

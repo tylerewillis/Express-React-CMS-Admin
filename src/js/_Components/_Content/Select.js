@@ -1,6 +1,9 @@
 import React from 'react'
+import { useCookies } from 'react-cookie'
 
-const Select = React.memo(({ con, handleChange, removeSection }) => {
+const Select = React.memo(({ con, handleChange, removeSection, blocksOpen, openBlocks }) => {
+
+	const [ cookies ] = useCookies(['role'])
 
 	const sendChange = (e) => {
 		handleChange({
@@ -13,8 +16,8 @@ const Select = React.memo(({ con, handleChange, removeSection }) => {
 	}
 
 	return (
-		<div className='ac-block'>
-			<h2>{con.name}</h2>
+		<div className={(blocksOpen) ? 'ac-block active' : 'ac-block'} onClick={(e) => openBlocks(e)}>
+			<h2><span>{con.id + 1}.</span> {con.name}</h2>
 			<p className='acb-description'>{con.description}</p>
 			<div className='acb-select'>
 				<select onBlur={sendChange} defaultValue={con.content}>
@@ -24,7 +27,7 @@ const Select = React.memo(({ con, handleChange, removeSection }) => {
 					})}
 				</select>
 			</div>
-			<i className="fas fa-times" onClick={() => removeSection(con.id)}/>
+			{cookies.role === 'super' && con.id !== 0 && <i className="fas fa-times" onClick={() => removeSection(con.id)}/>}
 		</div>
 	)
 })

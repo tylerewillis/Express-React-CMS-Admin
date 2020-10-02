@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useCookies } from 'react-cookie'
+
 import Text from './_Blocks/Text'
 import PlainText from './_Blocks/PlainText'
 import List from './_Blocks/List'
@@ -10,8 +12,9 @@ import Select from './_Blocks/Select'
 import Color from './_Blocks/Color'
 import Forms from './_Blocks/Forms'
 
-const Blocks = React.memo(({ con, images, forms, handleChange, removeSection }) => {
+const Blocks = React.memo(({ con, images, forms, handleChange, removeSection, blocksOpen, openBlocks }) => {
 
+	const [ cookies ] = useCookies(['role'])
 	const [ data, setData ] = useState(con.content)
 	const [ display, setDisplay ] = useState(false)
 
@@ -83,8 +86,8 @@ const Blocks = React.memo(({ con, images, forms, handleChange, removeSection }) 
 	}
 
 	return (
-		<div className='ac-block ac-block-blocks'>
-			<h2>{con.name}</h2>
+		<div className={(blocksOpen) ? 'ac-block ac-block-blocks active' : 'ac-block ac-block-blocks'} onClick={(e) => openBlocks(e)}>
+			<h2><span>{con.id + 1}.</span> {con.name}</h2>
 			<p className='acb-description'>{con.description}</p>
 			<p className='blocks-toggle' onClick={() => setDisplay(!display)}>{(display) ? 'Hide List' : 'Show List'}
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M441.9 167.3l-19.8-19.8c-4.7-4.7-12.3-4.7-17 0L224 328.2 42.9 147.5c-4.7-4.7-12.3-4.7-17 0L6.1 167.3c-4.7 4.7-4.7 12.3 0 17l209.4 209.4c4.7 4.7 12.3 4.7 17 0l209.4-209.4c4.7-4.7 4.7-12.3 0-17z"/></svg>
@@ -134,7 +137,7 @@ const Blocks = React.memo(({ con, images, forms, handleChange, removeSection }) 
 				})}
 			</div>
 			<p className='add' onClick={addSection} style={{'display': (display) ? 'block' : 'none'}}><i className="fas fa-plus"></i>Add New</p>
-			{(con.id !== 0) && <i className="fas fa-times" onClick={() => removeSection(con.id)}/>}
+			{cookies.role === 'super' && con.id !== 0 && <i className="fas fa-times" onClick={() => removeSection(con.id)}/>}
 		</div>
 	)
 })

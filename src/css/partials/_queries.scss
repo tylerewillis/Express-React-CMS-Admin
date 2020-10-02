@@ -3,36 +3,43 @@
 // =========================================/
 
 .admin-vert-list {
-	.avl-select-header {
+	.avl-top {
 		@include flex-container(space-between,center);
-		padding-bottom: 12px;
-		select {
-			font-size: .8em;
-			padding: 6px;
-		}
-		a {
+		width: 100%;
+		.avl-select-header {
+			@include flex-container(space-between,center);
+			padding-bottom: 12px;
+			select {
+				font-size: .9em;
+				padding: 8px;
+				width: 500px;
+			}
+			a {
 
+			}
 		}
-	}
-	.avl-search-filter {
-		padding-bottom: 20px;
-		input[type=text] {
-			font-size: .8em;
-			padding: 6px;
-			margin-right: 20px;
-		}
-		label {
-			font-weight: 400;
-			input {
-				margin-left: 5px;
+		.avl-search-filter {
+			padding-bottom: 20px;
+			input[type=text] {
+				font-size: .8em;
+				padding: 6px;
+				margin-right: 20px;
+			}
+			label {
+				font-weight: 400;
+				input {
+					margin-left: 5px;
+				}
 			}
 		}
 	}
 	.avl-post {
 		padding: 0px;
 		.query {
+			p {
+				color: $admin-color-black !important;
+			}
 			.query-header {
-				padding: 30px;
 				@include flex-container(space-between,center);
 				cursor: pointer;
 				p {
@@ -65,8 +72,8 @@
 				}
 			}
 			.query-fields.active {
-				padding: 0px 30px 30px;
 				height: auto;
+				padding-top: 20px;
 			}
 		}
 	}

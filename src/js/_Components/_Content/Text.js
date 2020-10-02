@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import Shortcodes from './_Text/Shortcodes'
+import { useCookies } from 'react-cookie'
 
-const Text = React.memo(({ con, handleChange, removeSection }) => {
+const Text = React.memo(({ con, handleChange, removeSection, blocksOpen, openBlocks }) => {
+
+	const [ cookies ] = useCookies(['role'])
 
 	const section = React.createRef()
 	const editor = React.createRef()
@@ -70,21 +72,16 @@ const Text = React.memo(({ con, handleChange, removeSection }) => {
   ]
 
 	return (
-		<div className='ac-block' ref={section}>
-			<h2>{con.name}</h2>
+		<div className={(blocksOpen) ? 'ac-block active' : 'ac-block'} ref={section} onClick={(e) => openBlocks(e)}>
+			<h2><span>{con.id + 1}.</span> {con.name}</h2>
 			<p className='acb-description'>{con.description}</p>
 			<div className='atbs-editor' ref={editor} onBlur={sendChange}>
 				<ReactQuill defaultValue={con.content} modules={modules} formats={formats} />
 			</div>
 			<Shortcodes />
-			<i className="fas fa-times" onClick={() => removeSection(con.id)}/>
+			{cookies.role === 'super' && con.id !== 0 && <i className="fas fa-times" onClick={() => removeSection(con.id)}/>}
 		</div>
 	)
 })
-
-Text.propTypes = {
-	con: PropTypes.array,
-	handleChange: PropTypes.func
-}
 
 export default Text

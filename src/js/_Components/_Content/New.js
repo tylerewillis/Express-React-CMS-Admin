@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-const PlainText = React.memo(({ content, addSection }) => {
+const PlainText = React.memo(({ content, addSection, blocksOpen, openBlocks }) => {
 
 	const [ title, setTitle ] = useState('')
 	const [ desc, setDesc ] = useState('')
@@ -144,7 +144,7 @@ const PlainText = React.memo(({ content, addSection }) => {
 	}
 
 	return (
-		<div className='ac-block'>
+		<div className={(blocksOpen) ? 'ac-block active' : 'ac-block'} onClick={(e) => openBlocks(e)}>
 			<h2>Add New Section</h2>
 			<p className='acb-description'>Add a new section to the page.</p>
 			<div className='acb-new-section'>

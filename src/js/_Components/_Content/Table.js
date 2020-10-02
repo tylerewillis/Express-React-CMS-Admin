@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
+import { useCookies } from 'react-cookie'
 
-const Table = React.memo(({ con, handleChange, removeSection }) => {
+const Table = React.memo(({ con, handleChange, removeSection, blocksOpen, openBlocks }) => {
+
+	const [ cookies ] = useCookies(['role'])
 
 	const [ newWidth, setNewWidth ] = useState('0')
 	const [ newHeight, setNewHeight ] = useState('0')
@@ -116,8 +118,8 @@ const Table = React.memo(({ con, handleChange, removeSection }) => {
 	},[cursorPosition]) // eslint-disable-line
 
 	return (
-		<div className='ac-block'>
-			<h2>{con.name}</h2>
+		<div className={(blocksOpen) ? 'ac-block active' : 'ac-block'} onClick={(e) => openBlocks(e)}>
+			<h2><span>{con.id + 1}.</span> {con.name}</h2>
 			<p className='acb-description'>{con.description}</p>
 			<table dangerouslySetInnerHTML={{__html: value}} ref={tableRef} className={`table-${con.id}`} />
 			<i className="fas fa-times" onClick={() => removeSection(con.id)}/>
@@ -127,14 +129,10 @@ const Table = React.memo(({ con, handleChange, removeSection }) => {
 				<input type='text' value={newHeight} placeholder='Height' onChange={(e) => setNewHeight(e.target.value)} />
 				<p onClick={resizeTable}>Resize Table</p>
 			</div>
+			{cookies.role === 'super' && con.id !== 0 && <i className="fas fa-times" onClick={() => removeSection(con.id)}/>}
 		</div>
 	)
 })
-
-Table.propTypes = {
-	con: PropTypes.object,
-	handleChange: PropTypes.func
-}
 
 export default Table
 

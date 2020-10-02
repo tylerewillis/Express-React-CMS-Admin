@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Layout from './_Components/Layout'
 import { useCookies } from 'react-cookie'
@@ -28,6 +28,7 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms })
 	const pathArray = window.location.pathname.split('/')
 	const path = pathArray[pathArray.length - 2]
 	const [ pubDate, setPubDate ] = useState(post.pub_date)
+	const [ blocksOpen, setBlocksOpen ] = useState(false)
 
 	const toUrl = string => {
 	  var clean = string.replace(/[^a-zA-Z0-9- ]/g, '')
@@ -67,30 +68,44 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms })
 		})
 	}
 
+	const openBlocks = (e = false) => {
+		if (e) {
+			let element = (e.target.closest('.ac-block')) ? e.target.closest('.ac-block') : e.target
+			if (!element.classList.contains('active')) {
+				setLoading(true)
+				setBlocksOpen(true)
+				setTimeout(() => {
+					setLoading(false)
+					element.scrollIntoView()
+				},250)
+			}
+		}
+	}
+
 	const section = content.map((con, index) => {
 		switch(con.type) {
 			case 'text':
-				return <Text key={index} con={con} handleChange={handleChange} removeSection={removeSection} />
+				return <Text key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			case 'plain-text':
-				return <PlainText key={index} con={con} handleChange={handleChange} removeSection={removeSection} />
+				return <PlainText key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			case 'list':
-				return <List key={index} con={con} handleChange={handleChange} removeSection={removeSection} />
+				return <List key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			case 'dates':
-				return <Dates key={index} con={con} handleChange={handleChange} removeSection={removeSection} />
+				return <Dates key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			case 'image':
-				return	<Image key={index} con={con} handleChange={handleChange} images={images} removeSection={removeSection} />
+				return	<Image key={index} con={con} handleChange={handleChange} images={images} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			case 'table':
-				return <Table key={index} con={con} handleChange={handleChange} removeSection={removeSection} />
+				return <Table key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			case 'images':
-				return <Images key={index} con={con} handleChange={handleChange} images={images} removeSection={removeSection} />
+				return <Images key={index} con={con} handleChange={handleChange} images={images} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			case 'select':
-				return <Select key={index} con={con} handleChange={handleChange} removeSection={removeSection} />
+				return <Select key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			case 'color':
-				return <Color key={index} con={con} handleChange={handleChange} removeSection={removeSection} />
+				return <Color key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			case 'form':
-				return <Forms key={index} con={con} forms={forms} handleChange={handleChange} removeSection={removeSection} />
+				return <Forms key={index} con={con} forms={forms} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			case 'blocks':
-				return <Blocks key={index} con={con} images={images} forms={forms} handleChange={handleChange} removeSection={removeSection} />
+				return <Blocks key={index} con={con} images={images} forms={forms} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			default:
 				return null
 		}
@@ -145,19 +160,47 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms })
 		setTimeout(() => { document.documentElement.style.scrollBehavior = 'smooth' }, 1000)
 	}
 
+	//--------------------
+	//- Scroll
+	//--------------------
+
+	useEffect(() => {
+		window.addEventListener('scroll', handleScroll())
+		return () => {
+			window.removeEventListener('scroll', handleScroll())
+		}
+	})
+
+	const handleScroll = (e) => {
+		window.onscroll = function(){
+			var st = window.pageYOffset + window.innerHeight
+			const formEl = document.querySelector('.admin-content form')
+			const buttons = document.querySelector('.buttons-bottom')
+			if (st > (formEl.offsetTop + formEl.offsetHeight)) {
+				buttons.classList.add('absolute-bottom')
+			} else {
+				buttons.classList.remove('absolute-bottom')
+			}
+		}
+	}
+
 	return (
 		<div className='admin-content'>
 			<div className='atbs-header'>
 				<h2>{name}</h2>
 				<div className='atbs-header-sub'>
-					{(path !== 'alerts' && path !== 'meta') && <input className='url-header' value={url} readonly />}
-					{(path !== 'alerts' && path !== 'meta') && <p>Pageviews: {post.pageviews.toLocaleString()}</p>}
+					<div className='left'>
+						{path !== 'alerts' && path !== 'meta' && <input className='url-header' value={url} readonly /> }
+						<svg className={!blocksOpen ? 'active' : ''} onClick={() => setBlocksOpen(false)} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48H48C21.49 32 0 53.49 0 80zm320-16v106.667H192V64h128zm160 245.333H352V202.667h128v106.666zm-160 0H192V202.667h128v106.666zM32 202.667h128v106.667H32V202.667zM160 64v106.667H32V80c0-8.837 7.163-16 16-16h112zM32 432v-90.667h128V448H48c-8.837 0-16-7.163-16-16zm160 16V341.333h128V448H192zm160 0V341.333h128V432c0 8.837-7.163 16-16 16H352zm128-277.333H352V64h112c8.837 0 16 7.163 16 16v90.667z"/></svg>
+						<svg className={blocksOpen ? 'active' : ''} onClick={() => setBlocksOpen(true)} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M464 64H48C21.5 64 0 85.5 0 112v288c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zm16 336c0 8.8-7.2 16-16 16H48c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16h416c8.8 0 16 7.2 16 16v288z"/></svg>
+					</div>
+					{path !== 'alerts' && path !== 'meta' && <p>Pageviews: {post.pageviews.toLocaleString()}</p> }
 				</div>
 			</div>
 			<form>
 				{section}
-				{cookies.role === 'super' && <New content={content} addSection={addSection} />}
-				<div className='buttons-bottom'>
+				{cookies.role === 'super' && <New content={content} addSection={addSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />}
+				<div className='buttons-bottom absolute-bottom'>
 					<div>
 						<p>Publish:
 							<input type='datetime-local' value={pubDate} onChange={(e) => setPubDate(e.target.value)} />

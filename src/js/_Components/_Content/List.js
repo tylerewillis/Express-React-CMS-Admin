@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import { useCookies } from 'react-cookie'
 
-const List = React.memo(({ con, handleChange, removeSection }) => {
+const List = React.memo(({ con, handleChange, removeSection, blocksOpen, openBlocks }) => {
 
+	const [ cookies ] = useCookies(['role'])
 	const [ items, setItems ] = useState((con.content.length) ? con.content.split(',') : [])
 
 	const sendChange = (value) => {
@@ -34,8 +36,8 @@ const List = React.memo(({ con, handleChange, removeSection }) => {
 	}
 
 	return (
-		<div className='ac-block'>
-			<h2>{con.name}</h2>
+		<div className={(blocksOpen) ? 'ac-block active' : 'ac-block'} onClick={(e) => openBlocks(e)}>
+			<h2><span>{con.id + 1}.</span> {con.name}</h2>
 			<p className='acb-description'>{con.description}</p>
 			<input onKeyUp={(e) => addItem(e)} />
 			<div className='list'>
@@ -45,7 +47,7 @@ const List = React.memo(({ con, handleChange, removeSection }) => {
 					</p>
 				})}
 			</div>
-			{(con.id !== 0) && <i className="fas fa-times" onClick={() => removeSection(con.id)}/>}
+			{cookies.role === 'super' && con.id !== 0 && <i className="fas fa-times" onClick={() => removeSection(con.id)}/>}
 		</div>
 	)
 })

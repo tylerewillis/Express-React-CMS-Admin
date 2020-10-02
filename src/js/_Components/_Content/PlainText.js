@@ -1,7 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { useCookies } from 'react-cookie'
 
-const PlainText = React.memo(({ con, handleChange, removeSection }) => {
+const PlainText = React.memo(({ con, handleChange, removeSection, blocksOpen, openBlocks }) => {
+
+	const [ cookies ] = useCookies(['role'])
 
 	const sendChange = (e) => {
 		handleChange({
@@ -14,18 +16,13 @@ const PlainText = React.memo(({ con, handleChange, removeSection }) => {
 	}
 
 	return (
-		<div className='ac-block'>
-			<h2>{con.name}</h2>
+		<div className={(blocksOpen) ? 'ac-block active' : 'ac-block'} onClick={(e) => openBlocks(e)}>
+			<h2><span>{con.id + 1}.</span> {con.name}</h2>
 			<p className='acb-description'>{con.description}</p>
 			<input defaultValue={con.content} onBlur={sendChange} readOnly={(con.id === 0 && con.content === 'Home') ? true : false} className={(con.id === 0 && con.content === 'Home') ? 'uneditable' : ''} />
-			{(con.id !== 0) && <i className="fas fa-times" onClick={() => removeSection(con.id)}/>}
+			{cookies.role === 'super' && con.id !== 0 && <i className="fas fa-times" onClick={() => removeSection(con.id)}/>}
 		</div>
 	)
 })
-
-PlainText.propTypes = {
-	con: PropTypes.array,
-	handleChange: PropTypes.func
-}
 
 export default PlainText
