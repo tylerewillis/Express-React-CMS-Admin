@@ -921,6 +921,7 @@
 .ac-block {
 	@include admin-white-background;
 	margin: 0px 0px 20px 0px;
+	padding: 17px;
 	h2 {
 		font-size: 1.2em;
 		font-weight: 900;
@@ -1446,6 +1447,7 @@
 		.ac-block {
 			width: calc(33% - 10px);
 			cursor: pointer;
+			border: 3px solid $color-white;
 			&:hover {
 				box-shadow: 2px 2px 3px #d3d3d3;
 			}
@@ -1456,11 +1458,19 @@
 		.ac-block.active {
 			width: 100%;
 			cursor: default;
+			box-shadow: 1px 1px 1px #d3d3d3 !important;
 			.acb-description {
 				margin-bottom: 1em;
 			}
 		}
+		.ac-block.block-focused {
+			@include animation(blockFocused,2s);
+		}
 	}
+}
+@keyframes blockFocused {
+	0% { border: 3px solid $admin-color-primary; }
+	100% { border: 3px solid $color-white; }
 }
 
 // =========================================/

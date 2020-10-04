@@ -7,6 +7,7 @@
 	@include admin-mq(m) {
 		justify-content: center;
 	}
+	padding-bottom: 15px;
 	.ad-single {
 		@include admin-white-background(20px, 15px 0px);
 		width: 32%;
@@ -66,6 +67,67 @@
 	a.ad-single {
 		&:hover {
 			box-shadow: 2px 2px 5px #a9a9a9;
+		}
+	}
+}
+
+// =========================================/
+// Dashboard -> Search
+// =========================================/
+
+.admin-dashboard {
+	.search-filter {
+		width: 100%;
+		@include flex-container(space-between,center);
+		margin-bottom: 15px;
+		input {
+			font-size: .9em;
+			width: 32%;
+			padding: 8px;
+		}
+		.select {
+			@include flex-container(space-between,center);
+			width: 32%;
+			select {
+				font-size: .9em;
+				padding: 7px;
+				width: calc(100% - 96px);
+				color: #888;
+			}
+			a {
+				color: #888;
+				margin-left: 20px;
+			}
+		}
+	}
+}
+
+// =========================================/
+// Dashboard -> Search Results
+// =========================================/
+
+.admin-dashboard {
+	.results {
+		width: 100%;
+		@include flex-container;
+		.res {
+			display: block;
+			background-color: #fff;
+			box-shadow: 1px 1px 1px #d3d3d3;
+			border-radius: 5px;
+			padding: 20px;
+			margin: 15px 0px;
+			width: 32%;
+			position: relative;
+			color: #333 !important;
+			text-decoration: none !important;
+			transition: all 0.2s;
+			h2 {
+				font-family: $admin-header-font;
+				font-size: 22px;
+				line-height: 28px;
+				font-weight: 500;
+			}
 		}
 	}
 }

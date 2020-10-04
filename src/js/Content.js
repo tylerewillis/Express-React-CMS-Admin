@@ -68,6 +68,10 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms })
 		})
 	}
 
+	//--------------------
+	//- Open Blocks from Closed
+	//--------------------
+
 	const openBlocks = (e = false) => {
 		if (e) {
 			let element = (e.target.closest('.ac-block')) ? e.target.closest('.ac-block') : e.target
@@ -77,6 +81,10 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms })
 				setTimeout(() => {
 					setLoading(false)
 					element.scrollIntoView()
+					// Remove focus from all other elements
+					document.querySelectorAll('.ac-block').forEach(block => block.classList.remove('block-focused'))
+					// Add focus to element
+					element.classList.add('block-focused')
 				},250)
 			}
 		}
@@ -161,7 +169,7 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms })
 	}
 
 	//--------------------
-	//- Scroll
+	//- Scroll Bottom Buttons
 	//--------------------
 
 	useEffect(() => {
