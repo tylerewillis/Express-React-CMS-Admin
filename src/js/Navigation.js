@@ -176,7 +176,7 @@ const Nav = ({ nav, posts }) => {
 	}
 
 	return (
-		<React.Fragment>
+		<div className='admin-navigation'>
 			<div className='block'>
 				<h1>Site Navigation</h1>
 				<p>Drag and drop the menu items below to reorder how they appear on the website. To insert the item as a sub-link, drag and drop under the parent link and then indent.</p>
@@ -208,7 +208,7 @@ const Nav = ({ nav, posts }) => {
 				</div>
 			</div>
 			{loading && <Loading />}
-		</React.Fragment>
+		</div>
 	)
 }
 

@@ -2,47 +2,66 @@
 // Config - Dashboard Blocks
 // =========================================/
 
-.dashboard-blocks {
-	.item {
-		background-color: #fff;
-		border-bottom: 2px solid #333;
-		padding: 20px;
-		cursor: move;
-		position: relative;
-		width: 100%;
-		i {
-			font-size: 1em;
-			top: 8px;
-			right: 0;
-			color: #d3d3d3;
-			position: absolute;
-			padding: 0px 5px;
-			cursor: pointer;
-			&:hover {
-				color: gray;
-			}
-		}
-		.details {
-			padding: 0px 30px 0px 0px;
-			p {
-				display: inline-block;
-				margin: 0px;
-			}
-			label {
-				font-weight: 600;
-				font-size: 1em;
-			}
-			input {
-				font-size: .9em;
-				padding: 3px;
-				margin: 0px 15px 0px 5px;
-			}
-			.desc {
-				width: 100%;
-				margin-top: 10px;
-				input {
-					width: calc(100% - 200px);
+.page-admin {
+	.page-admin-main {
+		.admin-config {
+			.block {
+				padding: 20px;
+				margin-bottom: 25px;
+				p:last-child {
+					margin-bottom: 0px;
+					font-style: italic;
+					color: #a9a9a9;
 				}
+			}
+			.dashboard-blocks {
+				.item {
+					background-color: #fff;
+					border-bottom: 2px solid #333;
+					padding: 20px;
+					cursor: move;
+					position: relative;
+					width: 100%;
+					i {
+						font-size: 1em;
+						top: 8px;
+						right: 0;
+						color: #d3d3d3;
+						position: absolute;
+						padding: 0px 5px;
+						cursor: pointer;
+						&:hover {
+							color: gray;
+						}
+					}
+					.details {
+						padding: 0px 30px 0px 0px;
+						p {
+							display: inline-block;
+							margin: 0px;
+						}
+						label {
+							font-weight: 600;
+							font-size: 1em;
+						}
+						input {
+							font-size: .9em;
+							padding: 3px;
+							margin: 0px 15px 0px 5px;
+						}
+						.desc {
+							width: 100%;
+							margin-top: 10px;
+							input {
+								width: calc(100% - 200px);
+							}
+						}
+					}
+				}
+			}
+			.buttons-bottom {
+				position: relative;
+				width: 100%;
 			}
 		}
 	}
@@ -60,7 +79,7 @@
 		position: relative;
 		width: 100%;
 		i {
-			font-size: 2em;
+			font-size: 1em;
 			top: 8px;
 			right: 0;
 			color: #d3d3d3;
@@ -107,7 +126,7 @@
 // =========================================/
 
 .client-details {
-	margin-bottom: 50px;
+	margin-bottom: 25px;
 	background-color: $color-white;
 	padding: 20px;
 	@include flex-container;

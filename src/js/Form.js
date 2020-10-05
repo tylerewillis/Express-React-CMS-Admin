@@ -223,7 +223,7 @@ const Form = ({ post, content }) => {
 	}
 
 	return (
-		<React.Fragment>
+		<div className='admin-form'>
 			<Details data={data} handleDetailsChange={handleDetailsChange} />
 			<Groups data={data} drag={drag} dragover={dragover} dropGroup={dropGroup} deleteGroup={deleteGroup} handleChange={handleChange} />
 			<Buttons addInput={addInput} />
@@ -240,7 +240,7 @@ const Form = ({ post, content }) => {
 				</div>
 			</div>
 			{loading && <Loading />}
-		</React.Fragment>
+		</div>
 	)
 }
 

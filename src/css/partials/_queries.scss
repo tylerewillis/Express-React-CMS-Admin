@@ -9,6 +9,7 @@
 		.avl-select-header {
 			@include flex-container(space-between,center);
 			padding-bottom: 12px;
+			margin-bottom: 5px;
 			select {
 				font-size: .9em;
 				padding: 8px;

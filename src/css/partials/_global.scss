@@ -172,7 +172,7 @@ input, textarea, select {
 	.outer {
 		width: 95%;
 		max-width: 500px;
-		fill: lighten($color-primary, 50%);
+		fill: $admin-color-primary;
 		@include animation(spin, 2s, linear, infinite);
 	}
 	.inner-container {
@@ -182,7 +182,7 @@ input, textarea, select {
 		.inner {
 			width: 95%;
 			max-width: 300px;
-			fill: $color-primary;
+			fill: $admin-color-secondary;
 			@include animation(spinInner, 1.5s, linear, infinite);
 		}
 	}

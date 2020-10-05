@@ -33,8 +33,15 @@
 					width: 100%;
 					margin-bottom: 15px;
 				}
+				p {
+					font-size: .8em;
+					font-style: italic;
+					color: #a9a9a9;
+					line-height: 1.5em;
+					margin-bottom: 1em;
+				}
 				.section-multiple {
-					width: 49%;
+					width: calc(50% - 6px);
 				}
 				p:last-child {
 					margin-bottom: 0px;
@@ -43,8 +50,18 @@
 					@include flex-container(flex-start);
 					p {
 						margin-right: 15px;
+						font-style: unset;
+						color: unset;
+						margin-bottom: 0px;
+					}
+					p.active {
+						color: $admin-color-white;
 					}
 				}
+			}
+			.buttons-bottom {
+				position: relative;
+				width: 100%;
 			}
 		}
 	}

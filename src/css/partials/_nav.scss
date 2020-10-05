@@ -73,10 +73,42 @@
 		margin-right: 15px;
 		display: block;
 		&:hover {
-			border: 2px solid #d3d3d3;
+			border: 2px solid $admin-color-secondary;
 		}
 		p {
 			margin: 0px;
+			font-size: .8em;
+		}
+	}
+}
+
+// =========================================/
+// Navigation
+// =========================================/
+
+.page-admin {
+	.page-admin-main {
+		.admin-navigation {
+			position: relative;
+			.block {
+				padding: 20px;
+				margin-bottom: 25px;
+				h1 {
+
+				}
+				p:last-child {
+					margin-bottom: 0px;
+					font-size: .8em;
+					font-style: italic;
+					color: #a9a9a9;
+					line-height: 1.5em;
+				}
+			}
+			.buttons-bottom {
+				padding: 25px 0px 0px;
+				position: relative;
+				width: 100%;
+			}
 		}
 	}
 }

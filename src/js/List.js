@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Layout from './_Components/Layout'
 
-const List = React.memo(({ posts }) => {
+const List = React.memo(({ posts, type }) => {
 
 	const pathArray = window.location.pathname.split('/')
 	const path = pathArray[pathArray.length - 1]
@@ -11,7 +11,10 @@ const List = React.memo(({ posts }) => {
 	return (
 		<div className='admin-content-listing'>
 			<div className='acl-header'>
-				<a href={window.location.pathname + '/new'} className='new-post'>Create New</a>
+				<div className='left'>
+					<h1>{type}</h1>
+					<a href={window.location.pathname + '/new'} className='new-post'>Create New</a>
+				</div>
 				<input value={(search) ? search : ''} placeholder='Search' onChange={(e) => setSearch(e.target.value.toLowerCase())} />
 			</div>
 			{posts.map((post, index) => {

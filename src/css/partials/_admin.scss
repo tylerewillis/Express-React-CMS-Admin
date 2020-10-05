@@ -58,6 +58,29 @@
 					margin: 0px;
 				}
 			}
+			.dark-mode {
+				@include flex-container(center,center);
+				margin-left: 20px;
+				p {
+					margin: 0px;
+					height: 25px;
+					width: 28px;
+					@include flex-container(center,center);
+					border-radius: 4px 0px 0px 4px;
+					border: 1px solid rgba($admin-color-secondary,.5);
+					cursor: pointer;
+					svg {
+						height: 12px;
+						fill: $admin-color-white;
+					}
+				}
+				p ~ p {
+					border-radius: 0px 4px 4px 0px;
+				}
+				p.active {
+					background-color: $admin-color-secondary;
+				}
+			}
 		}
 		.section ~ .section {
 			a {
@@ -66,7 +89,7 @@
 		}
 	}
 	.page-admin-main {
-		padding: 30px 0px 10px;
+		padding: 30px 0px;
 		@include global-width;
 		min-height: calc(100vh - 130px);
 	}
@@ -191,6 +214,7 @@
 			input {
 				margin-left: 5px;
 				width: 225px;
+				padding: 2px;
 			}
 		}
 		p:last-child {
@@ -337,7 +361,7 @@
 			.dates-editor {
 				@include flex-container;
 				input {
-					width: 49%;
+					width: calc(50% - 6px);
 				}
 			}
 			.select-images {
@@ -370,7 +394,6 @@
 		    	background: none;
 		    	color: #333;
 		    	border-right: 1px solid #d3d3d3;
-		    	padding: 10px;
 		    	textarea {
 		    		padding: 10px;
 		    		width: 100%;
@@ -469,14 +492,14 @@
 			.acb-new-section {
 				@include flex-container;
 				input[type='text'], input[type='number'] {
-					width: 49%;
+					width: calc(50% - 6px);
 				}
 				div {
 					width: 100%;
 					@include flex-container;
 				}
 				select {
-					width: 49%;
+					width: calc(50% - 6px);
 					height: 40px;
 					margin: 12px 0px;
 					border: 1px solid #d3d3d3;
@@ -685,18 +708,26 @@
 		width: 100%;
 		margin-bottom: 30px;
 		@include flex-container(space-between,center);
-		a {
-			display: inline-block;
-			border: 2px solid #e9e9e9;
-			padding: 5px 20px;
-			color: #999;
-			border-radius: 3px;
-			text-decoration: none;
-			@include transition;
-			&:hover {
-				border: 2px solid #333;
-				background-color: #333;
-				color: #fff;
+		.left {
+			@include flex-container(flex-start,center);
+			h1 {
+				font-size: 1.5em;
+				font-weight: 500;
+				margin-right: 20px;
+			}
+			a {
+				display: inline-block;
+				border: 2px solid #e9e9e9;
+				padding: 5px 20px;
+				color: #999;
+				border-radius: 3px;
+				text-decoration: none;
+				@include transition;
+				&:hover {
+					border: 2px solid #333;
+					background-color: #333;
+					color: #fff;
+				}
 			}
 		}
 		input {
@@ -1612,6 +1643,25 @@
 		.ac-block.active {
 			.acb-select {
 				display: block;
+			}
+		}
+	}
+}
+
+// =========================================/
+// List
+// =========================================/
+
+.page-admin {
+	.admin-content {
+		.ac-block {
+			.list{
+				display: none;
+			}
+		}
+		.ac-block.active {
+			.list {
+				display: flex;
 			}
 		}
 	}

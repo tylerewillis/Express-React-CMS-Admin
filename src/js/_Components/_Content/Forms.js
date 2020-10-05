@@ -26,7 +26,7 @@ const Form = React.memo(({ con, forms, handleChange, removeSection, blocksOpen, 
 				<select value={value} onChange={e => setSelect(e.target.value)}>
 					<option value=''>No form</option>
 					{options && options.map((option, i) => {
-						return <option value={option.name}>{option.name}</option>
+						return <option value={option.name} key={i}>{option.name}</option>
 					})}
 				</select>
 			</div>

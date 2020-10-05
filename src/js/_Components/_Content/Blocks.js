@@ -12,7 +12,7 @@ import Select from './_Blocks/Select'
 import Color from './_Blocks/Color'
 import Forms from './_Blocks/Forms'
 
-const Blocks = React.memo(({ con, images, forms, handleChange, removeSection, blocksOpen, openBlocks }) => {
+const Blocks = React.memo(({ con, images, forms, handleChange, removeSection, blocksOpen, openBlocks, blocksDisplay, setBlocksDisplay }) => {
 
 	const [ cookies ] = useCookies(['role'])
 	const [ data, setData ] = useState(con.content)
@@ -85,11 +85,16 @@ const Blocks = React.memo(({ con, images, forms, handleChange, removeSection, bl
 		sendChange()
 	}
 
+	const toggleBlocks = () => {
+		setDisplay(!display)
+		setBlocksDisplay(!blocksDisplay)
+	}
+
 	return (
 		<div className={(blocksOpen) ? 'ac-block ac-block-blocks active' : 'ac-block ac-block-blocks'} onClick={(e) => openBlocks(e)}>
 			<h2><span>{con.id + 1}.</span> {con.name}</h2>
 			<p className='acb-description'>{con.description}</p>
-			<p className='blocks-toggle' onClick={() => setDisplay(!display)}>{(display) ? 'Hide List' : 'Show List'}
+			<p className='blocks-toggle' onClick={() => toggleBlocks()}>{(display) ? 'Hide List' : 'Show List'}
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M441.9 167.3l-19.8-19.8c-4.7-4.7-12.3-4.7-17 0L224 328.2 42.9 147.5c-4.7-4.7-12.3-4.7-17 0L6.1 167.3c-4.7 4.7-4.7 12.3 0 17l209.4 209.4c4.7 4.7 12.3 4.7 17 0l209.4-209.4c4.7-4.7 4.7-12.3 0-17z"/></svg>
 			</p>
 			<div className='sections' style={{'display': (display) ? 'block' : 'none'}}>
@@ -99,8 +104,8 @@ const Blocks = React.memo(({ con, images, forms, handleChange, removeSection, bl
 							<div className='left'>
 								<p className='number'>{i + 1}</p>
 								<div className='arrows'>
-									<i class="fas fa-caret-up" onClick={() => moveUp(i)}></i>
-									<i class="fas fa-caret-down" onClick={() => moveDown(i)}></i>
+									<i className="fas fa-caret-up" onClick={() => moveUp(i)}></i>
+									<i className="fas fa-caret-down" onClick={() => moveDown(i)}></i>
 								</div>
 							</div>
 							<i className="fas fa-times delete" onClick={() => removeSect(i)}/>

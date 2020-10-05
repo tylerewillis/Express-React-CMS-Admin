@@ -43,7 +43,7 @@ const Image = React.memo(({ con, p, i, images, updateValue }) => {
 		<div className='item'>
 			<h2>{con.name}</h2>
 			<div className='acb-image'>
-				<div className='acbi-active' style={{backgroundImage: 'url(' + API_IMAGE_PATH + image + ')'}} onClick={() => containerToggle(true)}>
+				<div className='acbi-active' style={{backgroundImage: (image.length) ? 'url(' + API_IMAGE_PATH + image + ')': ''}} onClick={() => containerToggle(true)}>
 					{image && (image.substr(image.length - 4) === 'docx' || image.substr(image.length - 4) === '.doc' || image.substr(image.length - 4) === '.pdf') &&
 						<p className='media-file-name'>{image}</p>
 					}

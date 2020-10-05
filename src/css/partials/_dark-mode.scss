@@ -1,0 +1,1105 @@
+// =========================================/
+// Dark Mode -> Global
+// =========================================/
+
+.page-admin-dark-mode {
+	background-color: $admin-color-black;
+	.admin-header {
+		background-color: $admin-color-secondary;
+		box-shadow: 0px 0px 0px 2px $admin-color-black, 0px 0px 0px 4px $admin-color-secondary;
+		.section {
+			a {
+				i {
+					color: $admin-color-secondary-dark;
+					opacity: .5;
+				}
+			}
+			.dark-mode {
+				p {
+					border: 1px solid rgba($admin-color-secondary-dark,.2);
+				}
+				p.active {
+					background-color: $admin-color-secondary-dark;
+				}
+			}
+		}
+	}
+	.admin-footer {
+		background-color: #111;
+		box-shadow: 0px 0px 0px 5px $admin-color-black, 0px 0px 0px 10px #111;
+		img {
+			filter: brightness(0) invert(1);
+		}
+	}
+	.page-admin-main {
+		p.no-posts {
+			color: #d3d3d3;
+		}
+	}
+	.loading {
+		background-color: rgba($admin-color-black,.8);
+	}
+}
+
+// =========================================/
+// Dark Mode -> Dashboard
+// =========================================/
+
+.page-admin-dark-mode {
+	.admin-dashboard {
+		.ad-single {
+			background-color: #444;
+			box-shadow: 1px 1px 1px #666;
+			h2 {
+				color: $admin-color-white;
+			}
+			p {
+				color: #d3d3d3;
+			}
+			&:hover {
+				box-shadow: 2px 2px 2px #666;
+			}
+		}
+		.search-filter {
+			input {
+				background-color: $admin-color-black;
+				border: 1px solid #777;
+				color: $admin-color-white;
+			}
+			.select {
+				select {
+					background-color: $admin-color-black;
+					color: #666;
+					border: 1px solid #777;
+				}
+				select.active {
+					color: $admin-color-white;
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
+// Dark Mode -> List Pages
+// =========================================/
+
+.page-admin-dark-mode {
+	.admin-content-listing {
+		.acl-header {
+			.left {
+				h1 {
+					color: $admin-color-white;
+				}
+				a {
+					border: 2px solid #777;
+					color: #777;
+					&:hover {
+						color: #f2f2f2;
+						border: 2px solid #f2f2f2;
+					}
+				}
+			}
+			input {
+				background-color: $admin-color-black;
+				border: 1px solid #777;
+				color: $admin-color-white;
+			}
+		}
+		.atb-single {
+			background-color: #444;
+			box-shadow: 1px 1px 1px #666;
+			h2 {
+				color: $admin-color-white;
+			}
+			p {
+				color: #d3d3d3;
+			}
+			&:hover {
+				box-shadow: 2px 2px 2px #666;
+			}
+		}
+	}
+}
+
+// =========================================/
+// Dark Mode -> Content Pages
+// =========================================/
+
+.page-admin-dark-mode {
+	.page-admin-main {
+		.admin-content {
+			.atbs-header {
+				h2 {
+					color: $admin-color-white;
+				}
+				.atbs-header-sub {
+					.left {
+						input {
+							background-color: $admin-color-black;
+							border: 1px solid #777;
+							color: $admin-color-white;
+						}
+						svg {
+							&:hover {
+								background-color: #444;
+							}
+						}
+						svg.active {
+							background-color: $admin-color-secondary;
+						}
+					}
+					p {
+						color: #888;
+					}
+				}
+			}
+			form {
+				.ac-block {
+					background-color: #444;
+					box-shadow: 1px 1px 1px #666;
+					border: 3px solid #444;
+					h2 {
+						color: $admin-color-white;
+					}
+					p {
+						color: #d3d3d3;
+					}
+					&:hover {
+						box-shadow: 2px 2px 2px #666;
+					}
+					input, select {
+						background-color: $admin-color-black;
+						border: 1px solid #777;
+						color: $admin-color-white;
+					}
+					.fa-times {
+						&:hover {
+							color: $admin-color-white;
+						}
+					}
+				}
+				.ac-block.active {
+					box-shadow: 1px 1px 1px #666 !important;
+				}
+				.ac-block.block-focused {
+					@include animation(blockFocusedDark,2s);
+				}
+				.buttons-bottom {
+					background-color: #444;
+					border-top: 1px solid #777;
+					div {
+						p {
+							color: #d3d3d3;
+							input {
+								background-color: $admin-color-black;
+								border: 1px solid #777;
+								color: $admin-color-white;
+							}
+						}
+						p.save {
+							color: $admin-color-white;
+						}
+						p.top {
+							background-color: #777;
+							svg {
+								fill: $admin-color-white;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+@keyframes blockFocusedDark {
+	0% { border: 3px solid $admin-color-primary; }
+	100% { border: 3px solid #444; }
+}
+
+// =========================================/
+// Dark Mode -> Content Pages -> Image
+// =========================================/
+
+.page-admin-dark-mode {
+	.acb-image, .acb-images {
+		.acbi-active {
+			background-color: $admin-color-black;
+			border: 2px solid $admin-color-black;
+		}
+		.acbi-container {
+			.acbic-new {
+				background-color: $admin-color-black;
+				border: 2px dashed #444;
+			}
+			.image-search {
+				i {
+					&:hover {
+						background-color: #555;
+					}
+				}
+				i.active {
+					background-color: $admin-color-secondary;
+				}
+			}
+			.image-container {
+				.acbic-single {
+					background-color: $admin-color-black;
+					border: 2px solid $admin-color-black;
+					p.media-file-name {
+						background-color: #888;
+						color: #f2f2f2 !important;
+					}
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
+// Dark Mode -> Content Pages -> Image
+// =========================================/
+
+.page-admin-dark-mode {
+	.admin-content {
+		.ac-block {
+			.atbs-editor {
+				background-color: $admin-color-black;
+				.ql-toolbar {
+					.ql-bold, .ql-italic, .ql-underline {
+						svg {
+							path, line, rect {
+								stroke: #d3d3d3;
+							}
+						}
+					}
+					.ql-strike {
+						line { 
+							stroke: #d3d3d3;
+						}
+						path {
+							fill: #d3d3d3;
+						}
+					}
+					.ql-blockquote {
+						.ql-stroke.ql-fill {
+							fill: #d3d3d3;
+							stroke: #d3d3d3;
+						}
+					}
+					.ql-picker-label, .ql-background {
+						svg {
+							line, polyline {
+								stroke: #d3d3d3;
+							}
+							g {
+								fill: #666;
+							}
+						}
+					}
+					.ql-list, .ql-indent {
+						line, polyline {
+							stroke: #d3d3d3;
+						}
+						path {
+							fill: #d3d3d3;
+							stroke: #d3d3d3;
+						}
+					}
+					.ql-script {
+						path {
+							fill: #d3d3d3;
+						}
+					}
+					.ql-link {
+						line, path {
+							stroke: #d3d3d3;
+						}
+					}
+					.ql-clean {
+						line {
+							stroke: #d3d3d3;
+						}
+						rect {
+							fill: #d3d3d3;
+						}
+					}
+					.ql-picker {
+						.ql-picker-label {
+							color: #d3d3d3;
+							svg {
+								polygon {
+									stroke: #d3d3d3;
+								}
+							}
+						}
+						.ql-picker-options {
+							background-color: $admin-color-black;
+							span {
+								color: #d3d3d3;
+							}
+						}
+					}
+				}
+				.ql-editor {
+					color: $admin-color-white;
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
+// Dark Mode -> Content Pages -> List
+// =========================================/
+
+.page-admin-dark-mode {
+	.admin-content {
+		form {
+			.ac-block {
+				.list {
+					p {
+						color: #d3d3d3;
+						background-color: $admin-color-black;
+						box-shadow: 1px 1px 2px #555;
+					}
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
+// Dark Mode -> Content Pages -> Table
+// =========================================/
+
+.page-admin-dark-mode {
+	.admin-content {
+		.ac-block {
+			table {
+				tr {
+					border-top: 1px solid #666;
+					border-bottom: 1px solid #666;
+					border-left: 1px solid #666;
+					td {
+						border-right: 1px solid #666;
+						textarea {
+							background-color: $admin-color-black;
+							color: $admin-color-white;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
+// Dark Mode -> Content Pages -> Blocks New
+// =========================================/
+
+.page-admin-dark-mode {
+	.admin-content {
+		.ac-block {
+			.acb-new-section {
+				.list-options {
+					p {
+						background-color: $admin-color-black;
+						color: #d3d3d3;
+						&:hover {
+							background-color: #555;
+						}
+					}
+				}
+				.list-selected {
+					.list-sel {
+						border: 1px solid #777;
+					}
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
+// Dark Mode -> Media
+// =========================================/
+
+.page-admin-dark-mode {
+	.page-admin-main {
+		.admin-media-container {
+			.acbic-new {
+				background-color: $admin-color-black;
+				border: 2px dashed #777;
+				p {
+					color: #d3d3d3;
+				}
+			}
+			.image-search {
+				input {
+					background-color: $admin-color-black;
+					border: 1px solid #777;
+					color: $admin-color-white;
+				}
+				.actions {
+					i {
+						&:hover {
+							background-color: #555;
+						}
+					}
+				}
+			}
+			.image-container {
+				.acbic-single {
+					background-color: #444;
+					border: 2px solid #444;
+					p.media-file-name {
+						background-color: #666;
+						color: #f2f2f2 !important;
+					}
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
+// Dark Mode -> Navigation
+// =========================================/
+
+.page-admin-dark-mode {
+	.page-admin-main {
+		.admin-navigation {
+			.block {
+				background-color: #444;
+				box-shadow: 1px 1px 1px #666;
+				h1 {
+					color: $admin-color-white;
+				}
+				p {
+					color: #d3d3d3;
+				}
+			}
+			.nav {
+				.item {
+					background-color: #444;
+					border-bottom: 1px solid #666;
+					i {
+						color: #777;
+						&:hover {
+							color: #d3d3d3;
+						}
+					}
+					.details {
+						p {
+							color: #d3d3d3;
+						}
+						label {
+							color: #d3d3d3;
+						}
+						input {
+							background-color: $admin-color-black;
+							border: 1px solid #777;
+							color: $admin-color-white;
+						}
+					}
+				}
+			}
+			.buttons-bottom {
+				background-color: $admin-color-black;
+				border-top: 1px solid #666;
+				div {
+					p {
+						color: #d3d3d3;
+					}
+					p.save {
+						color: $admin-color-white;
+					}
+				}
+				div.add-item {
+					background-color: $admin-color-black;
+					border: 2px dashed #777;
+					&:hover {
+						border: 2px solid $admin-color-primary;
+					}
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
+// Dark Mode -> Forms
+// =========================================/
+
+.page-admin-dark-mode {
+	.page-admin-main {
+		.admin-form {
+			.block {
+				background-color: #444;
+				box-shadow: 1px 1px 1px #666;
+				h1 {
+					color: $admin-color-white;
+				}
+				.form-details {
+					.detail {
+						h2 {
+							color: $admin-color-white;
+						}
+						p {
+							color: #d3d3d3;
+						}
+						input, select {
+							background-color: $admin-color-black;
+							border: 1px solid #777;
+							color: $admin-color-white;
+						}
+						.atbs-editor {
+							background-color: $admin-color-black;
+							.ql-toolbar {
+								.ql-bold, .ql-italic, .ql-underline {
+									svg {
+										path, line, rect {
+											stroke: #d3d3d3;
+										}
+									}
+								}
+								.ql-strike {
+									line { 
+										stroke: #d3d3d3;
+									}
+									path {
+										fill: #d3d3d3;
+									}
+								}
+								.ql-blockquote {
+									.ql-stroke.ql-fill {
+										fill: #d3d3d3;
+										stroke: #d3d3d3;
+									}
+								}
+								.ql-picker-label, .ql-background {
+									svg {
+										line, polyline {
+											stroke: #d3d3d3;
+										}
+										g {
+											fill: #666;
+										}
+									}
+								}
+								.ql-list, .ql-indent {
+									line, polyline {
+										stroke: #d3d3d3;
+									}
+									path {
+										fill: #d3d3d3;
+										stroke: #d3d3d3;
+									}
+								}
+								.ql-script {
+									path {
+										fill: #d3d3d3;
+									}
+								}
+								.ql-link {
+									line, path {
+										stroke: #d3d3d3;
+									}
+								}
+								.ql-clean {
+									line {
+										stroke: #d3d3d3;
+									}
+									rect {
+										fill: #d3d3d3;
+									}
+								}
+								.ql-picker {
+									.ql-picker-label {
+										color: #d3d3d3;
+										svg {
+											polygon {
+												stroke: #d3d3d3;
+											}
+										}
+									}
+									.ql-picker-options {
+										background-color: $admin-color-black;
+										span {
+											color: #d3d3d3;
+										}
+									}
+								}
+							}
+							.ql-editor {
+								color: $admin-color-white;
+							}
+						}
+					}
+				}
+			}
+			.form-groups {
+				.group {
+					.input {
+						background-color: #444;
+						box-shadow: 1px 1px 1px #666;
+						p {
+							background-color: $admin-color-white;
+							color: $admin-color-black;
+						}
+						label {
+							color: #d3d3d3;
+						}
+						input {
+							background-color: $admin-color-black;
+							border: 1px solid #777;
+							color: $admin-color-white;
+						}
+					}
+					i {
+						color: #777;
+					}
+				}
+			}
+			.form-buttons {
+				p {
+					color: #d3d3d3;
+				}
+				.button {
+					background-color: $admin-color-black;
+					border: 2px dashed #777;
+					&:hover {
+						border: 2px solid $admin-color-primary;
+					}
+				}
+			}
+			.buttons-bottom {
+				background-color: $admin-color-black;
+				border-top: 1px solid #666;
+				div {
+					p {
+						color: #d3d3d3;
+					}
+					p.save {
+						color: $admin-color-white;
+					}
+					p.top {
+						background-color: #777;
+						svg {
+							fill: $admin-color-white;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
+// Dark Mode -> Shop
+// =========================================/
+
+.page-admin-dark-mode {
+	.page-admin-main {
+		.page-admin-shop {
+			.block {
+				background-color: #444;
+				box-shadow: 1px 1px 1px #666;
+				h1 {
+					color: $admin-color-white;
+				}
+				p {
+					color: #d3d3d3;
+				}
+				.tabs {
+					p {
+						color: #d3d3d3;
+						&:hover {
+							background-color: #555;
+						}
+					}
+				}
+				.section {
+					h4 {
+						color: $admin-color-white;
+					}
+					p.desc {
+						color: #d3d3d3;
+					}
+					input {
+						background-color: $admin-color-black;
+						border: 1px solid #777;
+						color: $admin-color-white;
+					}
+				}	
+				h3 {
+					color: $admin-color-white;
+				}
+				.atbs-editor {
+					background-color: $admin-color-black;
+					.ql-toolbar {
+						.ql-bold, .ql-italic, .ql-underline {
+							svg {
+								path, line, rect {
+									stroke: #d3d3d3;
+								}
+							}
+						}
+						.ql-strike {
+							line { 
+								stroke: #d3d3d3;
+							}
+							path {
+								fill: #d3d3d3;
+							}
+						}
+						.ql-blockquote {
+							.ql-stroke.ql-fill {
+								fill: #d3d3d3;
+								stroke: #d3d3d3;
+							}
+						}
+						.ql-picker-label, .ql-background {
+							svg {
+								line, polyline {
+									stroke: #d3d3d3;
+								}
+								g {
+									fill: #666;
+								}
+							}
+						}
+						.ql-list, .ql-indent {
+							line, polyline {
+								stroke: #d3d3d3;
+							}
+							path {
+								fill: #d3d3d3;
+								stroke: #d3d3d3;
+							}
+						}
+						.ql-script {
+							path {
+								fill: #d3d3d3;
+							}
+						}
+						.ql-link {
+							line, path {
+								stroke: #d3d3d3;
+							}
+						}
+						.ql-clean {
+							line {
+								stroke: #d3d3d3;
+							}
+							rect {
+								fill: #d3d3d3;
+							}
+						}
+						.ql-picker {
+							.ql-picker-label {
+								color: #d3d3d3;
+								svg {
+									polygon {
+										stroke: #d3d3d3;
+									}
+								}
+							}
+							.ql-picker-options {
+								background-color: $admin-color-black;
+								span {
+									color: #d3d3d3;
+								}
+							}
+						}
+					}
+					.ql-editor {
+						color: $admin-color-white;
+					}
+				}
+			}
+			.buttons-bottom {
+				background-color: $admin-color-black;
+				border-top: 1px solid #666;
+				div {
+					p {
+						color: #d3d3d3;
+					}
+					p.save {
+						color: $admin-color-white;
+					}
+					p.top {
+						background-color: #777;
+						svg {
+							fill: $admin-color-white;
+						}
+					}
+				}
+			}
+			.orders {
+				.actions {
+					div {
+						label {
+							color: #d3d3d3;
+						}
+						a {
+							color: #d3d3d3;
+						}
+					}
+				}
+				.order {
+					background-color: #444;
+					border-bottom: 1px solid #666;
+					.top {
+						.details {
+							p {
+								color: $admin-color-white;
+							}
+						}
+						.status {
+							svg.done {
+								fill: #00ff00;
+							}
+						}
+						&:hover {
+							background-color: #555;
+						}
+					}
+					.main {
+						p, label {
+							color: #d3d3d3;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
+// Dark Mode -> Queries
+// =========================================/
+
+.page-admin-dark-mode {
+	.page-admin-main {
+		.admin-vert-list {
+			.avl-top {
+				select, input {
+					background-color: $admin-color-black;
+					border: 1px solid #777;
+					color: $admin-color-white;
+				}
+				label {
+					color: #d3d3d3;
+				}
+			}
+			.avl-post {
+				background-color: #444;
+				box-shadow: 1px 1px 1px #666;
+				.query {
+					.query-header {
+						p {
+							color: $admin-color-white !important;
+						}
+						i {
+							color: #d3d3d3;
+						}
+					}
+					.query-fields {
+						p {
+							color: #d3d3d3 !important;
+							border-bottom: 1px solid #666;
+						}
+						.actions {
+							label {
+								color: #d3d3d3;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
+// Dark Mode -> Resources
+// =========================================/
+
+.page-admin-dark-mode {
+	.page-admin-main {
+		.admin-resources {
+			.avl-tabs {
+				border-bottom: 1px solid #666;
+				p {
+					background-color: #444;
+					border-bottom: 1px solid #666 !important;
+					border-right: 1px solid #666 !important;
+					color: $admin-color-white !important;
+				}
+				p.avct-active {
+					border: 1px solid #666 !important;
+					background-color: #666;
+				}
+			}
+			.avl-content {
+				background-color: #444;
+				box-shadow: 1px 1px 1px #666;
+				.avlc-post {
+					border-bottom: 1px dashed #666;
+					h3 {
+						color: $admin-color-white;
+					}
+					div {
+						* {
+							color: #d3d3d3;
+						}
+					}
+				}
+				.avlc-post:last-child {
+					border-bottom: 0px;
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
+// Dark Mode -> File Share
+// =========================================/
+
+.page-admin-dark-mode {
+	.page-admin-main {
+		.admin-file-sharing {
+			background-color: unset;
+			.settings-header, .settings {
+				background-color: #444;
+				box-shadow: 1px 1px 1px #666;
+				p {
+					color: $admin-color-white;
+				}
+				svg {
+					fill: #d3d3d3;
+				}
+				.section {
+					border-bottom: 1px solid #666;
+					h2 {
+						color: $admin-color-white;
+					}
+					label {
+						color: #d3d3d3;
+					}
+					select, input {
+						background-color: $admin-color-black;
+						border: 1px solid #777;
+						color: $admin-color-white;
+					}
+				}
+				.section:first-child {
+					border-top: 1px solid #666;
+				}
+			}
+			.file-search {
+				background-color: $admin-color-black;
+				input {
+					background-color: $admin-color-black;
+					border: 1px solid #777;
+					color: $admin-color-white;
+				}
+			}
+			.files {
+				.container {
+					background-color: #444;
+					.file {
+						p {
+							color: #d3d3d3;
+						}
+						svg {
+							fill: #d3d3d3;
+							&:hover {
+								fill: $admin-color-white;
+							}
+						}
+					}
+					.file.label {
+						border-bottom: 1px solid #666;
+						p {
+							color: $admin-color-white;
+						}
+					}
+					p.no-files {
+						color: #d3d3d3;
+					}
+				}
+			}
+			.add-new {
+				background-color: rgba(darken($admin-color-secondary-dark, 10%),.9);
+				form {
+					background-color: #444;
+					label {
+						color: #d3d3d3;
+						input, select {
+							background-color: $admin-color-black;
+							border: 1px solid #777;
+							color: $admin-color-white;
+						}
+					}
+					.acbic-new {
+						background-color: $admin-color-black;
+						border: 2px dashed #666;
+						p {
+							color: #d3d3d3;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
+// Dark Mode -> Config
+// =========================================/
+
+.page-admin-dark-mode {
+	.page-admin-main {
+		.admin-config {
+			.block {
+				background-color: #444;
+				box-shadow: 1px 1px 1px #666;
+				h1 {
+					color: $admin-color-white;
+				}
+				p {
+					color: #d3d3d3;
+				}
+			}
+			.client-details {
+				background-color: #444;
+				label {
+					color: #d3d3d3;
+				}
+				input {
+					background-color: $admin-color-black;
+					border: 1px solid #777;
+					color: $admin-color-white;
+				}
+			}
+			.dashboard-blocks, .post-types {
+				.item {
+					background-color: #444;
+					border-bottom: 2px solid $admin-color-black;
+					label {
+						color: #d3d3d3;
+					}
+					input, textarea {
+						background-color: $admin-color-black;
+						border: 1px solid #777;
+						color: $admin-color-white;
+					}
+				}
+			}
+		}
+	}
+}

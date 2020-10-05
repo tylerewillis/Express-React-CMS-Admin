@@ -136,7 +136,7 @@ const Nav = ({ details, blocks, types }) => {
 	}
 
 	return (
-		<React.Fragment>
+		<div className='admin-config'>
 			{/***************/}
 			<div className='block'>
 				<h1>Client Details</h1>
@@ -210,7 +210,7 @@ const Nav = ({ details, blocks, types }) => {
 				</div>
 			</div>
 			{loading && <Loading />}
-		</React.Fragment>
+		</div>
 	)
 }
 

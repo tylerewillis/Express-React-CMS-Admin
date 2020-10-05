@@ -11,7 +11,8 @@ import Loading from './Loading'
 const Admin = React.memo((props) => {
 
 	const [ page, setPage ] = useState(null)
-	const [ cookies, setCookie ] = useCookies(['signedIn']) // eslint-disable-line
+	const [ cookies, setCookie ] = useCookies(['signedIn','darkMode']) // eslint-disable-line
+	const [ darkMode, setDarkMode ] = useState(cookies.darkMode)
 
 	useEffect(() => {
 		(async function() {
@@ -34,7 +35,7 @@ const Admin = React.memo((props) => {
 				window.location.replace('/signin')
 			} else {
 				return (
-					<div className='page page-admin'>
+					<div className={(cookies.darkMode && cookies.darkMode === 'yes') ? 'page page-admin page-admin-dark-mode' : 'page page-admin'}>
 						<Helmet>
 			        <meta charSet="utf-8" />
 			        <title>{decodeURIComponent(page.title)}</title>
@@ -46,7 +47,7 @@ const Admin = React.memo((props) => {
 			        <meta property='og:image' content={''} />
 			      </Helmet>
 			      <Head />
-			      <Header page={page} />
+			      <Header page={page} darkMode={darkMode} setDarkMode={setDarkMode} />
 			      <div className='page-admin-main'>
 							{React.cloneElement(props.children, {...page})}
 						</div>
@@ -56,7 +57,7 @@ const Admin = React.memo((props) => {
 			}
 		} else {
 			return (
-				<div className='page page-admin'>
+				<div className={(cookies.darkMode && cookies.darkMode === 'yes') ? 'page page-admin page-admin-dark-mode' : 'page page-admin'}>
 					<Helmet>
 		        <meta charSet="utf-8" />
 		        <title>{decodeURIComponent(page.title)}</title>
@@ -68,7 +69,7 @@ const Admin = React.memo((props) => {
 		        <meta property='og:image' content={''} />
 		      </Helmet>
 		      <Head />
-	      	<Header page={page} />
+	      	<Header page={page} darkMode={darkMode} setDarkMode={setDarkMode} />
 			    <div className='page-admin-main'>
 						{React.cloneElement(props.children, {...page})}
 					</div>

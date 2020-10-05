@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import Dropzone from './Dropzone'
 import { API_IMAGE_PATH } from '../_Config'
 import Call from '../_API/Call'
@@ -17,8 +16,10 @@ const Image = React.memo(({ con, images, handleChange, removeSection, blocksOpen
 
 	const sendChange = (e) => {
 		var url
-		if (!e.target.classList.contains('acbic-single')) url = e.target.closest('.acbic-single').getAttribute('name')
-		else url = e.target.getAttribute('name')
+		if (!e.target.classList.contains('fa-times-circle')) {
+			if (!e.target.classList.contains('acbic-single')) url = e.target.closest('.acbic-single').getAttribute('name')
+			else url = e.target.getAttribute('name')
+		} else url = ''
 		handleChange({
 			id: con.id,
 			type: con.type,
@@ -54,7 +55,7 @@ const Image = React.memo(({ con, images, handleChange, removeSection, blocksOpen
 			<h2><span>{con.id + 1}.</span> {con.name}</h2>
 			<p className='acb-description'>{con.description}</p>
 			<div className='acb-image'>
-				<div className='acbi-active' style={{backgroundImage: 'url(' + API_IMAGE_PATH + image + ')'}} onClick={() => containerToggle(true)}>
+				<div className='acbi-active' style={{backgroundImage: (image.length) ? 'url(' + API_IMAGE_PATH + image + ')' : 'none'}} onClick={() => containerToggle(true)}>
 					<i className="far fa-times-circle" onClick={removeImage}></i>
 					{(image && (image.substr(image.length - 4) === 'docx' || image.substr(image.length - 4) === '.doc' || image.substr(image.length - 4) === '.pdf')) &&
 						<p className='media-file-name'>{image}</p>
@@ -89,11 +90,5 @@ const Image = React.memo(({ con, images, handleChange, removeSection, blocksOpen
 		</div>
 	)
 })
-
-Image.propTypes = {
-	con: PropTypes.array,
-	handleChange: PropTypes.func,
-	images: PropTypes.array
-}
 
 export default Image

@@ -11,7 +11,7 @@ const Resources = React.memo(({ resources }) => {
 	}
 
 	return (
-		<div className='admin-vert-list'>
+		<div className='admin-vert-list admin-resources'>
 			<div className='avl-tabs'>
 				<p className={(active === 'latest') ? 'avct-active' : ''} onClick={() => toggle('latest')}>Latest</p>
 				<p className={(active === 'training') ? 'avct-active' : ''} onClick={() => toggle('training')}>Training</p>

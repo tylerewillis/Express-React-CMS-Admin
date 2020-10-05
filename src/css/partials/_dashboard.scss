@@ -97,6 +97,17 @@
 			a {
 				color: #888;
 				margin-left: 20px;
+				cursor: default;
+				&:hover {
+					text-decoration: none;
+				}
+			}
+			a.active {
+				color: $admin-color-primary;
+				cursor: pointer;
+				&:hover {
+					text-decoration: underline;
+				}
 			}
 		}
 	}

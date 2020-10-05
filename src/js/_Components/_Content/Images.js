@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
 import Dropzone from './Dropzone'
 import { API_IMAGE_PATH } from '../_Config'
 import Call from '../_API/Call'
@@ -144,8 +143,8 @@ const Images = React.memo(({ con, images, handleChange, role, removeSection, blo
 						return <div key={i} name={img} className="acbi-active" style={{backgroundImage: 'url(' + img + ')'}} onClick={(e) => containerToggle(e)}>
 							<i className="far fa-times-circle" imgid={i} onClick={e => removeImage(e)}></i>
 							<div className='arrows'>
-								<i class="fas fa-caret-left" onClick={() => moveLeft(i)}></i>
-								<i class="fas fa-caret-right" onClick={() => moveRight(i)}></i>
+								<i className="fas fa-caret-left" onClick={() => moveLeft(i)}></i>
+								<i className="fas fa-caret-right" onClick={() => moveRight(i)}></i>
 							</div>
 							{(img.substr(img.length - 4) === 'docx' || img.substr(img.length - 4) === '.doc' || img.substr(img.length - 4) === '.pdf') &&
 								<p className='media-file-name'>{img.split('/')[img.split('/').length - 1]}</p>
@@ -185,11 +184,5 @@ const Images = React.memo(({ con, images, handleChange, role, removeSection, blo
 		</div>
 	)
 })
-
-Images.propTypes = {
-	con: PropTypes.array,
-	handleChange: PropTypes.func,
-	images: PropTypes.array
-}
 
 export default Images
