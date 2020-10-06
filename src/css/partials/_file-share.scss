@@ -56,6 +56,9 @@
 					font-weight: 500;
 					font-size: 1em;
 					color: #a9a9a9;
+					@include admin-mq(m) {
+						width: calc(100% - 30px);
+					}
 					input {
 						margin-top: 5px;
 						display: block;
@@ -124,7 +127,7 @@
 				max-width: calc(100% - 150px);
 			}
 			p.add-new-button {
-				background-color: $color-primary;
+				background-color: $admin-color-secondary;
 				margin: 0px;
 				color: $color-white;
 				padding: 8px 20px;
@@ -142,7 +145,7 @@
 					margin-right: 8px;
 				}
 				&:hover {
-					background-color: darken($color-primary, 10%);
+					background-color: darken($admin-color-secondary, 10%);
 				}
 			}
 		}
@@ -165,7 +168,7 @@
 			.file {
 				@include flex-container(flex-start,center);
 				padding: 20px;
-				@include mq(m) {
+				@include admin-mq(m) {
 					padding: 10px;
 					border-bottom: 1px solid #f2f2f2;
 				}
@@ -180,19 +183,54 @@
 				}
 				p:nth-child(1) {
 					width: 150px;
+					@include admin-mq(s) {
+						width: 100px;
+					}
 				}
 				p:nth-child(2) {
-					width: calc(100% - 950px);
+					width: calc(100% - 900px);
 					padding-right: 10px;
+					@include admin-mq(l) {
+						width: calc(100% - 625px);
+					}
+					@include admin-mq(m) {
+						width: calc(100% - 250px);
+					}
+					@include admin-mq(s) {
+						width: calc(100% - 200px);
+					}
 				}
-				p:nth-child(3), p:nth-child(4) {
+				p:nth-child(3) {
 					width: 150px;
+					@include admin-mq(l) {
+						display: none;
+					}
 				}
-				p:nth-child(7), p:nth-child(8) {
+				p:nth-child(4) {
+					width: 150px;
+					@include admin-mq(m) {
+						display: none;
+					}
+				}
+				p:nth-child(5) {
+					@include admin-mq(l) {
+						display: none;
+					}
+				}
+				p:nth-child(6) {
+					@include admin-mq(m) {
+						display: none;
+					}
+				}
+				p:nth-child(7) {
 					width: 100px;
 				}
 				p:nth-child(8) {
+					width: 100px;
 					text-align: center;
+					@include admin-mq(m) {
+						display: none;
+					}
 				}
 				p:last-child {
 					width: 50px;

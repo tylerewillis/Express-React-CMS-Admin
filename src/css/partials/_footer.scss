@@ -1,0 +1,15 @@
+// =========================================/
+// Footer
+// =========================================/
+
+.page-admin {
+	.admin-footer {
+		background-color: $color-white;
+		@include flex-container(flex-end);
+		padding: 20px;
+		box-shadow: 0px 0px 0px 5px #f9f9f9, 0px 0px 0px 10px $color-white;
+		img {
+			width: 120px;
+		}
+	}
+}

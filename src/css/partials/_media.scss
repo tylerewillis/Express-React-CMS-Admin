@@ -6,9 +6,9 @@
 	.image-container {
 		@include flex-container;
 		.acbic-single {
-			width: 24%;
+			width: calc(25% - 5px);
 			height: 200px;
-			margin: 10px 0px;
+			margin-bottom: 10px;
 			position: relative;
 			background-position: center;
 			background-size: 90%;
@@ -16,14 +16,15 @@
 			border: 2px solid #f2f2f2;
 			cursor: pointer;
 			border-radius: 3px;
-			@include mq(l) {
-				width: 33%;
+			@include admin-mq(l) {
+				width: calc(33% - 5px);
 			}
-			@include mq(m) {
-				width: 49%;
+			@include admin-mq(m) {
+				width: calc(50% - 5px);
 			}
-			@include mq(s) {
+			@include admin-mq(s) {
 				width: 100%;
+				height: 300px;
 			}
 			&:hover {
 				border: 2px solid $admin-color-secondary;
@@ -48,7 +49,7 @@
 	}
 	.image-container-grid-large {
 		.acbic-single {
-			width: calc(50% - 10px);
+			width: calc(50% - 5px);
 			height: 300px;
 			@include mq(m) {
 				width: 100%;
@@ -104,16 +105,21 @@
 }
 .image-search {
 	@include flex-container(space-between,center);
-	margin-bottom: 5px;
+	margin-bottom: 10px;
 	input {
 		width: 50%;
 		max-width: 300px;
 		font-size: .9em;
 		padding: 5px;
+		@include admin-mq(m) {
+			width: 100%;
+		}
 	}
 	.actions {
-		width: 50%;
 		@include flex-container(flex-end,center);
+		@include admin-mq(m) {
+			display: none;
+		}
 		i {
 			margin-left: 10px;
 	    cursor: pointer;

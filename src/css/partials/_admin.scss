@@ -21,73 +21,6 @@
 		font-size: 14px;
 		font-weight: 900;
 	}
-	.admin-header {
-		background-color: $admin-color-secondary-dark;
-		padding: 4px 0px 3px;
-		box-shadow: 0px 0px 0px 2px #f9f9f9, 0px 0px 0px 4px $admin-color-secondary-dark;
-		.container {
-			@include flex-container(space-between,center);
-			@include global-width;
-		}
-		.section {
-			@include flex-container(flex-start,center);
-			a {
-				color: #f2f2f2;
-				font-size: .95em;
-				i {
-					color: $admin-color-secondary;
-					margin-right: 5px;
-				}
-			}
-			p {
-				margin: 0px;
-				color: #f2f2f2;
-				font-size: .75em;
-				line-height: 1em;
-				a {
-					font-size: 1em;
-				}
-			}
-			span.divider {
-				margin: 0px 10px;
-				color: $color-white;
-			}
-			.breadcrumbs {
-				margin: 0px;
-				.bc-active {
-					margin: 0px;
-				}
-			}
-			.dark-mode {
-				@include flex-container(center,center);
-				margin-left: 20px;
-				p {
-					margin: 0px;
-					height: 25px;
-					width: 28px;
-					@include flex-container(center,center);
-					border-radius: 4px 0px 0px 4px;
-					border: 1px solid rgba($admin-color-secondary,.5);
-					cursor: pointer;
-					svg {
-						height: 12px;
-						fill: $admin-color-white;
-					}
-				}
-				p ~ p {
-					border-radius: 0px 4px 4px 0px;
-				}
-				p.active {
-					background-color: $admin-color-secondary;
-				}
-			}
-		}
-		.section ~ .section {
-			a {
-				margin-left: 20px;
-			}
-		}
-	}
 	.page-admin-main {
 		padding: 30px 0px;
 		@include global-width;
@@ -114,22 +47,6 @@
 		color: $color-primary;
 		&:hover {
 			text-decoration: underline;
-		}
-	}
-}
-
-// =========================================/
-// Footer
-// =========================================/
-
-.page-admin {
-	.admin-footer {
-		background-color: $color-white;
-		@include flex-container(flex-end);
-		padding: 20px;
-		box-shadow: 0px 0px 0px 5px #f9f9f9, 0px 0px 0px 10px $color-white;
-		img {
-			width: 120px;
 		}
 	}
 }
@@ -194,80 +111,7 @@
 }
 
 // =========================================/
-// Bottom Buttons
-// =========================================/
-
-.buttons-bottom {
-	@include flex-container(space-between,center);
-	position: fixed;
-	bottom: 0;
-	width: 95%;
-	max-width: 1260px;
-	padding: 20px;
-	background-color: #f9f9f9;
-	border-top: 1px solid #d3d3d3;
-	z-index: 1;
-	div {
-		@include flex-container(flex-start,center);
-		p {
-			margin: 0px 15px 0px 0px;
-			input {
-				margin-left: 5px;
-				width: 225px;
-				padding: 2px;
-			}
-		}
-		p:last-child {
-			margin: 0px;
-		}
-		.plain {
-			@include transition;
-			cursor: pointer;
-			font-size: .8em;
-			&:hover {
-				text-decoration: underline;
-			}
-		}
-		.save {
-			padding: 5px;
-			cursor: pointer;
-			background-color: $admin-color-secondary;
-			@include transition;
-			border-radius: 3px;
-			width: 80px;
-			text-align: center;
-			color: $color-white;
-			&:hover {
-				background-color: darken($admin-color-secondary,10%);
-			}
-		}
-		.top {
-			background-color: #d3d3d3;
-			@include flex-container(center,center);
-			border-radius: 3px;
-			width: 40px;
-			height: 40px;
-			cursor: pointer;
-			@include transition;
-			&:hover {
-				background-color: #a9a9a9;
-			}
-			svg {
-				width: 20px;
-				height: 20px;
-			}
-		}
-	}
-}
-.buttons-bottom.absolute-bottom {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-}
-
-// =========================================/
-// Content
+// Content -> Header
 // =========================================/
 
 .page-admin {
@@ -278,13 +122,22 @@
 				font-size: 2em;
 				font-weight: 600;
 				margin: 0px 0px 10px 20px;
+				@include admin-mq(m) {
+					margin: 0px 0px 10px 0px;
+				}
 			}
 			.atbs-header-sub {
 				@include flex-container(space-between,center);
 				padding: 0px 20px;
 				margin-bottom: 20px;
+				@include admin-mq(m) {
+					padding: 0px;
+				}
 				.left {
 					@include flex-container(flex-start,center);
+					@include admin-mq(m) {
+						width: 100%;
+					}
 					.url-header {
 						padding: 5px;
 						font-size: .85em;
@@ -293,6 +146,9 @@
 						background-color: #f9f9f9;
 						width: 300px;
 						margin-right: 15px;
+						@include admin-mq(m) {
+							width: calc(100% - 79px);
+						}
 					}
 					svg {
 						width: 27px;
@@ -315,134 +171,8 @@
 				p {
 					margin: 0px;
 					font-size: .75em;
-				}
-			}
-		}
-		form {
-			@include flex-container;
-			position: relative;
-			padding-bottom: 90px;
-		}
-		.ac-block {
-			position: relative;
-			width: 100%;
-			.fa-times {
-				position: absolute;
-				top: 0;
-				right: 0;
-				font-size: 1em;
-				padding: 10px;
-				color: #a9a9a9;
-				cursor: pointer;
-				&:hover {
-					color: #333;
-				}
-			}
-			h2 {
-				margin-bottom: .5em;
-			}
-			p {
-				font-size: .8em;
-				font-style: italic;
-				color: #a9a9a9;
-				line-height: 1.5em;
-				margin-bottom: 1em;
-			}
-			input {
-				width: 100%;
-				padding: 8px;
-				border: 1px solid #d3d3d3;
-				font-size: .9em;
-				display: none;
-			}
-			input.uneditable {
-				background-color: #f9f9f9;
-			}
-			.dates-editor {
-				@include flex-container;
-				input {
-					width: calc(50% - 6px);
-				}
-			}
-			.select-images {
-				@include transition;
-				padding: 5px 15px;
-				cursor: pointer;
-				background-color: $color-primary;
-				color: $color-white;
-				border: 0px;
-				border-radius: 3px;
-				display: inline-block;
-				margin: 10px 10px 0px 0px;
-				&:hover {
-					background-color: darken($color-primary, 5%);
-				}
-			}
-			table {
-				width: 100%;
-		    margin: 30px 0px 0px;
-		    border-radius: 0px;
-		    box-shadow: none;
-		    table-layout: fixed;
-		    tr {
-		    	border-top: 1px solid #d3d3d3;
-		    	border-bottom: 1px solid #d3d3d3;
-		    	border-left: 1px solid #d3d3d3;
-		    	font-size: .9em;
-		    }
-		    td {
-		    	background: none;
-		    	color: #333;
-		    	border-right: 1px solid #d3d3d3;
-		    	textarea {
-		    		padding: 10px;
-		    		width: 100%;
-		    		border: 0px;
-		    		font-size: 1em;
-		    	}
-		    }
-			}
-			.table-resize {
-				@include flex-container(flex-start,center);
-				margin-top: 20px;
-				input {
-					width: 40px;
-					padding: 4px 8px;
-				}
-				span {
-					font-weight: 600;
-					margin: 0px 10px;
-				}
-				p {
-					background-color: gray;
-					color: #fff;
-					padding: 5px 10px;
-					border-radius: 3px;
-					margin: 0px 0px 0px 10px;
-					&:hover {
-						background-color: #a9a9a9;
-						cursor: pointer;
-					}
-				}
-			}
-			.list {
-				@include flex-container(flex-start,center);
-				padding-top: 12px;
-				p {
-					margin: 0px 10px 10px 0px;
-			    background-color: #fff;
-			    box-shadow: 1px 1px 2px #d9d9d9;
-			    padding: 6px 8px;
-			    border-radius: 3px;
-			    font-size: .95em;
-			    font-style: unset;
-			    color: unset;
-					i {
-						cursor: pointer;
-				    position: relative;
-				    font-size: .9em;
-				    padding: 0px;
-				    margin-left: 8px;
+					@include admin-mq(m) {
+						display: none;
 					}
 				}
 			}
@@ -483,6 +213,160 @@
 }
 
 // =========================================/
+// Content -> Form/Blocks
+// =========================================/
+
+.page-admin {
+	.admin-content {
+		form {
+			@include flex-container;
+			position: relative;
+			padding-bottom: 90px;
+			@include admin-mq(l) {
+				padding-bottom: 112px;
+			}
+			@include admin-mq(s) {
+				padding-bottom: 150px;
+			}
+			.ac-block {
+				position: relative;
+				width: 100%;
+				.fa-times {
+					position: absolute;
+					top: 0;
+					right: 0;
+					font-size: 1em;
+					padding: 10px;
+					color: #a9a9a9;
+					cursor: pointer;
+					&:hover {
+						color: #333;
+					}
+				}
+				h2 {
+					margin-bottom: .5em;
+				}
+				p {
+					font-size: .8em;
+					font-style: italic;
+					color: #a9a9a9;
+					line-height: 1.5em;
+					margin-bottom: 1em;
+				}
+				input {
+					width: 100%;
+					padding: 8px;
+					border: 1px solid #d3d3d3;
+					font-size: .9em;
+					display: none;
+				}
+				input.uneditable {
+					background-color: #f9f9f9;
+				}
+				.dates-editor {
+					@include flex-container;
+					input {
+						width: calc(50% - 6px);
+						@include admin-mq(m) {
+							width: 100%;
+							margin-bottom: 12px;
+						}
+					}
+					input:last-child {
+						margin-bottom: 0px;
+					}
+				}
+				.select-images {
+					@include transition;
+					padding: 5px 15px;
+					cursor: pointer;
+					background-color: $color-primary;
+					color: $color-white;
+					border: 0px;
+					border-radius: 3px;
+					display: inline-block;
+					margin: 10px 10px 0px 0px;
+					font-style: unset;
+					&:hover {
+						background-color: darken($color-primary, 5%);
+					}
+				}
+				table {
+					width: 100%;
+			    margin: 30px 0px 0px;
+			    border-radius: 0px;
+			    box-shadow: none;
+			    table-layout: fixed;
+			    tr {
+			    	border-top: 1px solid #d3d3d3;
+			    	border-bottom: 1px solid #d3d3d3;
+			    	border-left: 1px solid #d3d3d3;
+			    	font-size: .9em;
+			    }
+			    td {
+			    	background: none;
+			    	color: #333;
+			    	border-right: 1px solid #d3d3d3;
+			    	textarea {
+			    		padding: 10px;
+			    		width: 100%;
+			    		border: 0px;
+			    		font-size: 1em;
+			    	}
+			    }
+				}
+				.table-resize {
+					@include flex-container(flex-start,center);
+					margin-top: 20px;
+					input {
+						width: 40px;
+						padding: 4px 8px;
+					}
+					span {
+						font-weight: 600;
+						margin: 0px 10px;
+					}
+					p {
+						background-color: gray;
+						color: #fff;
+						padding: 5px 10px;
+						border-radius: 3px;
+						margin: 0px 0px 0px 10px;
+						font-style: unset;
+						color: $admin-color-white !important;
+						&:hover {
+							background-color: #a9a9a9;
+							cursor: pointer;
+						}
+					}
+				}
+				.list {
+					@include flex-container(flex-start,center);
+					padding-top: 12px;
+					p {
+						margin: 0px 10px 10px 0px;
+				    background-color: #fff;
+				    box-shadow: 1px 1px 2px #d9d9d9;
+				    padding: 6px 8px;
+				    border-radius: 3px;
+				    font-size: .95em;
+				    font-style: unset;
+				    color: unset;
+						i {
+							cursor: pointer;
+					    position: relative;
+					    font-size: .9em;
+					    padding: 0px;
+					    margin-left: 8px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
 // Content - New Section
 // =========================================/
 
@@ -504,6 +388,9 @@
 					margin: 12px 0px;
 					border: 1px solid #d3d3d3;
 					font-size: .9em;
+					@include admin-mq(s) {
+						width: 100%;
+					}
 				}
 				.add-section-submit {
 					display: inline-block;
@@ -528,7 +415,8 @@
 						position: relative;
 						padding: 10px 30px 10px 10px;
 						border: 1px solid #d3d3d3;
-						width: 500px;
+						width: 100%;
+						max-width: 500px;
 						@include flex-container(space-between,center);
 						margin-bottom: 5px;
 						p {
@@ -567,138 +455,6 @@
 }
 
 // =========================================/
-// Content - Quill Overrides
-// =========================================/
-
-.ql-container {
-	font-size: inherit;
-}
-.ql-editor {
-	padding: 25px 15px 10px;
-	font-family: unset;
-	.ql-tooltip {
-		input {
-			width: auto;
-		}
-	}
-	* {
-		font-family: "Libre Baskerville", serif !important;
-	}
-	p {
-		font-size: .9em !important;
-		color: unset !important;
-		font-style: unset !important;
-		line-height: 1.5em;
-		margin-bottom: 1em;
-	}
-	li {
-		font-size: .9em;
-		line-height: 1.5em;
-	}
-	h1 {
-		font-size: 2.2em;
-		line-height: 1.3em;
-		margin-bottom: .8em;
-		font-weight: 600;
-	}
-	h2 {
-		font-size: 1.8em;
-		line-height: 1.3em;
-		margin-bottom: .8em;
-		font-weight: 600;
-	}
-	h3 {
-		font-size: 1.6em;
-		line-height: 1.3em;
-		margin-bottom: .8em;
-		font-weight: 600;
-	}
-	h4 {
-		font-size: 1.4em;
-		line-height: 1.3em;
-		margin-bottom: .8em;
-		font-weight: 600;
-	}
-	h5 {
-		font-size: 1.2em;
-		line-height: 1.3em;
-		margin-bottom: .8em;
-		font-weight: 600;
-	}
-	h6 {
-		font-size: 1em;
-		line-height: 1.3em;
-		margin-bottom: .8em;
-		font-weight: 600;
-	}
-	ul,ol {
-		padding-left: .5em;
-	}
-	strong {
-		font-weight: 600;
-	}
-	em {
-		font-style: italic;
-	}
-	sup {
-		vertical-align: super;
-		font-size: .7em;
-		line-height: 1em;
-	}
-	sub {
-		vertical-align: sub;
-		font-size: .7em;
-		line-height: 1em;
-	}
-}
-
-.quill {
-	.ql-toolbar {
-		.ql-color {
-			.ql-picker-options {
-				[data-value=custom-color] {
-					background: none;
-					width: 100%;
-					font-size: .7em;
-					line-height: 1em;
-					margin: 2px 0px -3px 0px;
-					font-style: italic;
-					color: #a9a9a9;
-					&:before {
-						content: 'Custom'
-					}
-					&:hover {
-						border-color: transparent;
-					}
-				}
-			}
-		}
-	}
-}
-
-// =========================================/
-// Footer
-// =========================================/
-
-.footer-admin {
-	background-color: $admin-color-bg-light;
-	padding: 30px 0px;
-	display: none;
-	.fa-container {
-		@include global-width;
-		a {
-			color: $admin-color-primary;
-			&:hover {
-				color: $admin-color-secondary;
-			}
-			i {
-				padding-right: 10px;
-			}
-		}
-	}
-}
-
-// =========================================/
 // Listing
 // =========================================/
 
@@ -710,6 +466,10 @@
 		@include flex-container(space-between,center);
 		.left {
 			@include flex-container(flex-start,center);
+			@include admin-mq(m) {
+				width: 100%;
+				margin-bottom: 20px;
+			}
 			h1 {
 				font-size: 1.5em;
 				font-weight: 500;
@@ -733,12 +493,17 @@
 		input {
 			font-size: .9em;
 			padding: 5px;
-			width: 100%;
-			max-width: 200px;
+			width: calc(33% - 10px);
+			@include admin-mq(l) {
+				width: calc(50% - 10px);
+			}
+			@include admin-mq(m) {
+				width: 100%;
+			}
 		}
 	}
 	.atb-single {
-		width: 32%;
+		width: calc(33% - 10px);
 		@include admin-white-background;
 		margin: 0px 0px 20px;
 		color: $color-black !important;
@@ -747,6 +512,12 @@
 		@include flex-container(space-between,center);
 		&:hover {
 			box-shadow: 0px 0px 10px #a9a9a9;
+		}
+		@include admin-mq(l) {
+			width: calc(50% - 10px);
+		}
+		@include admin-mq(m) {
+			width: 100%;
 		}
 		h1,h2 {
 			margin: 0px;
@@ -821,6 +592,9 @@
 	.avl-post {
 		@include admin-white-background;
 		display: none;
+		@include admin-mq(l) {
+			width: 100% !important;
+		}
 		h3 {
 			font-size: 1.2em;
 			font-weight: 600;
@@ -1076,24 +850,25 @@
 			@include flex-container;
 			width: 100%;
 			.acbic-single {
-				width: 24%;
+				width: calc(25% - 5px);
 				height: 150px;
 				background-size: 90%;
 				background-position: center;
 				background-repeat: no-repeat;
 				background-color: #f2f2f2;
 				border-radius: 5px;
-				margin: 5px 0px;
+				margin-bottom: 10px;
 				border: 2px solid #f2f2f2;
 				position: relative;
-				@include mq(l) {
-					width: 33%;
+				@include admin-mq(l) {
+					width: calc(33% - 5px);
 				}
-				@include mq(m) {
-					width: 49%;
+				@include admin-mq(m) {
+					width: calc(50% - 5px);
 				}
-				@include mq(s) {
+				@include admin-mq(s) {
 					width: 100%;
+					height: 300px;
 				}
 				&:hover {
 					cursor: pointer;
@@ -1154,7 +929,7 @@
 }
 
 // =========================================/
-// Images Listing - (like for galleries)
+// Images Listing
 // =========================================/
 
 .acb-images {
@@ -1166,12 +941,19 @@
 			border-radius: 5px;
 			padding: 5px 15px;
 			display: inline-block;
+			font-style: unset;
 		}
 		.acbi-active {
 			height: 150px;
-			width: 24%;
-			margin: 5px .5%;
+			width: calc(25% - 5px);
+			margin-bottom: 10px;
 			position: relative;
+			@include admin-mq(m) {
+				width: calc(50% - 5px);
+			}
+			@include admin-mq(s) {
+				width: 100%;
+			}
 			i {
 				position: absolute;
 				top: 0;
@@ -1475,27 +1257,35 @@
 
 .page-admin {
 	.admin-content {
-		.ac-block {
-			width: calc(33% - 10px);
-			cursor: pointer;
-			border: 3px solid $color-white;
-			&:hover {
-				box-shadow: 2px 2px 3px #d3d3d3;
+		form {
+			.ac-block {
+				width: calc(33% - 10px);
+				cursor: pointer;
+				border: 3px solid $color-white;
+				@include admin-mq(l) {
+					width: calc(50% - 10px);
+				}
+				@include admin-mq(m) {
+					width: 100%;
+				}
+				&:hover {
+					box-shadow: 2px 2px 3px #d3d3d3;
+				}
+				.acb-description {
+					margin-bottom: 0px;
+				}
 			}
-			.acb-description {
-				margin-bottom: 0px;
+			.ac-block.active {
+				width: 100%;
+				cursor: default;
+				box-shadow: 1px 1px 1px #d3d3d3 !important;
+				.acb-description {
+					margin-bottom: 1em;
+				}
 			}
-		}
-		.ac-block.active {
-			width: 100%;
-			cursor: default;
-			box-shadow: 1px 1px 1px #d3d3d3 !important;
-			.acb-description {
-				margin-bottom: 1em;
+			.ac-block.block-focused {
+				@include animation(blockFocused,2s);
 			}
-		}
-		.ac-block.block-focused {
-			@include animation(blockFocused,2s);
 		}
 	}
 }
@@ -1533,6 +1323,9 @@
 			width: 49%;
 			height: 40px;
 			font-size: .9em;
+			@include admin-mq(s) {
+				width: 100%;
+			}
 		}
 	}
 }
@@ -1700,10 +1493,16 @@
 					position: relative;
 					.left {
 						width: 60px;
+						@include admin-mq(m) {
+							width: 40px;
+						}
 						.number {
 							font-size: 2em;
 							color: #d3d3d3;
 							text-align: center;
+							@include admin-mq(m) {
+								font-size: 1.2em;
+							}
 						}
 						.arrows {
 							i {
@@ -1723,6 +1522,9 @@
 						border: 2px solid;
 						border-radius: 5px;
 						padding: 30px;
+						@include admin-mq(m) {
+							width: calc(100% - 45px);
+						}
 						.item {
 							margin-bottom: 15px;
 							h2 {

@@ -159,13 +159,16 @@ const Nav = ({ details, blocks, types }) => {
 				{order.map(item => {
 					return <div className={'item item-' + item.id} onDragStart={(e) => drag(e,item.id)} onDragOver={(e) => dragover(e)} onDrop={(e) => drop(e,item.id)} key={item.id} draggable="true" data-id={item.id} data-name={item.name} data-description={item.description} data-url={item.url}>
 						<div className='details'>
-							<label>Name:</label>
-							<input type='text' className='input-name' defaultValue={item.name} onChange={handleChange} />
-							<label>URL:</label>
-							<input type='text' className='input-url' defaultValue={item.url} onChange={handleChange} />
+							<label>Name:
+								<input type='text' className='input-name' defaultValue={item.name} onChange={handleChange} />
+							</label>
+							<label>URL:
+								<input type='text' className='input-url' defaultValue={item.url} onChange={handleChange} />
+							</label>
 							<div className='desc'>
-								<label>Description:</label>
-								<input type='text' className='input-desc' defaultValue={item.description} onChange={handleChange} />
+								<label>Description:
+									<input type='text' className='input-desc' defaultValue={item.description} onChange={handleChange} />
+								</label>
 							</div>
 						</div>
 						<i class="fas fa-times delete" onClick={() => deleteBlock(item.id)}></i>
@@ -186,13 +189,16 @@ const Nav = ({ details, blocks, types }) => {
 				{typesState.map(item => {
 					return <div className={'item item-' + item.id} key={item.id} data-id={item.id} data-type={item.type} data-single={item.single} data-content={item.content}>
 						<div className='details'>
-							<label>Type:</label>
-							<input type='text' className='input-type' defaultValue={item.type} onChange={handleChangeType} />
-							<label>Type Single:</label>
-							<input type='text' className='input-single' defaultValue={item.single} onChange={handleChangeType} />
+							<label>Type:
+								<input type='text' className='input-type' defaultValue={item.type} onChange={handleChangeType} />
+							</label>
+							<label>Type Single:
+								<input type='text' className='input-single' defaultValue={item.single} onChange={handleChangeType} />
+							</label>
 							<div className='desc'>
-								<label>Content:</label>
-								<textarea className='input-content' defaultValue={item.content} onChange={handleChangeType} />
+								<label>Content:
+									<textarea className='input-content' defaultValue={item.content} onChange={handleChangeType} />
+								</label>
 							</div>
 						</div>
 						<i class="fas fa-times delete" onClick={() => deleteType(item.id)}></i>
@@ -205,8 +211,8 @@ const Nav = ({ details, blocks, types }) => {
 				</div>
 				<div>
 					<p className='save' onClick={handleSave}>Save</p>
-					<p className='save save-close' onClick={handleSaveClose}>Save & Close</p>
-					<p className='save cancel' onClick={handleCancel}>Cancel & Go Back</p>
+					<p className='plain' onClick={handleSaveClose}>Save & Close</p>
+					<p className='plain' onClick={handleCancel}>Cancel & Go Back</p>
 				</div>
 			</div>
 			{loading && <Loading />}

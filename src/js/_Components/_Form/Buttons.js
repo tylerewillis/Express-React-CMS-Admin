@@ -4,7 +4,6 @@ export default ({ addInput }) => {
 
 	return (
 		<div className='form-buttons'>
-			<p>Add:</p>
 			<p className='button' onClick={() => addInput('input')}>Input</p>
 			<p className='button' onClick={() => addInput('textarea')}>Textarea</p>
 			<p className='button' onClick={() => addInput('select')}>Select</p>

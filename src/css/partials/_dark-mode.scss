@@ -35,9 +35,91 @@
 		p.no-posts {
 			color: #d3d3d3;
 		}
+		p.select-images, p.select-image {
+			color: $admin-color-white !important;
+		}
 	}
 	.loading {
 		background-color: rgba($admin-color-black,.8);
+	}
+}
+.loading.loading-dark-mode {
+	background-color: rgba($admin-color-black,.9);
+}
+
+// =========================================/
+// Dark Mode -> Login
+// =========================================/
+
+.page-admin-dark-mode {
+	.page-admin-main {
+		.admin-login-container {
+			background-color: #444;
+			box-shadow: 1px 1px 1px #666;
+			.alc-header {
+				border-bottom: 1px solid #666;
+				p.alch-active {
+					background-color: #666;
+				}
+				p {
+					background-color: #444;
+					color: $admin-color-white;
+				}
+			}
+			.alc-form-container {
+				input[type='email'], input[type='password'], input[type='text'] {
+					background-color: $admin-color-black;
+					border: 1px solid #777;
+					color: $admin-color-white;
+					-webkit-transition-delay: 99999s;
+				}
+				input[type=submit] {
+					&:hover {
+						background-color: darken($admin-color-secondary,10%);
+					}
+				}
+				label {
+					color: #d3d3d3;
+				}
+				.buttons {
+					a {
+						color: #d3d3d3;
+					}
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
+// Dark Mode -> Reset Password
+// =========================================/
+
+.page-admin-dark-mode {
+	.page-admin-main {
+		.reset-password-container {
+			background-color: #444;
+			box-shadow: 1px 1px 1px #666;
+			h1 {
+				color: $admin-color-white;
+			}
+			p {
+				color: #d3d3d3;
+			}
+			form {
+				input[type='email'], input[type='password'] {
+					background-color: $admin-color-black;
+					border: 1px solid #777;
+					color: $admin-color-white;
+					-webkit-transition-delay: 99999s;
+				}
+				input[type=submit] {
+					&:hover {
+						background-color: darken($admin-color-secondary,10%);
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -74,6 +156,18 @@
 				}
 				select.active {
 					color: $admin-color-white;
+				}
+			}
+		}
+		.results {
+			.res {
+				background-color: #444;
+				box-shadow: 1px 1px 1px #666;
+				h2 {
+					color: $admin-color-white;
+				}
+				&:hover {
+					box-shadow: 2px 2px 2px #666;
 				}
 			}
 		}
@@ -247,7 +341,7 @@
 					background-color: $admin-color-black;
 					border: 2px solid $admin-color-black;
 					p.media-file-name {
-						background-color: #888;
+						background-color: #666;
 						color: #f2f2f2 !important;
 					}
 				}
@@ -343,6 +437,27 @@
 				}
 				.ql-editor {
 					color: $admin-color-white;
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
+// Dark Mode -> Media
+// =========================================/
+
+.page-admin-dark-mode {
+	.page-admin-main {
+		.admin-media-container {
+			.image-search {
+				.actions {
+					i {
+						color: #d3d3d3;
+					}
+					i.active {
+						color: $admin-color-white;
+					}
 				}
 			}
 		}
@@ -1086,6 +1201,20 @@
 					color: $admin-color-white;
 				}
 			}
+			.buttons-bottom {
+				background-color: $admin-color-black;
+				padding: 20px 0px;
+				.add-item {
+					background-color: $admin-color-black;
+					border: 2px dashed #666;
+					p {
+						color: #d3d3d3;
+					}
+					&:hover {
+						border: 2px dashed $admin-color-primary;
+					}
+				}
+			}
 			.dashboard-blocks, .post-types {
 				.item {
 					background-color: #444;
@@ -1097,6 +1226,37 @@
 						background-color: $admin-color-black;
 						border: 1px solid #777;
 						color: $admin-color-white;
+					}
+				}
+			}
+			.buttons-bottom {
+				div {
+					p.plain {
+						color: #d3d3d3;
+					}
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
+// Dark Mode -> Admins
+// =========================================/
+
+.page-admin-dark-mode {
+	.page-admin-main {
+		.admin-admins {
+			.avl-post {
+				h3 {
+					color: $admin-color-white;
+				}
+				p {
+					color: #d3d3d3;
+				}
+				div {
+					p {
+						color: $admin-color-primary;
 					}
 				}
 			}

@@ -10,16 +10,16 @@
 	padding-bottom: 15px;
 	.ad-single {
 		@include admin-white-background(20px, 15px 0px);
-		width: 32%;
+		width: calc(33% - 15px);
 		position: relative;
 		color: $color-black !important;
 		text-decoration: none !important;
 		@include transition(.2s);
 		@include admin-mq(l) {
-			width: 48%;
+			width: calc(50% - 15px);
 		}
 		@include admin-mq(m) {
-			width: 95%;
+			width: 100%;
 		}
 		h2 {
 			margin: 0px 0px 12px;
@@ -82,17 +82,33 @@
 		margin-bottom: 15px;
 		input {
 			font-size: .9em;
-			width: 32%;
+			width: calc(33% - 15px);
 			padding: 8px;
+			@include admin-mq(l) {
+				width: calc(50% - 15px);
+			}
+			@include admin-mq(m) {
+				width: 100%;
+				margin-bottom: 25px;
+			}
 		}
 		.select {
 			@include flex-container(space-between,center);
-			width: 32%;
+			width: calc(33% - 15px);
+			@include admin-mq(l) {
+				width: calc(50% - 15px);
+			}
+			@include admin-mq(m) {
+				width: 100%;
+			}
 			select {
 				font-size: .9em;
 				padding: 7px;
 				width: calc(100% - 96px);
 				color: #888;
+				@include admin-mq(m) {
+					width: calc(100% - 140px);
+				}
 			}
 			a {
 				color: #888;
@@ -100,6 +116,10 @@
 				cursor: default;
 				&:hover {
 					text-decoration: none;
+				}
+				@include admin-mq(m) {
+					font-size: 1.1em;
+					padding: 5px 10px;
 				}
 			}
 			a.active {

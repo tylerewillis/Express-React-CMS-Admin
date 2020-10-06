@@ -1,0 +1,91 @@
+// =========================================/
+// Bottom Buttons
+// =========================================/
+
+.buttons-bottom {
+	@include flex-container(space-between,center);
+	position: fixed;
+	bottom: 0;
+	width: 95%;
+	max-width: 1260px;
+	padding: 20px;
+	background-color: #f9f9f9;
+	border-top: 1px solid #d3d3d3;
+	z-index: 1;
+	div {
+		@include flex-container(flex-start,center);
+		p {
+			margin: 0px 15px 0px 0px;
+			@include admin-mq(l) {
+				width: calc(100% - 95px);
+			}
+			input {
+				margin-left: 5px;
+				width: 225px;
+				padding: 2px;
+				@include admin-mq(l) {
+					width: calc(100% - 70px);
+				}
+			}
+		}
+		p:last-child {
+			margin: 0px;
+			@include admin-mq(l) {
+				margin: 15px 0px 0px 0px;
+			}
+		}
+		.plain {
+			@include transition;
+			cursor: pointer;
+			font-size: .8em;
+			@include admin-mq(l) {
+				width: max-content;
+				margin: 15px 20px 0px 0px;
+			}
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+		.save {
+			padding: 5px;
+			cursor: pointer;
+			background-color: $admin-color-secondary;
+			@include transition;
+			border-radius: 3px;
+			width: 80px;
+			text-align: center;
+			color: $color-white;
+			@include admin-mq(l) {
+				margin-right: 0px;
+			}
+			&:hover {
+				background-color: darken($admin-color-secondary,10%);
+			}
+		}
+		.top {
+			background-color: #d3d3d3;
+			@include flex-container(center,center);
+			border-radius: 3px;
+			width: 40px;
+			height: 40px;
+			cursor: pointer;
+			@include transition;
+			@include admin-mq(l) {
+				display: none;
+			}
+			&:hover {
+				background-color: #a9a9a9;
+			}
+			svg {
+				width: 20px;
+				height: 20px;
+			}
+		}
+	}
+}
+.buttons-bottom.absolute-bottom {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+}

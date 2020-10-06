@@ -1,0 +1,109 @@
+// =========================================/
+// Content - Quill Overrides
+// =========================================/
+
+.ql-container {
+	font-size: inherit;
+}
+.ql-editor {
+	padding: 25px 15px 10px;
+	font-family: unset;
+	.ql-tooltip {
+		input {
+			width: auto;
+		}
+	}
+	* {
+		font-family: "Libre Baskerville", serif !important;
+	}
+	p {
+		font-size: .9em !important;
+		color: unset !important;
+		font-style: unset !important;
+		line-height: 1.5em;
+		margin-bottom: 1em;
+	}
+	li {
+		font-size: .9em;
+		line-height: 1.5em;
+	}
+	h1 {
+		font-size: 2.2em;
+		line-height: 1.3em;
+		margin-bottom: .8em;
+		font-weight: 600;
+	}
+	h2 {
+		font-size: 1.8em;
+		line-height: 1.3em;
+		margin-bottom: .8em;
+		font-weight: 600;
+	}
+	h3 {
+		font-size: 1.6em;
+		line-height: 1.3em;
+		margin-bottom: .8em;
+		font-weight: 600;
+	}
+	h4 {
+		font-size: 1.4em;
+		line-height: 1.3em;
+		margin-bottom: .8em;
+		font-weight: 600;
+	}
+	h5 {
+		font-size: 1.2em;
+		line-height: 1.3em;
+		margin-bottom: .8em;
+		font-weight: 600;
+	}
+	h6 {
+		font-size: 1em;
+		line-height: 1.3em;
+		margin-bottom: .8em;
+		font-weight: 600;
+	}
+	ul,ol {
+		padding-left: .5em;
+	}
+	strong {
+		font-weight: 600;
+	}
+	em {
+		font-style: italic;
+	}
+	sup {
+		vertical-align: super;
+		font-size: .7em;
+		line-height: 1em;
+	}
+	sub {
+		vertical-align: sub;
+		font-size: .7em;
+		line-height: 1em;
+	}
+}
+
+.quill {
+	.ql-toolbar {
+		.ql-color {
+			.ql-picker-options {
+				[data-value=custom-color] {
+					background: none;
+					width: 100%;
+					font-size: .7em;
+					line-height: 1em;
+					margin: 2px 0px -3px 0px;
+					font-style: italic;
+					color: #a9a9a9;
+					&:before {
+						content: 'Custom'
+					}
+					&:hover {
+						border-color: transparent;
+					}
+				}
+			}
+		}
+	}
+}

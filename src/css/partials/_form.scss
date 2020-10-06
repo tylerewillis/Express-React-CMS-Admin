@@ -9,6 +9,9 @@
 		.detail {
 			width: 49%;
 			margin-bottom: 20px;
+			@include admin-mq(m) {
+				width: 100%;
+			}
 			h2 {
 				font-size: 1.3em;
 				font-weight: 500;
@@ -47,6 +50,9 @@
 			padding: 0px 30px;
 			position: relative;
 			margin-bottom: 20px;
+			@include admin-mq(m) {
+				margin-bottom: 0px;
+			}
 			.lines {
 				position: absolute;
 				color: #d3d3d3;
@@ -78,6 +84,10 @@
 				box-shadow: 2px 2px 2px #d3d3d3;
 				position: relative;
 				cursor: move;
+				@include admin-mq(m) {
+					width: 100% !important;
+					margin-bottom: 20px;
+				}
 				p {
 					margin: 0px 10px 0px 0px;
 			    width: 75px;
@@ -115,7 +125,7 @@
 	}
 	.form-buttons {
 		@include flex-container(flex-start,center);
-		margin: 50px 0px;
+		margin: 25px 0px 40px;
 		p {
 			margin: 0px 20px 0px 0px;
 			font-weight: 600;
@@ -129,7 +139,7 @@
 			border-radius: 5px;
 			text-align: center;
 			background-color: $color-white;
-			margin-right: 15px;
+			margin: 15px 15px 0px 0px;
 			font-weight: 400;
 			&:hover {
 				border: 2px solid #d3d3d3;
@@ -139,5 +149,21 @@
 	.buttons-bottom {
 		position: relative;
 		width: 100%;
+		@include admin-mq(l) {
+			padding: 20px 0px;
+		}
+		p.plain {
+			@include admin-mq(l) {
+				margin: 0px 0px 0px 15px;
+			}
+			@include admin-mq(m) {
+				margin: 20px 20px 0px 0px;
+			}
+		}
+		p.save {
+			@include admin-mq(m) {
+				margin-right: calc(100% - 80px);
+			}
+		}
 	}
 }

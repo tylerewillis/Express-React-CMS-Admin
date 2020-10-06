@@ -188,10 +188,12 @@ const Nav = ({ nav, posts }) => {
 						<i className="fas fa-caret-right arrow arrow-right" onClick={() => tab(i)}></i>
 						<div className='details'>
 							<p className='number'>{(i + 1) + '.'}</p>
-							<label>Name:</label>
-							<input type='text' className='input-name' defaultValue={item.name} onChange={handleChange} />
-							<label>URL:</label>
-							<input type='text' className='input-url' defaultValue={item.url} onChange={handleChange} />
+							<label>Name:
+								<input type='text' className='input-name' defaultValue={item.name} onChange={handleChange} />
+							</label>
+							<label>URL:
+								<input type='text' className='input-url' defaultValue={item.url} onChange={handleChange} />
+							</label>
 						</div>
 						<i class="fas fa-times delete" onClick={() => deleteNav(item.id)}></i>
 					</div>

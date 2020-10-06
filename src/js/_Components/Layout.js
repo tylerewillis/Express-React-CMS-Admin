@@ -78,7 +78,7 @@ const Admin = React.memo((props) => {
 			)
 		}
 	} else {
-		return <Loading />
+		return <Loading darkMode={darkMode} />
 	}
 })
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { MAIN_SITE } from './_Config'
 import { useCookies } from 'react-cookie'
+import Emoji from './_Header/Emoji'
 
 const Header = React.memo(({ page, darkMode, setDarkMode }) => {
 
@@ -31,7 +32,7 @@ const Header = React.memo(({ page, darkMode, setDarkMode }) => {
 	      	<span className='divider'>|</span>
 	      	{cookies.name &&
 	      		<React.Fragment>
-	      			<p>Hi, {cookies.name} 🙂</p>
+	      			<p>Hi, {cookies.name}<span className='emoji' role="img" aria-label="friendly emoji">{Emoji}</span></p>
 	      			<span className='divider'>|</span>
 	      		</React.Fragment>
 	      	}
@@ -46,7 +47,7 @@ const Header = React.memo(({ page, darkMode, setDarkMode }) => {
 		    		<i className="far fa-comment"></i>
 		    		<span>Support</span>
 		    	</a>
-		    	<a href='/signout'>
+		    	<a className='signout-link' href='/signout'>
 		    		<i className="fas fa-sign-out-alt"></i>
 		    		<span>Sign Out</span>
 		    	</a>

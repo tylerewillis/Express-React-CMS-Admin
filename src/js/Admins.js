@@ -31,7 +31,7 @@ const Admins = ({ admins }) => {
 	}
 
 	return (
-		<div className='admin-vert-list'>
+		<div className='admin-vert-list admin-admins'>
 			{admins.map((a,i) => {
 				return <div className='avl-post avl-admin-post' key={i}>
 					<h3>{a.first_name} {a.last_name}</h3>
