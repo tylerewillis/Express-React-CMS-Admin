@@ -1310,6 +1310,20 @@
 				display: block;
 			}
 		}
+		.ac-block.url-duplicate {
+			h2 {
+				span.duplicate-url-text {
+					color: $admin-color-primary;
+					font-weight: 400;
+			    font-size: .8em;
+			    margin-left: 20px;
+			    font-style: italic;
+				}
+			}
+			input {
+				border: 1px solid $admin-color-primary !important;
+			}
+		}
 	}
 }
 
@@ -1327,6 +1341,21 @@
 				width: 100%;
 			}
 		}
+	}
+}
+
+// =========================================/
+// List
+// =========================================/
+
+.ac-block {
+	.list {
+		display: none !important;
+	}
+}
+.ac-block.active {
+	.list {
+		display: flex !important;
 	}
 }
 

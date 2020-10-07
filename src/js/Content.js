@@ -17,7 +17,7 @@ import Blocks from './_Components/_Content/Blocks'
 import Color from './_Components/_Content/Color'
 import Submit from './_Components/_API/Submit'
 
-const Content = React.memo(({ postType, postUrl, post, content, images, forms }) => {
+const Content = React.memo(({ postType, postUrl, post, content, images, forms, urls }) => {
 	
 	const [ data, setData ] = useState({content})
 	const [ loading, setLoading ] = useState(false)
@@ -29,11 +29,11 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms })
 	const [ pubDate, setPubDate ] = useState(post.pub_date)
 	const [ blocksOpen, setBlocksOpen ] = useState(false)
 	const [ blocksDisplay, setBlocksDisplay ] = useState(false)
+	const [ duplicateUrl, setDuplicateUrl ] = useState(false)
 
 	const toUrl = string => {
 	  var clean = string.replace(/[^a-zA-Z0-9- ]/g, '')
 	  var url = clean.replace(/ /gm, "-").toLowerCase()
-
 	  if (path === 'pages') return '/' + url
 		else if (path === 'products') return '/shop/' + url
 		else return '/' + path + '/' + url
@@ -69,6 +69,30 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms })
 	}
 
 	//--------------------
+	//- Duplicate URL
+	//--------------------
+
+	const checkDuplicate = string => {
+		var temp = false
+		urls.forEach(item => {
+			if (item.url === string) temp = true
+		})
+		setDuplicateUrl(temp)
+	}
+
+	//--------------------
+	//- Remove own url from list initially
+	//--------------------
+
+	useEffect(() => {
+		var temp = '', done = false
+		if (content[1] && content[1].name === 'URL') temp = content[1].content
+		urls.forEach((item, i) => {
+			if (item.url === temp && !done) urls.splice(i,1)
+		})
+	},[]) // eslint-disable-line
+
+	//--------------------
 	//- Open Blocks from Closed
 	//--------------------
 
@@ -95,7 +119,7 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms })
 			case 'text':
 				return <Text key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			case 'plain-text':
-				return <PlainText key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
+				return <PlainText key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} checkDuplicate={checkDuplicate} duplicateUrl={duplicateUrl} />
 			case 'list':
 				return <List key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			case 'dates':
@@ -120,33 +144,39 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms })
 	})
 
 	const handleSave = () => {
-		setLoading(true);
-		(async () => {
-			await Submit(window.location.pathname, { content: data.content, pub_date: pubDate })
-			setLoading(false)
-		})()
+		if (!duplicateUrl) {
+			setLoading(true);
+			(async () => {
+				await Submit(window.location.pathname, { content: data.content, pub_date: pubDate })
+				setLoading(false)
+			})()
+		} else window.alert('Please change the duplicate URL before saving!')
 	}
 
 	const handleSaveClose = () => {
-		setLoading(true);
-		(async () => {
-			await Submit(window.location.pathname, { content: data.content, pub_date: pubDate })
-			const prevUrl = window.location.pathname.split('/')
-			prevUrl.pop()
-			const url = prevUrl.join('/')
-			window.location.replace(url)
-		})()
+		if (!duplicateUrl) {
+			setLoading(true);
+			(async () => {
+				await Submit(window.location.pathname, { content: data.content, pub_date: pubDate })
+				const prevUrl = window.location.pathname.split('/')
+				prevUrl.pop()
+				const url = prevUrl.join('/')
+				window.location.replace(url)
+			})()
+		} else window.alert('Please change the duplicate URL before saving!')
 	}
 
 	const handleSaveCopy = () => {
-		setLoading(true);
-		(async () => {
-			await Submit(window.location.pathname + '/copy', { type: postType, content: data.content, pub_date: pubDate })
-			const prevUrl = window.location.pathname.split('/')
-			prevUrl.pop()
-			const url = prevUrl.join('/')
-			window.location.replace(url)
-		})()
+		if (!duplicateUrl) {
+			setLoading(true);
+			(async () => {
+				await Submit(window.location.pathname + '/copy', { type: postType, content: data.content, pub_date: pubDate })
+				const prevUrl = window.location.pathname.split('/')
+				prevUrl.pop()
+				const url = prevUrl.join('/')
+				window.location.replace(url)
+			})()
+		} else window.alert('Please change the duplicate URL before saving!')
 	}
 
 	const handleCancel = () => {

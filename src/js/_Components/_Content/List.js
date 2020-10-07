@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie'
 const List = React.memo(({ con, handleChange, removeSection, blocksOpen, openBlocks }) => {
 
 	const [ cookies ] = useCookies(['role'])
-	const [ items, setItems ] = useState((con.content.length) ? con.content.split(',') : [])
+	const [ items, setItems ] = useState((con.content.length) ? con.content.split('^') : [])
 
 	const sendChange = (value) => {
 		handleChange({
@@ -21,7 +21,7 @@ const List = React.memo(({ con, handleChange, removeSection, blocksOpen, openBlo
 			let temp = items
 			temp.push(e.target.value.trim())
 			setItems(temp)
-			sendChange(temp.join(','))
+			sendChange(temp.join('^'))
 			// Reset
 			e.target.value = ''
 		}
@@ -32,7 +32,7 @@ const List = React.memo(({ con, handleChange, removeSection, blocksOpen, openBlo
 		let index = temp.indexOf(item)
 		temp.splice(index,1)
 		setItems(temp)
-		sendChange(temp.join(','))
+		sendChange(temp.join('^'))
 	}
 
 	return (
