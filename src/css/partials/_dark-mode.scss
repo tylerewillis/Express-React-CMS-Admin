@@ -463,6 +463,16 @@
 					}
 				}
 			}
+			.image-container {
+				.acbic-single {
+					.media-file-icon {
+						img {
+							filter: brightness(0) invert(1);
+							opacity: .2;
+						}
+					}
+				}
+			}
 		}
 	}
 }
@@ -1261,6 +1271,105 @@
 					p {
 						color: $admin-color-primary;
 					}
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
+// Dark Mode -> Comments
+// =========================================/
+
+.page-admin-dark-mode {
+	.page-admin-main {
+		.comments-list {
+			.avl-tabs {
+				p {
+					background-color: #444;
+					color: $admin-color-white !important;
+					border-right: 1px solid #666 !important;
+					border-bottom: 1px solid #666 !important;
+				}
+				p.avct-active {
+					background-color: #666;
+					border: 1px solid #666;
+				}
+			}
+			.avl-post {
+				h3 {
+					color: $admin-color-white;
+				}
+				.comments-list {
+					.comments-list-filter {
+						select {
+							background-color: $admin-color-black;
+							border: 1px solid #777;
+							color: $admin-color-white;
+						}
+					}
+					.comment {
+						p {
+							color: #d3d3d3;
+							border: 1px solid #666;
+							svg {
+								&:hover {
+									fill: #777;
+								}
+							}
+						}
+					}
+					.admin-comment {
+						p:nth-child(1) {
+							border-left: 4px solid $admin-color-primary;
+						}
+					}
+				}
+				p.comments-reply-empty {
+					color: #d3d3d3;
+					span {
+						color: $admin-color-primary;
+					}
+				}
+				.comments-new {
+					select, textarea, input {
+						background-color: $admin-color-black;
+						border: 1px solid #777;
+						color: $admin-color-white;
+					}
+					input[type=submit] {
+						background-color: $admin-color-secondary;
+						border: 0px;
+						&:hover {
+							background-color: darken($admin-color-secondary,10%);
+						}
+					}
+				}
+				.comments-reply {
+					.comment {
+						p {
+							color: #d3d3d3;
+							border: 1px solid #666;
+						}
+					}
+					p.reply-text{
+						color: $admin-color-white;
+					}
+					select, textarea, input {
+						background-color: $admin-color-black;
+						border: 1px solid #777;
+						color: $admin-color-white;
+					}
+					input[type=submit] {
+						background-color: $admin-color-secondary;
+						border: 0px;
+						&:hover {
+							background-color: darken($admin-color-secondary,10%);
+						}
+					}
+				}
+				p.comments-reply-empty {
+					color: #d3d3d3;
 				}
 			}
 		}

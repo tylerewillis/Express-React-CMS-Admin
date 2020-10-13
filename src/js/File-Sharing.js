@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import Layout from './_Components/Layout'
-import { API_PATH } from './_Components/_Config'
 import Call from './_Components/_API/Call'
 import Submit from './_Components/_API/Submit'
 import Loading from './_Components/Loading'
@@ -9,7 +8,7 @@ import Settings from './_Components/_Files/Settings'
 import Search from './_Components/_Files/Search'
 import AddNew from './_Components/_Files/Add-New'
 
-const FileSharing = ({ settings, files, url }) => {
+const FileSharing = ({ settings, files, url, fileUploadHost }) => {
 
 	const [ availFiles, setAvailFiles ] = useState(files)
 	const [ loading, setLoading ] = useState(false)
@@ -108,7 +107,7 @@ const FileSharing = ({ settings, files, url }) => {
 								<p>{(file.available_until) ? file.available_until : ''}</p>
 								<p>
 									{file.path.split(',').map((path, j) => {
-										return <a onClick={(e) => downloadFile(file.id, e.target)} href={API_PATH.substring(0, API_PATH.length - 6) + '/static/files/' + path} target='_blank' rel='noopener noreferrer'>Download</a>
+										return <a onClick={(e) => downloadFile(file.id, e.target)} href={fileUploadHost + '/static/files/' + path} target='_blank' rel='noopener noreferrer'>Download</a>
 									})}
 								</p>
 								<p className='downloads'>{file.downloads}</p>
@@ -124,7 +123,7 @@ const FileSharing = ({ settings, files, url }) => {
 					}
 				</div>
 			</div>
-			<AddNew showAddNew={showAddNew} settings={settings} setLoading={setLoading} reloadContainer={reloadContainer} setShowAddNew={setShowAddNew} accessLevels={accessLevels} />
+			<AddNew showAddNew={showAddNew} settings={settings} setLoading={setLoading} reloadContainer={reloadContainer} setShowAddNew={setShowAddNew} accessLevels={accessLevels} fileUploadHost={fileUploadHost} />
 			{loading && <Loading />}
 		</div>
 	)

@@ -4,7 +4,7 @@ import { API_IMAGE_PATH } from '../_Config'
 import Call from '../_API/Call'
 import { useCookies } from 'react-cookie'
 
-const Image = React.memo(({ con, images, handleChange, removeSection, blocksOpen, openBlocks }) => {
+const Image = React.memo(({ con, images, handleChange, removeSection, blocksOpen, openBlocks, fileUploadHost }) => {
 
 	const [ cookies ] = useCookies(['role'])
 	const [ image, setImage ] = useState(con.content)
@@ -41,7 +41,7 @@ const Image = React.memo(({ con, images, handleChange, removeSection, blocksOpen
 	const reloadContainer = () => {
 		(async function() {
 			const updatedImages = await Call('/get-images-from-directory')
-			setAvailableImages(updatedImages)
+			setAvailableImages(updatedImages.images)
 		})()
 	}
 	
@@ -62,7 +62,7 @@ const Image = React.memo(({ con, images, handleChange, removeSection, blocksOpen
 					}
 				</div>
 				<div className='acbi-container' style={{display: toggle}}>
-					<Dropzone reloadContainer={reloadContainer} />
+					<Dropzone reloadContainer={reloadContainer} fileUploadHost={fileUploadHost} />
 					<div className='image-search'>
 						<input value={(search) ? search : ''} placeholder='Search' onChange={(e) => setSearch(e.target.value.toLowerCase())} />
 						<div className='actions'>

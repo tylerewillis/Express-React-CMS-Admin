@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Dropzone from './Dropzone'
 import Submit from '../_API/Submit'
 
-const Search = ({ showAddNew, settings, setLoading, reloadContainer, setShowAddNew, accessLevels }) => {
+const Search = ({ showAddNew, settings, setLoading, reloadContainer, setShowAddNew, accessLevels, fileUploadHost }) => {
 
   const [ fileName, setFileName ] = useState('')
   const [ description, setDescription ] = useState('')
@@ -47,7 +47,7 @@ const Search = ({ showAddNew, settings, setLoading, reloadContainer, setShowAddN
         <label>Description
           <input value={description} onChange={(e) => setDescription(e.target.value)} />
         </label>
-        <Dropzone uploadedFileNames={uploadedFileNames} />
+        <Dropzone uploadedFileNames={uploadedFileNames} fileUploadHost={fileUploadHost} />
         <label>Your Name
           <input value={yourName} onChange={(e) => setYourName(e.target.value)} />
         </label>

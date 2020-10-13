@@ -20,10 +20,10 @@
 				display: inline-block;
 				margin: 0px;
 				border: 1px solid #d3d3d3;
-				padding: 5px;
-				min-height: 40px;
+				padding: 7px 5px;
+				font-size: .8em;
 				svg {
-					height: 20px;
+					height: 14px;
 					fill: #d3d3d3;
 					cursor: pointer;
 					&:hover {
@@ -91,8 +91,7 @@
 				display: inline-block;
 				margin: 0px;
 				border: 1px solid #d3d3d3;
-				padding: 5px;
-				min-height: 40px;
+				padding: 7px 5px;
 				svg {
 					height: 20px;
 					fill: #d3d3d3;

@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'production') {
 	} else MAIN_SITE = matches && 'https://' + matches[1].substr(6)
 	// End hard-coded overrides
 
-} else MAIN_SITE = 'http://localhost:4000'
+} else MAIN_SITE = 'http://localhost:5000'
 
 const API_PATH = MAIN_SITE + '/admin'
 const API_IMAGE_PATH = MAIN_SITE + '/static/images/'

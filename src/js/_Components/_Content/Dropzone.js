@@ -3,7 +3,7 @@ import { useDropzone } from 'react-dropzone'
 import Submit from '../_API/SubmitFiles'
 import Loading from '../Loading'
 
-const Dropzone = ({ reloadContainer }) => {
+const Dropzone = ({ reloadContainer, fileUploadHost }) => {
 
   const [ loading, setLoading ] = useState(false)
 
@@ -14,7 +14,7 @@ const Dropzone = ({ reloadContainer }) => {
       acceptedFiles.forEach(file => {
         data.append('files[]', file)
       })
-      await Submit('/upload', data)
+      await Submit('/admin/upload', data, 'POST', fileUploadHost)
       setTimeout(() => {
         reloadContainer()
         setLoading(false)

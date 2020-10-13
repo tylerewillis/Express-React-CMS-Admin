@@ -1,7 +1,10 @@
 import { API_PATH } from '../_Config'
 
-export default async (url, data, method='POST') => {
-  const response = await fetch(API_PATH + url, {
+export default async (url, data, method='POST', path = false) => {
+
+	const fetchPath = (path) ? path + url : API_PATH + url
+
+  const response = await fetch(fetchPath, {
     method: method,
     body: data
   });

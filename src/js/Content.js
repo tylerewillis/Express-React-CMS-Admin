@@ -17,7 +17,7 @@ import Blocks from './_Components/_Content/Blocks'
 import Color from './_Components/_Content/Color'
 import Submit from './_Components/_API/Submit'
 
-const Content = React.memo(({ postType, postUrl, post, content, images, forms, urls }) => {
+const Content = React.memo(({ postType, postUrl, post, content, images, forms, urls, fileUploadHost }) => {
 	
 	const [ data, setData ] = useState({content})
 	const [ loading, setLoading ] = useState(false)
@@ -125,11 +125,11 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms, u
 			case 'dates':
 				return <Dates key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			case 'image':
-				return	<Image key={index} con={con} handleChange={handleChange} images={images} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
+				return	<Image key={index} con={con} handleChange={handleChange} images={images} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} fileUploadHost={fileUploadHost} />
 			case 'table':
 				return <Table key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			case 'images':
-				return <Images key={index} con={con} handleChange={handleChange} images={images} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
+				return <Images key={index} con={con} handleChange={handleChange} images={images} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} fileUploadHost={fileUploadHost} />
 			case 'select':
 				return <Select key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			case 'color':
@@ -137,7 +137,7 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms, u
 			case 'form':
 				return <Forms key={index} con={con} forms={forms} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			case 'blocks':
-				return <Blocks key={index} con={con} images={images} forms={forms} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} blocksDisplay={blocksDisplay} setBlocksDisplay={setBlocksDisplay} />
+				return <Blocks key={index} con={con} images={images} forms={forms} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} blocksDisplay={blocksDisplay} setBlocksDisplay={setBlocksDisplay} fileUploadHost={fileUploadHost} />
 			default:
 				return null
 		}

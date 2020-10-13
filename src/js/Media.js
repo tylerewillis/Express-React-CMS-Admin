@@ -7,7 +7,7 @@ import Call from './_Components/_API/Call'
 import Submit from './_Components/_API/Submit'
 import Loading from './_Components/Loading'
 
-const Media = ({ images, url }) => {
+const Media = ({ images, url, fileUploadHost }) => {
 
 	const [ availableImages, setAvailableImages ] = useState(images)
 	const [ loading, setLoading ] = useState(false)
@@ -35,7 +35,7 @@ const Media = ({ images, url }) => {
 	const reloadContainer = () => {
 		(async function() {
 			const updatedImages = await Call('/get-images-from-directory')
-			setAvailableImages(updatedImages)
+			setAvailableImages(updatedImages.images)
 		})()
 	}
 
@@ -43,9 +43,9 @@ const Media = ({ images, url }) => {
 		if (window.confirm('Are you sure you want to delete this image? Any links to this image will be broken.')) {
 			setLoading(true);
 			(async function() {
-	      await Submit('/upload/delete', {
+	      await Submit('/admin/upload/delete', {
 	      	path: img
-	      })
+	      }, 'POST', fileUploadHost)
 	      setTimeout(() => {
 	      	reloadContainer()
 	      	setLoading(false)
@@ -56,7 +56,7 @@ const Media = ({ images, url }) => {
 
 	return (
 		<div className='admin-media-container'>
-			<Dropzone reloadContainer={reloadContainer} />
+			<Dropzone reloadContainer={reloadContainer} fileUploadHost={fileUploadHost} />
 			<div className='image-search'>
 				<input value={(search) ? search : ''} placeholder='Search' onChange={(e) => setSearch(e.target.value.toLowerCase())} />
 				<div className='actions'>
