@@ -1,6 +1,6 @@
 // Get API paths
 var MAIN_SITE = ''
-if (process.env.NODE_ENV === 'production') MAIN_SITE = 'http://api.mullinashley.com'
+if (process.env.NODE_ENV === 'production') MAIN_SITE = 'https://api.mullinashley.com'
 else MAIN_SITE = 'http://localhost:5000'
 
 const API_PATH = MAIN_SITE + '/admin'
