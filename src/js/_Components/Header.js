@@ -1,5 +1,4 @@
 import React from 'react';
-import { MAIN_SITE } from './_Config'
 import { useCookies } from 'react-cookie'
 import Emoji from './_Header/Emoji'
 
@@ -24,7 +23,7 @@ const Header = React.memo(({ page, darkMode, setDarkMode }) => {
   		<div className='container'>
       	<div className='section'>
       		<p className='main-site'>
-		      	<a href={MAIN_SITE}>
+		      	<a href={page.website}>
 		      		<i className="fas fa-reply"></i>
 		      		<span>Go to Website</span>
 		      	</a>
