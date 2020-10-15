@@ -4,7 +4,7 @@ import Layout from './_Components/Layout'
 import { API_PATH } from './_Components/_Config'
 import Submit from './_Components/_API/Submit'
 
-const Queries = React.memo(({ types, queries }) => {
+const Queries = React.memo(({ types, queries, website }) => {
 
 	const [ active, setActive ] = useState('all')
 	const [ search, setSearch ] = useState(false)
@@ -69,7 +69,7 @@ const Queries = React.memo(({ types, queries }) => {
 							return <option key={i} value={t}>{t.charAt(0).toUpperCase() + t.substr(1)}</option>
 						})}
 					</select>
-					<a href={API_PATH + '/queries/export/' + active} target='_blank' rel="noopener noreferrer" style={{display: (active === 'all') ? 'none' : 'block'}}>Export</a>
+					<a href={API_PATH + '/queries/export/' + active + '/' + website.split('://')[1]} target='_blank' rel="noopener noreferrer" style={{display: (active === 'all') ? 'none' : 'block'}}>Export</a>
 				</div>
 				<div className='avl-search-filter'>
 					<input type='text' placeholder='Search' onChange={(e) => searchQueries(e)}/>
