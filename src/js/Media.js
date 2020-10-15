@@ -72,7 +72,7 @@ const Media = ({ images, url, fileUploadHost }) => {
 							<i class="fas fa-times-circle delete" onClick={() => deleteImg(img)}></i>
 							{(img.substr(img.length - 4) === 'docx' || img.substr(img.length - 4) === '.doc' || img.substr(img.length - 4) === '.pdf') &&
 								<div className='media-file-icon' onClick={() => copyImage(img,true)}>
-									<img src={API_IMAGE_PATH + 'fileicon.png'} alt={'file icon for documents'} />
+									<img src={fileUploadHost + '/static/images/fileicon.png'} alt={'file icon for documents'} />
 								</div>
 							}
 							<p className='media-file-name' onClick={() => copyImage(img,true)}>{img}</p>
