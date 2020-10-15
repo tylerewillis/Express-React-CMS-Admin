@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import Dropzone from '../Dropzone'
-import { API_IMAGE_PATH } from '../../_Config'
 import Call from '../../_API/Call'
 
-const Image = React.memo(({ con, p, i, images, updateValue }) => {
+const Image = React.memo(({ con, p, i, images, updateValue, fileUploadHost }) => {
 
 	const [ image, setImage ] = useState(con.value)
 	const [ toggle, setToggle ] = useState('none')
@@ -43,7 +42,7 @@ const Image = React.memo(({ con, p, i, images, updateValue }) => {
 		<div className='item'>
 			<h2>{con.name}</h2>
 			<div className='acb-image'>
-				<div className='acbi-active' style={{backgroundImage: (image.length) ? 'url(' + API_IMAGE_PATH + image + ')': ''}} onClick={() => containerToggle(true)}>
+				<div className='acbi-active' style={{backgroundImage: (image.length) ? 'url(' + fileUploadHost + '/static/images/' + image + ')': ''}} onClick={() => containerToggle(true)}>
 					{image && (image.substr(image.length - 4) === 'docx' || image.substr(image.length - 4) === '.doc' || image.substr(image.length - 4) === '.pdf') &&
 						<p className='media-file-name'>{image}</p>
 					}
@@ -60,10 +59,10 @@ const Image = React.memo(({ con, p, i, images, updateValue }) => {
 					<div className={'image-container image-container-grid-' + grid}>
 						{availableImages.map((img, i) => {
 							if (!search || (search && (img.toLowerCase().includes(search) || img.replace(/-/g, ' ').toLowerCase().includes(search)))) {
-								return <div key={i} name={img} className='acbic-single' style={{backgroundImage: 'url(' + API_IMAGE_PATH + img + ')'}} onClick={e => updateItem(e)}>
+								return <div key={i} name={img} className='acbic-single' style={{backgroundImage: 'url(' + fileUploadHost + '/static/images/' + img + ')'}} onClick={e => updateItem(e)}>
 									{(img.substr(img.length - 4) === 'docx' || img.substr(img.length - 4) === '.doc' || img.substr(img.length - 4) === '.pdf') &&
 										<div className='media-file-icon'>
-											<img src={API_IMAGE_PATH + 'fileicon.png'} alt={'file icon for documents'} />
+											<img src={fileUploadHost + '/static/images/fileicon.png'} alt={'file icon for documents'} />
 										</div>
 									}
 									<p className='media-file-name'>{img}</p>

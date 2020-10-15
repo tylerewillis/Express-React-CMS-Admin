@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Dropzone from '../Dropzone'
-import { API_IMAGE_PATH } from '../../_Config'
 import Call from '../../_API/Call'
 
-const Images = React.memo(({ con, p, i, images, updateValue, role, removeSection }) => {
+const Images = React.memo(({ con, p, i, images, updateValue, role, removeSection, fileUploadHost }) => {
 
 	const [ imagesState, setImagesState ] = useState(con.value)
 	const [ imagesView, setImagesView ] = useState([])
@@ -17,7 +16,7 @@ const Images = React.memo(({ con, p, i, images, updateValue, role, removeSection
 		var newArray = []
 		imagesArray.forEach(image => {
 			if (image.length) {
-				let temp = API_IMAGE_PATH + image
+				let temp = fileUploadHost + '/static/images/' + image
 				newArray.push(temp)
 			}
 		})
@@ -120,10 +119,10 @@ const Images = React.memo(({ con, p, i, images, updateValue, role, removeSection
 					<div className={'image-container image-container-grid-' + grid}>
 						{availableImages.map((img, i) => {
 							if (!search || (search && (img.toLowerCase().includes(search) || img.replace(/-/g, ' ').toLowerCase().includes(search)))) {
-								return <div key={i} name={img} className='acbic-single' style={{backgroundImage: 'url(' + API_IMAGE_PATH + img + ')'}} onClick={e => addImage(e)}>
+								return <div key={i} name={img} className='acbic-single' style={{backgroundImage: 'url(' + fileUploadHost + '/static/images/' + img + ')'}} onClick={e => addImage(e)}>
 									{(img.substr(img.length - 4) === 'docx' || img.substr(img.length - 4) === '.doc' || img.substr(img.length - 4) === '.pdf') &&
 										<div className='media-file-icon'>
-											<img src={API_IMAGE_PATH + 'fileicon.png'} alt={'file icon for documents'} />
+											<img src={fileUploadHost + '/static/images/fileicon.png'} alt={'file icon for documents'} />
 										</div>
 									}
 									<p className='media-file-name'>{img}</p>

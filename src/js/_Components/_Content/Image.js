@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import Dropzone from './Dropzone'
-import { API_IMAGE_PATH } from '../_Config'
 import Call from '../_API/Call'
 import { useCookies } from 'react-cookie'
 
@@ -55,7 +54,7 @@ const Image = React.memo(({ con, images, handleChange, removeSection, blocksOpen
 			<h2><span>{con.id + 1}.</span> {con.name}</h2>
 			<p className='acb-description'>{con.description}</p>
 			<div className='acb-image'>
-				<div className='acbi-active' style={{backgroundImage: (image.length) ? 'url(' + API_IMAGE_PATH + image + ')' : 'none'}} onClick={() => containerToggle(true)}>
+				<div className='acbi-active' style={{backgroundImage: (image.length) ? 'url(' + fileUploadHost + '/static/images/' + image + ')' : 'none'}} onClick={() => containerToggle(true)}>
 					<i className="far fa-times-circle" onClick={removeImage}></i>
 					{(image && (image.substr(image.length - 4) === 'docx' || image.substr(image.length - 4) === '.doc' || image.substr(image.length - 4) === '.pdf')) &&
 						<p className='media-file-name'>{image}</p>
@@ -73,10 +72,10 @@ const Image = React.memo(({ con, images, handleChange, removeSection, blocksOpen
 					<div className={'image-container image-container-grid-' + grid}>
 						{availableImages.map((img, i) => {
 							if (!search || (search && (img.toLowerCase().includes(search) || img.replace(/-/g, ' ').toLowerCase().includes(search)))) {
-								return <div key={i} name={img} className='acbic-single' style={{backgroundImage: 'url(' + API_IMAGE_PATH + img + ')'}} onClick={e => sendChange(e)}>
+								return <div key={i} name={img} className='acbic-single' style={{backgroundImage: 'url(' + fileUploadHost + '/static/images/' + img + ')'}} onClick={e => sendChange(e)}>
 									{(img.substr(img.length - 4) === 'docx' || img.substr(img.length - 4) === '.doc' || img.substr(img.length - 4) === '.pdf') &&
 										<div className='media-file-icon'>
-											<img src={API_IMAGE_PATH + 'fileicon.png'} alt={'file icon for documents'} />
+											<img src={fileUploadHost + '/static/images/fileicon.png'} alt={'file icon for documents'} />
 										</div>
 									}
 									<p className='media-file-name'>{img}</p>
