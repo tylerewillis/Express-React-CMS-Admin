@@ -38,9 +38,9 @@ const Header = React.memo(({ page, darkMode, setDarkMode }) => {
 	      	<p className='breadcrumbs' dangerouslySetInnerHTML={{ __html: page.breadcrumbs }} />
 		    </div>
 		    <div className='section'>
-		    	<a href='/resources'>
-		    		<i className="far fa-file-alt"></i>
-		    		<span>Resources</span>
+		    	<a href='/documentation'>
+		    		<i class="fas fa-book"></i>
+		    		<span>Documentation</span>
 		    	</a>
 		    	<a href='mailto:web@mullinashley.com'>
 		    		<i className="far fa-comment"></i>

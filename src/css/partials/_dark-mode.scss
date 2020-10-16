@@ -1058,41 +1058,43 @@
 }
 
 // =========================================/
-// Dark Mode -> Resources
+// Dark Mode -> Documentation
 // =========================================/
 
 .page-admin-dark-mode {
 	.page-admin-main {
-		.admin-resources {
-			.avl-tabs {
-				border-bottom: 1px solid #666;
-				p {
-					background-color: #444;
-					border-bottom: 1px solid #666 !important;
-					border-right: 1px solid #666 !important;
-					color: $admin-color-white !important;
-				}
-				p.avct-active {
-					border: 1px solid #666 !important;
-					background-color: #666;
-				}
-			}
-			.avl-content {
-				background-color: #444;
-				box-shadow: 1px 1px 1px #666;
-				.avlc-post {
-					border-bottom: 1px dashed #666;
-					h3 {
-						color: $admin-color-white;
-					}
-					div {
-						* {
-							color: #d3d3d3;
+		.admin-documentation {
+			.search {
+				.tabs {
+					p {
+						color: #d3d3d3;
+						&:hover {
+							background-color: #292929;
 						}
 					}
+					p.active {
+						color: $admin-color-white;
+						background-color: #444 !important;
+						box-shadow: 1px 1px 1px #666;
+					}
 				}
-				.avlc-post:last-child {
-					border-bottom: 0px;
+				input {
+					background-color: $admin-color-black;
+					border: 1px solid #777;
+					color: $admin-color-white;
+				}
+			}
+			.posts {
+				.post {
+					background-color: #444;
+					box-shadow: 1px 1px 1px #666;
+					color: #d3d3d3;
+					h2 {
+						color: $admin-color-white;
+					}
+					a {
+						color: $admin-color-primary;
+					}
 				}
 			}
 		}

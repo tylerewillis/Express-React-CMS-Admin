@@ -8,7 +8,7 @@ import New from '../New'
 import Delete from '../Delete'
 import Media from '../Media'
 import Queries from '../Queries'
-import Resources from '../Resources'
+import Documentation from '../Documentation'
 import Admins from '../Admins'
 import Comments from '../Comments'
 import Navigation from '../Navigation'
@@ -49,8 +49,8 @@ export default [
     component: Admins
   },
   {
-    path: "/resources",
-    component: Resources
+    path: "/documentation",
+    component: Documentation
   },
   {
     path: "/nav",
