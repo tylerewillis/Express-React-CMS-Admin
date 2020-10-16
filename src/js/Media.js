@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Layout from './_Components/Layout'
 import Dropzone from './_Components/_Content/Dropzone'
-import { API_IMAGE_PATH } from './_Components/_Config'
 import Call from './_Components/_API/Call'
 import Submit from './_Components/_API/Submit'
 import Loading from './_Components/Loading'
@@ -16,7 +15,7 @@ const Media = ({ images, url, fileUploadHost }) => {
 
 	const copyImage = (img, pdf = false) => {
 		const input = document.createElement('textarea')
-		input.value = url + img
+		input.value = url + '/' + img
 		document.body.appendChild(input)
 		input.select()
 		document.execCommand('copy')
