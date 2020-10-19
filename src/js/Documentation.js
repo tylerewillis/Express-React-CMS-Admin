@@ -3,10 +3,10 @@ import Layout from './_Components/Layout'
 import Search from './_Components/_Documentation/Search'
 import Posts from './_Components/_Documentation/Posts'
 
-const Resources = React.memo(({ posts }) => {
+const Resources = React.memo(({ posts, keyword }) => {
 
 	const [ active, setActive ] = useState('all')
-	const [ search, setSearch ] = useState('')
+	const [ search, setSearch ] = useState(keyword)
 
 	return (
 		<div className='admin-vert-list admin-documentation'>

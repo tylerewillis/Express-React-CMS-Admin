@@ -53,6 +53,10 @@ export default [
     component: Documentation
   },
   {
+    path: "/documentation/:id",
+    component: Documentation
+  },
+  {
     path: "/nav",
     component: Navigation
   },
