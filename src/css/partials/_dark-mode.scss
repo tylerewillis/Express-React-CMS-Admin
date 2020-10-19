@@ -1086,14 +1086,20 @@
 			}
 			.posts {
 				.post {
-					background-color: #444;
-					box-shadow: 1px 1px 1px #666;
-					color: #d3d3d3;
-					h2 {
-						color: $admin-color-white;
+					p.number {
+						background-color: #111;
+						text-shadow: 2px 2px 3px rgba(#444,0.5);
 					}
-					a {
-						color: $admin-color-primary;
+					.body {
+						background-color: #444;
+						box-shadow: 1px 1px 1px #666;
+						color: #d3d3d3;
+						h2 {
+							color: $admin-color-white;
+						}
+						a {
+							color: $admin-color-primary;
+						}
 					}
 				}
 			}

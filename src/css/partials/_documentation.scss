@@ -44,54 +44,68 @@
 		.admin-documentation {
 			.posts {
 				.post {
-					background-color: $admin-color-white;
-					box-shadow: 1px 1px 1px #d3d3d3;
-					border-radius: 5px;
-					padding: 20px;
-					margin: 15px 0px;
-					h2 {
-						font-size: 1.3em;
-						font-weight: 500;
-						margin-bottom: 20px;
-						span {
-							margin-right: 5px;
-						}
-					}
-					p {
-						font-size: .87em;
-						a {
-							font-size: unset;
-						}
-					}
-					ul {
-						margin-bottom: 20px;
-					}
-					li {
-						font-size: .87em;
-						a {
-							font-size: unset;
-						}
-					}
-					a {
-						font-size: .87em;
-						color: $admin-color-secondary;
+					@include flex-container(space-between,center);
+					margin: 20px 0px;
+					p.number {
+						font-size: 2em;
+						line-height: 1em;
 						font-weight: 600;
+						width: 80px;
+						text-align: center;
+						background-color: #d3d3d3;
+					  color: transparent;
+					  text-shadow: 2px 2px 3px rgba(255,255,255,0.5);
+					  -webkit-background-clip: text;
+						-moz-background-clip: text;
+						background-clip: text;
 					}
-					img {
-						margin-bottom: 20px;
-						max-width: 100%;
-					}
-					*:last-child {
-						margin-bottom: 0px;
-					}
-					strong {
-						font-weight: 600;
-					}
-					em {
-						font-style: italic;
-					}
-					u {
-						text-decoration: underline;
+					.body {
+						background-color: $admin-color-white;
+						box-shadow: 1px 1px 1px #d3d3d3;
+						border-radius: 5px;
+						padding: 20px;
+						width: calc(100% - 80px);
+						h2 {
+							font-size: 1.3em;
+							font-weight: 500;
+							margin-bottom: 20px;
+						}
+						p {
+							font-size: .87em;
+							a {
+								font-size: unset;
+							}
+						}
+						ul {
+							margin-bottom: 20px;
+						}
+						li {
+							font-size: .87em;
+							a {
+								font-size: unset;
+							}
+						}
+						a {
+							font-size: .87em;
+							color: $admin-color-secondary;
+							font-weight: 600;
+						}
+						img {
+							margin-bottom: 20px;
+							max-width: 100%;
+						}
+						*:last-child {
+							margin-bottom: 0px;
+						}
+						strong {
+							font-weight: 600;
+						}
+						em {
+							font-style: italic;
+						}
+						u {
+							text-decoration: underline;
+						}
 					}
 				}
 			}

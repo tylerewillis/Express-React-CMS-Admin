@@ -12,8 +12,11 @@ export default ({ active, search, posts }) => {
 						if (active === 'all' || active === post.type) {
 							count++
 							return <div className='post'>
-								<h2><span>{count}.</span>{post.title}</h2>
-								<div dangerouslySetInnerHTML={{ __html: post.html }} />
+								<p className='number'>{count}.</p>
+								<div className='body'>
+									<h2>{post.title}</h2>
+									<div dangerouslySetInnerHTML={{ __html: post.html }} />
+								</div>
 							</div>
 						} else return null
 					} else return null
