@@ -510,16 +510,22 @@
 .page-admin-dark-mode {
 	.admin-content {
 		.ac-block {
-			table {
-				tr {
-					border-top: 1px solid #666;
-					border-bottom: 1px solid #666;
-					border-left: 1px solid #666;
-					td {
-						border-right: 1px solid #666;
+			.table {
+				.row {
+					border-right: 1px solid #777;
+					.column {
 						textarea {
 							background-color: $admin-color-black;
+							border-left: 1px solid #777;
+							border-top: 1px solid #777;
 							color: $admin-color-white;
+						}
+					}
+				}
+				.row:last-child {
+					.column {
+						textarea {
+							border-bottom: 1px solid #777;
 						}
 					}
 				}
