@@ -12,7 +12,7 @@ import Select from './_Blocks/Select'
 import Color from './_Blocks/Color'
 import Forms from './_Blocks/Forms'
 
-const Blocks = React.memo(({ con, images, forms, handleChange, removeSection, blocksOpen, openBlocks, blocksDisplay, setBlocksDisplay }) => {
+const Blocks = React.memo(({ con, images, forms, handleChange, removeSection, blocksOpen, openBlocks, blocksDisplay, setBlocksDisplay, fileUploadHost }) => {
 
 	const [ cookies ] = useCookies(['role'])
 	const [ data, setData ] = useState(con.content)
@@ -125,11 +125,11 @@ const Blocks = React.memo(({ con, images, forms, handleChange, removeSection, bl
 										case 'dates':
 											return <Dates key={index} p={i} i={index} con={item} updateValue={updateValue} />
 										case 'image':
-											return	<Image key={index} p={i} i={index} con={item} updateValue={updateValue} images={images} />
+											return	<Image key={index} p={i} i={index} con={item} updateValue={updateValue} images={images} fileUploadHost={fileUploadHost} />
 										case 'table':
 											return <Table key={index} p={i} i={index} con={item} updateValue={updateValue} />
 										case 'images':
-											return <Images key={index} p={i} i={index} con={item} updateValue={updateValue} images={images} />
+											return <Images key={index} p={i} i={index} con={item} updateValue={updateValue} images={images} fileUploadHost={fileUploadHost} />
 										case 'form':
 											return <Forms key={index} p={i} i={index} con={item} forms={forms} updateValue={updateValue} />
 										default:

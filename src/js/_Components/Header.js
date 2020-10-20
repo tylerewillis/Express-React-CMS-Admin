@@ -39,7 +39,7 @@ const Header = React.memo(({ page, darkMode, setDarkMode }) => {
 		    </div>
 		    <div className='section'>
 		    	<a href='/documentation'>
-		    		<i class="fas fa-book"></i>
+		    		<i className="fas fa-book"></i>
 		    		<span>Documentation</span>
 		    	</a>
 		    	<a href='mailto:web@mullinashley.com'>
