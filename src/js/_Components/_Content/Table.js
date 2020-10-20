@@ -1,25 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useCookies } from 'react-cookie'
 
 const Table = React.memo(({ con, handleChange, removeSection, blocksOpen, openBlocks }) => {
 
 	const [ cookies ] = useCookies(['role'])
 
-	const [ newWidth, setNewWidth ] = useState('0')
-	const [ newHeight, setNewHeight ] = useState('0')
-	const tableRef = React.createRef()
-	const [ value, setValue ] = useState(con.content)
-	const [ cursorPosition, setCursorPosition ] = useState(0)
-
-	const updateValue = (test) => {
-		const retrieved = document.querySelector(`.table-${con.id}`)
-		retrieved.querySelectorAll('td').forEach(cell => {
-			cell.innerHTML = cell.querySelector('textarea').value
-		})
-		const temp = retrieved.innerHTML.replace('<tbody>', '')
-		const temp2 = temp.replace('</tbody>', '')
-		sendChange(temp2)
-		setValue(temp2)
+	const updateCell = (row, column, e) => {
+		con.content[row].cells[column] = e.target.value
+		sendChange(con.content)
 	}
 
 	const sendChange = (value) => {
@@ -32,103 +20,98 @@ const Table = React.memo(({ con, handleChange, removeSection, blocksOpen, openBl
 		})
 	}
 
-	const resizeTable = () => {
-		if (window.confirm('Are you sure that you want to resize this table? If smaller than the current table, all content outside of the new bounds will be removed.')) {
-			const retrieved = tableRef.current.innerHTML
-			const temp = retrieved.replace('<tbody>', '')
-			const temp2 = temp.replace('</tbody>', '')
-			const temp3 = temp2.replace(/<tr><td>/g, '<tr>')
-			const temp4 = temp3.replace(/<\/td><\/tr>/g, '</tr>')
-			const rows = temp4.split('</tr><tr>')
-			const cells = rows[0].split('</td><td>') // eslint-disable-line
-			var newRows = []
-			rows.forEach((row, i) => {
-				if (i < newHeight) {
-					let newRow = '<tr>'
-					let cells = row.split('</td><td>')
-					for (let j = 0; j < newWidth; j++) {
-						if (cells[j]) {
-							let clean = cells[j].replace('<tr>', '')
-							let clean2 = clean.replace('</tr>', '')
-							console.log(clean2)
-							newRow += '<td>' + clean2 + '</td>'
-						} else {
-							newRow += '<td></td>'
-						}
-					}
-					newRows.push(newRow + '</tr>')
-				}
-			})
-			// If less, add more
-			if (rows.length < newHeight) {
-				for (let i = rows.length; i < newHeight; i++) {
-					let newRow = '<tr>'
-					for (let j = 0; j < newWidth; j++) {
-						newRow += '<td></td>'
-					}
-					newRows.push(newRow + '</tr>')
-				}
-			}
-			sendChange(newRows.join(''))
-		}
+	const largestId = () => {
+		var largest = 0
+		con.content.forEach(row => {
+			if (row.id > largest) largest = row.id
+		})
+		return largest + 1
 	}
 
-	//----------------------------------------
-	// Set column height/width
-	//----------------------------------------
+	const loadEmptyCells = () => {
+		var columns = con.content[0].cells.length
+		var array = []
+		for (var i = 0; i < columns; i++) {
+			array.push('')
+		}
+		return array
+	}
 
-	useEffect(() => {
-		const retrieved = tableRef.current.innerHTML
-		const temp = retrieved.replace('<tbody>', '')
-		const temp2 = temp.replace('</tbody>', '')
-		const temp3 = temp2.replace(/<tr><td>/g, '<tr>')
-		const temp4 = temp3.replace(/<\/td><\/tr>/g, '</tr>')
-		const rows = temp4.split('</tr><tr>')
-		const cells = rows[0].split('</td><td>')
-		setNewWidth(cells.length)
-		setNewHeight(rows.length)
-	},[]) // eslint-disable-line
+	const addRow = prev => {
+		let newRow = { id: largestId(), cells: loadEmptyCells() }
+		con.content.splice(prev, 0, newRow)
+		sendChange(con.content)
+	}
 
-	//----------------------------------------
-	// Make editable
-	//----------------------------------------
+	const removeRow = prev => {
+		if (con.content.length > 1) {
+			con.content.splice(prev, 1)
+			sendChange(con.content)
+		} else window.alert('Sorry, you need to include at least one cell in your table.')
+	}
 
-	useEffect(() => {
-		tableRef.current.querySelectorAll('td').forEach((cell, i) => {
-			let text = document.createElement('textarea')
-			text.value = cell.innerHTML
-
-			text.addEventListener('change', e => {
-				updateValue()
-				setCursorPosition(i)
+	const addColumn = prev => {
+		if (con.content[0].cells.length < 10) {
+			con.content.forEach(row => {
+				row.cells.splice(prev, 0, '')
 			})
-			cell.innerHTML = ''
-			cell.appendChild(text)
-		})
-	},[value]) // eslint-disable-line
+			sendChange(con.content)
+		} else window.alert('Sorry, you can only have 10 columns in your table.')
+	}
 
-	//----------------------------------------
-	// Move cursor into field
-	//----------------------------------------
-
-	useEffect(() => {
-		tableRef.current.querySelectorAll('td').forEach((cell, i) => {
-			if (i === cursorPosition) cell.querySelector('textarea').focus()
-		})
-	},[cursorPosition]) // eslint-disable-line
+	const removeColumn = prev => {
+		if (con.content[0].cells.length > 1) {
+			con.content.forEach(row => {
+				row.cells.splice(prev, 1)
+			})
+			sendChange(con.content)
+		} else window.alert('Sorry, you need to include at least one cell in your table.')
+	}
 
 	return (
 		<div className={(blocksOpen) ? 'ac-block active' : 'ac-block'} onClick={(e) => openBlocks(e)}>
 			<h2><span>{con.id + 1}.</span> {con.name}</h2>
 			<p className='acb-description'>{con.description}</p>
-			<table dangerouslySetInnerHTML={{__html: value}} ref={tableRef} className={`table-${con.id}`} />
-			<i className="fas fa-times" onClick={() => removeSection(con.id)}/>
-			<div className='table-resize'>
-				<input type='text' value={newWidth} placeholder='Width' onChange={(e) => setNewWidth(e.target.value)} />
-				<span>X</span>
-				<input type='text' value={newHeight} placeholder='Height' onChange={(e) => setNewHeight(e.target.value)} />
-				<p onClick={resizeTable}>Resize Table</p>
+			<div className='table'>
+				{con.content.map((row, j) => {
+					return <div className='row' key={row.id}>
+						{row.cells.map((cell, i) => {
+							return <div className='column' key={i}>
+									<textarea key={cell + i} defaultValue={cell} onBlur={(e) => updateCell(j, i, e)} />
+									{(j === 0) &&
+										<React.Fragment>
+											<div className='add-column' onClick={() => addColumn(i)}>
+												<i className="fas fa-plus"></i>
+												<div />
+											</div>
+											<div className='remove-column' onClick={() => removeColumn(i)}>
+												<i className="fas fa-minus"></i>
+											</div>
+											<div className='add-column add-column-last' onClick={() => addColumn(i + 1)}>
+												<i className="fas fa-plus"></i>
+												<div />
+											</div>
+										</React.Fragment>
+									}
+								</div>
+						})}
+						<div className='add-row' onClick={() => addRow(j)}>
+							<i className="fas fa-plus"></i>
+							<hr />
+						</div>
+						<div className='remove-row' onClick={() => removeRow(j)}>
+							<i className="fas fa-minus"></i>
+						</div>
+						{(j === con.content.length - 1) &&
+							<div className='add-row add-row-bottom' onClick={() => addRow(j + 1)}>
+								<i className="fas fa-plus"></i>
+								<hr />
+							</div>
+						}
+					</div>
+				})}
 			</div>
+			<i className="fas fa-times" onClick={() => removeSection(con.id)}/>
 			{cookies.role === 'super' && con.id !== 0 && <i className="fas fa-times" onClick={() => removeSection(con.id)}/>}
 		</div>
 	)

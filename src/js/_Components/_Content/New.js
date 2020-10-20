@@ -25,16 +25,13 @@ const PlainText = React.memo(({ content, addSection, blocksOpen, openBlocks }) =
 	const add = () => {
 		var content = ''
 		if (select === 'table') {
-			content += '<tr>'
+			content = []
 			for (let j = 0; j < rows; j++) {
+				let temp = { id: j, cells: [] }
 				for (let k = 0; k < columns; k++) {
-					content += '<td></td>'
+					temp.cells.push('')
 				}
-				if (j !== rows - 1) { // dont add row break to last row
-					content += '</tr><tr>'
-				} else {
-					content += '</tr>'
-				}
+				content.push(temp)
 			}
 		} else if (select === 'blocks') {
 			content = [{
@@ -48,6 +45,12 @@ const PlainText = React.memo(({ content, addSection, blocksOpen, openBlocks }) =
 						name: item.name,
 						value: '',
 						options: item.options
+					})
+				} else if (item.type === 'table') {
+					content[0].value.push({
+						type: item.type,
+						name: item.name,
+						value: [{id:0,cells:['']}],
 					})
 				} else {
 					content[0].value.push({

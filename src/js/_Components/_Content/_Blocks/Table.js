@@ -1,23 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 const Table = React.memo(({ con, p, i, updateValue, removeSection }) => {
 
-	const [ newWidth, setNewWidth ] = useState('0')
-	const [ newHeight, setNewHeight ] = useState('0')
-	const tableRef = React.createRef()
-
-	var timeout
-	const updateTable = () => {
-		clearTimeout(timeout)
-		if (tableRef && tableRef.current) {
-			timeout = setTimeout(() => {
-				const retrieved = tableRef.current.innerHTML
-				const temp = retrieved.replace('<tbody>', '')
-				const temp2 = temp.replace('</tbody>', '')
-				updateItem(temp2)
-			}, 3000)
-		}
+	const updateCell = (row, column, e) => {
+		con.value[row].cells[column] = e.target.value
+		updateItem(con.value)
 	}
 
 	const updateItem = (value) => {
@@ -28,69 +16,95 @@ const Table = React.memo(({ con, p, i, updateValue, removeSection }) => {
 		})
 	}
 
-	const resizeTable = () => {
-		if (window.confirm('Are you sure that you want to resize this table? If smaller than the current table, all content outside of the new bounds will be removed.')) {
-			const retrieved = tableRef.current.innerHTML
-			const temp = retrieved.replace('<tbody>', '')
-			const temp2 = temp.replace('</tbody>', '')
-			const temp3 = temp2.replace(/<tr><td>/g, '<tr>')
-			const temp4 = temp3.replace(/<\/td><\/tr>/g, '</tr>')
-			const rows = temp4.split('</tr><tr>')
-			const cells = rows[0].split('</td><td>') // eslint-disable-line
-			var newRows = []
-			rows.forEach((row, i) => {
-				if (i < newHeight) {
-					let newRow = '<tr>'
-					let cells = row.split('</td><td>')
-					for (let j = 0; j < newWidth; j++) {
-						if (cells[j]) {
-							console.log(cells[j])
-							let clean = cells[j].replace('<tr>', '')
-							let clean2 = clean.replace('</tr>', '')
-							console.log(clean2)
-							newRow += '<td>' + clean2 + '</td>'
-						} else {
-							newRow += '<td></td>'
-						}
-					}
-					newRows.push(newRow + '</tr>')
-				}
-			})
-			// If less, add more
-			if (rows.length < newHeight) {
-				for (let i = rows.length; i < newHeight; i++) {
-					let newRow = '<tr>'
-					for (let j = 0; j < newWidth; j++) {
-						newRow += '<td></td>'
-					}
-					newRows.push(newRow + '</tr>')
-				}
-			}
-			updateItem(newRows.join(''))
-		}
+	const largestId = () => {
+		var largest = 0
+		con.value.forEach(row => {
+			if (row.id > largest) largest = row.id
+		})
+		return largest + 1
 	}
 
-	useEffect(() => {
-		const retrieved = tableRef.current.innerHTML
-		const temp = retrieved.replace('<tbody>', '')
-		const temp2 = temp.replace('</tbody>', '')
-		const temp3 = temp2.replace(/<tr><td>/g, '<tr>')
-		const temp4 = temp3.replace(/<\/td><\/tr>/g, '</tr>')
-		const rows = temp4.split('</tr><tr>')
-		const cells = rows[0].split('</td><td>')
-		setNewWidth(cells.length)
-		setNewHeight(rows.length)
-	},[]) // eslint-disable-line
+	const loadEmptyCells = () => {
+		var columns = con.value[0].cells.length
+		var array = []
+		for (var i = 0; i < columns; i++) {
+			array.push('')
+		}
+		return array
+	}
+
+	const addRow = prev => {
+		let newRow = { id: largestId(), cells: loadEmptyCells() }
+		con.value.splice(prev, 0, newRow)
+		updateItem(con.value)
+	}
+
+	const removeRow = prev => {
+		if (con.value.length > 1) {
+			con.value.splice(prev, 1)
+			updateItem(con.value)
+		} else window.alert('Sorry, you need to include at least one cell in your table.')
+	}
+
+	const addColumn = prev => {
+		if (con.value[0].cells.length < 10) {
+			con.value.forEach(row => {
+				row.cells.splice(prev, 0, '')
+			})
+			updateItem(con.value)
+		} else window.alert('Sorry, you can only have 10 columns in your table.')
+	}
+
+	const removeColumn = prev => {
+		if (con.value[0].cells.length > 1) {
+			con.value.forEach(row => {
+				row.cells.splice(prev, 1)
+			})
+			updateItem(con.value)
+		} else window.alert('Sorry, you need to include at least one cell in your table.')
+	}
 
 	return (
 		<div className='item'>
 			<h2>{con.name}</h2>
-			<table dangerouslySetInnerHTML={{__html: con.value}} contentEditable='true' ref={tableRef} onKeyUp={updateTable} />
-			<div className='table-resize'>
-				<input type='text' value={newWidth} placeholder='Width' onChange={(e) => setNewWidth(e.target.value)} />
-				<span>X</span>
-				<input type='text' value={newHeight} placeholder='Height' onChange={(e) => setNewHeight(e.target.value)} />
-				<p onClick={resizeTable}>Resize Table</p>
+			<div className='table'>
+				{typeof(con.value) === 'object' && con.value.map((row, j) => {
+					return <div className='row' key={row.id}>
+						{row.cells.map((cell, i) => {
+							return <div className='column' key={i}>
+									<textarea key={cell + i} defaultValue={cell} onBlur={(e) => updateCell(j, i, e)} />
+									{(j === 0) &&
+										<React.Fragment>
+											<div className='add-column' onClick={() => addColumn(i)}>
+												<i className="fas fa-plus"></i>
+												<div />
+											</div>
+											<div className='remove-column' onClick={() => removeColumn(i)}>
+												<i className="fas fa-minus"></i>
+											</div>
+											<div className='add-column add-column-last' onClick={() => addColumn(i + 1)}>
+												<i className="fas fa-plus"></i>
+												<div />
+											</div>
+										</React.Fragment>
+									}
+								</div>
+						})}
+						<div className='add-row' onClick={() => addRow(j)}>
+							<i className="fas fa-plus"></i>
+							<hr />
+						</div>
+						<div className='remove-row' onClick={() => removeRow(j)}>
+							<i className="fas fa-minus"></i>
+						</div>
+						{(j === con.value.length - 1) &&
+							<div className='add-row add-row-bottom' onClick={() => addRow(j + 1)}>
+								<i className="fas fa-plus"></i>
+								<hr />
+							</div>
+						}
+					</div>
+				})}
 			</div>
 		</div>
 	)
