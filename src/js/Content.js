@@ -223,7 +223,7 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms, u
 			const buttons = document.querySelector('.buttons-bottom')
 			if (formEl && st > (formEl.offsetTop + formEl.offsetHeight)) {
 				buttons.classList.add('absolute-bottom')
-			} else {
+			} else if (buttons) {
 				buttons.classList.remove('absolute-bottom')
 			}
 		}

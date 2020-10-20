@@ -34,7 +34,7 @@ const Image = React.memo(({ con, p, i, images, updateValue, fileUploadHost }) =>
 	const reloadContainer = () => {
 		(async function() {
 			const updatedImages = await Call('/get-images-from-directory')
-			setAvailableImages(updatedImages)
+			setAvailableImages(updatedImages.images)
 		})()
 	}
 	
@@ -48,7 +48,7 @@ const Image = React.memo(({ con, p, i, images, updateValue, fileUploadHost }) =>
 					}
 				</div>
 				<div className='acbi-container' style={{display: toggle}}>
-					<Dropzone reloadContainer={reloadContainer} />
+					<Dropzone reloadContainer={reloadContainer} fileUploadHost={fileUploadHost} />
 					<div className='image-search'>
 						<input value={(search) ? search : ''} placeholder='Search' onChange={(e) => setSearch(e.target.value.toLowerCase())} />
 						<div className='actions'>
@@ -57,7 +57,7 @@ const Image = React.memo(({ con, p, i, images, updateValue, fileUploadHost }) =>
 						</div>
 					</div>
 					<div className={'image-container image-container-grid-' + grid}>
-						{availableImages.map((img, i) => {
+						{availableImages && availableImages.map((img, i) => {
 							if (!search || (search && (img.toLowerCase().includes(search) || img.replace(/-/g, ' ').toLowerCase().includes(search)))) {
 								return <div key={i} name={img} className='acbic-single' style={{backgroundImage: 'url(' + fileUploadHost + '/static/images/' + img + ')'}} onClick={e => updateItem(e)}>
 									{(img.substr(img.length - 4) === 'docx' || img.substr(img.length - 4) === '.doc' || img.substr(img.length - 4) === '.pdf') &&
