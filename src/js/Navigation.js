@@ -3,13 +3,16 @@ import Layout from './_Components/Layout'
 import Loading from './_Components/Loading'
 import Submit from './_Components/_API/Submit'
 
-const Nav = ({ nav, posts }) => {
+const Nav = ({ post, content }) => {
 
-	const [ order, setOrder ] = useState(nav)
+	const [ order, setOrder ] = useState(content)
 	const [ loading, setLoading ] = useState(false)
 
+	//------------------------------
+	// Set initial formatting and assign levels
+	//------------------------------
+
 	useEffect(() => {
-		// Set initial formatting
 		let items = document.querySelectorAll('.nav .item')
 		var level1 = '', level2 = ''
 		for (let i = 0; i < items.length; i++) {
@@ -24,6 +27,10 @@ const Nav = ({ nav, posts }) => {
 			else if (items[i].style.marginLeft === '50px') level2 = name
 		}
 	},[])
+
+	//------------------------------
+	// Update state
+	//------------------------------
 
 	const updateState = (ignore = false, add = false) => {
 		// Reset variables
@@ -63,6 +70,10 @@ const Nav = ({ nav, posts }) => {
 		setOrder(newState)
 	}
 
+	//------------------------------
+	// Drag / reorder
+	//------------------------------
+
 	const drag = (e, key) => { e.dataTransfer.setData("key", key)}
 	const dragover = e => { e.preventDefault() }
 
@@ -85,6 +96,10 @@ const Nav = ({ nav, posts }) => {
 		updateState()
 	}
 
+	//------------------------------
+	// Shift right
+	//------------------------------
+
 	const tab = key => {
 		// If not first element
 		if (key !== 0) {
@@ -100,6 +115,10 @@ const Nav = ({ nav, posts }) => {
 			}
 		}
 	}
+
+	//------------------------------
+	// Shift left
+	//------------------------------
 
 	const unTab = key => {
 		const el = document.querySelector('.item-key-' + key)
@@ -120,6 +139,10 @@ const Nav = ({ nav, posts }) => {
 		updateState()
 	}
 
+	//------------------------------
+	// Change input
+	//------------------------------
+
 	const handleChange = (e) => {
 		const el = e.target.closest('.item')
 		const oldName = el.getAttribute('data-name')
@@ -136,6 +159,10 @@ const Nav = ({ nav, posts }) => {
 		updateState()
 	}
 
+	//------------------------------
+	// Delete item
+	//------------------------------
+
 	const deleteNav = index => {
 		if (window.confirm('Are you sure that you want to delete this navigation item?')) {
 			// Update children
@@ -151,9 +178,17 @@ const Nav = ({ nav, posts }) => {
 		}
 	}
 
+	//------------------------------
+	// Create new link
+	//------------------------------
+
 	const newItem = () => {
 		updateState(false,true)
 	}
+
+	//------------------------------
+	// Save
+	//------------------------------
 
 	const handleSave = () => {
 		setLoading(true);
@@ -178,7 +213,7 @@ const Nav = ({ nav, posts }) => {
 	return (
 		<div className='admin-navigation'>
 			<div className='block'>
-				<h1>Site Navigation</h1>
+				<h1>{post.name}</h1>
 				<p>Drag and drop the menu items below to reorder how they appear on the website. To insert the item as a sub-link, drag and drop under the parent link and then indent.</p>
 			</div>
 			<div className='nav'>

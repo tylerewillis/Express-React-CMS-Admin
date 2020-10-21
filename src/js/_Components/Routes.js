@@ -57,10 +57,6 @@ export default [
     component: Documentation
   },
   {
-    path: "/nav",
-    component: Navigation
-  },
-  {
     path: "/shop",
     component: Shop
   },
@@ -98,6 +94,10 @@ export default [
   {
     path: ["/forms/:id"],
     component: Form
+  },
+  {
+    path: ["/navigations/:id"],
+    component: Navigation
   },
   {
     path: "/:id/:id",

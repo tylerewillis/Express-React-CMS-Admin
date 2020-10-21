@@ -13,7 +13,9 @@ const List = React.memo(({ posts, type }) => {
 			<div className='acl-header'>
 				<div className='left'>
 					<h1>{type}</h1>
-					<a href={window.location.pathname + '/new'} className='new-post'>Create New</a>
+					{type !== 'Navigations' &&
+						<a href={window.location.pathname + '/new'} className='new-post'>Create New</a>
+					}
 				</div>
 				<input value={(search) ? search : ''} placeholder='Search' onChange={(e) => setSearch(e.target.value.toLowerCase())} />
 			</div>
