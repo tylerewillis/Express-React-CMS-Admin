@@ -1,0 +1,93 @@
+// =========================================/
+// Bulk Upload -> Instructions
+// =========================================/
+
+.page-admin {
+	.page-admin-main {
+		.admin-bulk-upload {
+			.instructions {
+				background-color: $admin-color-white;
+				box-shadow: 0px 2px 2px #d3d3d3;
+				padding: 40px;
+				border-radius: 5px;
+				margin-bottom: 30px;
+				h2 {
+					font-size: 1.5em;
+					margin-bottom: 1em;
+				}
+				p {
+					color: #a9a9a9;
+					font-size: .9em;
+					font-style: italic;
+				}
+				p:last-child {
+					margin-bottom: 0px;
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
+// Bulk Upload -> Downloads
+// =========================================/
+
+.page-admin {
+	.page-admin-main {
+		.admin-bulk-upload {
+			.downloads {
+				@include flex-container(flex-start,center);
+				margin-bottom: 10px;
+				p.block {
+					@include flex-container(center,center);
+					margin-bottom: 20px;
+					position: relative;
+					padding: 40px 30px;
+					border: 2px solid transparent;
+					text-decoration: none;
+					background-color: #fff;
+					border-radius: 5px;
+					margin-right: 20px;
+					box-shadow: unset;
+					cursor: pointer;
+					&:hover {
+						border: 2px solid $admin-color-secondary;
+					}
+					span {
+						font-size: 1.2em;
+						color: $admin-color-black;
+						position: relative;
+					}
+					i {
+						position: absolute;
+						opacity: .1;
+						font-size: 5em;
+						color: #a9a9a9;
+					}
+				}
+			}
+			p.download-links-message {
+				color: $admin-color-black;
+				margin-bottom: 30px;
+			}
+		}
+	}
+}
+
+// =========================================/
+// Bulk Upload -> Dropzone
+// =========================================/
+
+.page-admin {
+	.page-admin-main {
+		.admin-bulk-upload {
+			.acbic-new {
+				margin-bottom: 30px;
+			}
+			p.confirmation-message {
+				margin-bottom: 30px;
+				color: $admin-color-secondary;
+			}
+		}
+	}
+}

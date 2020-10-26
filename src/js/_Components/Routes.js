@@ -17,6 +17,7 @@ import Shop from '../Shop'
 import Config from '../Config'
 import RedirectToMainSite from '../Redirect-to-Site'
 import FileSharing from '../File-Sharing'
+import BulkUpload from '../Bulk-Upload'
 
 export default [
   {
@@ -67,6 +68,10 @@ export default [
   {
     path: "/config",
     component: Config
+  },
+  {
+    path: "/bulk-upload",
+    component: BulkUpload
   },
   {
     path: "/password-reset",

@@ -1395,3 +1395,51 @@
 		}
 	}
 }
+
+// =========================================/
+// Dark Mode -> Bulk Upload
+// =========================================/
+
+.page-admin-dark-mode {
+	.page-admin-main {
+		.admin-bulk-upload {
+			.instructions {
+				background-color: #444;
+				box-shadow: 0px 2px 2px #666;
+				h2 {
+					color: $admin-color-white;
+				}
+				p {
+					color: #d3d3d3;
+				}
+			}
+			.acbic-new {
+				background-color: #222;
+				border: 2px dashed #444;
+				p {
+					color: #d3d3d3;
+				}
+			}
+			.downloads {
+				p.block {
+					background-color: #444;
+					&:hover {
+						border: 2px solid $admin-color-secondary;
+					}
+					span {
+						color: $admin-color-white;
+					}
+					i {
+						color: #a9a9a9;
+					}
+				}
+			}
+			p.download-links-message {
+				color: #d3d3d3;
+			}
+			p.confirmation-message {
+				color: $admin-color-primary;
+			}
+		}
+	}
+}
