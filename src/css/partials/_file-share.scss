@@ -326,6 +326,12 @@
 				}
 			}
 		}
+		.loading {
+			svg {
+				position: unset;
+				width: 95%;
+			}
+		}
 	}
 	.add-new.active {
 		visibility: visible;
