@@ -202,7 +202,10 @@ const Nav = ({ post, content }) => {
 		setLoading(true);
 		(async () => {
 			await Submit(window.location.pathname, order)
-			window.location.replace('/')
+			const prevUrl = window.location.pathname.split('/')
+			prevUrl.pop()
+			const url = prevUrl.join('/')
+			window.location.replace(url)
 		})()
 	}
 

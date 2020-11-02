@@ -155,7 +155,7 @@ const Images = React.memo(({ con, images, handleChange, role, removeSection, blo
 					}
 				</div>
 				<div className='acbi-container' style={{display: toggle}}>
-					<Dropzone reloadContainer={reloadContainer} />
+					<Dropzone reloadContainer={reloadContainer} fileUploadHost={fileUploadHost} />
 					<div className='image-search'>
 						<input value={(search) ? search : ''} placeholder='Search' onChange={(e) => setSearch(e.target.value.toLowerCase())} />
 						<div className='actions'>
