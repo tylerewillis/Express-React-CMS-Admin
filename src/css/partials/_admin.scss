@@ -540,6 +540,19 @@
 // =========================================/
 
 .admin-vert-list {
+	.avl-tabs {
+		@include flex-container(center,center);
+		width: 100%;
+		p {
+			margin: 0px;
+			padding: 7px 14px;
+			border-radius: 5px 5px 0px 0px;
+			cursor: pointer;
+		}
+		p.avct-active {
+
+		}
+	}
 	.avl-post {
 		@include admin-white-background;
 		display: none;
