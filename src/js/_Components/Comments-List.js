@@ -26,7 +26,7 @@ export default ({ posts, comments, setReplyTo, setActive }) => {
 					<select value={post} onChange={(e) => setPost(e.target.value)}>
 						<option value='all'>All Posts</option>
 						{posts.map((post, i) => {
-							if (post && post.ID) return <option value={'post-' + post.ID} key={i}>{post.name}</option>
+							if (post) return <option value={'post-' + i} key={i}>{post}</option>
 							else return null
 						})}
 					</select>
@@ -43,7 +43,7 @@ export default ({ posts, comments, setReplyTo, setActive }) => {
 								{com.subs.map((sub, i) => {
 									if (sub) {
 										return (
-											<div className={(sub.admin) ? 'comment admin-comment sub-comment' :'comment sub-comment'}>
+											<div className={(sub.admin) ? 'comment admin-comment sub-comment' :'comment sub-comment'} key={i}>
 												<p>{sub.name}</p>
 												<p>{sub.email}</p>
 												<p>{sub.comment}</p>
