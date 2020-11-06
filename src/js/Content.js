@@ -75,7 +75,7 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms, u
 	const checkDuplicate = string => {
 		var temp = false
 		urls.forEach(item => {
-			if (item.url === string) temp = true
+			if (item.url === string && postType !== 'meta') temp = true
 		})
 		setDuplicateUrl(temp)
 	}
@@ -119,7 +119,7 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms, u
 			case 'text':
 				return <Text key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			case 'plain-text':
-				return <PlainText key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} checkDuplicate={checkDuplicate} duplicateUrl={duplicateUrl} />
+				return <PlainText key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} checkDuplicate={checkDuplicate} duplicateUrl={duplicateUrl} postType={postType} />
 			case 'list':
 				return <List key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			case 'dates':

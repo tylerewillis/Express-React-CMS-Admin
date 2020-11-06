@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useCookies } from 'react-cookie'
 
-const PlainText = React.memo(({ con, handleChange, removeSection, blocksOpen, openBlocks, checkDuplicate, duplicateUrl }) => {
+const PlainText = React.memo(({ con, handleChange, removeSection, blocksOpen, openBlocks, checkDuplicate, duplicateUrl, postType }) => {
 
 	const [ cookies ] = useCookies(['role'])
 	const [ blockClass, setBlockClass ] = useState((blocksOpen) ? 'ac-block active' : 'ac-block')
