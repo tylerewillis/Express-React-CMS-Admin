@@ -6,7 +6,7 @@ import Submit from './_Components/_API/Submit'
 import Settings from './_Components/Shop-Settings'
 import Orders from './_Components/Shop-Orders'
 
-const Shop = ({ shop, orders }) => {
+const Shop = ({ shop, orders, website }) => {
 
 	const [ loading, setLoading ] = useState(false)
 	const [ data, setData ] = useState(shop)
@@ -64,7 +64,7 @@ const Shop = ({ shop, orders }) => {
 				<Settings data={data} sendChange={handleChange} />
 			}
 			{(tab === 'orders') &&
-				<Orders orders={orders} sendChange={handleChange} />
+				<Orders orders={orders} sendChange={handleChange} website={website} />
 			}
 			<div className='buttons-bottom'>
 				<div>

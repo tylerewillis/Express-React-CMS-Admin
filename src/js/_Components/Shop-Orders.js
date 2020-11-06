@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Submit from './_API/Submit'
 import Loading from './Loading'
 import { API_PATH } from './_Config'
 
-export default React.memo(({ orders }) => {
+export default React.memo(({ orders, website }) => {
 
 	const [ loading, setLoading ] = useState(false)
 	const [ completed, setCompleted ] = useState(false)
+	const [ hasIncomplete, setHasIncomplete ] = useState(false)
 
 	const toggleShow = (e) => {
 		e.target.closest('.order').classList.toggle('active')
@@ -28,10 +29,13 @@ export default React.memo(({ orders }) => {
 				element.classList.remove('pending')
 				element.classList.add('complete')
 				element.setAttribute('data-status', 'complete')
+				setHasIncomplete(false)
+				checkIfIncomplete(element.getAttribute('data-id'))
 			} else if (status === 'complete') {
 				element.classList.remove('complete')
 				element.classList.add('pending')
 				element.setAttribute('data-status', 'pending')
+				setHasIncomplete(true)
 			}
 			setLoading(false)
 		},1000)
@@ -51,6 +55,22 @@ export default React.memo(({ orders }) => {
 		}
 	}
 
+	//------------------
+	//- Check if any incomplete orders before showing export link
+	//------------------
+
+	useEffect(() => {
+		orders.forEach(order => {
+			if (order.data[13].status === 'pending') setHasIncomplete(true)
+		})
+	},[]) //eslint-disable-line
+
+	const checkIfIncomplete = (id) => {
+		orders.forEach(order => {
+			if (order.data[13].status === 'pending' && order.id !== parseInt(id)) setHasIncomplete(true)
+		})
+	}
+
 	return (
 		<div className='orders'>
 			<div className='actions'>
@@ -58,7 +78,8 @@ export default React.memo(({ orders }) => {
 					<label>Show Completed
 						<input type='checkbox' onChange={(e) => showCompleted(e.target.value)} />
 					</label>
-					<a href={API_PATH + '/shop/export/'} target='_blank' rel="noopener noreferrer">Export</a>
+					<a href={API_PATH + '/shop/export-all/' + website.split('://')[1]} target='_blank' rel="noopener noreferrer">Export All</a>
+					{hasIncomplete && <a href={API_PATH + '/shop/export-incomplete/' + website.split('://')[1]} target='_blank' rel="noopener noreferrer">Export Incomplete</a>}
 				</div>
 			</div>
 			{orders.map((order, i) => {
