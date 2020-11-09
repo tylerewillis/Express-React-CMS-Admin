@@ -38,6 +38,12 @@ export default React.memo(({ data, sendChange }) => {
 		})
 	}
 
+	const handleTaxChange = (e) => {
+		sendChange({
+			tax: e.target.value
+		})
+	}
+
 	const handleTextChange = () => {
 		var temp = []
 		const desc = document.querySelectorAll('.descr')
@@ -98,6 +104,11 @@ export default React.memo(({ data, sendChange }) => {
 					</div>
 				)
 			})}
+			<h3>Global Tax</h3>
+			<div className='section'>
+				<p className='desc'>The global tax rate if tax not fixed for individual item. Examples: 0.02 = 2%, 0.1 = 10%.</p>
+				<input type='text' defaultValue={data.tax} onChange={(e) => handleTaxChange(e)} />
+			</div>
 			<h3>Global Descriptions</h3>
 			{data.description.map((desc, i) => {
 				return ( <div className='section descr' key={i}>
