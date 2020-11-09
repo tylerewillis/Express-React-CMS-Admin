@@ -68,7 +68,10 @@ const Media = ({ images, url, fileUploadHost }) => {
 					if (!search || (search && (img.toLowerCase().includes(search) || img.replace(/-/g, ' ').toLowerCase().includes(search)))) {
 						return <div key={i} name={img} className='acbic-single' style={{backgroundImage: 'url(' + fileUploadHost + '/static/images/' + img + ')'}}>
 							<div className='copy-area' onClick={() => copyImage(img)}/>
-							<i class="fas fa-times-circle delete" onClick={() => deleteImg(img)}></i>
+							<i className="fas fa-times-circle delete" onClick={() => deleteImg(img)}></i>
+							<a className='download-image' href={fileUploadHost + '/static/images/' + img} target='_blank' rel='noreferrer noopener'>
+								<i className="fas fa-download" />
+							</a>
 							{(img.substr(img.length - 4) === 'docx' || img.substr(img.length - 4) === '.doc' || img.substr(img.length - 4) === '.pdf') &&
 								<div className='media-file-icon' onClick={() => copyImage(img,true)}>
 									<img src={fileUploadHost + '/static/images/fileicon.png'} alt={'file icon for documents'} />

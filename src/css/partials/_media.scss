@@ -45,6 +45,21 @@
 					color: $admin-color-primary;
 				}
 			}
+			a.download-image {
+				z-index: 1;
+				color: #222;
+				display: inline-block;
+				margin: 5px;
+				font-size: .9em;
+				position: relative;
+				width: max-content;
+				&:hover {
+					color: $admin-color-primary;
+				}
+				i {
+
+				}
+			}
 		}
 	}
 	.image-container-grid-large {
