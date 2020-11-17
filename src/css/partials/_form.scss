@@ -1,55 +1,127 @@
 // =========================================/
-// Form 
+// Form -> Details
 // =========================================/
 
 .admin-form {
-	.form-details {
-		@include flex-container(space-between,flex-start);
-		margin-top: 30px;
-		.detail {
-			width: 49%;
-			margin-bottom: 20px;
-			@include admin-mq(m) {
-				width: 100%;
-			}
-			h2 {
-				font-size: 1.3em;
-				font-weight: 500;
-				margin-bottom: .5em;
-			}
-			p {
-				color: #a9a9a9;
-				font-size: .8em;
-				font-style: italic;
-			}
-			input, select {
-				width: 100%;
-				padding: 8px;
-				border: 1px solid #d3d3d3;
-				font-size: .9em;
-			}
+	h1 {
+		font-size: 2em;
+		font-weight: 600;
+		margin: 0px 0px 20px 20px;
+	}
+	.form-details-header {
+		@include flex-container(space-between,center);
+		padding-bottom: 15px;
+		background-color: $color-white;
+		padding: 20px;
+		box-shadow: 0px 2px 2px #d3d3d3;
+		cursor: pointer;
+		&:hover {
+			background-color: #f2f2f2;
 		}
-		.detail-email-message {
-			width: 100%;
-			.atbs-editor {
-				.quill {
-					.ql-container {
-						height: 150px;
-						p {
-							font-size: 1em;
-							color: unset;
+		p {
+			margin: 0px;
+			font-weight: 600;
+		}
+		svg {
+			width: 15px;
+		}
+	}
+	.block {
+		margin-bottom: 50px;
+		padding: 20px;
+		border-radius: 0px 0px 5px 5px;
+		.form-details {
+			@include flex-container(space-between,flex-start);
+			.detail {
+				width: calc(50% - 10px);
+				margin-bottom: 20px;
+				@include admin-mq(m) {
+					width: 100%;
+				}
+				h2 {
+					font-size: 1.3em;
+					font-weight: 500;
+					margin-bottom: .5em;
+				}
+				p {
+					color: #a9a9a9;
+					font-size: .8em;
+					font-style: italic;
+				}
+				input, select {
+					width: 100%;
+					padding: 8px;
+					border: 1px solid #d3d3d3;
+					font-size: .9em;
+				}
+			}
+			.detail-email-message {
+				width: 100%;
+				.atbs-editor {
+					.quill {
+						.ql-container {
+							height: 150px;
+							p {
+								font-size: 1em;
+								color: unset;
+							}
 						}
 					}
 				}
 			}
 		}
 	}
+}
+
+// =========================================/
+// Form -> Inputs
+// =========================================/
+
+.form-inputs {
+	background-color: $color-white;
+	padding: 20px;
+	margin-top: 25px;
+	box-shadow: 0px 2px 2px #d3d3d3;
+	border-radius: 0px 0px 5px 5px;
+	@include flex-container(space-between,flex-start);
+	p.header {
+		font-weight: 600;
+		margin-bottom: 20px;
+		width: 100%;
+	}
+	.form-buttons {
+		width: 200px;
+		padding-right: 20px;
+		padding-top: 50px;
+		p.header {
+			border-bottom: 1px solid #d3d3d3;
+			font-weight: 400;
+		}
+		p.button {
+			cursor: pointer;
+			font-size: .8em;
+			i {
+				margin-left: 5px;
+				@include transition;
+			}
+			&:hover {
+				text-decoration: underline;
+				i {
+					margin-left: 7px;
+				}
+			}
+		}
+	}
 	.form-groups {
+		width: calc(100% - 200px);
+		background-color: #f9f9f9;
+		padding: 50px;
+		box-shadow: 0px 0px 5px inset #d3d3d3;
 		.group {
 			@include flex-container(space-between,center);
-			padding: 0px 30px;
+			padding: 0px 30px 0px 40px;
 			position: relative;
-			margin-bottom: 20px;
+			margin-bottom: 15px;
 			@include admin-mq(m) {
 				margin-bottom: 0px;
 			}
@@ -59,7 +131,6 @@
 				cursor: move;
 				left: 0;
 		    font-size: 1.5em;
-		    top: 26px;
 				&:hover {
 					color: gray;
 				}
@@ -77,92 +148,128 @@
 				}
 			}
 			.input {
-				background-color: $color-white;
-				padding: 20px;
-				@include flex-container(flex-start,center);
-				border-radius: 5px;
-				box-shadow: 2px 2px 2px #d3d3d3;
-				position: relative;
-				cursor: move;
-				@include admin-mq(m) {
-					width: 100% !important;
-					margin-bottom: 20px;
-				}
-				p {
-					margin: 0px 10px 0px 0px;
-			    width: 75px;
-			    background-color: #333;
-			    color: #fff;
-			    border-radius: 3px;
-			    font-size: .8em;
-			    text-align: center;
-				}
-				label {
-					font-weight: 400;
-					margin-right: 5px;
-					font-size: 1em;
-				}
 				input {
 					font-size: .9em;
-					padding: 5px;
-					max-width: 20%;
-					margin-right: 10px;
+					padding: 7px;
+				}
+				textarea {
+					width: 100%;
+					padding: 7px;
+					font-size: .9em;
+					height: 80px;
+				}
+				input.label-input {
+					width: calc(100% - 70px);
+					background: none;
+					border: 0px;
+					font-weight: 600;
+					padding-left: 0px;
+					&:hover {
+						background-color: $color-white;
+						color: $color-black;
+					}
+				}
+				label.required-label {
+					font-size: .9em;
+					font-weight: 300;
+					input {
+						margin-left: 3px;
+						vertical-align: middle;
+						margin-bottom: 4px;
+					}
+				}
+				input.placeholder-input, textarea.placeholder-input, input.options-input, textarea.text-input {
+					width: 100%;
+					color: gray;
 				}
 				.required-input {
 					margin-right: 0px;
 				}
+				textarea.text-input {
+					color: #333;
+				}
 			}
-			.text-input {
-				width: 100%;
-				max-width: calc(100% - 133px);
+		}
+		.group-checkbox {
+			.input {
+				input.label-input {
+					width: calc(100% - 23px);
+				}
+				input[type=checkbox] {
+					float: left;
+					width: 15px;
+					margin: 8px 8px 0px 0px;
+				}
+				i.delete {
+					top: 7px;
+				}
+				label.required-label {
+					input.required-input {
+						float: none;
+						margin: 0px 0px 4px 3px;
+					}
+				}
 			}
 		}
 		.group-submit {
 			.input {
 				cursor: default;
+				width: max-content !important;
+				background-color: $admin-color-primary !important;
+				padding: 1px;
+				input.label-input {
+					width: max-content;
+					text-align: center;
+					color: $color-white;
+				}
 			}
 		}
-	}
-	.form-buttons {
-		@include flex-container(flex-start,center);
-		margin: 25px 0px 40px;
-		p {
-			margin: 0px 20px 0px 0px;
-			font-weight: 600;
-			padding-left: 20px;
-		}
-		.button {
-			padding: 10px;
-			cursor: pointer;
-			border: 2px dashed #d3d3d3;
-			width: 150px;
-			border-radius: 5px;
-			text-align: center;
-			background-color: $color-white;
-			margin: 15px 15px 0px 0px;
-			font-weight: 400;
-			&:hover {
-				border: 2px solid #d3d3d3;
+		.group-payment {
+			.lines {
+				display: none;
+			}
+			.input {
+				background-color: rgba($admin-color-secondary,.3);
+				padding: 10px;
+				@include flex-container(flex-start,center);
+				p {
+					margin: 0px 15px 0px 0px;
+					font-size: .8em;
+					font-weight: 600;
+				}
+				label {
+					font-weight: 400;
+					margin-right: 15px;
+					font-family: $admin-body-font;
+					font-size: .85em;
+					select {
+						margin-left: 8px;
+						min-width: 75px;
+					}
+					input {
+						margin-left: 8px;
+						padding: 2px;
+						font-size: 1em;
+						width: 80px;
+					}
+				}
+			}
+			i.delete {
+				top: 13px;
 			}
 		}
-	}
-	.buttons-bottom {
-		position: relative;
-		width: 100%;
-		@include admin-mq(l) {
-			padding: 20px 0px;
-		}
-		p.plain {
-			@include admin-mq(l) {
-				margin: 0px 0px 0px 15px;
-			}
-			@include admin-mq(m) {
-				margin: 20px 20px 0px 0px;
-			}
-		}
-		p.save {
-			@include admin-mq(m) {
-				margin-right: calc(100% - 80px);
+		.group-text-block {
+			.input {
+				textarea.text-input {
+					background-color: unset;
+					border: 0px;
+					padding: 0px;
+					font-weight: 600;
+					height: 50px;
+					&:hover {
+						background-color: $color-white;
+					}
+				}
 			}
 		}
 	}

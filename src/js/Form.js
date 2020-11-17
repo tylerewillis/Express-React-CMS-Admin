@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Layout from './_Components/Layout'
 import Loading from './_Components/Loading'
 import Submit from './_Components/_API/Submit'
 import Groups from './_Components/_Form/Groups'
-import Buttons from './_Components/_Form/Buttons'
 import Details from './_Components/_Form/Details'
 
 const Form = ({ post, content }) => {
@@ -12,14 +11,15 @@ const Form = ({ post, content }) => {
 	const [ loading, setLoading ] = useState(false)
 	const pathArray = window.location.pathname.split('/')
 	const path = pathArray[pathArray.length - 2]
+	const [ inputList, setInputList ] = useState([])
+	const [ paymentForm, setPaymentForm ] = useState(false)
 
 	//--------------------------
 	//- Update State
 	//--------------------------
 
 	const updateState = (add = false, replace = false, replaceWith = false, deleteEl = false) => {
-		var tempDetails = []
-		var tempGroups = []
+		var tempDetails = [], tempGroups = [], tempList = ['Select Input']
 		const details = document.querySelectorAll('.form-details .detail')
 		for (let i = 0; i < details.length; i++) {
 			if (details[i].classList.contains('detail-email-message')) {
@@ -74,6 +74,7 @@ const Form = ({ post, content }) => {
 							paymentValue: inputs[j].getAttribute('data-payment-value'),
 							paymentValueLink: inputs[j].getAttribute('data-payment-value-link')
 						})
+						setPaymentForm(true)
 					} else if (inputs[j].getAttribute('data-type') === 'text-block') {
 						array.push({
 							id: inputs[j].getAttribute('data-id'),
@@ -89,17 +90,21 @@ const Form = ({ post, content }) => {
 							placeholder: inputs[j].getAttribute('data-placeholder')
 						})
 					}
+					// Add to list
+					if (inputs[j].getAttribute('data-label') && inputs[j].getAttribute('data-label').length && inputs[j].getAttribute('data-type') !== 'submit') tempList.push(inputs[j].getAttribute('data-label'))
 				}
+				// Add to list
+				setInputList(tempList)
 				// Add new
 				if (i === groups.length - 1) {
 					let id = Math.floor(Math.random() * 100)
-					if (add && add === 'input') tempGroups.push({id, inputs:[{id: String(id) + "0", type:"input",label:"",required:"false",placeholder:""}]})
-					else if (add && add === 'textarea') tempGroups.push({id, inputs:[{id: String(id) + "0", type:"textarea",label:"",required:"false",placeholder:""}]})
-					else if (add && add === 'select') tempGroups.push({id, inputs:[{id: String(id) + "0", type:"select",label:"",required:"false",placeholder:"",options:"option 1, option 2, ..."}]})
-					else if (add && add === 'checkbox') tempGroups.push({id, inputs:[{id: String(id) + "0", type:"checkbox",label:"",required:"false",placeholder:""}]})
-					else if (add && add === 'double') tempGroups.push({id, inputs:[{id: String(id) + "0", type:"input",label:"",required:"false",placeholder:""},{id: String(id) + "1", type:"input",label:"",required:"false",placeholder:""}]})
+					if (add && add === 'input') tempGroups.push({id, inputs:[{id: String(id) + "0", type:"input",label:"Label",required:"false",placeholder:"Placeholder"}]})
+					else if (add && add === 'textarea') tempGroups.push({id, inputs:[{id: String(id) + "0", type:"textarea",label:"Label",required:"false",placeholder:"Placeholder"}]})
+					else if (add && add === 'select') tempGroups.push({id, inputs:[{id: String(id) + "0", type:"select",label:"Label",required:"false",placeholder:"Placeholder",options:"option 1, option 2, ..."}]})
+					else if (add && add === 'checkbox') tempGroups.push({id, inputs:[{id: String(id) + "0", type:"checkbox",label:"Label",required:"false",placeholder:"Placeholder"}]})
+					else if (add && add === 'double') tempGroups.push({id, inputs:[{id: String(id) + "0", type:"input",label:"Label",required:"false",placeholder:"Placeholder"},{id: String(id) + "1", type:"input",label:"Label",required:"false",placeholder:"Placeholder"}]})
 					else if (add && add === 'payment') tempGroups.push({id, inputs:[{id: String(id) + "0", type:"payment",paymentValue:"0",paymentValueLink:""}]})
-					else if (add && add === 'text-block') tempGroups.push({id, inputs:[{id: String(id) + "0", type:"text-block",text:""}]})
+					else if (add && add === 'text-block') tempGroups.push({id, inputs:[{id: String(id) + "0", type:"text-block",text:"Text"}]})
 				}
 				tempGroups.push({
 					id: groups[i].getAttribute('data-id'),
@@ -117,6 +122,32 @@ const Form = ({ post, content }) => {
 			groups: tempGroups
 		}])
 	}
+
+	//--------------------------
+	//- Build Input List
+	//--------------------------
+
+	useEffect(() => {
+		var tempList = ['Select Input']
+		data[0].groups.forEach(group => {
+			group.inputs.forEach(input => {
+				if (input.type !== 'submit') tempList.push(input.label)
+			})
+		})
+		setInputList(tempList)
+	},[]) // eslint-disable-line
+
+	//--------------------------
+	//- Set Payment Form
+	//--------------------------
+
+	useEffect(() => {
+		data[0].groups.forEach(group => {
+			group.inputs.forEach(input => {
+				if (input.type === 'payment') setPaymentForm(true)
+			})
+		})
+	},[]) // eslint-disable-line
 
 	//--------------------------
 	//- Drag
@@ -158,7 +189,12 @@ const Form = ({ post, content }) => {
 	//--------------------------
 
 	const addInput = (type) => {
-		updateState(type)
+		if (type === 'payment' && paymentForm) {
+			alert('This form has already been identified as one accepting payment.')
+		} else if (type === 'payment') {
+			setPaymentForm(true)
+			updateState(type)
+		} else updateState(type)
 	}
 
 	//--------------------------
@@ -166,6 +202,7 @@ const Form = ({ post, content }) => {
 	//--------------------------
 
 	const deleteGroup = i => {
+		setPaymentForm(false)
 		updateState(false, false, false, String(i))
 	}
 
@@ -224,9 +261,9 @@ const Form = ({ post, content }) => {
 
 	return (
 		<div className='admin-form'>
+			<h1>{data[0].details[0].value}</h1>
 			<Details data={data} handleDetailsChange={handleDetailsChange} />
-			<Groups data={data} drag={drag} dragover={dragover} dropGroup={dropGroup} deleteGroup={deleteGroup} handleChange={handleChange} />
-			<Buttons addInput={addInput} />
+			<Groups data={data} drag={drag} dragover={dragover} dropGroup={dropGroup} deleteGroup={deleteGroup} handleChange={handleChange} inputList={inputList} addInput={addInput} />
 			<div className='buttons-bottom'>
 				<div>
 					<p className='save' onClick={handleSave}>Save</p>
