@@ -675,12 +675,25 @@
 .page-admin-dark-mode {
 	.page-admin-main {
 		.admin-form {
+			h1 {
+				color: $admin-color-white;
+			}
+			.form-details-header {
+				background-color: #444;
+				box-shadow: 1px 1px 1px #666;
+				p {
+					color: $admin-color-white;
+				}
+				svg {
+					fill: $admin-color-white;
+				}
+				&:hover {
+					background-color: #555;
+				}
+			}
 			.block {
 				background-color: #444;
 				box-shadow: 1px 1px 1px #666;
-				h1 {
-					color: $admin-color-white;
-				}
 				.form-details {
 					.detail {
 						h2 {
@@ -779,39 +792,58 @@
 					}
 				}
 			}
+			.form-inputs {
+				background-color: #444;
+				box-shadow: 1px 1px 1px #666;
+				p.header {
+					color: $admin-color-white;
+				}
+				svg {
+					fill: $admin-color-white;
+				}
+			}
 			.form-groups {
+				background-color: #333;
+				box-shadow: 0px 0px 5px inset #222;
 				.group {
 					.input {
-						background-color: #444;
-						box-shadow: 1px 1px 1px #666;
-						p {
-							background-color: $admin-color-white;
-							color: $admin-color-black;
-						}
 						label {
 							color: #d3d3d3;
 						}
-						input {
-							background-color: $admin-color-black;
-							border: 1px solid #777;
+						input.label-input {
+							border: 0px;
 							color: $admin-color-white;
+							&:hover {
+								background-color: #444;
+							}
+						}
+						input.placeholder-input, textarea.placeholder-input, input.options-input {
+							border: 1px solid #777;
+							background-color: #333;
 						}
 					}
 					i {
 						color: #777;
 					}
 				}
+				.group-payment {
+					.input {
+						p {
+							color: $admin-color-white;
+						}
+						label {
+							select, input {
+								background-color: #333;
+								color: $admin-color-white;
+								border: 0px;
+							}
+						}
+					}
+				}
 			}
 			.form-buttons {
 				p {
 					color: #d3d3d3;
-				}
-				.button {
-					background-color: $admin-color-black;
-					border: 2px dashed #777;
-					&:hover {
-						border: 2px solid $admin-color-primary;
-					}
 				}
 			}
 			.buttons-bottom {

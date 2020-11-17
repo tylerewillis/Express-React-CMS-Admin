@@ -259,6 +259,30 @@ const Form = ({ post, content }) => {
 		setTimeout(() => { document.documentElement.style.scrollBehavior = 'smooth' }, 1000)
 	}
 
+	//--------------------
+	//- Scroll Bottom Buttons
+	//--------------------
+
+	useEffect(() => {
+		window.addEventListener('scroll', handleScroll())
+		return () => {
+			window.removeEventListener('scroll', handleScroll())
+		}
+	})
+
+	const handleScroll = (e) => {
+		window.onscroll = function(){
+			var st = window.pageYOffset + window.innerHeight
+			const formEl = document.querySelector('.admin-form')
+			const buttons = document.querySelector('.buttons-bottom')
+			if (formEl && st > (formEl.offsetTop + formEl.offsetHeight)) {
+				buttons.classList.add('absolute-bottom')
+			} else if (buttons) {
+				buttons.classList.remove('absolute-bottom')
+			}
+		}
+	}
+
 	return (
 		<div className='admin-form'>
 			<h1>{data[0].details[0].value}</h1>
