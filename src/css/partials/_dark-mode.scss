@@ -891,7 +891,7 @@
 				}
 				.tabs {
 					p {
-						color: #d3d3d3;
+						color: $admin-color-white;
 						&:hover {
 							background-color: #555;
 						}
@@ -1046,6 +1046,47 @@
 					.main {
 						p, label {
 							color: #d3d3d3;
+						}
+					}
+				}
+			}
+			.products {
+				.product.labels {
+					p {
+						color: $admin-color-white;
+					}
+				}
+				.product {
+					.variation {
+						input {
+							background-color: $admin-color-black;
+							border: 1px solid #777;
+							color: $admin-color-white;
+						}
+						input:nth-child(1) {
+							background-color: #393939;
+						}
+					}
+				}
+				.product.updates {
+					border-top: 2px solid $admin-color-white;
+					p {
+						color: $admin-color-white;
+					}
+					input {
+						background-color: $admin-color-black;
+						border: 1px solid #777;
+						color: $admin-color-white;
+					}
+					.input {
+						.actions {
+							span {
+								background-color: #393939;
+								color: #d3d3d3;
+								&:hover {
+									background-color: #111;
+								}
+							}
 						}
 					}
 				}

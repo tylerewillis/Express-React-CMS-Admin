@@ -1,67 +1,20 @@
 // =========================================/
-// Shop - Settings
+// Shop - Tabs
 // =========================================/
 
 .page-admin {
-	.page-admin-main {
-		.page-admin-shop {
-			.block {
-				@include flex-container;
-				padding: 20px;
-				margin-bottom: 25px;
-				.section {
-					width: 100%;
-					p {
-						font-size: .8em;
-						font-style: italic;
-						color: #a9a9a9;
-						line-height: 1.5em;
-						margin-bottom: 1em;
-					}
-					.atbs-editor {
-						.ql-editor {
-							p:last-child {
-								margin-bottom: 1em;
-							}
-						}
-					}
-				}
-				h1 {
-					width: 100%;
-				}
-				h3 {
-					width: 100%;
-					margin-bottom: 15px;
-				}
-				p {
-					font-size: .8em;
-					font-style: italic;
-					color: #a9a9a9;
-					line-height: 1.5em;
-					margin-bottom: 1em;
-				}
-				.section-multiple {
-					width: calc(50% - 6px);
-				}
-				p:last-child {
-					margin-bottom: 0px;
-				}
-				.tabs {
-					@include flex-container(flex-start);
-					p {
-						margin-right: 15px;
-						font-style: unset;
-						color: unset;
-						margin-bottom: 0px;
-					}
-					p.active {
-						color: $admin-color-white;
-					}
-				}
+	.page-admin-shop {
+		.block {
+			padding: 30px;
+			margin-bottom: 25px;
+			*:last-child {
+				margin-bottom: 0px;
 			}
-			.buttons-bottom {
-				position: relative;
-				width: 100%;
+			.tabs {
+				justify-content: flex-start;
+				p {
+					flex-grow: unset;
+				}
 			}
 		}
 	}
@@ -181,6 +134,99 @@
 		}
 		.main {
 			display: flex;
+		}
+	}
+}
+
+// =========================================/
+// Shop - Products
+// =========================================/
+
+.page-admin {
+	.page-admin-shop {
+		.products {
+			.variation, .product {
+				@include flex-container(flex-start,center);
+				width: 100%;
+				input {
+					width: 100px;
+					text-align: center;
+					font-size: .9em;
+					padding: 5px;
+				}
+				input:nth-child(1) {
+					background-color: #f9f9f9;
+				}
+				input:nth-child(1), input:nth-child(2) {
+					width: calc((100% - 500px) / 2);
+					text-align: left;
+				}
+			}
+			.product.labels {
+				p {
+					font-weight: 600;
+					width: 100px;
+					text-align: center;
+					font-size: .9em;
+				}
+				p:nth-child(1), p:nth-child(2) {
+					width: calc((100% - 500px) / 2);
+					text-align: left;
+					padding: 0px 0px 0px 5px;
+				}
+			}
+			.product.updates {
+				border-top: 2px solid #333;
+				align-items: flex-start;
+				.input {
+					font-weight: 600;
+					width: 100px;
+					text-align: center;
+					input {
+						width: 100%;
+						font-size: .9em;
+						background-color: $admin-color-white;
+					}
+					.actions {
+						span {
+							opacity: 0;
+							visibility: hidden;
+							@include transition;
+							display: block;
+							width: max-content;
+							cursor: pointer;
+							margin: auto;
+							padding: 5px 8px;
+							border-radius: 2px;
+							background-color: #f2f2f2;
+							font-weight: 300;
+							font-size: .9em;
+							margin-top: 5px;
+							&:hover {
+								background-color: $admin-color-primary;
+								color: $admin-color-white;
+							}
+						}
+					}
+				}
+				.input.active {
+					.actions {
+						span {
+							opacity: 1;
+							visibility: visible;
+						}
+					}
+				}
+				p, .input:nth-child(2) {
+					width: calc((100% - 500px) / 2);
+					text-align: left;
+				}
+				p {
+					padding: 0px 0px 0px 5px;
+					margin: 3px 0px 0px;
+					font-style: italic;
+				}
+			}
 		}
 	}
 }
