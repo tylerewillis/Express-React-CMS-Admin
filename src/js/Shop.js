@@ -3,8 +3,8 @@ import Layout from './_Components/Layout'
 import Loading from './_Components/Loading'
 import Submit from './_Components/_API/Submit'
 
-import Settings from './_Components/Shop-Settings'
-import Orders from './_Components/Shop-Orders'
+import Products from './_Components/_Shop/Products'
+import Orders from './_Components/_Shop/Orders'
 
 const Shop = ({ shop, orders, website }) => {
 
@@ -60,9 +60,6 @@ const Shop = ({ shop, orders, website }) => {
 					<p onClick={() => setTab('orders')} className={(tab === 'orders') ? 'active' : ''}>Orders</p>
 				</div>
 			</div>
-			{(tab === 'settings') &&
-				<Settings data={data} sendChange={handleChange} />
-			}
 			{(tab === 'orders') &&
 				<Orders orders={orders} sendChange={handleChange} website={website} />
 			}

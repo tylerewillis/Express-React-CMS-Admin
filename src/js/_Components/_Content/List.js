@@ -5,6 +5,7 @@ const List = React.memo(({ con, handleChange, removeSection, blocksOpen, openBlo
 
 	const [ cookies ] = useCookies(['role'])
 	const [ items, setItems ] = useState((con.content.length) ? con.content.split('^') : [])
+	const [ tempValue, setTempValue ] = useState(false)
 
 	const sendChange = (value) => {
 		handleChange({
@@ -24,6 +25,9 @@ const List = React.memo(({ con, handleChange, removeSection, blocksOpen, openBlo
 			sendChange(temp.join('^'))
 			// Reset
 			e.target.value = ''
+			setTempValue(false)
+		} else {
+			setTempValue(true)
 		}
 	}
 
@@ -40,6 +44,9 @@ const List = React.memo(({ con, handleChange, removeSection, blocksOpen, openBlo
 			<h2><span>{con.id + 1}.</span> {con.name}</h2>
 			<p className='acb-description'>{con.description}</p>
 			<input onKeyUp={(e) => addItem(e)} />
+			{tempValue &&
+				<p className='list-temp-value'>Don't forget to add by pressing Enter.</p>
+			}
 			<div className='list'>
 				{items.map((item, i) => {
 					return <p key={i}>{item.trim()}

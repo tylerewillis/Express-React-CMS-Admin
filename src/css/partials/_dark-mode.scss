@@ -67,19 +67,24 @@
 				}
 			}
 			.alc-form-container {
-				input[type='email'], input[type='password'], input[type='text'] {
-					background-color: $admin-color-black;
-					border: 1px solid #777;
-					color: $admin-color-white;
-					-webkit-transition-delay: 99999s;
-				}
-				input[type=submit] {
-					&:hover {
-						background-color: darken($admin-color-secondary,10%);
+				form {
+					input[type='email'], input[type='password'], input[type='text'] {
+						background-color: $admin-color-black;
+						border: 1px solid #777;
+						color: $admin-color-white;
+						-webkit-transition-delay: 99999s;
 					}
-				}
-				label {
-					color: #d3d3d3;
+					input[type=submit] {
+						&:hover {
+							background-color: darken($admin-color-secondary,10%);
+						}
+					}
+					label {
+						color: #d3d3d3;
+					}
+					p {
+						color: $admin-color-white;
+					}
 				}
 				.buttons {
 					a {

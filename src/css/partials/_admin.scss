@@ -1313,14 +1313,29 @@
 // =========================================/
 
 .ac-block {
+	p.list-temp-value {
+		display: none !important;
+		font-size: .7em !important;
+		margin: 7px 0px 0px !important;
+		color: lighten($admin-color-secondary, 10%) !important;
+		@include animation(listTempPulse, 3s, infinite);
+	}
 	.list {
 		display: none !important;
 	}
 }
 .ac-block.active {
+	p.list-temp-value {
+		display: block !important;
+	}
 	.list {
 		display: flex !important;
 	}
+}
+@keyframes listTempPulse {
+	0% { opacity: .3; }
+	50% { opacity: 1; }
+	100% { opacity: .3; }
 }
 
 // =========================================/
