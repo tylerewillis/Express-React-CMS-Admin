@@ -14,10 +14,18 @@ import Comments from '../Comments'
 import Navigation from '../Navigation'
 import Form from '../Form'
 import Shop from '../Shop'
+import ShopCRA from '../Shop-CRA'
 import Config from '../Config'
 import RedirectToMainSite from '../Redirect-to-Site'
 import FileSharing from '../File-Sharing'
 import BulkUpload from '../Bulk-Upload'
+
+var shopToRender
+if (window.location.origin.includes('chestertownriverarts')) {
+  shopToRender = ShopCRA
+} else {
+  shopToRender = Shop
+}
 
 export default [
   {
@@ -59,7 +67,7 @@ export default [
   },
   {
     path: "/shop",
-    component: Shop
+    component: shopToRender
   },
   {
     path: "/file-share",

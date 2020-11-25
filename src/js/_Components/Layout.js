@@ -16,7 +16,11 @@ const Admin = React.memo((props) => {
 
 	useEffect(() => {
 		(async function() {
-			const path = window.location.pathname === '/' ? '/' : window.location.pathname
+			var path = window.location.pathname === '/' ? '/' : window.location.pathname
+			//- CRA shop routes
+			if (window.location.origin.includes('chestertownriverarts') && path === '/shop') {
+			  path = '/shop-cra'
+			}
 			try {
 				const res = await fetch(API_PATH + path)
 				const json = await res.json()

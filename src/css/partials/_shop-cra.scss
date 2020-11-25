@@ -1,0 +1,186 @@
+// =========================================/
+// Shop - Settings
+// =========================================/
+
+.page-admin {
+	.page-admin-main {
+		.page-admin-shop {
+			.block {
+				@include flex-container;
+				padding: 20px;
+				margin-bottom: 25px;
+				.section {
+					width: 100%;
+					p {
+						font-size: .8em;
+						font-style: italic;
+						color: #a9a9a9;
+						line-height: 1.5em;
+						margin-bottom: 1em;
+					}
+					.atbs-editor {
+						.ql-editor {
+							p:last-child {
+								margin-bottom: 1em;
+							}
+						}
+					}
+				}
+				h1 {
+					width: 100%;
+				}
+				h3 {
+					width: 100%;
+					margin-bottom: 15px;
+				}
+				p {
+					font-size: .8em;
+					font-style: italic;
+					color: #a9a9a9;
+					line-height: 1.5em;
+					margin-bottom: 1em;
+				}
+				.section-multiple {
+					width: calc(50% - 6px);
+				}
+				p:last-child {
+					margin-bottom: 0px;
+				}
+				.tabs {
+					@include flex-container(flex-start);
+					p {
+						margin-right: 15px;
+						font-style: unset;
+						color: unset;
+						margin-bottom: 0px;
+					}
+					p.active {
+						color: $admin-color-white;
+					}
+				}
+			}
+			.buttons-bottom {
+				position: relative;
+				width: 100%;
+			}
+		}
+	}
+}
+
+// =========================================/
+// Shop - Orders
+// =========================================/
+
+.orders {
+	.actions {
+		@include flex-container(flex-end,center);
+		padding: 20px;
+		div {
+			@include flex-container;
+			label {
+				font-family: $admin-body-font;
+				font-size: .8em;
+				font-weight: 500;
+				line-height: 1em;
+				cursor: pointer;
+				input {
+					margin-left: 8px;
+				}
+			}
+			a {
+				line-height: 1.2em;
+				font-size: .95em;
+				margin: 0px 0px 0px 15px;
+				display: block;
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+	.order {
+		background-color: #fff;
+		border-bottom: 1px solid #d3d3d3;
+		position: relative;
+		width: 100%;
+		.top {
+			@include flex-container(space-between,center);
+			cursor: pointer;
+			padding: 20px;
+			&:hover {
+				background-color: #f2f2f2;
+			}
+			.details {
+				@include flex-container(flex-start,center);
+				width: calc(100% - 30px);
+				p {
+					margin: 0px 15px 0px 0px;
+				}
+			}
+			.status {
+				width: 30px;
+				svg {
+					width: 30px;
+				}
+				.warn {
+					fill: red;
+					display: none;
+				}
+				.done {
+					fill: green;
+					display: none;
+				}
+			}
+			.status.pending {
+				.warn {
+					display: block;
+				}
+			}
+			.status.complete {
+				.done {
+					display: block;
+				}
+			}
+		}
+		.main {
+			@include flex-container;
+			display: none;
+			padding: 20px;
+			p {
+				font-weight: 600;
+				span {
+					font-weight: 400;
+				}
+			}
+			.person {
+				width: 49%;
+				label {
+					font-weight: 400;
+					cursor: pointer;
+					input {
+						margin-left: 8px;
+					}
+				}
+			}
+			.product {
+				width: 49%;
+				.item {
+					border-bottom: 1px solid #f2f2f2;
+					margin-bottom: 1em;
+					p ~ p {
+						font-weight: 400;
+					}
+				}
+			}
+		}
+	}
+	.order.active {
+		border-bottom: 2px solid #333;
+		.top {
+			border-bottom: 1px solid #f2f2f2;
+		}
+		.main {
+			display: flex;
+		}
+	}
+}
