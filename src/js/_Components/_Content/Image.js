@@ -12,6 +12,7 @@ const Image = React.memo(({ con, images, handleChange, removeSection, blocksOpen
 	const [ search, setSearch ] = useState(false)
 	const [ scrollPos, setScrollPos ] = useState(0)
 	const [ grid, setGrid ] = useState('small')
+	const [ helperActive, setHelperActive ] = useState(false)
 
 	const sendChange = (e) => {
 		var url
@@ -49,9 +50,18 @@ const Image = React.memo(({ con, images, handleChange, removeSection, blocksOpen
 		sendChange(e)
 	}
 
+	const helperToggle = () => {
+		setHelperActive(!helperActive)
+	}
+
 	return (
 		<div className={(blocksOpen) ? 'ac-block active' : 'ac-block'} onClick={(e) => openBlocks(e)}>
-			<h2><span>{con.id + 1}.</span> {con.name}</h2>
+			<h2><span>{con.id + 1}.</span> {con.name}
+				<div className='title-helper'>
+					<i className="far fa-question-circle" onClick={() => helperToggle()}></i>
+					<p className={(helperActive) ? 'title-content active' : 'title-content'}>This is an image element where you can click on the block to open and select from the site's full media catalog.</p>
+				</div>
+			</h2>
 			<p className='acb-description'>{con.description}</p>
 			<div className='acb-image'>
 				<div className='acbi-active' style={{backgroundImage: (image.length) ? 'url(' + fileUploadHost + '/static/images/' + image + ')' : 'none'}} onClick={() => containerToggle(true)}>

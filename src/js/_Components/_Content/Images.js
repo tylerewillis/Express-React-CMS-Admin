@@ -12,6 +12,7 @@ const Images = React.memo(({ con, images, handleChange, role, removeSection, blo
 	const [ availableImages, setAvailableImages ] = useState(images)
 	const [ search, setSearch ] = useState(false)
 	const [ grid, setGrid ] = useState('small')
+	const [ helperActive, setHelperActive ] = useState(false)
 
 	useEffect(() => {
 		var imagesArray = imagesState.split(',')
@@ -132,9 +133,18 @@ const Images = React.memo(({ con, images, handleChange, role, removeSection, blo
 	  }
 	}
 
+	const helperToggle = () => {
+		setHelperActive(!helperActive)
+	}
+
 	return (
 		<div className={(blocksOpen) ? 'ac-block active' : 'ac-block'} onClick={(e) => openBlocks(e)}>
-			<h2><span>{con.id + 1}.</span> {con.name}</h2>
+			<h2><span>{con.id + 1}.</span> {con.name}
+				<div className='title-helper'>
+					<i className="far fa-question-circle" onClick={() => helperToggle()}></i>
+					<p className={(helperActive) ? 'title-content active' : 'title-content'}>This is an multiple image element where you can add and remove images from the site's full media catalog.</p>
+				</div>
+			</h2>
 			<p className='acb-description'>{con.description}</p>
 			<div className='acb-images'>
 				<div className='acb-images-current'>

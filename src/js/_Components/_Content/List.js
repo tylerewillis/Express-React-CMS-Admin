@@ -6,6 +6,7 @@ const List = React.memo(({ con, handleChange, removeSection, blocksOpen, openBlo
 	const [ cookies ] = useCookies(['role'])
 	const [ items, setItems ] = useState((con.content.length) ? con.content.split('^') : [])
 	const [ tempValue, setTempValue ] = useState(false)
+	const [ helperActive, setHelperActive ] = useState(false)
 
 	const sendChange = (value) => {
 		handleChange({
@@ -39,9 +40,18 @@ const List = React.memo(({ con, handleChange, removeSection, blocksOpen, openBlo
 		sendChange(temp.join('^'))
 	}
 
+	const helperToggle = () => {
+		setHelperActive(!helperActive)
+	}
+
 	return (
 		<div className={(blocksOpen) ? 'ac-block active' : 'ac-block'} onClick={(e) => openBlocks(e)}>
-			<h2><span>{con.id + 1}.</span> {con.name}</h2>
+			<h2><span>{con.id + 1}.</span> {con.name}
+				<div className='title-helper'>
+					<i className="far fa-question-circle" onClick={() => helperToggle()}></i>
+					<p className={(helperActive) ? 'title-content active' : 'title-content'}>This is a text list element where you can add items by pressing Enter on the keyboard.</p>
+				</div>
+			</h2>
 			<p className='acb-description'>{con.description}</p>
 			<input onKeyUp={(e) => addItem(e)} />
 			{tempValue &&

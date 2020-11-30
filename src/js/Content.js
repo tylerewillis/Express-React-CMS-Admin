@@ -15,6 +15,7 @@ import Forms from './_Components/_Content/Forms'
 import Select from './_Components/_Content/Select'
 import Blocks from './_Components/_Content/Blocks'
 import Color from './_Components/_Content/Color'
+import Code from './_Components/_Content/Code'
 import Submit from './_Components/_API/Submit'
 
 const Content = React.memo(({ postType, postUrl, post, content, images, forms, urls, fileUploadHost }) => {
@@ -138,6 +139,8 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms, u
 				return <Forms key={index} con={con} forms={forms} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			case 'blocks':
 				return <Blocks key={index} con={con} images={images} forms={forms} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} blocksDisplay={blocksDisplay} setBlocksDisplay={setBlocksDisplay} fileUploadHost={fileUploadHost} />
+			case 'code':
+				return <Code key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} postType={postType} />
 			default:
 				return null
 		}

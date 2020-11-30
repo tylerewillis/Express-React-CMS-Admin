@@ -21,10 +21,10 @@ const PlainText = React.memo(({ con, p, i, updateValue }) => {
 			<h2>{con.name}
 				<div className='title-helper'>
 					<i className="far fa-question-circle" onClick={() => helperToggle()}></i>
-					<p className={(helperActive) ? 'title-content active' : 'title-content'}>This is a simple plain-text field where you can input non-formatted text, numbers and characters from your keyboard.</p>
+					<p className={(helperActive) ? 'title-content active' : 'title-content'}>This is a code input field where you can paste HTML, JavaScript or CSS.</p>
 				</div>
 			</h2>
-			<input defaultValue={con.value} onBlur={updateItem} />
+			<textarea defaultValue={con.value} onBlur={updateItem} className='code-textarea' />
 		</div>
 	)
 })

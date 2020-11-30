@@ -166,6 +166,7 @@ const PlainText = React.memo(({ content, addSection, blocksOpen, openBlocks }) =
 					<option value='table'>Table</option>
 					<option value='form'>Form</option>
 					<option value='blocks'>Blocks</option>
+					<option value='code'>Code</option>
 				</select>
 				{select === 'table' &&
 					<div>
@@ -202,6 +203,7 @@ const PlainText = React.memo(({ content, addSection, blocksOpen, openBlocks }) =
 							<p onClick={() => addToList('color')}>Color</p>
 							<p onClick={() => addToList('form')}>Form</p>
 							<p onClick={() => addToList('table')}>Table</p>
+							<p onClick={() => addToList('code')}>Code</p>
 						</div>
 					</div>
 				}

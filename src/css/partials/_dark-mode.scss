@@ -263,6 +263,12 @@
 					border: 3px solid #444;
 					h2 {
 						color: $admin-color-white;
+						.title-helper {
+							.title-content {
+								background-color: #222;
+								color: #d3d3d3;
+							}
+						}
 					}
 					p {
 						color: #d3d3d3;
@@ -534,6 +540,22 @@
 						}
 					}
 				}
+			}
+		}
+	}
+}
+
+// =========================================/
+// Dark Mode -> Content Pages -> Code
+// =========================================/
+
+.page-admin-dark-mode {
+	.admin-content {
+		.ac-block {
+			.code-textarea {
+				background-color: $admin-color-black;
+				border: 1px solid #777;
+				color: $admin-color-white;
 			}
 		}
 	}

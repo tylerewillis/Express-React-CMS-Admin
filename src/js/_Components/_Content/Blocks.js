@@ -11,12 +11,14 @@ import Table from './_Blocks/Table'
 import Select from './_Blocks/Select'
 import Color from './_Blocks/Color'
 import Forms from './_Blocks/Forms'
+import Code from './_Blocks/Code'
 
 const Blocks = React.memo(({ con, images, forms, handleChange, removeSection, blocksOpen, openBlocks, blocksDisplay, setBlocksDisplay, fileUploadHost }) => {
 
 	const [ cookies ] = useCookies(['role'])
 	const [ data, setData ] = useState(con.content)
 	const [ display, setDisplay ] = useState(false)
+	const [ helperActive, setHelperActive ] = useState(false)
 
 	const updateValue = async (p, i, obj) => {
 		await setData(prevState => {
@@ -90,9 +92,18 @@ const Blocks = React.memo(({ con, images, forms, handleChange, removeSection, bl
 		setBlocksDisplay(!blocksDisplay)
 	}
 
+	const helperToggle = () => {
+		setHelperActive(!helperActive)
+	}
+
 	return (
 		<div className={(blocksOpen) ? 'ac-block ac-block-blocks active' : 'ac-block ac-block-blocks'} onClick={(e) => openBlocks(e)}>
-			<h2><span>{con.id + 1}.</span> {con.name}</h2>
+			<h2><span>{con.id + 1}.</span> {con.name}
+				<div className='title-helper'>
+					<i className="far fa-question-circle" onClick={() => helperToggle()}></i>
+					<p className={(helperActive) ? 'title-content active' : 'title-content'}>This section allows for multiple elements like lists, blocks and links. Click "Show List" to see and edit the elements.</p>
+				</div>
+			</h2>
 			<p className='acb-description'>{con.description}</p>
 			<p className='blocks-toggle' onClick={() => toggleBlocks()}>{(display) ? 'Hide List' : 'Show List'}
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M441.9 167.3l-19.8-19.8c-4.7-4.7-12.3-4.7-17 0L224 328.2 42.9 147.5c-4.7-4.7-12.3-4.7-17 0L6.1 167.3c-4.7 4.7-4.7 12.3 0 17l209.4 209.4c4.7 4.7 12.3 4.7 17 0l209.4-209.4c4.7-4.7 4.7-12.3 0-17z"/></svg>
@@ -132,6 +143,8 @@ const Blocks = React.memo(({ con, images, forms, handleChange, removeSection, bl
 											return <Images key={index} p={i} i={index} con={item} updateValue={updateValue} images={images} fileUploadHost={fileUploadHost} />
 										case 'form':
 											return <Forms key={index} p={i} i={index} con={item} forms={forms} updateValue={updateValue} />
+										case 'code':
+											return <Code key={index} p={i} i={index} con={item} updateValue={updateValue} />
 										default:
 											return null
 									}

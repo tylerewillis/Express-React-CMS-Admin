@@ -6,6 +6,7 @@ const Form = React.memo(({ con, forms, handleChange, removeSection, blocksOpen, 
 	const [ cookies ] = useCookies(['role'])
 	const [ options ] = useState(forms)
 	const [ value, setValue ] = useState(con.content)
+	const [ helperActive, setHelperActive ] = useState(false)
 
 	const setSelect = (value) => {
 		setValue(value)
@@ -18,9 +19,18 @@ const Form = React.memo(({ con, forms, handleChange, removeSection, blocksOpen, 
 		})
 	}
 
+	const helperToggle = () => {
+		setHelperActive(!helperActive)
+	}
+
 	return (
 		<div className={(blocksOpen) ? 'ac-block active' : 'ac-block'} onClick={(e) => openBlocks(e)}>
-			<h2><span>{con.id + 1}.</span> {con.name}</h2>
+			<h2><span>{con.id + 1}.</span> {con.name}
+				<div className='title-helper'>
+					<i className="far fa-question-circle" onClick={() => helperToggle()}></i>
+					<p className={(helperActive) ? 'title-content active' : 'title-content'}>This section allows you to select an existing form to put on the page.</p>
+				</div>
+			</h2>
 			<p className='acb-description'>{con.description}</p>
 			<div className='acb-new-section'>
 				<select value={value} onChange={e => setSelect(e.target.value)}>

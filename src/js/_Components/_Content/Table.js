@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useCookies } from 'react-cookie'
 
 const Table = React.memo(({ con, handleChange, removeSection, blocksOpen, openBlocks }) => {
 
 	const [ cookies ] = useCookies(['role'])
+	const [ helperActive, setHelperActive ] = useState(false)
 
 	const updateCell = (row, column, e) => {
 		con.content[row].cells[column] = e.target.value
@@ -68,9 +69,18 @@ const Table = React.memo(({ con, handleChange, removeSection, blocksOpen, openBl
 		} else window.alert('Sorry, you need to include at least one cell in your table.')
 	}
 
+	const helperToggle = () => {
+		setHelperActive(!helperActive)
+	}
+
 	return (
 		<div className={(blocksOpen) ? 'ac-block active' : 'ac-block'} onClick={(e) => openBlocks(e)}>
-			<h2><span>{con.id + 1}.</span> {con.name}</h2>
+			<h2><span>{con.id + 1}.</span> {con.name}
+				<div className='title-helper'>
+					<i className="far fa-question-circle" onClick={() => helperToggle()}></i>
+					<p className={(helperActive) ? 'title-content active' : 'title-content'}>This is a table element where you can add/remove rows and input text.</p>
+				</div>
+			</h2>
 			<p className='acb-description'>{con.description}</p>
 			<div className='table'>
 				{con.content.map((row, j) => {

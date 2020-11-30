@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import Shortcodes from '../_Text/Shortcodes'
 
 const Text = React.memo(({ con, p, i, updateValue, removeSection }) => {
 
+	const [ helperActive, setHelperActive ] = useState(false)
 	const section = React.createRef()
 	const editor = React.createRef()
 
@@ -64,9 +65,18 @@ const Text = React.memo(({ con, p, i, updateValue, removeSection }) => {
     'link'
   ]
 
+  const helperToggle = () => {
+		setHelperActive(!helperActive)
+	}
+
 	return (
 		<div className='item' ref={section}>
-			<h2>{con.name}</h2>
+			<h2>{con.name}
+				<div className='title-helper'>
+					<i className="far fa-question-circle" onClick={() => helperToggle()}></i>
+					<p className={(helperActive) ? 'title-content active' : 'title-content'}>This is a text input field where you can add and format text and shortcodes as listed below.</p>
+				</div>
+			</h2>
 			<div className='atbs-editor' ref={editor} onBlur={updateItem}>
 				<ReactQuill defaultValue={con.value} modules={modules} formats={formats} />
 			</div>

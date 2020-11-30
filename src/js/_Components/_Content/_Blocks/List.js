@@ -4,6 +4,7 @@ const List = React.memo(({ con, p, i, updateValue }) => {
 
 	const [ items, setItems ] = useState((con.value.length) ? con.value.split(',') : [])
 	const [ tempValue, setTempValue ] = useState(false)
+	const [ helperActive, setHelperActive ] = useState(false)
 
 	const updateItem = (value) => {
 		updateValue(p,i, {
@@ -35,9 +36,18 @@ const List = React.memo(({ con, p, i, updateValue }) => {
 		updateItem(temp.join(','))
 	}
 
+	const helperToggle = () => {
+		setHelperActive(!helperActive)
+	}
+
 	return (
 		<div className='item'>
-			<h2>{con.name}</h2>
+			<h2>{con.name}
+				<div className='title-helper'>
+					<i className="far fa-question-circle" onClick={() => helperToggle()}></i>
+					<p className={(helperActive) ? 'title-content active' : 'title-content'}>This is a text list element where you can add items by pressing Enter on the keyboard.</p>
+				</div>
+			</h2>
 			<input onKeyUp={(e) => addItem(e)} />
 			{tempValue &&
 				<p className='list-temp-value'>Don't forget to add by pressing Enter.</p>

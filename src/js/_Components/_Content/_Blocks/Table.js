@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 const Table = React.memo(({ con, p, i, updateValue, removeSection }) => {
+
+	const [ helperActive, setHelperActive ] = useState(false)
 
 	const updateCell = (row, column, e) => {
 		con.value[row].cells[column] = e.target.value
@@ -64,9 +66,18 @@ const Table = React.memo(({ con, p, i, updateValue, removeSection }) => {
 		} else window.alert('Sorry, you need to include at least one cell in your table.')
 	}
 
+	const helperToggle = () => {
+		setHelperActive(!helperActive)
+	}
+
 	return (
 		<div className='item'>
-			<h2>{con.name}</h2>
+			<h2>{con.name}
+				<div className='title-helper'>
+					<i className="far fa-question-circle" onClick={() => helperToggle()}></i>
+					<p className={(helperActive) ? 'title-content active' : 'title-content'}>This is a table element where you can add/remove rows and input text.</p>
+				</div>
+			</h2>
 			<div className='table'>
 				{typeof(con.value) === 'object' && con.value.map((row, j) => {
 					return <div className='row' key={row.id}>

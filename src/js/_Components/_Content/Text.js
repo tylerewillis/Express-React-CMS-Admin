@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import Shortcodes from './_Text/Shortcodes'
@@ -7,6 +7,7 @@ import { useCookies } from 'react-cookie'
 const Text = React.memo(({ con, handleChange, removeSection, blocksOpen, openBlocks }) => {
 
 	const [ cookies ] = useCookies(['role'])
+	const [ helperActive, setHelperActive ] = useState(false)
 
 	const section = React.createRef()
 	const editor = React.createRef()
@@ -71,9 +72,18 @@ const Text = React.memo(({ con, handleChange, removeSection, blocksOpen, openBlo
     'link'
   ]
 
+  const helperToggle = () => {
+		setHelperActive(!helperActive)
+	}
+
 	return (
 		<div className={(blocksOpen) ? 'ac-block active' : 'ac-block'} ref={section} onClick={(e) => openBlocks(e)}>
-			<h2><span>{con.id + 1}.</span> {con.name}</h2>
+			<h2><span>{con.id + 1}.</span> {con.name}
+				<div className='title-helper'>
+					<i className="far fa-question-circle" onClick={() => helperToggle()}></i>
+					<p className={(helperActive) ? 'title-content active' : 'title-content'}>This is a text input field where you can add and format text and shortcodes as listed below.</p>
+				</div>
+			</h2>
 			<p className='acb-description'>{con.description}</p>
 			<div className='atbs-editor' ref={editor} onBlur={sendChange}>
 				<ReactQuill defaultValue={con.content} modules={modules} formats={formats} />

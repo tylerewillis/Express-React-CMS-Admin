@@ -10,6 +10,7 @@ const Image = React.memo(({ con, p, i, images, updateValue, fileUploadHost }) =>
 	const [ search, setSearch ] = useState(false)
 	const [ scrollPos, setScrollPos ] = useState(0)
 	const [ grid, setGrid ] = useState('small')
+	const [ helperActive, setHelperActive ] = useState(false)
 
 	const updateItem = (e) => {
 		var url
@@ -38,9 +39,18 @@ const Image = React.memo(({ con, p, i, images, updateValue, fileUploadHost }) =>
 		})()
 	}
 	
+	const helperToggle = () => {
+		setHelperActive(!helperActive)
+	}
+
 	return (
 		<div className='item'>
-			<h2>{con.name}</h2>
+			<h2>{con.name}
+				<div className='title-helper'>
+					<i className="far fa-question-circle" onClick={() => helperToggle()}></i>
+					<p className={(helperActive) ? 'title-content active' : 'title-content'}>This is an image element where you can click on the block to open and select from the site's full media catalog.</p>
+				</div>
+			</h2>
 			<div className='acb-image'>
 				<div className='acbi-active' style={{backgroundImage: (image.length) ? 'url(' + fileUploadHost + '/static/images/' + image + ')': ''}} onClick={() => containerToggle(true)}>
 					{image && (image.substr(image.length - 4) === 'docx' || image.substr(image.length - 4) === '.doc' || image.substr(image.length - 4) === '.pdf') &&

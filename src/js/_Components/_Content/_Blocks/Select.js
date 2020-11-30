@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Select = React.memo(({ con, p, i, updateValue }) => {
+
+	const [ helperActive, setHelperActive ] = useState(false)
 
 	const updateItem = (e) => {
 		updateValue(p,i, {
@@ -11,9 +13,18 @@ const Select = React.memo(({ con, p, i, updateValue }) => {
 		})
 	}
 
+	const helperToggle = () => {
+		setHelperActive(!helperActive)
+	}
+
 	return (
 		<div className='item'>
-			<h2>{con.name}</h2>
+			<h2>{con.name}
+				<div className='title-helper'>
+					<i className="far fa-question-circle" onClick={() => helperToggle()}></i>
+					<p className={(helperActive) ? 'title-content active' : 'title-content'}>This is a select field where you can choose an item from the options given.</p>
+				</div>
+			</h2>
 			<div className='acb-select'>
 				<select onBlur={updateItem} defaultValue={con.value}>
 					<option value=''>Choose</option>
