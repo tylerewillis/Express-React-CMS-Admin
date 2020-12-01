@@ -746,6 +746,20 @@
 				width: unset;
 			}
 		}
+		.ql-tooltip.ql-editing {
+			font-size: .9em;
+			a.ql-preview {
+				max-width: unset;
+			}
+			a.ql-action {
+				&:after {
+					margin-left: 0px;
+				}
+			}
+			input {
+				min-width: 350px;
+			}
+		}
 	}
 	.textarea-inline {
 		width: 100%;
