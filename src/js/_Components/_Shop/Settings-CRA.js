@@ -14,10 +14,12 @@ export default React.memo(({ data, sendChange }) => {
 		var temp = []
 		const prices = document.querySelectorAll('.pricing')
 		prices.forEach(price => {
-			temp.push({
-				name: price.querySelector('h4').innerHTML,
-				price: price.querySelector('input').value
-			})
+			if (price.querySelector('h4') && price.querySelector('input')) {
+				temp.push({
+					name: price.querySelector('h4').innerHTML,
+					price: price.querySelector('input').value
+				})
+			}
 		})
 		sendChange({
 			pricing: temp
@@ -28,10 +30,12 @@ export default React.memo(({ data, sendChange }) => {
 		var temp = []
 		const prices = document.querySelectorAll('.shipping')
 		prices.forEach(price => {
-			temp.push({
-				name: price.querySelector('h4').innerHTML,
-				price: price.querySelector('input').value
-			})
+			if (price.querySelector('h4') && price.querySelector('input')) {
+				temp.push({
+					name: price.querySelector('h4').innerHTML,
+					price: price.querySelector('input').value
+				})
+			}
 		})
 		sendChange({
 			shipping: temp
@@ -48,10 +52,12 @@ export default React.memo(({ data, sendChange }) => {
 		var temp = []
 		const desc = document.querySelectorAll('.descr')
 		desc.forEach(des => {
-			temp.push({
-				name: des.querySelector('h4').innerHTML,
-				html: des.querySelector('.ql-editor').innerHTML
-			})
+			if (desc.querySelector('h4') && desc.querySelector('.ql-editor')) {
+				temp.push({
+					name: des.querySelector('h4').innerHTML,
+					html: des.querySelector('.ql-editor').innerHTML
+				})
+			}
 		})
 		sendChange({
 			description: temp
