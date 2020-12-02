@@ -52,7 +52,7 @@ export default React.memo(({ data, sendChange }) => {
 		var temp = []
 		const desc = document.querySelectorAll('.descr')
 		desc.forEach(des => {
-			if (desc.querySelector('h4') && desc.querySelector('.ql-editor')) {
+			if (des.querySelector('h4') && des.querySelector('.ql-editor')) {
 				temp.push({
 					name: des.querySelector('h4').innerHTML,
 					html: des.querySelector('.ql-editor').innerHTML
