@@ -19,6 +19,7 @@ import Config from '../Config'
 import RedirectToMainSite from '../Redirect-to-Site'
 import FileSharing from '../File-Sharing'
 import BulkUpload from '../Bulk-Upload'
+import SiteSettings from '../Site-Settings'
 
 var shopToRender
 if (window.location.origin.includes('chestertownriverarts')) {
@@ -88,6 +89,10 @@ export default [
   {
     path: "/password-reset/:code/:email",
     component: ResetPassword
+  },
+  {
+    path: "/site-settings",
+    component: SiteSettings
   },
   {
     path: "/:id",

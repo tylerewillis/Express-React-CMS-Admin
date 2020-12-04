@@ -191,3 +191,39 @@
 		}
 	}
 }
+
+// =========================================/
+// Config - Settings
+// =========================================/
+
+.settings {
+	.setting {
+		background-color: #fff;
+		padding: 20px;
+		position: relative;
+		width: 100%;
+		margin-bottom: 25px;
+		border-radius: 5px;
+		box-shadow: 0px 2px 2px #d3d3d3;
+		h2 {
+			margin-bottom: .5em;
+			font-size: 1.2em;
+			font-weight: 500;
+		}
+		p {
+			font-size: .8em;
+			font-style: italic;
+			color: #a9a9a9;
+			line-height: 1.5em;
+			margin-bottom: 1em;
+		}
+		textarea {
+			width: 100%;
+			padding: 8px;
+			border: 1px solid #d3d3d3;
+			font-size: .85em;
+			height: 100px;
+			font-family: 'Courier New', monospace;
+		}
+	}
+}

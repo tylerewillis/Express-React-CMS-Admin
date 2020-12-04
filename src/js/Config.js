@@ -3,7 +3,7 @@ import Layout from './_Components/Layout'
 import Loading from './_Components/Loading'
 import Submit from './_Components/_API/Submit'
 
-const Nav = ({ details, blocks, types }) => {
+const Nav = ({ details, blocks, types, settings }) => {
 
 	const [ dets, setDets ] = useState(details)
 	const [ order, setOrder ] = useState(blocks)
@@ -113,7 +113,8 @@ const Nav = ({ details, blocks, types }) => {
 			await Submit(window.location.pathname, {
 				details: dets,
 				dashboard: order,
-				post_types: typesState
+				post_types: typesState,
+				settings
 			})
 			setLoading(false)
 		})()
@@ -125,7 +126,8 @@ const Nav = ({ details, blocks, types }) => {
 			await Submit(window.location.pathname, {
 				details: dets,
 				dashboard: order,
-				post_types: typesState
+				post_types: typesState,
+				settings
 			})
 			window.location.replace('/')
 		})()

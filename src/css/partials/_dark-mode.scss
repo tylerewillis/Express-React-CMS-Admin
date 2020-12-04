@@ -1368,6 +1368,20 @@
 					}
 				}
 			}
+			.settings {
+				.setting {
+					background-color: #444;
+					box-shadow: 1px 1px 1px #666;
+					h2 {
+						color: $admin-color-white;
+					}
+					textarea {
+						background-color: $admin-color-black;
+						border: 1px solid #777;
+						color: $admin-color-white;
+					}
+				}
+			}
 			.buttons-bottom {
 				div {
 					p.plain {
