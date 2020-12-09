@@ -7,6 +7,11 @@ const PlainText = React.memo(({ con, handleChange, removeSection, blocksOpen, op
 	const [ blockClass, setBlockClass ] = useState((blocksOpen) ? 'ac-block active' : 'ac-block')
 	const [ helperActive, setHelperActive ] = useState(false)
 
+	const stringToUrl = string => {
+	  var clean = string.replace(/[^a-zA-Z0-9- ]/g, '')
+	  return clean.replace(/ /gm, "-").toLowerCase()
+	}
+
 	const sendChange = (e) => {
 		handleChange({
 			id: con.id,
@@ -15,7 +20,7 @@ const PlainText = React.memo(({ con, handleChange, removeSection, blocksOpen, op
 			description: con.description,
 			content: e.target.value
 		})
-		if (con.id === 1) checkDuplicate(e.target.value)
+		if (con.id === 1) checkDuplicate(stringToUrl(e.target.value))
 	}
 
 	const helperToggle = () => {
