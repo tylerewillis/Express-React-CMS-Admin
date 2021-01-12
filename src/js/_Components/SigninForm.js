@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Input from './_FormElements/Input'
 import Submit from './_API/Submit'
 import { useCookies } from 'react-cookie'
+import Loading from './Loading'
 
 const SignIn = () => {
 
@@ -11,9 +12,11 @@ const SignIn = () => {
 	const [ email, setEmail ] = useState('')
 	const [ password, setPassword ] = useState('')
 	const [ ip, setIp ] = useState('')
+	const [ loading, setLoading ] = useState(false)
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		setLoading(true);
 		(async function() {
 			const submit = await Submit('/signin', {
 				email, password, ip
@@ -25,6 +28,7 @@ const SignIn = () => {
 				window.location.replace('/')
 			} else {
 				setSignInError(true)
+				setLoading(false)
 			}
 		})()
 	}
@@ -45,6 +49,7 @@ const SignIn = () => {
 				<input type='submit' value='Sign In' />
 				<a href='/password-reset'>Forgot Password</a>
 			</div>
+			{loading && <Loading />}
 		</form>
 	)
 }
