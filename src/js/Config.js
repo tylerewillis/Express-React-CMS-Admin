@@ -58,10 +58,17 @@ const Nav = ({ details, blocks, types, settings }) => {
 
 	const drop = (e, key) => {
 		e.preventDefault()
+		let parent = document.querySelector(`.dashboard-blocks`)
+
   	const movingKey = e.dataTransfer.getData("key")
-  	document.querySelector(`.item-${movingKey}`).style.marginLeft = '0px'
-  	document.querySelector(`.item-${movingKey}`).setAttribute('data-parent', false)
-  	document.querySelector('.dashboard-blocks').insertBefore(document.querySelector(`.item-${movingKey}`), document.querySelector(`.item-${key}`))
+  	parent.querySelector(`.item-${movingKey}`).style.marginLeft = '0px'
+  	parent.querySelector(`.item-${movingKey}`).setAttribute('data-parent', false)
+
+  	let elementBack = parent.querySelector(`.item-${key}`)
+  	let elementFront = parent.querySelector(`.item-${movingKey}`)
+  	if (elementBack && elementBack.parentElement === parent && elementFront && elementFront.parentElement === parent) {
+  		parent.insertBefore(elementFront, elementBack)
+  	}
 		updateState()
 	}
 
