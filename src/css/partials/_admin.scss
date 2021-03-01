@@ -296,15 +296,30 @@
 				}
 				.dates-editor {
 					@include flex-container;
-					input {
+					.item {
 						width: calc(50% - 6px);
+						margin-bottom: 12px;
+						position: relative;
+						display: none;
 						@include admin-mq(m) {
 							width: 100%;
-							margin-bottom: 12px;
+						}
+						input {
+							width: 100%;
+							padding-right: 25px;
+						}
+						i {
+							position: absolute;
+							right: 0;
+							padding: 11px 10px 9px 0px;
 						}
 					}
-					input:last-child {
-						margin-bottom: 0px;
+				}
+				.dates-editor-range {
+					.item {
+						input {
+							padding-right: 8px;
+						}
 					}
 				}
 				.select-images {
@@ -349,6 +364,50 @@
 					.title-helper {
 						display: inline-block;
 					}
+				}
+				.dates-editor {
+					.item {
+						display: block;
+					}
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
+// Content -> Form/Blocks -> Add date
+// =========================================/
+
+.page-admin {
+	.admin-content {
+		form {
+			.ac-block {
+				.date-add {
+					display: none;
+					p {
+						@include transition;
+						padding: 5px 15px;
+						cursor: pointer;
+						background-color: $color-primary;
+						color: $color-white !important;
+						border: 0px;
+						border-radius: 3px;
+						display: inline-block;
+						margin: 9px 10px 0px 0px;
+						font-style: unset;
+						i {
+							margin-right: 5px;
+						}
+						&:hover {
+							background-color: darken($color-primary, 5%);
+						}
+					}
+				}
+			}
+			.ac-block.active {
+				.date-add {
+					display: block;
 				}
 			}
 		}

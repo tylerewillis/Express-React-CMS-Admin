@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Layout from './_Components/Layout'
 import { useCookies } from 'react-cookie'
 import Loading from './_Components/Loading'
+import Call from './_Components/_API/Call'
 
 import Text from './_Components/_Content/Text'
 import PlainText from './_Components/_Content/PlainText'
@@ -31,6 +32,7 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms, u
 	const [ blocksOpen, setBlocksOpen ] = useState(false)
 	const [ blocksDisplay, setBlocksDisplay ] = useState(false)
 	const [ duplicateUrl, setDuplicateUrl ] = useState(false)
+	const [ availableImages, setAvailableImages ] = useState(images)
 
 	const toUrl = string => {
 	  var clean = string.replace(/[^a-zA-Z0-9- ]/g, '')
@@ -82,6 +84,17 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms, u
 	}
 
 	//--------------------
+	//- Get available images
+	//--------------------
+
+	const reloadImages = () => {
+		(async function() {
+			const updatedImages = await Call('/get-images-from-directory')
+			setAvailableImages(updatedImages.images)
+		})()
+	} // eslint-disable-line
+
+	//--------------------
 	//- Remove own url from list initially
 	//--------------------
 
@@ -126,11 +139,11 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms, u
 			case 'dates':
 				return <Dates key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			case 'image':
-				return	<Image key={index} con={con} handleChange={handleChange} images={images} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} fileUploadHost={fileUploadHost} />
+				return	<Image key={index} con={con} handleChange={handleChange} images={images} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} fileUploadHost={fileUploadHost} availableImages={availableImages} reloadImages={reloadImages} />
 			case 'table':
 				return <Table key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			case 'images':
-				return <Images key={index} con={con} handleChange={handleChange} images={images} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} fileUploadHost={fileUploadHost} />
+				return <Images key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} fileUploadHost={fileUploadHost} availableImages={availableImages} reloadImages={reloadImages} />
 			case 'select':
 				return <Select key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			case 'color':
@@ -138,7 +151,7 @@ const Content = React.memo(({ postType, postUrl, post, content, images, forms, u
 			case 'form':
 				return <Forms key={index} con={con} forms={forms} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} />
 			case 'blocks':
-				return <Blocks key={index} con={con} images={images} forms={forms} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} blocksDisplay={blocksDisplay} setBlocksDisplay={setBlocksDisplay} fileUploadHost={fileUploadHost} />
+				return <Blocks key={index} con={con} forms={forms} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} blocksDisplay={blocksDisplay} setBlocksDisplay={setBlocksDisplay} fileUploadHost={fileUploadHost} availableImages={availableImages} reloadImages={reloadImages} />
 			case 'code':
 				return <Code key={index} con={con} handleChange={handleChange} removeSection={removeSection} blocksOpen={blocksOpen} openBlocks={openBlocks} postType={postType} />
 			default:

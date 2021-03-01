@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
 import Dropzone from './Dropzone'
-import Call from '../_API/Call'
 import { useCookies } from 'react-cookie'
 
-const Image = React.memo(({ con, images, handleChange, removeSection, blocksOpen, openBlocks, fileUploadHost }) => {
+const Image = React.memo(({ con, handleChange, removeSection, blocksOpen, openBlocks, fileUploadHost, availableImages, reloadImages }) => {
 
 	const [ cookies ] = useCookies(['role'])
 	const [ image, setImage ] = useState(con.content)
 	const [ toggle, setToggle ] = useState('none')
-	const [ availableImages, setAvailableImages ] = useState(images)
 	const [ search, setSearch ] = useState(false)
 	const [ scrollPos, setScrollPos ] = useState(0)
 	const [ grid, setGrid ] = useState('small')
@@ -37,13 +35,6 @@ const Image = React.memo(({ con, images, handleChange, removeSection, blocksOpen
 		setToggle(temp)
 		if (scroll) setScrollPos(window.scrollY)
 	}
-
-	const reloadContainer = () => {
-		(async function() {
-			const updatedImages = await Call('/get-images-from-directory')
-			setAvailableImages(updatedImages.images)
-		})()
-	}
 	
 	const removeImage = (e) => {
 		setImage('')
@@ -71,7 +62,7 @@ const Image = React.memo(({ con, images, handleChange, removeSection, blocksOpen
 					}
 				</div>
 				<div className='acbi-container' style={{display: toggle}}>
-					<Dropzone reloadContainer={reloadContainer} fileUploadHost={fileUploadHost} />
+					<Dropzone reloadContainer={reloadImages} fileUploadHost={fileUploadHost} />
 					<div className='image-search'>
 						<input value={(search) ? search : ''} placeholder='Search' onChange={(e) => setSearch(e.target.value.toLowerCase())} />
 						<div className='actions'>

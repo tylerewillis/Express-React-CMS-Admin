@@ -1563,3 +1563,25 @@
 		}
 	}
 }
+
+// =========================================/
+// Dark Mode -> Shortcodes
+// =========================================/
+
+.page-admin-dark-mode {
+	.page-admin-main {
+		.admin-content {
+			form {
+				.acb-shortcodes {
+					.acb-sc-list {
+						.sc {
+							p {
+								color: #d3d3d3 !important;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

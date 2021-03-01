@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import Dropzone from '../Dropzone'
-import Call from '../../_API/Call'
 
-const Images = React.memo(({ con, p, i, images, updateValue, role, removeSection, fileUploadHost }) => {
+const Images = React.memo(({ con, p, i, updateValue, role, removeSection, fileUploadHost, availableImages, reloadImages }) => {
 
 	const [ imagesState, setImagesState ] = useState(con.value)
 	const [ imagesView, setImagesView ] = useState([])
 	const [ toggle, setToggle ] = useState('none')
-	const [ availableImages, setAvailableImages ] = useState(images)
 	const [ search, setSearch ] = useState(false)
 	const [ grid, setGrid ] = useState('small')
 	const [ helperActive, setHelperActive ] = useState(false)
@@ -83,13 +81,6 @@ const Images = React.memo(({ con, p, i, images, updateValue, role, removeSection
 		const temp = (toggle === 'block') ? 'none' : 'block'
 		setToggle(temp)
 	}
-
-	const reloadContainer = () => {
-		(async function() {
-			const updatedImages = await Call('/get-images-from-directory')
-			setAvailableImages(updatedImages)
-		})()
-	}
 	
 	const helperToggle = () => {
 		setHelperActive(!helperActive)
@@ -118,7 +109,7 @@ const Images = React.memo(({ con, p, i, images, updateValue, role, removeSection
 					}
 				</div>
 				<div className='acbi-container' style={{display: toggle}}>
-					<Dropzone reloadContainer={reloadContainer} fileUploadHost={fileUploadHost} />
+					<Dropzone reloadContainer={reloadImages} fileUploadHost={fileUploadHost} />
 					<div className='image-search'>
 						<input value={(search) ? search : ''} placeholder='Search' onChange={(e) => setSearch(e.target.value.toLowerCase())} />
 						<div className='actions'>

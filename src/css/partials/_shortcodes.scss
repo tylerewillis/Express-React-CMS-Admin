@@ -21,16 +21,15 @@
 			padding-top: 15px;
 			margin-top: 15px;
 			p {
-				color: unset;
-				font-style: unset;
-				font-size: unset;
+				color: #777 !important;
+				font-style: unset !important;
 			}
 			.sc-label {
 				font-weight: 600;
 				font-size: 1.1em;
 			}
 			input {
-				font-size: .8em;
+				font-size: .8em !important;
 				padding: 8px;
 				margin-bottom: 1em;
 				max-width: 415px;
