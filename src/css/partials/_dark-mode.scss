@@ -854,6 +854,12 @@
 							border: 1px solid #777;
 							background-color: #333;
 						}
+						textarea.text-input {
+							color: #fff;
+							&:hover {
+								background-color: #444;
+							}
+						}
 					}
 					i {
 						color: #777;

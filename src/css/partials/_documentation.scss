@@ -8,6 +8,7 @@
 			.search {
 				@include flex-container(space-between,center);
 				width: 100%;
+				padding-left: 80px;
 				.tabs {
 					@include flex-container(flex-start,center);
 					p {
