@@ -1203,6 +1203,11 @@
 				}
 			}
 			.posts {
+				.no-results {
+					p {
+						color: #f2f2f2;
+					}
+				}
 				.post {
 					p.number {
 						background-color: #111;

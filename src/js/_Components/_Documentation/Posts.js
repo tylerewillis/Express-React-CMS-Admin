@@ -22,6 +22,12 @@ export default ({ active, search, posts }) => {
 					} else return null
 				} else return null
 			})}
+			{count === 0 &&
+				<div className='no-results'>
+					<img src='https://media1.giphy.com/media/dy4swYs1dp430jChRa/source.gif' alt='empty room' />
+					<p>Sorry, we can't find anything in the documentation for those filters. If you need support, please click on the "Support" link at the top of this page.</p>
+				</div>
+			}
 		</div>
 	)
 }

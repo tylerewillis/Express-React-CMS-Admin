@@ -12,7 +12,8 @@ const Resources = React.memo(({ posts, keyword }) => {
 		const queryString = window.location.search
 		if (queryString) {
 			const params = new URLSearchParams(queryString)
-			setActive(params.get('t') || '')
+			setActive(params.get('t') || 'all')
+			setSearch(params.get('s') || '')
 		}
 	},[])
 

@@ -44,6 +44,19 @@
 	.page-admin-main {
 		.admin-documentation {
 			.posts {
+				width: 100%;
+				.no-results {
+					margin: 50px auto;
+					width: 95%;
+					max-width: 600px;
+					text-align: center;
+					img {
+						margin-bottom: 20px;
+					}
+					p {
+
+					}
+				}
 				.post {
 					@include flex-container(space-between,center);
 					margin: 20px 0px;
