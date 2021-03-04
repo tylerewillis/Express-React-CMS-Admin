@@ -46,7 +46,7 @@ const SignUp = (props) => {
 				</p>
 			}
 			{submitted && !signUpError &&
-				<p>Thanks, {first}. We'll review your credentials and let you know once you're able to sign in.</p>
+				<p>Thanks, {first}. We'll review your credentials and you will receive an email once your account has been approved.</p>
 			}
 			<div style={{display: 'none'}}>
 				<Input type='text' name='ip' inputName='ip' updateValue={(value) => setIp(value)} />

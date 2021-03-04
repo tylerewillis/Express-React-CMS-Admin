@@ -48,3 +48,223 @@
 		}
 	}
 }
+
+// =========================================/
+// Admins -> Settings
+// =========================================/
+
+.admin-admins {
+	@include flex-container(space-between,flex-start);
+	.settings {
+		width: 400px;
+		background-color: #fff;
+    box-shadow: 1px 1px 1px #d3d3d3;
+    border-radius: 5px;
+    padding: 20px;
+    position: relative;
+    color: #333 !important;
+    text-decoration: none !important;
+    h6 {
+    	font-size: 1.2em;
+    	margin-bottom: 20px;
+    	font-weight: 500;
+    	span.actions {
+    		float: right;
+    		span {
+    			margin-left: 5px;
+	    		font-size: .8em;
+	    		padding: 5px;
+					cursor: pointer;
+					background-color: $admin-color-secondary;
+					@include transition;
+					border-radius: 3px;
+					text-align: center;
+					color: $color-white;
+					border: 0px;
+					&:hover {
+						background-color: darken($admin-color-secondary,10%);
+					}
+	    		i {
+	    			margin-right: 5px;
+	    			font-size: .8em;
+	    		}
+	    	}
+    	}
+    }
+		input, select {
+			width: 100%;
+			margin-bottom: 8px;
+			padding: 8px;
+			font-size: .9em;
+		}
+		input[type=submit] {
+			padding: 8px;
+			cursor: pointer;
+			background-color: $admin-color-secondary;
+			@include transition;
+			border-radius: 3px;
+			text-align: center;
+			color: $color-white;
+			border: 0px;
+			&:hover {
+				background-color: darken($admin-color-secondary,10%);
+			}
+		}
+		.new-admin {
+			.input-group {
+				@include flex-container;
+				input {
+					width: calc(50% - 4px);
+				}
+			}
+			input[type=submit] {
+				background-color: #d3d3d3;
+				cursor: default;
+				&:hover {
+					background-color: #d3d3d3;
+				}
+			}
+			input.active[type=submit] {
+				cursor: pointer;
+				background-color: $admin-color-secondary;
+				&:hover {
+					background-color: darken($admin-color-secondary,10%);
+				}
+			}
+		}
+		.levels {
+			margin-top: 30px;
+			select {
+				width: 100%;
+				margin-bottom: 8px;
+				padding: 8px;
+				font-size: .9em;
+			}
+			.dashboard-blocks {
+				@include flex-container;
+				.dash {
+					width: calc(50% - 5px);
+					margin-bottom: 10px;
+					border: 2px solid #efefef;
+					@include flex-container(space-between,center);
+					border-radius: 3px;
+					padding: 15px 8px;
+					cursor: pointer;
+					i {
+						width: 25px;
+						text-align: center;
+						color: #efefef;
+					}
+					p {
+						margin: 0px;
+						width: calc(100% - 25px);
+						text-align: center;
+					}
+				}
+				.dash.active {
+					border: 2px solid $admin-color-secondary;
+					i {
+						color: $admin-color-secondary;
+					}
+				}
+			}
+			p.save {
+				padding: 8px;
+				background-color: #d3d3d3;
+				@include transition;
+				border-radius: 3px;
+				text-align: center;
+				color: $color-white;
+				border: 0px;
+				margin: 0px;
+				width: 100%;
+			}
+			p.save.active {
+				background-color: $admin-color-secondary;
+				cursor: pointer;
+				&:hover {
+					background-color: darken($admin-color-secondary,10%);
+				}
+			}
+		}
+	}
+}
+
+// =========================================/
+// Admins -> Settings -> New/Remove Access Levels
+// =========================================/
+
+.admin-admins {
+	.settings {
+		.new-access {
+			margin-bottom: 8px;
+			background-color: $admin-color-secondary;
+			padding: 10px;
+			input[type=submit] {
+				margin: 0px;
+				border: 2px solid $admin-color-white;
+				padding: 6px;
+				&:hover {
+					background-color: $admin-color-white;
+					color: $admin-color-secondary;
+				}
+			}
+		}
+		.remove-access {
+			margin-bottom: 8px;
+			background-color: $admin-color-primary;
+			padding: 10px;
+			select {
+				margin: 0px;
+			}
+		}
+	}
+}
+
+// =========================================/
+// Admins -> List
+// =========================================/
+
+.admin-admins {
+	.list {
+		width: calc(100% - 425px);
+		@include flex-container(space-between,flex-start);
+		.user {
+			.actions {
+				@include flex-container(space-between,center);
+				select {
+					width: calc(100% - 90px);
+					padding: 5px;
+					font-size: .9em;
+				}
+				p {
+					padding: 5px 8px;
+					background-color: #d3d3d3;
+					@include transition;
+					border-radius: 3px;
+					text-align: center;
+					color: $color-white;
+					border: 0px;
+					margin: 0px;
+					min-width: 30px;
+					font-size: .8em;
+					text-decoration: none;
+				}
+				p.save.active {
+					background-color: $admin-color-secondary;
+					cursor: pointer;
+					&:hover {
+						background-color: darken($admin-color-secondary,10%);
+					}
+				}
+				p.remove {
+					background-color: $admin-color-primary;
+					font-size: .9em;
+					&:hover {
+						background-color: darken($admin-color-primary,10%);
+					}
+				}
+			}
+		}
+	}
+}
