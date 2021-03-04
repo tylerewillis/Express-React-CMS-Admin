@@ -40,10 +40,10 @@ export default ({ first, last, email, role, levels, setLoading, removeUser }) =>
 			<h3>{first} {last}</h3>
 			<p>Email: <span>{email}</span></p>
 			<div className='actions'>
-				<select value={newRole} onChange={e => changeRole(e)}>
+				<select value={newRole.toLowerCase()} onChange={e => changeRole(e)}>
 					<option value='pending'>Select Access</option>
 					{levels.map((level, i) => {
-						return <option value={level.name} key={i}>{level.name}</option>
+						return <option value={level.name.toLowerCase()} key={i}>{level.name}</option>
 					})}
 				</select>
 				<p className={changes ? 'save active': 'save'} onClick={() => save()}>Save</p>
