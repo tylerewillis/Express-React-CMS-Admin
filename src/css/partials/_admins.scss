@@ -250,6 +250,9 @@
 					font-size: .8em;
 					text-decoration: none;
 				}
+				p.save {
+					cursor: default;
+				}
 				p.save.active {
 					background-color: $admin-color-secondary;
 					cursor: pointer;

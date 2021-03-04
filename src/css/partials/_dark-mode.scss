@@ -1460,6 +1460,21 @@
 								color: $admin-color-secondary;
 							}
 						}
+						p.save {
+							background-color: #555;
+							border: 0px;
+							cursor: default;
+							&:hover {
+								background-color: #555;
+							}
+						}
+						p.save.active {
+							cursor: pointer;
+							background-color: $admin-color-secondary;
+							&:hover {
+								background-color: darken($admin-color-secondary,10%);
+							}
+						}
 					}
 				}
 			}
@@ -1474,6 +1489,12 @@
 					.actions {
 						p {
 							color: $admin-color-white;
+						}
+						p.save {
+							background-color: #888;
+						}
+						p.save.active {
+							background-color: $admin-color-secondary;
 						}
 						select {
 							background-color: $admin-color-black;

@@ -10,16 +10,20 @@ export default ({ emails, levels, setLoading, addUser }) => {
 
 	const send = () => {
 		if (!emails.includes(email)) {
-			setLoading(true);
-			(async () => {
-				await Submit(window.location.pathname + '/new-admin', { first, last, email, level })
-				setFirst('')
-				setLast('')
-				setEmail('')
-				setLevel('')
-				setLoading(false)
-			})()
-			addUser({ first_name: first, last_name: last, email, level })
+			if (first && last && email && level) {
+				setLoading(true);
+				(async () => {
+					await Submit(window.location.pathname + '/new-admin', { first, last, email, level })
+					setFirst('')
+					setLast('')
+					setEmail('')
+					setLevel('')
+					setLoading(false)
+				})()
+				addUser({ first_name: first, last_name: last, email, level })
+			} else {
+				window.alert('Please be sure to populate every input before sending the invite.')
+			}
 		} else {
 			window.alert('This email has already been assigned administrator access.')
 		}
