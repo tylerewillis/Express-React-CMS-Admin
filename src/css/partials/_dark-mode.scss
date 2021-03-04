@@ -1406,16 +1406,80 @@
 .page-admin-dark-mode {
 	.page-admin-main {
 		.admin-admins {
-			.avl-post {
-				h3 {
+			.settings {
+				background-color: #444;
+				box-shadow: 1px 1px 1px #666;
+				color: $admin-color-white !important;
+				input, select {
+					background-color: $admin-color-black;
+					border: 1px solid #777;
 					color: $admin-color-white;
 				}
-				p {
-					color: #d3d3d3;
+				.new-admin {
+					input[type=submit] {
+						background-color: #555;
+						border: 0px;
+						cursor: default;
+						&:hover {
+							background-color: #555;
+						}
+					}
+					input.active[type=submit] {
+						cursor: pointer;
+						background-color: $admin-color-secondary;
+						&:hover {
+							background-color: darken($admin-color-secondary,10%);
+						}
+					}
 				}
-				div {
+				.new-access {
+					input[type=submit] {
+						margin: 0px;
+						border: 2px solid $admin-color-white;
+						padding: 6px;
+						background: none;
+						&:hover {
+							background-color: $admin-color-white;
+							color: $admin-color-secondary;
+						}
+					}
+				}
+				.levels {
+					.dashboard-blocks {
+						.dash {
+							border: 2px solid #555;
+							color: #888;
+							i {
+								color: #888;
+							}
+						}
+						.dash.active {
+							border: 2px solid $admin-color-secondary;
+							color: #f2f2f2;
+							i {
+								color: $admin-color-secondary;
+							}
+						}
+					}
+				}
+			}
+			.list {
+				.user {
+					h3 {
+						color: $admin-color-white;
+					}
 					p {
-						color: $admin-color-primary;
+						color: #d3d3d3;
+					}
+					.actions {
+						p {
+							color: $admin-color-white;
+						}
+						select {
+							background-color: $admin-color-black;
+							border: 1px solid #777;
+							color: $admin-color-white;
+						}
 					}
 				}
 			}
