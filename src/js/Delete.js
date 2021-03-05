@@ -4,12 +4,12 @@ import PropTypes from 'prop-types'
 
 const SignOut = React.memo(({ url }) => {
 
-	const [ seconds, setSeconds ] = useState(5)
+	const [ seconds, setSeconds ] = useState(3)
 
 	useEffect(() => {
 		setTimeout(() => {
 			window.location.href = url
-		}, 5000)
+		}, 3000)
 	},[]) // eslint-disable-line
 
 	// Timer

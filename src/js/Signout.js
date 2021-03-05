@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie'
 
 const SignOut = React.memo(() => {
 
-	const [ seconds, setSeconds ] = useState(5)
+	const [ seconds, setSeconds ] = useState(3)
 	const [ cookies, setCookie, removeCookie ] = useCookies(['signedIn', 'role']) // eslint-disable-line
 
 	useEffect(() => {
@@ -13,12 +13,12 @@ const SignOut = React.memo(() => {
 			removeCookie('role', { path: '/' })
 			removeCookie('name', { path: '/' })
 			window.location.href = '/'
-		}, 5000) // eslint-disable-next-line
+		}, 3000) // eslint-disable-next-line
 	},[])
 
 	useEffect(() => { // eslint-disable-line
 		if (seconds > 0) {
-	    setTimeout(() => setSeconds(seconds - 1), 1000);
+	    setTimeout(() => setSeconds(seconds - 1), 3000);
 	  } else {
 	    setSeconds(0);
 	  }
