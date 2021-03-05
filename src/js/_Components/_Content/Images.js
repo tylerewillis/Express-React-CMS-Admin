@@ -128,6 +128,30 @@ const Images = React.memo(({ con, handleChange, role, removeSection, blocksOpen,
 		setHelperActive(!helperActive)
 	}
 
+	const audioFileTypes = ['mp3']
+	const videoFileTypes = ['mov', 'mp4']
+	const miscFileTypes = ['css', 'doc', 'docx', 'gif', 'html', 'pdf', 'tiff', 'txt', 'wav', 'xls', 'xlsx', 'zip']
+
+	const mediaIcon = (type) => {
+		if (audioFileTypes.includes(type)) {
+			return <div className='media-icon'><i className="fas fa-volume-up"></i></div>
+		} else if (videoFileTypes.includes(type)) {
+			return <div className='media-icon'><i className="fas fa-video"></i></div>
+		} else if (miscFileTypes.includes(type)) {
+			return <div className='media-icon'><i className="fas fa-file"></i></div>
+		} else return null
+	}
+
+	const mediaFileName = (type, name) => {
+		if (audioFileTypes.includes(type)) {
+			return <p className='media-file-name'>Audio: {name}</p>
+		} else if (videoFileTypes.includes(type)) {
+			return <p className='media-file-name'>Video: {name}</p>
+		} else if (miscFileTypes.includes(type)) {
+			return <p className='media-file-name'>File: {name}</p>
+		} else return null
+	}
+
 	return (
 		<div className={(blocksOpen) ? 'ac-block active' : 'ac-block'} onClick={(e) => openBlocks(e)}>
 			<h2><span>{con.id + 1}.</span> {con.name}
@@ -139,18 +163,17 @@ const Images = React.memo(({ con, handleChange, role, removeSection, blocksOpen,
 			<p className='acb-description'>{con.description}</p>
 			<div className='acb-images'>
 				<div className='acb-images-current'>
-					{imagesView.map((img, i) => {
-						return <div key={i} name={img} className="acbi-active" style={{backgroundImage: 'url(' + img + ')'}} onClick={(e) => containerToggle(e)}>
+					{imagesView.map((img, i) => (
+						<div key={i} name={img} className="acbi-active" style={{backgroundImage: 'url(' + img + ')'}} onClick={(e) => containerToggle(e)}>
 							<i className="far fa-times-circle" imgid={i} onClick={e => removeImage(e)}></i>
+							{mediaIcon(img.split('.')[img.split('.').length - 1])}
+							{mediaFileName(img.split('.')[img.split('.').length - 1],img)}
 							<div className='arrows'>
 								<i className="fas fa-caret-left" onClick={() => moveLeft(i)}></i>
 								<i className="fas fa-caret-right" onClick={() => moveRight(i)}></i>
 							</div>
-							{(img.substr(img.length - 4) === 'docx' || img.substr(img.length - 4) === '.doc' || img.substr(img.length - 4) === '.pdf') &&
-								<p className='media-file-name'>{img.split('/')[img.split('/').length - 1]}</p>
-							}
 						</div>
-					})}
+					))}
 					{imagesView.length === 0 &&
 						<p className='select-images' onClick={containerToggle}>Select Images</p>
 					}
@@ -168,11 +191,7 @@ const Images = React.memo(({ con, handleChange, role, removeSection, blocksOpen,
 						{availableImages.map((img, i) => {
 							if (!search || (search && (img.toLowerCase().includes(search) || img.replace(/-/g, ' ').toLowerCase().includes(search)))) {
 								return <div key={img} name={img} className='acbic-single' style={{backgroundImage: 'url(' + fileUploadHost + '/static/images/' + img + ')'}} onClick={e => addImage(e)}>
-									{(img.substr(img.length - 4) === 'docx' || img.substr(img.length - 4) === '.doc' || img.substr(img.length - 4) === '.pdf') &&
-										<div className='media-file-icon'>
-											<img src={fileUploadHost + '/static/images/fileicon.png'} alt={'file icon for documents'} />
-										</div>
-									}
+									{mediaIcon(img.split('.')[img.split('.').length - 1])}
 									<p className='media-file-name'>{img}</p>
 								</div>
 							} else return false

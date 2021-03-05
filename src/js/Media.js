@@ -53,6 +53,10 @@ const Media = ({ images, url, fileUploadHost }) => {
 		}
 	}
 
+	const audioFileTypes = ['mp3']
+	const videoFileTypes = ['mov', 'mp4']
+	const miscFileTypes = ['css', 'doc', 'docx', 'gif', 'html', 'pdf', 'tiff', 'txt', 'wav', 'xls', 'xlsx', 'zip']
+
 	return (
 		<div className='admin-media-container'>
 			<Dropzone reloadContainer={reloadContainer} fileUploadHost={fileUploadHost} />
@@ -72,9 +76,19 @@ const Media = ({ images, url, fileUploadHost }) => {
 							<a className='download-image' href={fileUploadHost + '/static/images/' + img} target='_blank' rel='noreferrer noopener'>
 								<i className="fas fa-download" />
 							</a>
-							{(img.substr(img.length - 4) === 'docx' || img.substr(img.length - 4) === '.doc' || img.substr(img.length - 4) === '.pdf') &&
-								<div className='media-file-icon' onClick={() => copyImage(img,true)}>
-									<img src={fileUploadHost + '/static/images/fileicon.png'} alt={'file icon for documents'} />
+							{audioFileTypes.includes(img.split('.')[img.split('.').length - 1]) &&
+								<div className='media-icon' onClick={() => copyImage(img,true)}>
+									<i class="fas fa-volume-up"></i>
+								</div>
+							}
+							{videoFileTypes.includes(img.split('.')[img.split('.').length - 1]) &&
+								<div className='media-icon' onClick={() => copyImage(img,true)}>
+									<i class="fas fa-video"></i>
+								</div>
+							}
+							{miscFileTypes.includes(img.split('.')[img.split('.').length - 1]) &&
+								<div className='media-icon' onClick={() => copyImage(img,true)}>
+									<i class="fas fa-file"></i>
 								</div>
 							}
 							<p className='media-file-name' onClick={() => copyImage(img,true)}>{img}</p>

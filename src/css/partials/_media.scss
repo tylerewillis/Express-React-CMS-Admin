@@ -109,15 +109,27 @@
 	color: unset !important;
 	font-style: unset !important;
 }
-.media-file-icon {
+
+// =========================================/
+// Media -> List -> Icons
+// =========================================/
+
+.media-icon {
 	@include overlay;
 	@include flex-container(center,center);
-	img {
+	padding-bottom: 28px;
+	i {
+		font-size: 5em;
 		opacity: .1;
-		max-width: 75%;
-		max-height: 75%;
+		position: unset !important;
+		color: #222 !important;
 	}
 }
+
+// =========================================/
+// Media -> Image Search
+// =========================================/
+
 .image-search {
 	@include flex-container(space-between,center);
 	margin-bottom: 10px;

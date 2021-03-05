@@ -34,6 +34,30 @@ const Image = React.memo(({ con, p, i, updateValue, fileUploadHost, availableIma
 		setHelperActive(!helperActive)
 	}
 
+	const audioFileTypes = ['mp3']
+	const videoFileTypes = ['mov', 'mp4']
+	const miscFileTypes = ['css', 'doc', 'docx', 'gif', 'html', 'pdf', 'tiff', 'txt', 'wav', 'xls', 'xlsx', 'zip']
+
+	const mediaIcon = (type, name = false) => {
+		if (audioFileTypes.includes(type)) {
+			return <div className='media-icon'><i class="fas fa-volume-up"></i></div>
+		} else if (videoFileTypes.includes(type)) {
+			return <div className='media-icon'><i class="fas fa-video"></i></div>
+		} else if (miscFileTypes.includes(type)) {
+			return <div className='media-icon'><i class="fas fa-file"></i></div>
+		} else return null
+	}
+
+	const mediaFileName = (type, name) => {
+		if (audioFileTypes.includes(type)) {
+			return <p className='media-file-name'>Audio: {name}</p>
+		} else if (videoFileTypes.includes(type)) {
+			return <p className='media-file-name'>Video: {name}</p>
+		} else if (miscFileTypes.includes(type)) {
+			return <p className='media-file-name'>File: {name}</p>
+		} else return null
+	}
+	
 	return (
 		<div className='item'>
 			<h2>{con.name}
@@ -44,9 +68,8 @@ const Image = React.memo(({ con, p, i, updateValue, fileUploadHost, availableIma
 			</h2>
 			<div className='acb-image'>
 				<div className='acbi-active' style={{backgroundImage: (image.length) ? 'url(' + fileUploadHost + '/static/images/' + image + ')': ''}} onClick={() => containerToggle(true)}>
-					{image && (image.substr(image.length - 4) === 'docx' || image.substr(image.length - 4) === '.doc' || image.substr(image.length - 4) === '.pdf') &&
-						<p className='media-file-name'>{image}</p>
-					}
+					{mediaIcon(image.split('.')[image.split('.').length - 1])}
+					{mediaFileName(image.split('.')[image.split('.').length - 1],image)}
 				</div>
 				<div className='acbi-container' style={{display: toggle}}>
 					<Dropzone reloadContainer={reloadImages} fileUploadHost={fileUploadHost} />
@@ -61,11 +84,7 @@ const Image = React.memo(({ con, p, i, updateValue, fileUploadHost, availableIma
 						{availableImages && availableImages.map((img, i) => {
 							if (!search || (search && (img.toLowerCase().includes(search) || img.replace(/-/g, ' ').toLowerCase().includes(search)))) {
 								return <div key={i} name={img} className='acbic-single' style={{backgroundImage: 'url(' + fileUploadHost + '/static/images/' + img + ')'}} onClick={e => updateItem(e)}>
-									{(img.substr(img.length - 4) === 'docx' || img.substr(img.length - 4) === '.doc' || img.substr(img.length - 4) === '.pdf') &&
-										<div className='media-file-icon'>
-											<img src={fileUploadHost + '/static/images/fileicon.png'} alt={'file icon for documents'} />
-										</div>
-									}
+									{mediaIcon(img.split('.')[img.split('.').length - 1])}
 									<p className='media-file-name'>{img}</p>
 								</div>
 							} else return false

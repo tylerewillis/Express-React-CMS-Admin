@@ -334,6 +334,15 @@
 		.acbi-active {
 			background-color: $admin-color-black;
 			border: 2px solid $admin-color-black;
+			.media-icon {
+				i {
+					opacity: .5;
+				}
+			}
+			p.media-file-name {
+				background-color: #444;
+				color: #f2f2f2 !important;
+			}
 		}
 		.acbi-container {
 			.acbic-new {
@@ -355,13 +364,12 @@
 					background-color: $admin-color-black;
 					border: 2px solid $admin-color-black;
 					p.media-file-name {
-						background-color: #666;
+						background-color: #444;
 						color: #f2f2f2 !important;
 					}
-					.media-file-icon {
-						img {
-							filter: brightness(0) invert(1);
-							opacity: .2;	
+					.media-icon {
+						i {
+							opacity: .4;
 						}
 					}
 				}
@@ -488,10 +496,9 @@
 			}
 			.image-container {
 				.acbic-single {
-					.media-file-icon {
-						img {
-							filter: brightness(0) invert(1);
-							opacity: .2;
+					.media-icon {
+						i {
+							opacity: .4;
 						}
 					}
 				}
