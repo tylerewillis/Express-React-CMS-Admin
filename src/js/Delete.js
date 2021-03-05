@@ -1,20 +1,31 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Layout from './_Components/Layout'
 import PropTypes from 'prop-types'
 
 const SignOut = React.memo(({ url }) => {
 
+	const [ seconds, setSeconds ] = useState(5)
+
 	useEffect(() => {
 		setTimeout(() => {
 			window.location.href = url
-		}, 2000) // eslint-disable-next-line
-	},[])
+		}, 5000)
+	},[]) // eslint-disable-line
+
+	// Timer
+	useEffect(() => { // eslint-disable-line
+		if (seconds > 0) {
+	    setTimeout(() => setSeconds(seconds - 1), 1000);
+	  } else {
+	    setSeconds(0);
+	  }
+	})
 
 	return (
-		<div className='admin-login-container'>
-			<div className='alc-form-container'>
-				<p className='alc-sign-out'>Deleting ...</p>
-			</div>
+		<div className='temporary-page'>
+			<h1>{seconds}</h1>
+			<p>Deleting ...</p>
+			<img src='https://64.media.tumblr.com/tumblr_mbui1kpPoU1rxdw8g.gif' alt='erase' />
 		</div>
 	)
 })

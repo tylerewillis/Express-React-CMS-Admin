@@ -20,6 +20,7 @@ import RedirectToMainSite from '../Redirect-to-Site'
 import FileSharing from '../File-Sharing'
 import BulkUpload from '../Bulk-Upload'
 import SiteSettings from '../Site-Settings'
+import NoAccess from '../No-Access'
 
 var shopToRender
 if (window.location.origin.includes('chestertownriverarts')) {
@@ -93,6 +94,10 @@ export default [
   {
     path: "/site-settings",
     component: SiteSettings
+  },
+  {
+    path: "/no-access",
+    component: NoAccess
   },
   {
     path: "/:id",

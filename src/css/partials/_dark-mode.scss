@@ -1681,3 +1681,15 @@
 		}
 	}
 }
+
+// =========================================/
+// Dark Mode -> Temporary Page
+// =========================================/
+
+.page-admin-dark-mode {
+	.temporary-page {
+		p {
+			color: $admin-color-white;
+		}
+	}
+}

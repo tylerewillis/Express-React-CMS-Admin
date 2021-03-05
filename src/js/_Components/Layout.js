@@ -60,26 +60,30 @@ const Admin = React.memo((props) => {
 				)
 			}
 		} else {
-			return (
-				<div className={(cookies.darkMode && cookies.darkMode === 'yes') ? 'page page-admin page-admin-dark-mode' : 'page page-admin'}>
-					<Helmet>
-		        <meta charSet="utf-8" />
-		        <title>{decodeURIComponent(page.title)}</title>
-		        <meta name='description' content=''/>
-		        <meta property='og:locale' content='en_US' />
-		        <meta property='og:type' content='website' />
-		        <meta property='og:title' content={page.title} />
-		        <meta property='og:description' content='' />
-		        <meta property='og:image' content={''} />
-		      </Helmet>
-		      <Head />
-	      	<Header page={page} darkMode={darkMode} setDarkMode={setDarkMode} />
-			    <div className='page-admin-main'>
-						{React.cloneElement(props.children, {...page})}
+			if (window.location.pathname !== '/no-access' && page.allowedAccess && !page.allowedAccess.includes(cookies.role.toLowerCase())) {
+				window.location.replace('/no-access')
+			} else {
+				return (
+					<div className={(cookies.darkMode && cookies.darkMode === 'yes') ? 'page page-admin page-admin-dark-mode' : 'page page-admin'}>
+						<Helmet>
+			        <meta charSet="utf-8" />
+			        <title>{decodeURIComponent(page.title)}</title>
+			        <meta name='description' content=''/>
+			        <meta property='og:locale' content='en_US' />
+			        <meta property='og:type' content='website' />
+			        <meta property='og:title' content={page.title} />
+			        <meta property='og:description' content='' />
+			        <meta property='og:image' content={''} />
+			      </Helmet>
+			      <Head />
+		      	<Header page={page} darkMode={darkMode} setDarkMode={setDarkMode} />
+				    <div className='page-admin-main'>
+							{React.cloneElement(props.children, {...page})}
+						</div>
+						<Footer />
 					</div>
-					<Footer />
-				</div>
-			)
+				)
+			}
 		}
 	} else {
 		return <Loading darkMode={darkMode} />
