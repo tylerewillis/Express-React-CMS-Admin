@@ -3,7 +3,7 @@ import Layout from './_Components/Layout'
 import Loading from './_Components/Loading'
 import Submit from './_Components/_API/Submit'
 
-const Nav = ({ details, blocks, types, settings }) => {
+const Nav = ({ details, blocks, types, settings, access_levels }) => {
 
 	const [ dets, setDets ] = useState(details)
 	const [ order, setOrder ] = useState(blocks)
@@ -121,7 +121,8 @@ const Nav = ({ details, blocks, types, settings }) => {
 				details: dets,
 				dashboard: order,
 				post_types: typesState,
-				settings
+				settings,
+				access_levels
 			})
 			setLoading(false)
 		})()
@@ -134,7 +135,8 @@ const Nav = ({ details, blocks, types, settings }) => {
 				details: dets,
 				dashboard: order,
 				post_types: typesState,
-				settings
+				settings,
+				access_levels
 			})
 			window.location.replace('/')
 		})()
