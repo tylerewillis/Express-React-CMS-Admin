@@ -13,13 +13,13 @@ const Admin = React.memo(({ blocks, results, types, accessLevels }) => {
 	const [ approved, setApproved ] = useState([])
 
 	useEffect(() => {
-		console.log(cookies.role)
-		console.log(accessLevels)
-		accessLevels.forEach(level => {
-			if (level.name.toLowerCase() === cookies.role.toLowerCase()) {
-				setApproved(level.access)
-			}
-		})
+		if (accessLevels) {
+			accessLevels.forEach(level => {
+				if (level.name.toLowerCase() === cookies.role.toLowerCase()) {
+					setApproved(level.access)
+				}
+			})
+		}
 	},[]) //eslint-disable-line
 
 	return (
