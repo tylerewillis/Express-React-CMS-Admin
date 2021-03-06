@@ -52,7 +52,8 @@ const Media = ({ images, url, fileUploadHost }) => {
 	      	loadingTemp = false
 	      },1000)
 			})() // eslint-disable-next-line
-			setTimeout(() => { // hide loading/reload container after 5 seconds regardless
+			// Refresh if stuck
+			setTimeout(() => {
 				if (loadingTemp) {
 					reloadContainer()
 					setLoading(false)

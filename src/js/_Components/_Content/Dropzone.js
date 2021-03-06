@@ -8,6 +8,7 @@ const Dropzone = ({ reloadContainer, fileUploadHost }) => {
   const [ loading, setLoading ] = useState(false)
 
   const onDrop = useCallback(acceptedFiles => {
+    let tempLoading = true
     setLoading(true);
     (async function() {
       const data = new FormData()
@@ -18,11 +19,13 @@ const Dropzone = ({ reloadContainer, fileUploadHost }) => {
       setTimeout(() => {
         reloadContainer()
         setLoading(false)
+        tempLoading = false
         rmvHighlight()
       },1000)
 		})()
+    // Reset if stuck
     setTimeout(() => {
-      if (loading) { // reset if 5 seconds
+      if (tempLoading) {
         reloadContainer()
         setLoading(false)
         rmvHighlight()
