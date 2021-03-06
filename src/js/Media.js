@@ -40,6 +40,7 @@ const Media = ({ images, url, fileUploadHost }) => {
 
 	const deleteImg = (img) => {
 		if (window.confirm('Are you sure you want to delete this image? Any links to this image will be broken.')) {
+			let loadingTemp = true
 			setLoading(true);
 			(async function() {
 	      await Submit('/admin/upload/delete', {
@@ -48,10 +49,11 @@ const Media = ({ images, url, fileUploadHost }) => {
 	      setTimeout(() => {
 	      	reloadContainer()
 	      	setLoading(false)
+	      	loadingTemp = false
 	      },1000)
 			})() // eslint-disable-next-line
 			setTimeout(() => { // hide loading/reload container after 5 seconds regardless
-				if (loading) {
+				if (loadingTemp) {
 					reloadContainer()
 					setLoading(false)
 				}
