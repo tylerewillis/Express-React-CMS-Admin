@@ -20,8 +20,15 @@ const Dropzone = ({ reloadContainer, fileUploadHost }) => {
         setLoading(false)
         rmvHighlight()
       },1000)
-		})() // eslint-disable-next-line
-  },[])
+		})()
+    setTimeout(() => {
+      if (loading) { // reset if 5 seconds
+        reloadContainer()
+        setLoading(false)
+        rmvHighlight()
+      }
+    },5000)
+  },[]) //eslint-disable-line
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop}) //eslint-disable-line
 
